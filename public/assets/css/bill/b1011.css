@@ -1,0 +1,49 @@
+/* ==========================================================================
+   タブ
+   ========================================================================== */
+input[name="tab-radio"] {
+  display: none; }
+
+.tab-contents {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center; }
+  .tab-contents .tab-item {
+    width: 50%;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid #3c6690;
+    margin: 0 -1px 0 0;
+    transition: opacity .1s ease-in-out, background .1s ease-in-out, color .1s ease-in-out; }
+    .tab-contents .tab-item:hover {
+      opacity: 1;
+      background: linear-gradient(#0ed0ff, #00a4e9);
+      color: #fff;
+      cursor: pointer; }
+
+.tab-content {
+  display: none;
+  width: 100%;
+  margin-top: 20px; }
+
+#tab4:checked ~ #tab-item4 {
+  opacity: 1;
+  background: linear-gradient(#0ed0ff, #00a4e9);
+  color: #fff;
+  font-weight: bold; }
+
+#tab4:checked ~ #tab-content4 {
+  display: block; }
+
+#tab5:checked ~ #tab-item5 {
+  opacity: 1;
+  background: linear-gradient(#0ed0ff, #00a4e9);
+  color: #fff;
+  font-weight: bold; }
+
+#tab5:checked ~ #tab-content5 {
+  display: block; }
+

@@ -1,0 +1,5 @@
+<?php defined('COREPATH') or exit('No direct script access allowed'); ?>
+
+ERROR - 2022-05-05 22:03:44 --> 【CE0009】アップロードに失敗しました。
+ERROR - 2022-05-05 22:04:20 --> 【CE0009】アップロードに失敗しました。
+ERROR - 2022-05-05 22:14:12 --> SQLSTATE[01000]: Warning: 1265 Data truncated for column 'carrier_payment' at row 1 with query: "INSERT INTO `t_dispatch_share` (`division_code`, `delivery_code`, `dispatch_code`, `area_code`, `course`, `delivery_date`, `pickup_date`, `delivery_place`, `pickup_place`, `client_code`, `carrier_code`, `product_name`, `maker_name`, `volume`, `unit_code`, `car_model_code`, `car_code`, `member_code`, `driver_name`, `remarks`, `inquiry_no`, `carrier_payment`, `sales_status`, `create_datetime`, `create_user`, `update_datetime`, `update_user`) VALUES ('7', '3', '4', '3', null, '2022-04-29', '2022-05-18', HEX(AES_ENCRYPT("一括納品先C社","!asdf1234@@@@#")), HEX(AES_ENCRYPT("一括引取先C社","!asdf1234@@@@#")), '00005', '50039', '一括商品名C', '一括メーカーA', '22.33', '3', '42', '1244', '99007', HEX(AES_ENCRYPT("久保","!asdf1234@@@@#")), '一括備考03', null, '1,000', '1', '2022-05-05 22:14:12', 'komine', '2022-05-05 22:14:12', 'komine')"
