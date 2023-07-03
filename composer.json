@@ -14,7 +14,12 @@
         "fuel/orm": "1.8.*",
         "fuel/parser": "1.8.*",
         "fuelphp/upload": "2.0.6",
-        "phpoffice/phpspreadsheet": "^1.17"
+        "guzzlehttp/guzzle":"~7.0",
+        "aws/aws-sdk-php": "2.*",
+        "paragonie/random_compat": "2.*",
+        "setasign/fpdi": "^2.3",
+        "picqer/php-barcode-generator": "^0.3.0",
+        "phpoffice/phpspreadsheet": "^1.8"
     },
     "require-dev": {
         "fuel/docs": "1.8.*"

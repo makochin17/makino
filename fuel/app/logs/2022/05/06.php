@@ -1,6 +1,0 @@
-<?php defined('COREPATH') or exit('No direct script access allowed'); ?>
-
-ERROR - 2022-05-06 11:15:57 --> Notice - Undefined variable: code_list in /Library/WebServer/Documents/kobayashi/onishi/fuel/app/classes/model/allocation/d1020.php on line 60
-ERROR - 2022-05-06 11:16:30 --> shutdown - Cannot modify header information - headers already sent by (output started at /Library/WebServer/Documents/kobayashi/onishi/fuel/app/vendor/phpexcel/Classes/PHPExcel/Writer/Excel2007.php:404) in /Library/WebServer/Documents/kobayashi/onishi/fuel/core/classes/cookie.php on 100
-ERROR - 2022-05-06 11:17:03 --> shutdown - Cannot modify header information - headers already sent by (output started at /Library/WebServer/Documents/kobayashi/onishi/fuel/app/vendor/phpexcel/Classes/PHPExcel/Writer/Excel2007.php:404) in /Library/WebServer/Documents/kobayashi/onishi/fuel/core/classes/cookie.php on 100
-ERROR - 2022-05-06 11:24:54 --> shutdown - Cannot modify header information - headers already sent by (output started at /Library/WebServer/Documents/kobayashi/onishi/fuel/app/vendor/phpexcel/Classes/PHPExcel/Writer/Excel2007.php:404) in /Library/WebServer/Documents/kobayashi/onishi/fuel/core/classes/cookie.php on 100
