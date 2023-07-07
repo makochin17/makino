@@ -16,7 +16,7 @@ ini_set("memory_limit", "1000M");
 
 class T1112 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
     
     // 地区リスト
     private static $area_list                  = array();

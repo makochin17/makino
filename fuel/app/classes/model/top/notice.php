@@ -10,7 +10,7 @@ use \Model\Common\AuthConfig;
 
 class Notice extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * 通知データ取得
@@ -30,14 +30,6 @@ class Notice extends \Model {
             array(\DB::expr('AES_DECRYPT(UNHEX(notice_message), "'.$encrypt_key.'")'), 'notice_message')
         )
         ->from('t_notice')
-        ->where_open()
-        ->where('division_code', 'IS', null)
-        ->or_where('division_code', '=', $list['division_code'])
-        ->where_close()
-        ->where_open()
-        ->where('position_code', 'IS', null)
-        ->or_where('position_code', '=', $list['position_code'])
-        ->where_close()
         ->where('notice_start', '<=', date('Y-m-d'))
         ->where('notice_end', '>', date('Y-m-d'))
         ->order_by('notice_date')
@@ -52,23 +44,24 @@ class Notice extends \Model {
      */
     public static function getEtcData($is_insert) {
 
-        //$auth_data        = Init::get('auth_data');
-        //$user_master_id   = $auth_data['id'];
-        $user_master_id   = '00000';
+        if (!$user_name = AuthConfig::getAuthConfig('user_id')) {
+            $user_name = AuthConfig::getAuthConfig('user_name');
+        }
+
         switch ($is_insert) {
         case true:  // 新規登録
             $data = array(
-                'create_datetime'   => Date::forge()->format('mysql'),
-                'create_user'       => $user_master_id,
-                'update_datetime'   => Date::forge()->format('mysql'),
-                'update_user'       => $user_master_id
+                'create_datetime'   => \Date::forge()->format('mysql'),
+                'create_user'       => $user_name,
+                'update_datetime'   => \Date::forge()->format('mysql'),
+                'update_user'       => $user_name
             );
             break;
         case false: // 更新
         default:    // 更新
             $data = array(
-                'update_datetime'   => Date::forge()->format('mysql'),
-                'update_user'       => $user_master_id
+                'update_datetime'   => \Date::forge()->format('mysql'),
+                'update_user'       => $user_name
             );
             break;
         }

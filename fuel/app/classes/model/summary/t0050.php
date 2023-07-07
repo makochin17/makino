@@ -7,7 +7,7 @@ ini_set("memory_limit", "1000M");
 
 class T0050 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * 車種リスト取得

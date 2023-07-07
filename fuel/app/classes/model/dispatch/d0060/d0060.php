@@ -4,7 +4,7 @@ use \Model\Common\SystemConfig;
 
 class D0060 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * 売上補正レコード検索件数取得

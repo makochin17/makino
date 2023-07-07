@@ -7,7 +7,7 @@ use \Model\Mainte\M0020\M0020;
 
 class D1140 extends \Model {
 
-    public static $db           = 'ONISHI';
+    public static $db           = 'MAKINO';
 
     /**
      * 付加データ

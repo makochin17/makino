@@ -8,7 +8,7 @@ use \Model\Stock\D1111;
 
 class D1110 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
     
     // フォームデータ
     public static function getForms() {

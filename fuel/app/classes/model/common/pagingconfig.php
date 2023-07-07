@@ -3,7 +3,7 @@ namespace Model\Common;
 
 class PagingConfig extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * ページング設定値取得

@@ -25,17 +25,13 @@
                         array('class' => 'input-text', 'type' => 'text', 'id' => 'name_furigana', 'style' => 'width:240px;', 'maxlength' => '15', 'tabindex' => '3')); ?></td>
                 </tr>
                 <tr>
-                    <td style="width: 150px; height: 30px;">課</td>
-                    <td style="width: 350px; height: 30px;">
-                        <?php echo Form::select('division', $data['division'], $division_list,
-                        array('class' => 'select-item', 'id' => 'division', 'style' => 'width: 150px', 'tabindex' => '4')); ?></td>
+                    <td style="width: 150px; height: 30px;">メールアドレス</td>
+                    <td style="width: 450px; height: 30px;">
+                        <?php echo Form::input('mail_address', (!empty($data['mail_address'])) ? $data['mail_address'] : '', 
+                        array('class' => 'input-text', 'type' => 'text', 'id' => 'mail_address', 'style' => 'width:160px;', 'maxlength' => '50', 'tabindex' => '4')); ?>
+                    </td>
                 </tr>
-                <tr>
-                    <td style="width: 150px; height: 30px;">役職</td>
-                    <td style="width: 350px; height: 30px;">
-                        <?php echo Form::select('position', $data['position'], $position_list,
-                        array('class' => 'select-item', 'id' => 'position', 'style' => 'width: 150px', 'tabindex' => '5')); ?></td>
-                </tr>
+                <?php /* ?>
                 <tr>
                     <td style="width: 150px; height: 30px;">車両番号</td>
                     <td style="width: 450px; height: 30px;">
@@ -43,6 +39,7 @@
                         array('class' => 'input-text', 'type' => 'text', 'id' => 'car_number', 'style' => 'width:160px;', 'maxlength' => '12', 'tabindex' => '6')); ?>
                     </td>
                 </tr>
+                <?php */ ?>
             </tbody>
         </table>
         <div class="search-buttons">
@@ -61,17 +58,13 @@
             </div>
             <!-- ここまでPager -->
             <div class="table-wrap">
-                <table class="table-inq" style="width: 1390px">
+                <table class="table-inq" style="width: 1020px">
                     <tr>
                         <th style="width: 60px">選択</th>
-                        <th style="width: 110px">社員コード</th>
-                        <th style="width: 190px">氏名</th>
-                        <th style="width: 270px">ふりがな</th>
-                        <th style="width: 120px">課</th>
-                        <th style="width: 190px">役職</th>
-                        <th style="width: 160px">車両番号</th>
-                        <th style="width: 120px">ドライバー名</th>
-                        <th>電話番号</th>
+                        <th style="width: 110px">従業員コード</th>
+                        <th style="width: 130px">氏名</th>
+                        <th style="width: 130px">ふりがな</th>
+                        <th style="width: 160px">メールアドレス</th>
                     </tr>
                     <?php if (!empty($list_data)) : ?>
                       <?php foreach ($list_data as $key => $val) : ?>
@@ -83,13 +76,9 @@
                             <?php echo Form::hidden(\Config::get('security.csrf_token_key'), \Security::fetch_token());?>
                             <?php echo Form::close(); ?></td>
                             <td style="width: 110px"><?php echo sprintf('%05d', $val['member_code']); ?></td>
-                            <td style="width: 190px"><?php echo $val['full_name']; ?></td>
-                            <td style="width: 270px"><?php echo $val['name_furigana']; ?></td>
-                            <td style="width: 120px"><?php echo $val['division']; ?></td>
-                            <td style="width: 190px"><?php echo $val['position']; ?></td>
-                            <td style="width: 160px"><?php echo (empty($val['car_number'])) ? "-" : $val['car_number']; ?></td>
-                            <td style="width: 120px"><?php echo (empty($val['driver_name'])) ? "-" : $val['driver_name']; ?></td>
-                            <td><?php echo (empty($val['phone_number'])) ? "-" : $val['phone_number']; ?></td>
+                            <td style="width: 130px"><?php echo $val['full_name']; ?></td>
+                            <td style="width: 130px"><?php echo $val['name_furigana']; ?></td>
+                            <td style="width: 160px"><?php echo (empty($val['mail_address'])) ? "-" : $val['mail_address']; ?></td>
                         </tr>
                       <?php endforeach; ?>
                     <?php endif ; ?>

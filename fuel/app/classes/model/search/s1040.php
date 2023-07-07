@@ -9,7 +9,7 @@ use \Model\Mainte\M0060;
 
 class S1040 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     // フォームデータ
     public static function getForms() {

@@ -6,7 +6,7 @@ use \Date;
 
 class OpeLog extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * 操作ログ出力

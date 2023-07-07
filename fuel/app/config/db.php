@@ -21,9 +21,9 @@
  */
 
 return array(
-	'active' => 'ONISHI',
+	'active' => 'MAKINO',
 	// 大西運輸
-	'ONISHI' => array(
+	'MAKINO' => array(
 		'type'        => 'pdo',
 		'connection'  => array(
 			'persistent' => false,

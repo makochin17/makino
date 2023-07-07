@@ -11,7 +11,7 @@ ini_set("memory_limit", "1000M");
 
 class D1030 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * エクセル出力処理

@@ -26,10 +26,10 @@ class Controller_Search_S0010 extends Controller_Hybrid {
     	'show_first' 	=> true,
     	'show_last' 	=> true,
     );
-    
+
     // 課リスト
     private $division_list = array();
-    
+
     // 役職リスト
     private $position_list = array();
 
@@ -58,17 +58,17 @@ class Controller_Search_S0010 extends Controller_Hybrid {
 
 		// テンプレートに渡す定義
 		$this->template->head = $head;
-        
+
         // ページング設定値取得
         $paging_config = PagingConfig::getPagingConfig("UIS0010", S0010::$db);
         $this->pagenation_config['num_links'] = $paging_config['display_link_number'];
         $this->pagenation_config['per_page'] = $paging_config['display_record_number'];
 
-        // 課リスト取得
-        $this->division_list = GenerateList::getDivisionList(true, S0010::$db);
-        
-        // 役職リスト取得
-        $this->position_list = GenerateList::getPositionList(true, S0010::$db);
+        // // 課リスト取得
+        // $this->division_list = GenerateList::getDivisionList(true, S0010::$db);
+
+        // // 役職リスト取得
+        // $this->position_list = GenerateList::getPositionList(true, S0010::$db);
 	}
 
 	public function before() {
@@ -99,11 +99,10 @@ class Controller_Search_S0010 extends Controller_Hybrid {
 		$validation->run();
 		return $validation;
 	}
-    
+
     public function action_index() {
-        
+
         Config::load('message');
-        
         /**
          * 検索項目の取得＆初期設定
          */
@@ -113,21 +112,17 @@ class Controller_Search_S0010 extends Controller_Hybrid {
         	'member_code',
         	'full_name',
         	'name_furigana',
-        	'division',
-        	'position',
-        	'car_number'
+        	'mail_address',
         ), '');
-        
+
         if (!empty(Input::param('cancel')) && Security::check_token()) {
             // キャンセルボタンが押下された場合の処理
-            
             Session::set('select_cancel', true);
             Session::delete('s0010_list');
             echo "<script type='text/javascript'>window.opener[window.name]();</script>";
             echo "<script type='text/javascript'>window.close();</script>";
         } elseif (!empty(Input::param('select')) && Security::check_token()) {
             // 選択ボタンが押下された場合の処理
-            
             Session::set('select_member_code', Input::param('select_code'));
             Session::delete('s0010_list');
             echo "<script type='text/javascript'>window.opener[window.name]();</script>";
@@ -139,23 +134,23 @@ class Controller_Search_S0010 extends Controller_Hybrid {
             foreach ($conditions as $key => $val) {
                 $conditions[$key] = Input::param($key, ''); // 検索項目
             }
-            
+
             // 入力値チェック
 			$validation = $this->validate_info();
 			$errors = $validation->error();
 			if (!empty($errors)) {
 				foreach($validation->error() as $key => $e) {
                     // チェック項目は社員コードのみのため固定
-                    $error_msg = str_replace('XXXXX','社員コード',Config::get('m_CW0006'));
+                    $error_msg = str_replace('XXXXX','従業員コード',Config::get('m_CW0006'));
 				}
 			}
-                        
+
             /**
              * セッションに検索条件を設定
              */
             Session::delete('s0010_list');
             Session::set('s0010_list', $conditions);
-            
+
         } else {
             if ($cond = Session::get('s0010_list', array())) {
 
@@ -166,7 +161,7 @@ class Controller_Search_S0010 extends Controller_Hybrid {
             } else {
                 $init_flag = true;
             }
-            
+
             //初期表示もエクスポートに備えて条件保存する
             Session::set('s0010_list', $conditions);
 

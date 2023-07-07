@@ -10,7 +10,7 @@ use \Model\Dispatch\D0040\D0040;
 
 class S1010 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     // フォームデータ
     public static function getForms() {

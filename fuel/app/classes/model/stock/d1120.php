@@ -11,7 +11,7 @@ use \Model\Stock\D1121;
 
 class D1120 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
     
     // 入力チェック項目
     public static function getValidateItems() {

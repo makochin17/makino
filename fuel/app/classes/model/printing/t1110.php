@@ -5,7 +5,7 @@ use \Model\Printing\T1112;
 
 class T1110 extends \Model {
     
-    public static $db           = 'ONISHI';
+    public static $db           = 'MAKINO';
     
     /**
      * 出力条件取得

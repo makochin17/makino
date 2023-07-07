@@ -4,7 +4,7 @@ use \Model\Common\SystemConfig;
 
 class S0060 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
     public static $count    = 0;
 
     //=========================================================================//

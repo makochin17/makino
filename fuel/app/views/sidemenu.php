@@ -68,7 +68,7 @@
         <li>
           <span class="opener">マスタ管理</span>
           <ul>
-            <li><?php echo Html::anchor(\Uri::create('mainte/m0010'), '社員マスタメンテナンス'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('mainte/m0010'), '従業員マスタ'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('mainte/m0020'), '得意先マスタメンテナンス'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('mainte/m0030'), '庸車先マスタメンテナンス'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('mainte/m0040'), '車種マスタメンテナンス'); ?></li>

@@ -10,7 +10,7 @@ use \Model\Common\AuthConfig;
 
 class C0030 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * ログインユーザー名取得

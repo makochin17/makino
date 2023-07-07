@@ -4,7 +4,7 @@ use \Model\Common\SystemConfig;
 
 class CommonSql extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * 会社情報取得

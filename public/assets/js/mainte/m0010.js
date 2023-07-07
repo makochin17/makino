@@ -5,7 +5,7 @@ var flag = null;
 function change() {
 	processing_division = document.entryForm.processing_division.value;
     flag = (processing_division == '1') ? false : true;
-    
+
     document.entryForm.text_member_code.disabled = flag;
     if (processing_division == '3') {
     	document.entryForm.text_user_id.disabled = flag;

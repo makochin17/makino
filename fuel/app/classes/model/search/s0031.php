@@ -3,7 +3,7 @@ namespace Model\Search;
 
 class S0031 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
     public static $count    = 0;
 
     //=========================================================================//

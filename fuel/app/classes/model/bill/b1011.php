@@ -11,7 +11,7 @@ use \Model\Mainte\M0050;
 
 class B1011 extends \Model {
 
-    public static $db           = 'ONISHI';
+    public static $db           = 'MAKINO';
 
     /**
      * 付加データ

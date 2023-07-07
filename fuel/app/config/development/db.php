@@ -22,14 +22,14 @@
 return array(
     'default' => array(
         'connection'  => array(
-            'dsn'        => 'mysql:host=localhost;dbname=_onishi;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
+            'dsn'        => 'mysql:host=localhost;dbname=makino;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
             'username'   => 'root',
             'password'   => 'root',
         ),
     ),
-    'ONISHI' => array(
+    'MAKINO' => array(
         'connection'  => array(
-            'dsn'        => 'mysql:host=localhost;dbname=_onishi;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
+            'dsn'        => 'mysql:host=localhost;dbname=makino;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
             'username'   => 'root',
             'password'   => 'root',
         ),

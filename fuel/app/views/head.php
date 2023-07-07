@@ -4,7 +4,7 @@
   <meta name="keywords" content="">
   <meta name="auther" content="ProjectGroup" />
 
-  <title><?php echo (!empty($title)) ? $title:'大西運輸基幹業務システム'; ?></title>
+  <title><?php echo (!empty($title)) ? $title:'タイヤハウスまきの予約管理システム'; ?></title>
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

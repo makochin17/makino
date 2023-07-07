@@ -47,12 +47,12 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
         $this->mode                         = Input::param('mode', '');
         // サイト設定
         $cnf                                = \Config::load('siteinfo', true);
-        $cnf['header_title']                = '社員マスタメンテナンス';
+        $cnf['header_title']                = '従業員マスタ';
         $cnf['page_id']                     = '[M0010]';
         $cnf['tree']['top']                 = \Uri::base(false);
-        $cnf['tree']['management_function'] = '社員マスタメンテナンス';
+        $cnf['tree']['management_function'] = '従業員マスタ';
         $cnf['tree']['page_url']            = \Uri::create(AccessControl::getActiveController());
-        $cnf['tree']['page_title']          = '社員マスタメンテナンス';
+        $cnf['tree']['page_title']          = '従業員マスタ';
 
         if ($this->mode == 'reset') {
             $header                         = View::forge('header_logout');
@@ -98,12 +98,12 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
         $this->template->sidemenu       = $sidemenu;
         $this->template->footer         = $footer;
 
-        // 処理区分リスト取得
-        $this->processing_division_list = GenerateList::getProcessingDivisionList();
-        // 課リスト
-        $this->division_list            = GenerateList::getDivisionList(false, GenerateList::$db);
-        // 役職リスト
-        $this->position_list            = GenerateList::getPositionList(false, GenerateList::$db);
+        // // 処理区分リスト取得
+        // $this->processing_division_list = GenerateList::getProcessingDivisionList();
+        // // 課リスト
+        // $this->division_list            = GenerateList::getDivisionList(false, GenerateList::$db);
+        // // 役職リスト
+        // $this->position_list            = GenerateList::getPositionList(false, GenerateList::$db);
     }
 
 	public function before() {
@@ -134,14 +134,6 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
             ->add_rule('valid_strings', array('alpha', 'numeric', 'dashes'))
         ;
         if ($kind != 'del') {
-            // 課チェック
-            $validation->add('division_code', '課')
-                ->add_rule('required')
-            ;
-            // 役職チェック
-            $validation->add('position_code', '役職')
-                ->add_rule('required')
-            ;
             // 氏名チェック
             $validation->add('full_name', '氏名')
                 ->add_rule('required')
@@ -150,19 +142,9 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
             $validation->add('name_furigana', 'ふりがな')
                 ->add_rule('required')
             ;
-            // 車両チェック
-            $validation->add('car_code', '車両')
-                // ->add_rule('required')
-                ->add_rule('valid_strings', array('alpha', 'numeric'))
-            ;
-            // ドライバー名チェック
-            $validation->add('driver_name', 'ドライバー名')
-                // ->add_rule('required')
-            ;
-            // 電話番号チェック
-            $validation->add('phone_number', '電話番号')
-                ->add_rule('required')
-                ->add_rule('valid_strings', array('alpha', 'numeric', 'dashes'))
+            // メールアドレスチェック
+            $validation->add('mail_address', 'メールアドレス')
+                ->add_rule('valid_email')
             ;
             // ユーザ名チェック
             $validation->add('user_id', 'ユーザ名')
@@ -207,8 +189,10 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                     // $conditions[$key] = $result[0][$key];
                     $conditions[$key] = $val;
                 }
+                $conditions['processing_division'] = 2;
             } else {
                 $error_msg = Config::get('m_MW0003');
+                $conditions['processing_division'] = null;
             }
             Session::delete('select_member_code');
         }
@@ -254,7 +238,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
             if (!is_null($error_msg)) {
                 return $error_msg;
             }
-            
+
             if (!empty(M0010::$password)) {
                 $end_msg = str_replace('XXXXX', M0010::$password, Config::get('m_MI0016'));
             } else {
@@ -434,16 +418,12 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
         /**
          * 初期設定
          */
-        $error_msg      = null;
-        $conditions 	= array_fill_keys(array(
+        $error_msg                 = null;
+        $conditions 	           = array_fill_keys(array(
         	'member_code',
-            'division_code',
-            'position_code',
-            'car_code',
             'full_name',
             'name_furigana',
-            'driver_name',
-            'phone_number',
+            'mail_address',
             'user_id',
             'user_authority',
             'password_limit',
@@ -460,7 +440,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
         } elseif (!empty(Input::param('excel'))) {
             // エクセル出力ボタンが押下された場合の処理
             M0010::createTsv(M0010::$db);
-            
+
         } elseif (!empty(Input::param('csv_download')) && Input::method() == 'POST' && Security::check_token()) {
             // CSVフォーマットボタンが押下された場合の処理
             \Response::redirect(\Uri::create('file/filedownload?type=m0010'));
@@ -497,16 +477,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                 foreach($validation->error() as $key => $e) {
                     switch ($key){
                         case 'member_code':
-                            $error_column = '社員コード';
-                            break;
-                        case 'division_code':
-                            $error_column = '課';
-                            break;
-                        case 'position_code':
-                            $error_column = '役職';
-                            break;
-                        case 'car_code':
-                            $error_column = '車両';
+                            $error_column = '従業員コード';
                             break;
                         case 'full_name':
                             $error_column = '氏名';
@@ -514,11 +485,8 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                         case 'name_furigana':
                             $error_column = 'ふりがな';
                             break;
-                        case 'driver_name':
-                            $error_column = 'ドライバー名';
-                            break;
-                        case 'phone_number':
-                            $error_column = '電話番号';
+                        case 'mail_address':
+                            $error_column = 'メールアドレス';
                             break;
                         case 'user_id':
                             $error_column = 'ユーザ名';
@@ -533,6 +501,8 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                         $error_msg = str_replace('XXXXX',$error_column,Config::get('m_CW0006'));
                     } elseif ($validation->error()[$key]->rule == 'min_length') {
                         $error_msg = str_replace('xxxxx','6',str_replace('XXXXX',$error_column,Config::get('m_CW0016')));
+                    } elseif ($validation->error()[$key]->rule == 'valid_email') {
+                        $error_msg = str_replace('XXXXX',$error_column,Config::get('m_CW0023'));
                     } else {
                         // $error_msg = str_replace('XXXXX',$error_column,Config::get('m_CW0007'));
                     }
@@ -544,7 +514,9 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                 switch ($conditions['processing_division']){
                     case '1':
                         // 登録処理
-                        $error_msg = $this->create_record($conditions);
+                        if (!$error_msg = $this->create_record($conditions)) {
+                            $conditions['processing_division'] = 2;
+                        }
                         break;
                     case '2':
                         // 更新処理
@@ -556,7 +528,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                         break;
                 }
             }
-                
+
             /**
              * セッションに検索条件を設定
              */
@@ -569,7 +541,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                 }
                 Session::delete('m0010_list');
             }
-            
+
             if (!empty(Input::param('select_record'))) {
                 // 検索画面からコードが連携された場合の処理
                 foreach ($conditions as $key => $val) {
@@ -580,14 +552,10 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
             }
 
         }
-
         $this->template->content = View::forge(AccessControl::getActiveController(),
             array(
                 'error_message'             => $error_msg,
                 'data'                      => $conditions,
-                'processing_division_list'  => $this->processing_division_list,
-                'division_list'             => $this->division_list,
-                'position_list'             => $this->position_list,
                 'user_permission'           => M0010::permission(),
             )
         );

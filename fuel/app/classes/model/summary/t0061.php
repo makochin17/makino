@@ -10,7 +10,7 @@ ini_set("memory_limit", "1000M");
 
 class T0061 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * エクセル作成処理（3課）

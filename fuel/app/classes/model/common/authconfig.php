@@ -3,7 +3,7 @@ namespace Model\Common;
 
 class AuthConfig extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * システム設定値取得
@@ -44,13 +44,9 @@ class AuthConfig extends \Model {
                     'login_user_id'     => \Auth::get_user_id(),
                     'login_user_name'   => \Auth::get_screen_name(),
                     'member_code'       => \Auth::get_profile_fields('member_code', ''),
-                    'division_code'     => \Auth::get_profile_fields('division_code', ''),
-                    'position_code'     => \Auth::get_profile_fields('position_code', ''),
-                    'car_code'          => \Auth::get_profile_fields('car_code', ''),
                     'full_name'         => \Auth::get_profile_fields('full_name', ''),
                     'name_furigana'     => \Auth::get_profile_fields('name_furigana', ''),
-                    'driver_name'       => \Auth::get_profile_fields('driver_name', ''),
-                    'phone_number'      => \Auth::get_profile_fields('phone_number', ''),
+                    'mail_address'      => \Auth::get_profile_fields('mail_address', ''),
                     'user_id'           => \Auth::get_profile_fields('user_id', ''),
                     'user_authority'    => \Auth::get_profile_fields('user_authority', ''),
                     'lock_status'       => \Auth::get_profile_fields('lock_status', ''),
@@ -72,13 +68,9 @@ class AuthConfig extends \Model {
 
         $profile_fields = array(
             'member_code'       => $conditions['member_code'],
-            'division_code'     => $conditions['division_code'],
-            'position_code'     => $conditions['position_code'],
-            'car_code'          => $conditions['car_code'],
             'full_name'         => $conditions['full_name'],
             'name_furigana'     => $conditions['name_furigana'],
-            'driver_name'       => $conditions['driver_name'],
-            'phone_number'      => $conditions['phone_number'],
+            'mail_address'      => $conditions['mail_address'],
             'user_id'           => $conditions['user_id'],
             'user_authority'    => $conditions['user_authority'],
             'lock_status'       => $conditions['lock_status']
@@ -125,13 +117,9 @@ class AuthConfig extends \Model {
         } else {
             $values = array(
                 'member_code'       => $conditions['member_code'],
-                'division_code'     => $conditions['division_code'],
-                'position_code'     => $conditions['position_code'],
-                'car_code'          => $conditions['car_code'],
                 'full_name'         => $conditions['full_name'],
                 'name_furigana'     => $conditions['name_furigana'],
-                'driver_name'       => $conditions['driver_name'],
-                'phone_number'      => $conditions['phone_number'],
+                'mail_address'      => $conditions['mail_address'],
                 'user_id'           => $conditions['user_id'],
                 'user_authority'    => $conditions['user_authority'],
                 'lock_status'       => $conditions['lock_status']

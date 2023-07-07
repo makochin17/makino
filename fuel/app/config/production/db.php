@@ -22,7 +22,7 @@
 return array(
 	'default' => array(
 		'connection' => array(
-			'dsn'      => 'mysql:host=localhost;dbname=fuel_prod',
+			'dsn'      => 'mysql:host=localhost;dbname=makino',
 			'username' => 'fuel_app',
 			'password' => 'super_secret_password',
 		),

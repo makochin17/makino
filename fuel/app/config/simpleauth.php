@@ -24,7 +24,7 @@ return array(
 	/**
 	 * DB connection, leave null to use default
 	 */
-	'db_connection' => 'ONISHI',
+	'db_connection' => 'MAKINO',
 
 	/**
 	 * DB table name for the user table

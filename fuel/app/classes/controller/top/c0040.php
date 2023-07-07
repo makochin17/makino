@@ -36,12 +36,12 @@ class Controller_Top_C0040 extends Controller_Hybrid {
         $this->mode                         = Input::param('mode', '');
         // サイト設定
         $cnf                                = \Config::load('siteinfo', true);
-        $cnf['header_title']                = '統合情報基盤システム';
+        $cnf['header_title']                = $cnf['system_title'];
         $cnf['page_id']                     = '';
         $cnf['tree']['top']                 = \Uri::base(false);
-        $cnf['tree']['management_function'] = '統合情報基盤システム';
+        $cnf['tree']['management_function'] = $cnf['system_title'];
         $cnf['tree']['page_url']            = \Uri::create(AccessControl::getActiveController());
-        $cnf['tree']['page_title']          = '統合情報基盤システム';
+        $cnf['tree']['page_title']          = $cnf['system_title'];
 
         if ($this->mode == 'reset') {
             $header                         = View::forge('header_logout');

@@ -42,6 +42,7 @@ class Controller_ControlUser extends Controller_Rest {
 	        if (!empty($conditions['user_id'])) {
 	            // ログインユーザ名重複チェック
 	            $result = M0010::getMemberLoginUser($conditions['user_id'], $db);
+
 	            if (count($result) == 1) {
 	                return \Config::get('m_MW0012');
 	            }
@@ -71,15 +72,11 @@ class Controller_ControlUser extends Controller_Rest {
 	public function action_index() {
 
         $conditions 	= array(
-        	'member_code'			=> '10001',
-            'division_code'			=> '001',
-            'position_code'			=> '01',
-            'car_code'				=> '0001',
+        	'member_code'			=> '999999999',
             'full_name'				=> '小峰誠',
             'name_furigana'			=> 'こみねまこと',
-            'driver_name'			=> 'システム',
-            'phone_number'			=> '999-9999-9999',
-            'user_id'				=> 'komine',
+            'mail_address'			=> 'komine@golf-force.net',
+            'user_id'				=> 'system',
             'user_authority'		=> '1',
             'password_limit'		=> '9999/12/31',
             'password_error_count'	=> '0',

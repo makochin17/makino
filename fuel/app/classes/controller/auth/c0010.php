@@ -157,13 +157,9 @@ class Controller_Auth_C0010 extends Controller_Hybrid {
                     // ログイン成功
                     $login_user_data = array(
                         'member_code'           => $data['member_code'],
-                        'division_code'         => $data['division_code'],
-                        'position_code'         => $data['position_code'],
-                        'car_code'              => $data['car_code'],
                         'full_name'             => $data['full_name'],
                         'name_furigana'         => $data['name_furigana'],
-                        'driver_name'           => $data['driver_name'],
-                        'phone_number'          => $data['phone_number'],
+                        'mail_address'          => $data['mail_address'],
                         'user_id'               => $data['user_id'],
                         'user_authority'        => $data['user_authority'],
                         'lock_status'           => $data['lock_status'],

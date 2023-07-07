@@ -7,7 +7,7 @@ ini_set("memory_limit", "1000M");
 
 class T0060 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * ドライバーリスト取得

@@ -404,7 +404,7 @@
 		}
 
 			#menu ul a:hover, #menu ul span:hover {
-				color: #009EDB;
+				color: #005FFF;
 			}
 
 			#menu ul a.opener, #menu ul span.opener {
@@ -438,7 +438,7 @@
 				}
 
 				#menu ul a.opener:hover:before, #menu ul span.opener:hover:before {
-					color: #009EDB;
+					color: #005FFF;
 				}
 
 				#menu ul a.opener.active + ul, #menu ul span.opener.active + ul {
@@ -629,8 +629,8 @@
 
 		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
-			border-color: #009EDB;
-			box-shadow: 0 0 0 1px #009EDB;
+			border-color: #005FFF;
+			box-shadow: 0 0 0 1px #005FFF;
 		}
 
 	input[type="checkbox"] + label:before,

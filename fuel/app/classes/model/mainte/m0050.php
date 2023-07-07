@@ -7,7 +7,7 @@ use \Date;
 
 class M0050 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * エクセル作成処理

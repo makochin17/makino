@@ -11,7 +11,7 @@ use \Model\Mainte\M0060;
 
 class B1010 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     // フォームデータ
     public static function getForms() {

@@ -5,7 +5,7 @@
 
 class MyValidation {
 
-    public static $db           = 'ONISHI';
+    public static $db           = 'MAKINO';
 
     /**
      * Special empty method because 0 and '0' are non-empty values

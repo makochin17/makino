@@ -9,7 +9,7 @@ use \Model\Common\SystemConfig;
 
 class C0010 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     //=========================================================================//
     //==============================   対象検索   ==============================//
@@ -24,13 +24,9 @@ class C0010 extends \Model {
         // 項目
         $stmt = \DB::select(
                 array('m.member_code', 'member_code'),
-                array('m.division_code', 'division_code'),
-                array('m.position_code', 'position_code'),
-                array('m.car_code', 'car_code'),
                 array(\DB::expr('AES_DECRYPT(UNHEX(m.name),"'.$encrypt_key.'")'), 'full_name'),
                 array(\DB::expr('AES_DECRYPT(UNHEX(m.name_furigana),"'.$encrypt_key.'")'), 'name_furigana'),
-                array(\DB::expr('AES_DECRYPT(UNHEX(m.driver_name),"'.$encrypt_key.'")'), 'driver_name'),
-                array(\DB::expr('AES_DECRYPT(UNHEX(m.phone_number),"'.$encrypt_key.'")'), 'phone_number'),
+                array(\DB::expr('AES_DECRYPT(UNHEX(m.mail_address),"'.$encrypt_key.'")'), 'mail_address'),
                 array('m.user_id', 'user_id'),
                 array('m.user_authority', 'user_authority'),
                 array('m.lock_status', 'lock_status')
@@ -144,23 +140,24 @@ class C0010 extends \Model {
      */
     public static function getEtcData($is_insert) {
 
-        //$auth_data        = Init::get('auth_data');
-        //$user_master_id   = $auth_data['id'];
-        $user_master_id   = '00000';
+        if (!$user_name = AuthConfig::getAuthConfig('user_id')) {
+            $user_name = AuthConfig::getAuthConfig('user_name');
+        }
+
         switch ($is_insert) {
         case true:  // 新規登録
             $data = array(
-                'create_datetime'   => Date::forge()->format('mysql'),
-                'create_user'       => $user_master_id,
-                'update_datetime'   => Date::forge()->format('mysql'),
-                'update_user'       => $user_master_id
+                'create_datetime'   => \Date::forge()->format('mysql'),
+                'create_user'       => $user_name,
+                'update_datetime'   => \Date::forge()->format('mysql'),
+                'update_user'       => $user_name
             );
             break;
         case false: // 更新
         default:    // 更新
             $data = array(
-                'update_datetime'   => Date::forge()->format('mysql'),
-                'update_user'       => $user_master_id
+                'update_datetime'   => \Date::forge()->format('mysql'),
+                'update_user'       => $user_name
             );
             break;
         }

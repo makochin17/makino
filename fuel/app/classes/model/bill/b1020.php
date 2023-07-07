@@ -23,7 +23,7 @@ ini_set("memory_limit", "1000M");
 
 class B1020 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     public static $format_array = array(
                                   'xls'             => 'Excel5'

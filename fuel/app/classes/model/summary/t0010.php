@@ -12,7 +12,7 @@ ini_set("memory_limit", "1000M");
 
 class T0010 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
     
     /**
      * 課別配車売上集計

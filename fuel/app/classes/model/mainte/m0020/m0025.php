@@ -11,7 +11,7 @@ use \Config;
 
 class M0025 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
     
     /**
      * 得意先マスタレコード取得

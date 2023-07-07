@@ -4,7 +4,7 @@ use \Model\Common\SystemConfig;
 
 class D0040 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * 配車データ（チャーター便）取得

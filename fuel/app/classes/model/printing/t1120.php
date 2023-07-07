@@ -16,7 +16,7 @@ use \Model\Printing\T1124;
 
 class T1120 extends \Model {
 
-    public static $db           = 'ONISHI';
+    public static $db           = 'MAKINO';
     
     /**
      * 納品書区分リスト取得

@@ -10,7 +10,7 @@ use \Config;
 
 class M0034 extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
     
     /**
      * 庸車先登録

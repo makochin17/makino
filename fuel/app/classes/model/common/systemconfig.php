@@ -3,7 +3,7 @@ namespace Model\Common;
 
 class SystemConfig extends \Model {
 
-    public static $db       = 'ONISHI';
+    public static $db       = 'MAKINO';
 
     /**
      * システム設定値取得
