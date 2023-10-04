@@ -18,6 +18,7 @@ class SystemConfig extends \Model {
         // データ取得
         $stmt = \DB::select(
                 array(\DB::expr('CONCAT(\'!\',m.encrypt_key,\'#\')'), 'encrypt_key'),
+                array(\DB::expr('AES_DECRYPT(UNHEX(fullcalendar_key),encrypt_key)'), 'fullcalendar_key'),
                 array('m.password_limit', 'password_limit'),
                 array('m.password_default', 'password_default')
                 );

@@ -47,12 +47,12 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
         $this->mode                         = Input::param('mode', '');
         // サイト設定
         $cnf                                = \Config::load('siteinfo', true);
-        $cnf['header_title']                = '従業員マスタ';
+        $cnf['header_title']                = 'ユーザーマスタ';
         $cnf['page_id']                     = '[M0010]';
         $cnf['tree']['top']                 = \Uri::base(false);
-        $cnf['tree']['management_function'] = '従業員マスタ';
+        $cnf['tree']['management_function'] = 'ユーザーマスタ';
         $cnf['tree']['page_url']            = \Uri::create(AccessControl::getActiveController());
-        $cnf['tree']['page_title']          = '従業員マスタ';
+        $cnf['tree']['page_title']          = 'ユーザーマスタ';
 
         if ($this->mode == 'reset') {
             $header                         = View::forge('header_logout');

@@ -377,6 +377,14 @@
 			color: inherit;
 		}
 
+/* Header */
+#header {
+  border-bottom: solid 5px #0051FF;
+  padding: 1em 0;
+  margin: 0 0 1em;
+  position: relative;
+}
+
 /* Menu */
 
 	#menu ul {
@@ -404,7 +412,7 @@
 		}
 
 			#menu ul a:hover, #menu ul span:hover {
-				color: #005FFF;
+				color: #0051FF;
 			}
 
 			#menu ul a.opener, #menu ul span.opener {
@@ -438,7 +446,7 @@
 				}
 
 				#menu ul a.opener:hover:before, #menu ul span.opener:hover:before {
-					color: #005FFF;
+					color: #0051FF;
 				}
 
 				#menu ul a.opener.active + ul, #menu ul span.opener.active + ul {
@@ -515,12 +523,12 @@
         align-items: center; }
     .pagination a:hover {
       opacity: 1;
-      background: linear-gradient(#0ed0ff, #00a4e9);
+      background: linear-gradient(#0051FF, #00a4e9);
       color: #ffffff; }
     .pagination .previous-inactive.current,
     .pagination .active,
     .pagination .active a {
-      background: linear-gradient(#0ed0ff, #00a4e9);
+      background: linear-gradient(#0051FF, #00a4e9);
       color: #ffffff;
       font-weight: bold;
       cursor: default; }
@@ -552,7 +560,7 @@
     text-align: center;
     margin-left: 5px;
     color: white;
-    background: linear-gradient(#0ed0ff, #00a4e9);
+    background: linear-gradient(#0051FF, #00a4e9);
     border-left: 1px solid #007abc;
     border-top: 1px solid #007abc;
     border-bottom: 1px solid #007abc;
@@ -629,8 +637,8 @@
 
 		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
-			border-color: #005FFF;
-			box-shadow: 0 0 0 1px #005FFF;
+			border-color: #0051FF;
+			box-shadow: 0 0 0 1px #0051FF;
 		}
 
 	input[type="checkbox"] + label:before,
@@ -697,7 +705,7 @@ input[name="tab_name"] + label:before {
 
 input:checked + .tab_class  {
   color: white;
-  background: linear-gradient(#0ed0ff, #00a4e9);
+  background: linear-gradient(#0051FF, #00a4e9);
   border-left: 1px solid #007abc;
   border-top: 1px solid #007abc;
   border-bottom: 1px solid #007abc;
@@ -731,15 +739,15 @@ display: flex;
     border: 1px solid #007abc;
    }
     .tab-contents .tab-item:hover {
-      background: linear-gradient(#0ed0ff, #00a4e9);
+      background: linear-gradient(#0051FF, #00a4e9);
      }
 #tab1:checked ~ #tab-item1 {
-  background: linear-gradient(#0ed0ff, #00a4e9);
+  background: linear-gradient(#0051FF, #00a4e9);
 }
 #tab2:checked ~ #tab-item2 {
-  background: linear-gradient(#0ed0ff, #00a4e9);
+  background: linear-gradient(#0051FF, #00a4e9);
 }
 #tab3:checked ~ #tab-item3 {
-  background: linear-gradient(#0ed0ff, #00a4e9);
+  background: linear-gradient(#0051FF, #00a4e9);
 }
 

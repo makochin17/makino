@@ -3,8 +3,8 @@
  * Site Info
  */
 return array(
-    'system_title'          => 'タイヤハウスまきの予約管理システム',
-    'system_title_alpha'    => 'TIRE HOUSE MAKINO RESERVATION MANAGEMENT SYSTEM',
+    'system_title'          => 'タイヤ預託システム',
+    'system_title_alpha'    => 'TIRE DEPOSIT SYSTEM',
     'header_title'          => '',
     'tree'                  => array(
         'top'                   => '',

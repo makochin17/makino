@@ -109,10 +109,11 @@ class Controller_Search_S0010 extends Controller_Hybrid {
         $error_msg      = null;
         $init_flag      = false;
         $conditions 	= array_fill_keys(array(
-        	'member_code',
-        	'full_name',
-        	'name_furigana',
-        	'mail_address',
+        	'customer_code',
+        	'customer_name',
+        	'customer_name_kana',
+            'mail_address',
+            'office_name',
         ), '');
 
         if (!empty(Input::param('cancel')) && Security::check_token()) {
@@ -123,7 +124,7 @@ class Controller_Search_S0010 extends Controller_Hybrid {
             echo "<script type='text/javascript'>window.close();</script>";
         } elseif (!empty(Input::param('select')) && Security::check_token()) {
             // 選択ボタンが押下された場合の処理
-            Session::set('select_member_code', Input::param('select_code'));
+            Session::set('select_customer_code', Input::param('select_code'));
             Session::delete('s0010_list');
             echo "<script type='text/javascript'>window.opener[window.name]();</script>";
             echo "<script type='text/javascript'>window.close();</script>";
@@ -140,8 +141,8 @@ class Controller_Search_S0010 extends Controller_Hybrid {
 			$errors = $validation->error();
 			if (!empty($errors)) {
 				foreach($validation->error() as $key => $e) {
-                    // チェック項目は社員コードのみのため固定
-                    $error_msg = str_replace('XXXXX','従業員コード',Config::get('m_CW0006'));
+                    // チェック項目はコードのみのため固定
+                    $error_msg = str_replace('XXXXX','お客様番号',Config::get('m_CW0006'));
 				}
 			}
 

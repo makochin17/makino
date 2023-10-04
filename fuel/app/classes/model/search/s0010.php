@@ -20,21 +20,24 @@ class S0010 extends \Model {
         // 件数取得
         if ($is_count) {
 
-            $stmt = \DB::select(\DB::expr('COUNT(mm.member_code) AS count'));
+            $stmt = \DB::select(\DB::expr('COUNT(mm.customer_code) AS count'));
 
         // データ取得
         } else {
 
             $stmt = \DB::select(
-                    array('mm.member_code', 'member_code'),
-                    array(\DB::expr('AES_DECRYPT(UNHEX(mm.name),"'.$encrypt_key.'")'), 'full_name'),
-                    array(\DB::expr('AES_DECRYPT(UNHEX(mm.name_furigana),"'.$encrypt_key.'")'), 'name_furigana'),
-                    array(\DB::expr('AES_DECRYPT(UNHEX(mm.mail_address),"'.$encrypt_key.'")'), 'mail_address')
+                    array('mm.customer_code', 'customer_code'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mm.name),"'.$encrypt_key.'")'), 'customer_name'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mm.name_kana),"'.$encrypt_key.'")'), 'customer_name_kana'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mm.tel),"'.$encrypt_key.'")'), 'tel'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mm.mobile),"'.$encrypt_key.'")'), 'mobile'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mm.mail_address),"'.$encrypt_key.'")'), 'mail_address'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mm.office_name),"'.$encrypt_key.'")'), 'office_name')
                     );
         }
 
         // テーブル
-        $stmt->from(array('m_member', 'mm'))
+        $stmt->from(array('m_customer', 'mm'))
             // ->join(array('m_car', 'mc'), 'left outer')
             //     ->on('mm.car_code', '=', 'mc.car_code')
             //     ->on('mc.start_date', '<=', '\''.date("Y-m-d").'\'')
@@ -42,25 +45,25 @@ class S0010 extends \Model {
         ;
 
         // 社員コード
-        if (trim($conditions['member_code']) != '') {
-            $stmt->where('mm.member_code', '=', $conditions['member_code']);
+        if (trim($conditions['customer_code']) != '') {
+            $stmt->where('mm.customer_code', '=', $conditions['customer_code']);
         }
         // 氏名
-        if (trim($conditions['full_name']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(mm.name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['full_name']."%'"));
+        if (trim($conditions['customer_name']) != '') {
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(mm.name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['customer_name']."%'"));
         }
         // ふりがな
-        if (trim($conditions['name_furigana']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(mm.name_furigana),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['name_furigana']."%'"));
+        if (trim($conditions['customer_name_kana']) != '') {
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(mm.name_kana),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['customer_name_kana']."%'"));
         }
         // メールアドレス
         if (trim($conditions['mail_address']) != '') {
             $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(mm.mail_address),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['mail_address']."%'"));
         }
-        // // 車両番号
-        // if (trim($conditions['car_number']) != '') {
-        //     $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(mc.car_number),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['car_number']."%'"));
-        // }
+        // 勤務先
+        if (trim($conditions['office_name']) != '') {
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(mc.office_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['office_name']."%'"));
+        }
 
         // 適用開始日
         $stmt->where('mm.start_date', '<=', date("Y-m-d"));
@@ -75,7 +78,7 @@ class S0010 extends \Model {
 
         } else {
             // データ取得
-            return $stmt->order_by('mm.member_code', 'ASC')
+            return $stmt->order_by('mm.customer_code', 'ASC')
             ->limit($limit)
             ->offset($offset)
             ->execute($db)

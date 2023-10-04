@@ -1,25 +1,29 @@
-window.onload = function(){
-	change();
+// 「入力項目クリア」の確認ダイアログ表示
+function submitChkClear() {
+    var flag = window.confirm (clear_msg);
+    return flag;
 }
 
-// 項目の活性状態制御
-function change() {
-	
-	//ラジオボタン操作
-	var departmentRs = document.getElementsByName("department_radio");
-	for ( var i=0, i=departmentRs.length; i--; ) {
-		if ( departmentRs[i].checked ) {
-			var r_value = departmentRs[i].value ;
-			break;
-		}
-	}
-	
-	if(r_value == 1) {
-		document.getElementById('department_name').disabled = false;
-	}
-	if(r_value == 2){
-		document.getElementById('department_name').disabled = true;
-	}
+// 「確定」の確認ダイアログ表示
+function submitChkExecution() {
+    var flag = window.confirm (processing_msg1);
+    return flag;
+}
+
+// 「削除」の確認ダイアログ表示
+function onDelete(storage_height_id, del_flg) {
+    if (del_flg == 'NO') {
+        var flag = window.confirm (processing_msg2);
+    } else {
+        var flag = window.confirm (processing_msg3);
+    }
+    var f = document.forms["selectForm"];
+    f.processing_division.value = '3';
+    f.storage_height_id.value = storage_height_id;
+    f.method = "POST";
+    f.submit();
+
+    return flag;
 }
 
 // Enterキーによるsubmit無効化

@@ -17,7 +17,7 @@
 
 			<div class="logo" style="margin-bottom:40px;">
 				<div style="text-align:center;margin:10px auto 10px auto;font-size: large;">
-					<?php echo Asset::img('logo.svg', array('style' => 'width:440px;', 'alt' => 'logo')); ?>
+					<?php echo Asset::img('login_logo.jpg', array('style' => 'width:440px;', 'alt' => 'logo')); ?>
 				</div>
 			</div>
 

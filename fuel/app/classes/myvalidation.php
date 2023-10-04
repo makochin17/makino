@@ -369,7 +369,7 @@ class MyValidation {
         if ($val == '') {
             return true;
         }
-        
+
         // カンマを取り除く
         if ($mode) {
             $val = str_replace(',', '', $val);
@@ -462,6 +462,24 @@ class MyValidation {
    }
 
     /**
+     * 時刻形式チェック
+     */
+    public static function _validation_valid_time_format($time) {
+
+        // 空文字は通す 通したくない場合はrequiredを使用させる
+        if ($time == '') {
+            return true;
+        }
+
+        if (!preg_match('/(0[0-9]{1}|1{1}[0-9]{1}|2{1}[0-3]{1}):(0[0-9]{1}|[1-5]{1}[0-9]{1})$/', $time)){
+            return false;
+        }
+
+        return true;
+
+   }
+
+    /**
      * メールチェック
      */
     public static function _validation_valid_mail($mail) {
@@ -477,7 +495,38 @@ class MyValidation {
 
         return false;
 
-   }
+    }
+
+    /**
+     * 郵便番号チェック
+     */
+    public static function _validation_valid_zip($zip) {
+
+        $zip = mb_convert_kana($zip, 'a', 'UTF-8');
+        if (preg_match("/\A\d{3}[-]\d{4}\z/", $zip)) {
+            return true;
+            // print('郵便番号：〒' . $zip);
+        }
+        return false;
+
+    }
+
+    /**
+     * 電話・Fax・携帯番号チェック
+     */
+    public static function _validation_valid_phone_no($phone_no) {
+
+        // ハイフンありチェック
+        if (preg_match('/^0[0-9]{1,4}-[0-9]{1,4}-[0-9]{3,4}$/', $phone_no)) {
+            return true;
+        } else {
+            if (preg_match('/^0[0-9]{9,10}$/', $telNo)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
 
     /**
      * 会員コードチェック
@@ -496,12 +545,12 @@ class MyValidation {
         return false;
 
    }
-   
+
    /**
      * 半角カタカナチェック
      */
     public static function _validation_is_half_katakana($val) {
-        
+
         // 空文字は通す 通したくない場合はrequiredを使用させる
         if ($val == '') {
             return true;

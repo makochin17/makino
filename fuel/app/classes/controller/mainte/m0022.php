@@ -20,7 +20,7 @@ class Controller_Mainte_M0022 extends Controller_Hybrid {
 	private $tree 		= 'tree';
 	private $sidemenu 	= 'sidemenu';
 	private $footer   	= 'footer';
-    
+
     /**
     * 画面共通初期設定
     **/

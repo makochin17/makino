@@ -10,7 +10,7 @@
 <body>
 	<header id="header" style="padding-top:1em;">
 		<div style="text-align:center;margin:10px auto 10px auto;">
-			<?php echo Html::anchor(\Uri::create('top'), Asset::img('logo.svg', array('style' => 'width:230px;', 'alt' => 'logo')), array('class' => 'logo')); ?>
+			<?php echo Html::anchor(\Uri::create('top'), Asset::img('sidemenu.jpg', array('style' => 'width:230px;', 'alt' => 'logo')), array('class' => 'logo')); ?>
 		</div>
 	</header>
 

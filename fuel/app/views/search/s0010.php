@@ -7,22 +7,22 @@
         <table class="search-area" style="width: 500px">
             <tbody>
                 <tr>
-                    <td style="width: 150px; height: 30px;">社員コード</td>
+                    <td style="width: 150px; height: 30px;">お客様番号</td>
                     <td style="width: 350px; height: 30px;">
-                        <?php echo Form::input('member_code', (!empty($data['member_code'])) ? $data['member_code'] : '', 
-                        array('class' => 'input-text', 'type' => 'number', 'id' => 'member_code', 'style' => 'width:80px;', 'min' => '0', 'max' => '99999', 'tabindex' => '1')); ?></td>
+                        <?php echo Form::input('customer_code', (!empty($data['customer_code'])) ? $data['customer_code'] : '', 
+                        array('class' => 'input-text', 'type' => 'number', 'id' => 'customer_code', 'style' => 'width:80px;', 'min' => '0', 'max' => '99999', 'tabindex' => '1')); ?></td>
                 </tr>
                 <tr>
                     <td style="width: 150px; height: 30px;">氏名</td>
                     <td style="width: 350px; height: 30px;">
-                        <?php echo Form::input('full_name', (!empty($data['full_name'])) ? $data['full_name'] : '', 
-                        array('class' => 'input-text', 'type' => 'text', 'id' => 'full_name', 'style' => 'width:180px;', 'maxlength' => '10', 'tabindex' => '2')); ?></td>
+                        <?php echo Form::input('customer_name', (!empty($data['customer_name'])) ? $data['customer_name'] : '', 
+                        array('class' => 'input-text', 'type' => 'text', 'id' => 'customer_name', 'style' => 'width:180px;', 'maxlength' => '10', 'tabindex' => '2')); ?></td>
                 </tr>
                 <tr>
                     <td style="width: 150px; height: 30px;">ふりがな</td>
                     <td style="width: 350px; height: 30px;">
-                        <?php echo Form::input('name_furigana', (!empty($data['name_furigana'])) ? $data['name_furigana'] : '', 
-                        array('class' => 'input-text', 'type' => 'text', 'id' => 'name_furigana', 'style' => 'width:240px;', 'maxlength' => '15', 'tabindex' => '3')); ?></td>
+                        <?php echo Form::input('customer_name_kana', (!empty($data['customer_name_kana'])) ? $data['customer_name_kana'] : '', 
+                        array('class' => 'input-text', 'type' => 'text', 'id' => 'customer_name_kana', 'style' => 'width:240px;', 'maxlength' => '15', 'tabindex' => '3')); ?></td>
                 </tr>
                 <tr>
                     <td style="width: 150px; height: 30px;">メールアドレス</td>
@@ -31,15 +31,13 @@
                         array('class' => 'input-text', 'type' => 'text', 'id' => 'mail_address', 'style' => 'width:160px;', 'maxlength' => '50', 'tabindex' => '4')); ?>
                     </td>
                 </tr>
-                <?php /* ?>
                 <tr>
-                    <td style="width: 150px; height: 30px;">車両番号</td>
+                    <td style="width: 150px; height: 30px;">勤務先</td>
                     <td style="width: 450px; height: 30px;">
-                        <?php echo Form::input('car_number', (!empty($data['car_number'])) ? $data['car_number'] : '', 
-                        array('class' => 'input-text', 'type' => 'text', 'id' => 'car_number', 'style' => 'width:160px;', 'maxlength' => '12', 'tabindex' => '6')); ?>
+                        <?php echo Form::input('office_name', (!empty($data['office_name'])) ? $data['office_name'] : '', 
+                        array('class' => 'input-text', 'type' => 'text', 'id' => 'office_name', 'style' => 'width:160px;', 'maxlength' => '12', 'tabindex' => '6')); ?>
                     </td>
                 </tr>
-                <?php */ ?>
             </tbody>
         </table>
         <div class="search-buttons">
@@ -61,10 +59,11 @@
                 <table class="table-inq" style="width: 1020px">
                     <tr>
                         <th style="width: 60px">選択</th>
-                        <th style="width: 110px">従業員コード</th>
-                        <th style="width: 130px">氏名</th>
-                        <th style="width: 130px">ふりがな</th>
+                        <th style="width: 110px">お客様番号</th>
+                        <th style="width: 180px">氏名</th>
+                        <th style="width: 150px">ふりがな</th>
                         <th style="width: 160px">メールアドレス</th>
+                        <th style="width: 160px">勤務先</th>
                     </tr>
                     <?php if (!empty($list_data)) : ?>
                       <?php foreach ($list_data as $key => $val) : ?>
@@ -72,13 +71,14 @@
                             <td style="width: 60px; text-align: center;">
                             <?php echo Form::open(array('id' => 'selectForm', 'name' => 'selectForm', 'action' => '', 'method' => 'post', 'class' => 'form-stacked','enctype'=>"multipart/form-data")); ?>
                             <?php echo Form::submit('select', '選択', array('class' => 'buttonA', 'onclick' => '')); ?>
-                            <?php echo Form::hidden('select_code', $val['member_code']);?>
+                            <?php echo Form::hidden('select_code', $val['customer_code']);?>
                             <?php echo Form::hidden(\Config::get('security.csrf_token_key'), \Security::fetch_token());?>
                             <?php echo Form::close(); ?></td>
-                            <td style="width: 110px"><?php echo sprintf('%05d', $val['member_code']); ?></td>
-                            <td style="width: 130px"><?php echo $val['full_name']; ?></td>
-                            <td style="width: 130px"><?php echo $val['name_furigana']; ?></td>
-                            <td style="width: 160px"><?php echo (empty($val['mail_address'])) ? "-" : $val['mail_address']; ?></td>
+                            <td style="width: 110px"><?php echo $val['customer_code']; ?></td>
+                            <td style="width: 180px;font-size:14px"><?php echo $val['customer_name']; ?></td>
+                            <td style="width: 150px;font-size:14px"><?php echo $val['customer_name_kana']; ?></td>
+                            <td style="width: 160px;font-size:14px"><?php echo (empty($val['mail_address'])) ? "-" : $val['mail_address']; ?></td>
+                            <td style="width: 160px;font-size:14px"><?php echo (empty($val['office_name'])) ? "-" : $val['office_name']; ?></td>
                         </tr>
                       <?php endforeach; ?>
                     <?php endif ; ?>

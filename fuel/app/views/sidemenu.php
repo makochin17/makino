@@ -4,7 +4,7 @@
 <div id="sidebar">
   <div class="inner">
     <section id="search" class="alt" style="">
-      <?php echo Html::anchor(\Uri::create('top/c0040'), Asset::img('logo.svg', array('style' => 'width:230px;', 'alt' => 'logo')), array('class' => 'logo')); ?>
+      <?php echo Html::anchor(\Uri::create('top/c0040'), Asset::img('sidemenu.jpg', array('style' => 'width:320px;height:160px;', 'alt' => 'logo')), array('class' => 'logo')); ?>
       <br />
     </section>
     <div style="text-align:right;margin-top:-40px;padding-bottom:10px;border:0px;margin-bottom:10px;">
@@ -66,22 +66,27 @@
           </ul>
         </li>
         <li>
+          <span class="opener">社内システム管理</span>
+          <ul>
+            <li><?php echo Html::anchor(\Uri::create('customer/c0010'), 'お客様情報'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('car/c0010'), '車両情報'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('schedule/s0010'), '予約スケジュール'); ?></li>
+          </ul>
+        </li>
+        <li>
           <span class="opener">マスタ管理</span>
           <ul>
-            <li><?php echo Html::anchor(\Uri::create('mainte/m0010'), '従業員マスタ'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('mainte/m0020'), '得意先マスタメンテナンス'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('mainte/m0030'), '庸車先マスタメンテナンス'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('mainte/m0040'), '車種マスタメンテナンス'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('mainte/m0050'), '車両マスタメンテナンス'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('mainte/m0060'), '商品マスタメンテナンス'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('mainte/m0080'), '課マスタメンテナンス'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('mainte/m0010'), 'ユーザーマスタ'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('mainte/m0020'), 'ユニットマスタ'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('mainte/m0030'), '保管場所リレーション'); ?></li>
           </ul>
         </li>
         <li>
           <span class="opener">システム管理</span>
           <ul>
+            <li><?php echo Html::anchor(\Uri::create('system/c0080'), '会社情報設定'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('system/m0070'), '通知データメンテナンス'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('system/c0050'), '不要データ削除'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('system/c0050'), 'カレンダー休日設定'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('auth/c0030'), 'パスワード変更'); ?></li>
           </ul>
         </li>

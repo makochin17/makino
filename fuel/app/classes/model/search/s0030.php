@@ -14,89 +14,81 @@ class S0030 extends \Model {
      * 庸車先マスタレコード検索
      */
     public static function getSearch($is_count, $conditions, $offset, $limit, $db) {
-        
-        $encrypt_key = SystemConfig::getSystemConfig('encrypt_key',self::$db);
-        
+
         // 件数取得
         if ($is_count) {
 
-            $stmt = \DB::select(\DB::expr('COUNT(mc.carrier_code) AS count'));
+            $stmt = \DB::select(\DB::expr('COUNT(rsl.id) AS count'));
 
         // データ取得
         } else {
 
             $stmt = \DB::select(
-                    array('mc.carrier_code', 'carrier_code'),
-                    array('mc.company_section', 'company_section'),
-                    array('mcc.company_name', 'company_name'),
-                    array('mcs.sales_office_name', 'sales_office_name'),
-                    array('mcd.department_name', 'department_name'),
-                    array('mc.closing_date', 'closing_date'),
-                    array('mc.closing_date_1', 'closing_date_1'),
-                    array('mc.closing_date_2', 'closing_date_2'),
-                    array('mc.closing_date_3', 'closing_date_3'),
-                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.official_name),"'.$encrypt_key.'")'), 'official_name'),
+                        array('rsl.id', 'storage_location_id'),
+                        array(\DB::expr("CONCAT(msc.name, '-', msd.name, '-', msh.name)"), 'storage_location_name'),
+                        array('rsl.storage_column_id', 'storage_column_id'),
+                        array('msc.name', 'storage_column_name'),
+                        array('rsl.storage_depth_id', 'storage_depth_id'),
+                        array('msd.name', 'storage_depth_name'),
+                        array('rsl.storage_height_id', 'storage_height_id'),
+                        array('msh.name', 'storage_height_name'),
+                        array('rsl.del_flg', 'del_flg'),
                     );
         }
 
         // テーブル
-        $stmt->from(array('m_carrier', 'mc'))
-            ->join(array('m_carrier_company', 'mcc'), 'left outer')
-                ->on('mc.carrier_company_code', '=', 'mcc.carrier_company_code')
-                ->on('mcc.start_date', '<=', '\''.date("Y-m-d").'\'')
-                ->on('mcc.end_date', '>', '\''.date("Y-m-d").'\'')
-            ->join(array('m_carrier_sales_office', 'mcs'), 'left outer')
-                ->on('mc.carrier_sales_office_code', '=', 'mcs.carrier_sales_office_code')
-                ->on('mcs.start_date', '<=', '\''.date("Y-m-d").'\'')
-                ->on('mcs.end_date', '>', '\''.date("Y-m-d").'\'')
-            ->join(array('m_carrier_department', 'mcd'), 'left outer')
-                ->on('mc.carrier_department_code', '=', 'mcd.carrier_department_code')
-                ->on('mcd.start_date', '<=', '\''.date("Y-m-d").'\'')
-                ->on('mcd.end_date', '>', '\''.date("Y-m-d").'\'');
-        
-        // 庸車先コード
-        if (trim($conditions['carrier_code']) != '') {
-            $stmt->where('mc.carrier_code', '=', $conditions['carrier_code']);
+        $stmt->from(array('rel_storage_location', 'rsl'))
+            ->join(array('m_storage_column', 'msc'), 'left outer')
+                ->on('msc.id', '=', 'rsl.storage_column_id')
+                ->on('msc.start_date', '<=', '\''.date("Y-m-d").'\'')
+                ->on('msc.end_date', '>', '\''.date("Y-m-d").'\'')
+            ->join(array('m_storage_depth', 'msd'), 'left outer')
+                ->on('msd.id', '=', 'rsl.storage_depth_id')
+                ->on('msd.start_date', '<=', '\''.date("Y-m-d").'\'')
+                ->on('msd.end_date', '>', '\''.date("Y-m-d").'\'')
+            ->join(array('m_storage_height', 'msh'), 'left outer')
+                ->on('msh.id', '=', 'rsl.storage_height_id')
+                ->on('msh.start_date', '<=', '\''.date("Y-m-d").'\'')
+                ->on('msh.end_date', '>', '\''.date("Y-m-d").'\'');
+
+        // 保管場所コード
+        if (trim($conditions['storage_location_id']) != '') {
+            $stmt->where('rsl.id', '=', $conditions['storage_location_id']);
         }
-        // 会社区分
-        if (trim($conditions['company_section']) != '' && trim($conditions['company_section']) != '0') {
-            $stmt->where('mc.company_section', '=', $conditions['company_section']);
+        // 保管場所名称
+        if (trim($conditions['storage_location_name']) != '') {
+            $stmt->where(\DB::expr("CONCAT(msc.name, '-', msd.name, '-', msh.name)"), 'LIKE', \DB::expr("'%".$conditions['storage_location_name']."%'"));
         }
-        // 会社名
-        if (trim($conditions['company_name']) != '') {
-            $stmt->where('mcc.company_name', 'LIKE', \DB::expr("'%".$conditions['company_name']."%'"));
+        // 保管場所列コード
+        if (trim($conditions['storage_column_id']) != '') {
+            $stmt->where('rsl.storage_column_id', '=', $conditions['storage_column_id']);
         }
-        // 営業所名
-        if (trim($conditions['sales_office_name']) != '') {
-            $stmt->where('mcs.sales_office_name', 'LIKE', \DB::expr("'%".$conditions['sales_office_name']."%'"));
+        // 保管場所列名
+        if (trim($conditions['storage_column_name']) != '') {
+            $stmt->where('msc.name', 'LIKE', \DB::expr("'%".$conditions['storage_column_name']."%'"));
         }
-        // 部署名
-        if (trim($conditions['department_name']) != '') {
-            $stmt->where('mcd.department_name', 'LIKE', \DB::expr("'%".$conditions['department_name']."%'"));
+        // 保管場所奥行コード
+        if (trim($conditions['storage_depth_id']) != '') {
+            $stmt->where('rsl.storage_depth_id', '=', $conditions['storage_depth_id']);
         }
-        // 締日
-        if (trim($conditions['closing_date']) != '' && trim($conditions['closing_date']) != '0') {
-            $stmt->and_where_open();
-            $stmt->where('mc.closing_date', '=', $conditions['closing_date']);
-            $stmt->or_where('mc.closing_date_1', '=', $conditions['closing_date']);
-            $stmt->or_where('mc.closing_date_2', '=', $conditions['closing_date']);
-            $stmt->or_where('mc.closing_date_3', '=', $conditions['closing_date']);
-            $stmt->and_where_close();
+        // 保管場所奥行名
+        if (trim($conditions['storage_depth_name']) != '') {
+            $stmt->where('msd.name', 'LIKE', \DB::expr("'%".$conditions['storage_depth_name']."%'"));
         }
-        // 正式名称
-        if (trim($conditions['official_name']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(mc.official_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['official_name']."%'"));
+        // 保管場所高コード
+        if (trim($conditions['storage_height_id']) != '') {
+            $stmt->where('rsl.storage_height_id', '=', $conditions['storage_height_id']);
         }
-        // 正式名称（カナ）
-        if (trim($conditions['official_name_kana']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(mc.official_name_kana),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['official_name_kana']."%'"));
+        // 保管場所高名
+        if (trim($conditions['storage_height_name']) != '') {
+            $stmt->where('msh.name', 'LIKE', \DB::expr("'%".$conditions['storage_height_name']."%'"));
         }
-                
+
         // 適用開始日
-        $stmt->where('mc.start_date', '<=', date("Y-m-d"));
+        $stmt->where('rsl.start_date', '<=', date("Y-m-d"));
         // 適用終了日
-        $stmt->where('mc.end_date', '>', date("Y-m-d"));
-        
+        $stmt->where('rsl.end_date', '>', date("Y-m-d"));
+
         // 検索実行
         if ($is_count) {
             // 件数取得
@@ -105,7 +97,7 @@ class S0030 extends \Model {
 
         } else {
             // データ取得
-            return $stmt->order_by('mc.carrier_code', 'ASC')
+            return $stmt->order_by('rsl.id', 'ASC')
             ->limit($limit)
             ->offset($offset)
             ->execute($db)
