@@ -252,7 +252,6 @@ class Controller_Schedule_S0012 extends Controller_Hybrid {
             $end_time   = $s[1];
             $start_h    = (int)$start_hour;
             $end_h      = (int)$end_hour;
-
         }
         // 指定日付設定
         $conditions['default_day'] = date("Y-m-d");
