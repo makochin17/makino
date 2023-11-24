@@ -17,8 +17,8 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
     protected $format = 'json';
 
     // テンプレート定義
-    public $template    = 'template_schedule2';
-    private $head       = 'head_schedule2';
+    public $template    = 'template_schedule';
+    private $head       = 'head_schedule';
     private $header     = 'header';
     private $tree       = 'tree';
     private $sidemenu   = 'sidemenu';
@@ -26,12 +26,12 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
 
     // ページネーション
     private $pagenation_config = array(
-        'uri_segment' 	=> 'p',
-    	'num_links' 	=> 2,
-    	'per_page' 		=> 50,
-    	'name' 			=> 'default',
-    	'show_first' 	=> true,
-    	'show_last' 	=> true,
+        'uri_segment'   => 'p',
+        'num_links'     => 2,
+        'per_page'      => 50,
+        'name'          => 'default',
+        'show_first'    => true,
+        'show_last'     => true,
     );
 
     // 会社情報リスト
@@ -44,6 +44,8 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
     private $unit_list                  = array();
     // 依頼区分リスト
     private $request_class_list         = array();
+    // 予約権限設定
+    private $schedule_authority         = array();
 
     public function is_restful()
     {
@@ -66,16 +68,16 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
     /**
     * 画面共通初期設定
     **/
-	private function initViewForge($auth_data){
+    private function initViewForge($auth_data){
 
         // 画面モード設定
         $this->mode                         = Input::param('mode', '');
         // サイト設定
         $cnf                                = \Config::load('siteinfo', true);
-        $cnf['header_title']                = '予約スケジュール';
-        $cnf['page_id']                     = '[S0010]';
+        $cnf['header_title']                = '配達予約スケジュール';
+        $cnf['page_id']                     = '[S0011]';
         $cnf['tree']['top']                 = \Uri::base(false);
-        $cnf['tree']['management_function'] = '予約スケジュール';
+        $cnf['tree']['management_function'] = '配達予約スケジュール';
         $cnf['tree']['page_url']            = \Uri::create(AccessControl::getActiveController());
         $cnf['tree']['page_title']          = '';
 
@@ -110,6 +112,7 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
         $ary_style_css = array(
             'font-awesome/css/font-awesome.min.css',
             'common/style.css',
+            'schedule/s0010.css',
         );
         Asset::css($ary_style_css, array(), 'style_css', false);
 
@@ -136,17 +139,19 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
         // 作業選択時間リスト
         $this->select_work_time_list    = GenerateList::getSelectWorkTimeList(false);
         // ユニットリスト
-        $this->unit_list                = GenerateList::getUnitList('all', S0010::$db);
+        $this->unit_list                = GenerateList::getUnitList('all', S0010::$schedule_type, S0010::$db);
         // 依頼区分リスト
         $this->request_class_list       = GenerateList::getRequestClassList(false);
+        // 予約権限設定
+        $this->schedule_authority       = GenerateList::$schedule_authority;
 
         // ユーザ権限取得
         $this->user_authority           = $auth_data['user_authority'];
 
-	}
+    }
 
-	public function before() {
-		parent::before();
+    public function before() {
+        parent::before();
         // ログインチェック
         if(!Auth::check()) {
             Response::redirect(\Uri::base(false));
@@ -155,14 +160,17 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
         // 初期設定(共通画面設定)
         $auth_data = AuthConfig::getAuthConfig('all');
 
-		// ページアクセス権判定
-		//if (!AccessControl::isPagePermission($auth_data['permission_level'])) {
-		//	Response::redirect(\Uri::create('top'));
-		//}
+        // 予約タイプ
+        S0010::$schedule_type = 'delivery';
+
+        // ページアクセス権判定
+        //if (!AccessControl::isPagePermission($auth_data['permission_level'])) {
+        //  Response::redirect(\Uri::create('top'));
+        //}
         if (!$this->is_restful()) {
             $this->initViewForge($auth_data);
         }
-	}
+    }
 
     // 検索画面にてレコード選択された場合の処理
     private function set_info(&$conditions) {
@@ -182,142 +190,6 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
         return $error_msg;
     }
 
-    // 入力チェック
-    private function validate_info($conditions) {
-
-        $validation = false;
-
-        // 入力チェック
-        foreach ($conditions['list'] as $key => $val) {
-            // ２レコード目以降で処理区分が更新または削除の場合はスルー
-            if ($key > 0 && $conditions['processing_division'] != 1) {
-                continue;
-            }
-            // バリデーション対象チェック
-            // 指定項目が全て未入力の場合はスルー
-            if (!S0010::chkDispatchShareDataNull($val)) {
-                continue;
-            }
-            $validation = Validation::forge('list_'.$key);
-            $validation->add_callable('myvalidation');
-
-            // 配送区分チェック
-            $validation->add('list['.$key.'][delivery_code]', '配送区分')
-                ->add_rule('required_select');
-            // 地区チェック
-            $validation->add('list['.$key.'][area_code]', '地区')
-                ->add_rule('required_select');
-            // コースチェック
-            $validation->add('list['.$key.'][course]', 'コース')
-                ->add_rule('trim_max_lengths', 5);
-            // 納品日チェック
-            $validation->add('list['.$key.'][delivery_date]', '納品日')
-                ->add_rule('delivery_and_pickup_required_date', $val['pickup_date'])
-                ->add_rule('valid_date_format');
-            // 引取日チェック
-            $validation->add('list['.$key.'][pickup_date]', '引取日')
-                ->add_rule('delivery_and_pickup_required_date', $val['delivery_date'])
-                ->add_rule('valid_date_format');
-            // 納品先チェック
-            $validation->add('list['.$key.'][delivery_place]', '納品先')
-                ->add_rule('trim_max_lengths', 30);
-            // 引取先チェック
-            $validation->add('list['.$key.'][pickup_place]', '引取先')
-                ->add_rule('trim_max_lengths', 30);
-            // 得意先Noチェック
-            $validation->add('list['.$key.'][client_code]', '得意先No')
-                ->add_rule('required')
-                ->add_rule('trim_max_lengths', 5)
-                ->add_rule('is_numeric');
-            // 庸車先Noチェック
-            $validation->add('list['.$key.'][carrier_code]', '傭車先No')
-                ->add_rule('trim_max_lengths', 5)
-                ->add_rule('is_numeric');
-            // 数量チェック
-            $validation->add('list['.$key.'][volume]', '数量')
-                ->add_rule('required')
-                ->add_rule('is_numeric_decimal', 6);
-            // 単位チェック
-            $validation->add('list['.$key.'][unit_code]', '単位')
-                ->add_rule('required_select');
-            // 庸車費用チェック
-            $validation->add('list['.$key.'][carrier_payment]', '庸車費用')
-                ->add_rule('trim_max_lengths', 8)
-                ->add_rule('valid_strings', array('numeric', 'commas'));
-            // 商品名チェック
-            $validation->add('list['.$key.'][product_name]', '商品名')
-                ->add_rule('required')
-                ->add_rule('trim_max_lengths', 30);
-            // 車種チェック
-            $validation->add('list['.$key.'][car_model_code]', '車種')
-                ->add_rule('required');
-            // メーカーチェック
-            $validation->add('list['.$key.'][maker_name]', 'メーカー')
-                ->add_rule('trim_max_lengths', 15);
-            // 車両番号チェック
-            $validation->add('list['.$key.'][car_code]', '車両番号')
-                ->add_rule('required')
-                ->add_rule('trim_max_lengths', 4)
-                ->add_rule('is_numeric');
-            // 依頼者チェック
-            $validation->add('list['.$key.'][requester]', '依頼者')
-                ->add_rule('trim_max_lengths', 15);
-            // 問い合わせNoチェック
-            $validation->add('list['.$key.'][inquiry_no]', '問い合わせNo')
-                ->add_rule('trim_max_lengths', 15);
-            // 納品先住所チェック
-            $validation->add('list['.$key.'][delivery_address]', '納品先住所')
-                ->add_rule('trim_max_lengths', 40);
-            // 運転手チェック
-            $validation->add('list['.$key.'][driver_name]', '運転手')
-                ->add_rule('required');
-            // 備考1チェック
-            $validation->add('list['.$key.'][remarks1]', '備考1')
-                ->add_rule('trim_max_lengths', 15);
-            $validation->run();
-            // 備考2チェック
-            $validation->add('list['.$key.'][remarks2]', '備考2')
-                ->add_rule('trim_max_lengths', 15);
-            $validation->run();
-            // 備考3チェック
-            $validation->add('list['.$key.'][remarks3]', '備考3')
-                ->add_rule('trim_max_lengths', 15);
-            $validation->run();
-
-        }
-        return $validation;
-    }
-
-    // 登録処理
-    private function create_record($conditions) {
-
-        Config::load('message');
-        $error_msg                  = null;
-
-        // 傭車先コード取得
-        if (empty($conditions['carrier_code'])) {
-            $conditions['carrier_code'] = S0010::getCarrierCode($conditions['member_code'], $conditions['driver_name'], S0010::$db);
-        }
-        if (empty($conditions['carrier_code'])) {
-            return str_replace('XXXXX','庸車No',Config::get('m_CW0005'));
-        }
-        // // 傭車先が自社かどうか判定して自社なら車両コード存在チェック
-        // if (S0010::OurCompanyCheck($conditions['carrier_code'], S0010::$db)) {
-        //     // 車両コードが車両マスタに登録されているかチェック
-        //     if (!S0010::getNameById('car', $conditions['car_code'], S0010::$db)) {
-        //         return Config::get('m_DW0021');
-        //     }
-        // }
-
-        // レコード登録
-        $error_msg = S0010::create_record($conditions, S0010::$db);
-        if (!is_null($error_msg)) {
-            return $error_msg;
-        }
-
-        return null;
-    }
-
     public function action_index() {
 
         Config::load('message');
@@ -325,17 +197,12 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
         /**
          * 検索項目の取得＆初期設定
          */
+        $company            = $this->company_select_list;
+
         $cnt                = 0;
         $error_msg          = null;
-        $init_flag          = false;
-        $redirect_flag      = false;
+        $schedule_all_list  = array();
         $schedule_list      = array();
-
-        $company            = $this->company_select_list;
-        $unit_cd            = null;
-        $unit               = Input::param('unit', '');
-        $cboUnit            = Input::param('cboUnit', '');
-
         // 時刻設定
         $start_hour         = null;
         $start_time         = null;
@@ -352,6 +219,7 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
             'y',
             'm',
             'd',
+            'txtCustomerCode',
             'customer_code',
             'customer_name',
             'default_day',
@@ -406,10 +274,16 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
 
         if (Input::method() == 'POST' && Security::check_token()) {
             //POST送信の場合の処理
-            if (!empty($conditions['cboUnit'])) {
+            if (!empty($conditions['cboUnit']) || $conditions['cboUnit'] == 0) {
                 $conditions['unit_id'] = $conditions['cboUnit'];
             } else {
                 $conditions['unit_id'] = Session::get('schedule_unit_id', '');
+            }
+            if (!empty($conditions['txtCustomerCode'])) {
+                $conditions['customer_code'] = $conditions['txtCustomerCode'];
+            }
+            if (!empty(Input::param('reset')) && Security::check_token()) {
+                $conditions['customer_code'] = null;
             }
         } else {
             //POSTでない場合
@@ -422,22 +296,27 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
                     }
                 }
             }
-
         }
         Session::set('schedule_unit_id', $conditions['unit_id']);
 
         // ユニット別予約スケジュール取得(全件)
-        $schedule_all_list  = S0010::getScheduleByUnit($conditions['unit_id'], S0010::$db);
+        $schedule_all_list  = S0010::getScheduleByUnit($conditions, S0010::$schedule_type, S0010::$db);
 
         // 個別予約スケジュール取得
-        $schedule_list      = S0010::getScheduleByCustomer($conditions, S0010::$db);
-
+        $schedule_list      = S0010::getScheduleByCustomer($conditions, S0010::$schedule_type, S0010::$db);
         // カレンダー取得
-        $calendar           = S0010::CalendarView(S0010::$db);
+        $calendar           = S0010::CalendarView(\Uri::create(AccessControl::getActiveController()), S0010::$db);
 
         $this->template->content = View::forge(AccessControl::getActiveController(),
             array(
+                'customer_check_url'        => \Uri::create(\Uri::create('schedule/fullcalendar/cuscheck')),
+
                 'getcar_url'                => \Uri::create(\Uri::create('schedule/fullcalendar/getcar')),
+                'addschedule_url'           => \Uri::create(\Uri::create('schedule/fullcalendar/addschedule')),
+                'geteventinfo_url'          => \Uri::create(\Uri::create('schedule/fullcalendar/geteventinfo')),
+                'changedateschedule_url'    => \Uri::create(\Uri::create('schedule/fullcalendar/changedateschedule')),
+                'cancelschedule_url'        => \Uri::create(\Uri::create('schedule/fullcalendar/cancelschedule')),
+                'commitschedule_url'        => \Uri::create(\Uri::create('schedule/fullcalendar/commitschedule')),
                 'current_url'               => \Uri::create(AccessControl::getActiveController().'/detail'),
                 'master_url'                => \Uri::create(AccessControl::getActiveController().'/master'),
 
@@ -460,11 +339,13 @@ class Controller_Schedule_S0011 extends Controller_Hybrid {
                 'select_work_time_list'     => $this->select_work_time_list,
                 'unit_list'                 => $this->unit_list,
                 'request_class_list'        => $this->request_class_list,
+                'schedule_authority'        => $this->schedule_authority,
+                'holiday_list'              => S0010::getCalendarAll(S0010::$db),
 
                 // 社員情報
                 'userinfo'                  => AuthConfig::getAuthConfig('all'),
                 // ユニットリストデータ
-                'unit'                      => S0010::setList('unit', S0010::getUnit(null, S0010::$db)),
+                'unit'                      => S0010::setList('unit', S0010::getUnit(null, S0010::$schedule_type, S0010::$db)),
 
                 'error_message'             => $error_msg,
             )

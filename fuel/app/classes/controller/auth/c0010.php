@@ -161,12 +161,14 @@ class Controller_Auth_C0010 extends Controller_Hybrid {
                         'name_furigana'         => $data['name_furigana'],
                         'mail_address'          => $data['mail_address'],
                         'user_id'               => $data['user_id'],
+                        'customer_code'         => $data['customer_code'],
                         'user_authority'        => $data['user_authority'],
                         'lock_status'           => $data['lock_status'],
-                        'password'              => $conditions['password']
+                        'login_password'        => $conditions['password']
                     );
                     // ログイン情報テーブルにログインした社員情報を更新
-                    $auth->update_user(array('profile_fields' => $login_user_data), $data['user_id']);
+                    // $auth->update_user(array('profile_fields' => $login_user_data), $data['user_id']);
+                    $auth->update_user($login_user_data, $data['user_id']);
                     // 操作ログ出力
                     $result = OpeLog::addOpeLog('CI0006', Config::get('m_CI0006'), $data['user_id'], C0010::$db);
                     if (!$result) {

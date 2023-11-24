@@ -37,6 +37,9 @@ class AuthConfig extends \Model {
             case 'lock_status':
                 $item = \Auth::get_profile_fields('lock_status', '');
                 break;
+            case 'customer_code':
+                $item = \Auth::get_profile_fields('customer_code', '');
+                break;
             case 'all':
             default:
                 $item = array();
@@ -48,6 +51,7 @@ class AuthConfig extends \Model {
                     'name_furigana'     => \Auth::get_profile_fields('name_furigana', ''),
                     'mail_address'      => \Auth::get_profile_fields('mail_address', ''),
                     'user_id'           => \Auth::get_profile_fields('user_id', ''),
+                    'customer_code'     => \Auth::get_profile_fields('customer_code', ''),
                     'user_authority'    => \Auth::get_profile_fields('user_authority', ''),
                     'lock_status'       => \Auth::get_profile_fields('lock_status', ''),
                 );
@@ -72,6 +76,7 @@ class AuthConfig extends \Model {
             'name_furigana'     => $conditions['name_furigana'],
             'mail_address'      => $conditions['mail_address'],
             'user_id'           => $conditions['user_id'],
+            'customer_code'     => $conditions['customer_code'],
             'user_authority'    => $conditions['user_authority'],
             'lock_status'       => $conditions['lock_status']
         );
@@ -121,6 +126,7 @@ class AuthConfig extends \Model {
                 'name_furigana'     => $conditions['name_furigana'],
                 'mail_address'      => $conditions['mail_address'],
                 'user_id'           => $conditions['user_id'],
+                'customer_code'     => $conditions['customer_code'],
                 'user_authority'    => $conditions['user_authority'],
                 'lock_status'       => $conditions['lock_status']
             );

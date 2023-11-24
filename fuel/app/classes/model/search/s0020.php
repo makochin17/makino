@@ -11,7 +11,7 @@ class S0020 extends \Model {
     //==============================   対象検索   ==============================//
     //=========================================================================//
     /**
-     * 得意先マスタレコード検索
+     * ユニットマスタレコード検索
      */
     public static function getSearch($is_count, $conditions, $offset, $limit, $db) {
 
@@ -26,14 +26,19 @@ class S0020 extends \Model {
             $stmt = \DB::select(
                     array('mu.id', 'unit_code'),
                     array('mu.name', 'unit_name'),
+                    array('mu.schedule_type', 'schedule_type'),
                     );
         }
 
         // テーブル
         $stmt->from(array('m_unit', 'mu'));
 
-        // 会社名
-        if (trim($conditions['unit_name']) != '') {
+        // 予約タイプ
+        if (!empty($conditions['schedule_type'])) {
+            $stmt->where('mu.schedule_type', '=', $conditions['unit_name']);
+        }
+        // ユニット名
+        if (!empty($conditions['unit_name'])) {
             $stmt->where('mu.name', 'LIKE', \DB::expr("'%".$conditions['unit_name']."%'"));
         }
         // 適用開始日

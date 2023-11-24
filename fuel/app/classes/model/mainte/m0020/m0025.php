@@ -21,6 +21,7 @@ class M0025 extends \Model {
         // 項目
         $stmt = \DB::select(
                 array('m.id', 'unit_code'),
+                array('m.schedule_type', 'schedule_type'),
                 array('m.name', 'unit_name'),
                 array('m.start_date', 'start_date'),
                 array('m.end_date', 'end_date'),
@@ -73,11 +74,11 @@ class M0025 extends \Model {
     }
 
     /**
-     * 得意先更新
+     * ユニット更新
      */
     public static function update_record($conditions, $db) {
 
-        //得意先マスタ情報取得
+        //ユニットマスタ情報取得
         $result = self::getUnit($conditions['unit_code'], $db);
         if (is_countable($result)){
             if (count($result) == 0) {
@@ -89,7 +90,7 @@ class M0025 extends \Model {
         $unit_data = $result[0];
 
         ////////////////////////////////////////////
-        //得意先マスタ更新
+        //ユニットマスタ更新
 
         // 取得レコードの「適用開始日」がシステム日付より過去日か
         if (strtotime($unit_data['start_date']) < strtotime(Date::forge()->format('mysql_date'))) {
@@ -101,18 +102,19 @@ class M0025 extends \Model {
             }
 
             $data = array(
-                'unit_name'	=> $conditions['unit_name'],
+                'schedule_type' => $conditions['schedule_type'],
+                'unit_name'     => $conditions['unit_name'],
                 );
 
-            //得意先マスタ登録
-            $result = M0024::addClient($data, $db);
+            //ユニットマスタ登録
+            $result = M0024::addUnit($data, $db);
             if (!$result) {
                 Log::error(str_replace('XXXXX','ユニット',Config::get('m_ME0006'))."[".print_r($conditions,true)."]");
                 return str_replace('XXXXX','ユニット',Config::get('m_ME0006'));
             }
         } else {
             //　レコード更新
-            $result = self::updClient($conditions, $db);
+            $result = self::updUnit($conditions, $db);
             if (!$result) {
                 Log::error(str_replace('XXXXX','ユニット',Config::get('m_ME0007'))."[".print_r($conditions,true)."]");
                 return str_replace('XXXXX','ユニット',Config::get('m_ME0007'));
@@ -130,16 +132,17 @@ class M0025 extends \Model {
     }
 
     /**
-     * 得意先マスタ更新
+     * ユニットマスタ更新
      */
-    public static function updClient($items, $db) {
+    public static function updUnit($items, $db) {
 
         // テーブル
         $stmt = \DB::update('m_unit');
 
         // 項目セット
         $set = array(
-            'name'		    => $items['unit_name'],
+            'schedule_type' => $items['schedule_type'],
+            'name'          => $items['unit_name'],
             'start_date'    => Date::forge()->format('mysql_date'),
             'end_date'      => Date::create_from_string("9999-12-31" , "mysql_date")->format('mysql_date')
             );

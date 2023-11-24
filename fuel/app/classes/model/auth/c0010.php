@@ -28,6 +28,7 @@ class C0010 extends \Model {
                 array(\DB::expr('AES_DECRYPT(UNHEX(m.name_furigana),"'.$encrypt_key.'")'), 'name_furigana'),
                 array(\DB::expr('AES_DECRYPT(UNHEX(m.mail_address),"'.$encrypt_key.'")'), 'mail_address'),
                 array('m.user_id', 'user_id'),
+                array('m.customer_code', 'customer_code'),
                 array('m.user_authority', 'user_authority'),
                 array('m.lock_status', 'lock_status')
                 )

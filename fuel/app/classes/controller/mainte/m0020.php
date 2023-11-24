@@ -32,8 +32,8 @@ class Controller_Mainte_M0020 extends Controller_Hybrid {
     	'show_last' 	=> true,
     );
 
-    // 締日リスト
-    private $closing_date_list = array();
+    // 予約タイプリスト
+    private $schedule_type_list = array();
 
     /**
     * 画面共通初期設定
@@ -93,6 +93,9 @@ class Controller_Mainte_M0020 extends Controller_Hybrid {
         $paging_config = PagingConfig::getPagingConfig("UIS0020", M0020::$db);
         $this->pagenation_config['num_links'] = $paging_config['display_link_number'];
         $this->pagenation_config['per_page'] = $paging_config['display_record_number'];
+
+        // 予約タイプリスト
+        $this->schedule_type_list = GenerateList::getScheduleTypeList(false);
 
     }
 
@@ -169,6 +172,7 @@ class Controller_Mainte_M0020 extends Controller_Hybrid {
         $search_flag    = true;
         $init_flag      = false;
         $conditions 	= array_fill_keys(array(
+            'schedule_type',
         	'unit_name',
         ), '');
 
@@ -269,7 +273,7 @@ class Controller_Mainte_M0020 extends Controller_Hybrid {
             array(
                 'total'                 => $total,
                 'data'                  => $conditions,
-                'closing_date_list'     => $this->closing_date_list,
+                'schedule_type_list'    => $this->schedule_type_list,
                 'list_data'             => $list_data,
                 'offset'                => $offset,
                 'error_message'         => $error_msg,

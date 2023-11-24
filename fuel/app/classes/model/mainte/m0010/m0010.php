@@ -316,6 +316,7 @@ class M0010 extends \Model {
                 array('m.user_id', 'user_id'),
                 array('m.user_authority', 'user_authority'),
                 array('m.lock_status', 'lock_status'),
+                array('m.customer_code', 'customer_code'),
                 array('m.start_date', 'start_date')
                 );
 
@@ -365,7 +366,8 @@ class M0010 extends \Model {
                 array(\DB::expr('AES_DECRYPT(UNHEX(m.mail_address),"'.$encrypt_key.'")'), 'mail_address'),
                 array('m.user_id', 'user_id'),
                 array('m.user_authority', 'user_authority'),
-                array('m.lock_status', 'lock_status')
+                array('m.lock_status', 'lock_status'),
+                array('m.customer_code', 'customer_code')
                 );
 
         // テーブル
@@ -480,6 +482,7 @@ class M0010 extends \Model {
             'password_limit'        => date('Y-m-d', strtotime('+7 day')),
             'password_error_count'  => 0,
             'lock_status'           => 0,
+            'customer_code'         => (!empty($data['customer_code'])) ? $data['customer_code']:NULL,
             'start_date'            => \Date::forge()->format('mysql_date'),
             'end_date'              => \Date::create_from_string("9999-12-31" , "mysql_date")->format('mysql_date')
 
@@ -494,6 +497,7 @@ class M0010 extends \Model {
                 . ", `password_limit` = VALUES(`password_limit`)"
                 . ", `password_error_count` = VALUES(`password_error_count`)"
                 . ", `lock_status` = VALUES(`lock_status`)"
+                . ", `customer_code` = VALUES(`customer_code`)"
                 . ", `end_date` = VALUES(`end_date`)"
                 . ", `update_user` = VALUES(`update_user`)"
                 . ", `update_datetime` = VALUES(`update_datetime`)";
@@ -624,7 +628,8 @@ class M0010 extends \Model {
             'name_furigana'         => \DB::expr('HEX(AES_ENCRYPT("'.$data['name_furigana'].'","'.$encrypt_key.'"))'),
             'mail_address'          => \DB::expr('HEX(AES_ENCRYPT("'.$data['mail_address'].'","'.$encrypt_key.'"))'),
             'user_id'               => $data['user_id'],
-            'user_authority'        => $data['user_authority']
+            'user_authority'        => $data['user_authority'],
+            'customer_code'         => (!empty($data['customer_code'])) ? $data['customer_code']:NULL,
             );
         $stmt->set(array_merge($set, self::getEtcData(false)));
 

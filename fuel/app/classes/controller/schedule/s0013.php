@@ -12,7 +12,7 @@ use \Model\Common\PagingConfig;
 use \Model\Common\OpeLog;
 use \Model\Schedule\S0010;
 
-class Controller_Schedule_S0010 extends Controller_Hybrid {
+class Controller_Schedule_S0013 extends Controller_Hybrid {
 
     protected $format = 'json';
 
@@ -74,10 +74,10 @@ class Controller_Schedule_S0010 extends Controller_Hybrid {
         $this->mode                         = Input::param('mode', '');
         // サイト設定
         $cnf                                = \Config::load('siteinfo', true);
-        $cnf['header_title']                = '予約スケジュール';
-        $cnf['page_id']                     = '[S0010]';
+        $cnf['header_title']                = '配達予約スケジュール';
+        $cnf['page_id']                     = '[S0013]';
         $cnf['tree']['top']                 = \Uri::base(false);
-        $cnf['tree']['management_function'] = '予約スケジュール';
+        $cnf['tree']['management_function'] = '配達予約スケジュール';
         $cnf['tree']['page_url']            = \Uri::create(AccessControl::getActiveController());
         $cnf['tree']['page_title']          = '';
 
@@ -161,7 +161,7 @@ class Controller_Schedule_S0010 extends Controller_Hybrid {
         $auth_data = AuthConfig::getAuthConfig('all');
 
         // 予約タイプ
-        S0010::$schedule_type = 'usually';
+        S0010::$schedule_type = 'delivery';
 
         // ページアクセス権判定
         //if (!AccessControl::isPagePermission($auth_data['permission_level'])) {

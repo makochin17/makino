@@ -25,7 +25,7 @@
         <p class="error-message-head"><?php echo $error_message; ?></p>
         <br />
         <div style="padding-top:10px;">
-            <input type="button" value="検索" class='buttonB' tabindex="2" onclick="carModelSearch('<?php echo Uri::create('search/s0010'); ?>')"/>
+            <input type="button" value="検索" class='buttonB' tabindex="2" onclick="carModelSearch('<?php echo Uri::create('search/s0090'); ?>')"/>
             <?php echo Form::submit('input_clear', '入力項目クリア', array('class' => 'buttonB', 'style' => 'margin-left: 20px;', 'onclick' => 'return submitChkClear()' , 'tabindex' => '3')); ?>
             <?php echo Form::submit('excel', 'エクセル出力', array('class' => 'buttonB', 'style' => 'margin-left: 20px;', 'tabindex' => '4')); ?>
             <?php // echo Form::submit('csv_download', 'CSVフォーマット', array('class' => 'buttonB', 'tabindex' => '4')); ?>
@@ -36,12 +36,12 @@
 			<table class="search-area" style="height: 90px; width: 680px">
 				<tr>
 					<td style="width: 200px; height: 30px;">
-						従業員コード<i class='fa fa-asterisk' style="color:#FF4040;font-size:10px;"></i>
+						ユーザーコード<i class='fa fa-asterisk' style="color:#FF4040;font-size:10px;"></i>
 					</td>
 					<td style="width: 480px; height: 30px;">
-                    <?php echo Form::input('text_member_code', (!empty($data['member_code'])) ? $data['member_code'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'text_member_code', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '5', 'tabindex' => '5')); ?></td>
-                    <?php echo Form::hidden('member_code', (!empty($data['member_code'])) ? $data['member_code'] : '');?>
+	                    <?php echo Form::input('text_member_code', (!empty($data['member_code'])) ? $data['member_code'] : '', 
+	                    array('class' => 'input-text', 'type' => 'text', 'id' => 'text_member_code', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '5', 'tabindex' => '5')); ?>
+	                    <?php echo Form::hidden('member_code', (!empty($data['member_code'])) ? $data['member_code'] : '');?>
 					</td>
 				</tr>
 				<tr>
@@ -83,6 +83,16 @@
 					<td style="width: 480px; height: 30px;">
 				        <?php echo Form::select('user_authority', $data['user_authority'], $user_permission,
 				            array('class' => 'select-item', 'id' => 'user_authority', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '10')); ?>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 200px; height: 30px;">
+						お客様番号
+					</td>
+					<td style="width: 480px; height: 30px;">
+	                    <?php echo Form::input('customer_code', (!empty($data['customer_code'])) ? $data['customer_code'] : '', 
+	                    array('class' => 'input-text', 'type' => 'text', 'id' => 'customer_code', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '5', 'tabindex' => '11')); ?>
+	                    <i class='fa fa-asterisk' style="color:#FF4040;font-size:12px;"> お客様情報がある場合にご入力ください</i>
 					</td>
 				</tr>
 				<tr>

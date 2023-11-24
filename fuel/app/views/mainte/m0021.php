@@ -14,11 +14,20 @@
             <tbody>
                 <tr>
                     <td style="width: 150px; height: 30px;">
+                        予約タイプ
+                    </td>
+                    <td style="width: 380px; height: 30px;">
+                        <?php echo Form::select('schedule_type', $data['schedule_type'], $schedule_type_list,
+                            array('class' => 'select-item', 'id' => 'schedule_type', 'style' => 'width: 100px', 'onchange' => 'change()', 'tabindex' => '1')); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 150px; height: 30px;">
                         ユニット名
                     </td>
                     <td style="width: 380px; height: 30px;">
                         <?php echo Form::input('unit_name', (!empty($data['unit_name'])) ? $data['unit_name'] : '', 
-                        array('class' => 'input-text', 'type' => 'text', 'id' => 'unit_name', 'style' => 'width:130px;', 'maxlength' => '8', 'tabindex' => '1')); ?>
+                        array('class' => 'input-text', 'type' => 'text', 'id' => 'unit_name', 'style' => 'width:180px;', 'maxlength' => '8', 'tabindex' => '2')); ?>
                     </td>
                 </tr>
             </tbody>

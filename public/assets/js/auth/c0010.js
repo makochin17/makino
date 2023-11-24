@@ -1,35 +1,3 @@
-// 項目の活性状態制御
-window.onload = change;
-function change() {
-    var flag = (document.entryForm.processing_division.value == '1') ? false : true;
-    document.entryForm.car_model_code_text.disabled = flag;
-}
-
-// 「入力項目クリア」の確認ダイアログ表示
-function submitChkClear() {
-    var flag = window.confirm (clear_msg);
-    return flag;
-}
-
-// 「確定」の確認ダイアログ表示
-function submitChkExecution() {
-    var value = document.entryForm.processing_division.value;
-    var flag = false;
-
-    // 処理区分によってメッセージを変える
-    if (value == '1') {
-        flag = window.confirm (processing_msg1);
-    } else if(value == '2') {
-        flag = window.confirm (processing_msg2);
-    } else if(value == '3') {
-        flag = window.confirm (processing_msg3);
-    }
-
-    // hiddenに車種コードコピー
-    document.entryForm.car_model_code.value = document.entryForm.car_model_code_text.value;
-    return flag;
-}
-
 // 検索ボタン押下時処理
 function carModelSearch(url_str) {
     var callback_id = 'callback_m0040'; //IDをふる

@@ -12,7 +12,7 @@ use \Model\Common\PagingConfig;
 use \Model\Common\OpeLog;
 use \Model\Schedule\S0010;
 
-class Controller_Schedule_S0010 extends Controller_Hybrid {
+class Controller_Schedule_S0012 extends Controller_Hybrid {
 
     protected $format = 'json';
 
@@ -75,7 +75,7 @@ class Controller_Schedule_S0010 extends Controller_Hybrid {
         // サイト設定
         $cnf                                = \Config::load('siteinfo', true);
         $cnf['header_title']                = '予約スケジュール';
-        $cnf['page_id']                     = '[S0010]';
+        $cnf['page_id']                     = '[S0012]';
         $cnf['tree']['top']                 = \Uri::base(false);
         $cnf['tree']['management_function'] = '予約スケジュール';
         $cnf['tree']['page_url']            = \Uri::create(AccessControl::getActiveController());

@@ -156,6 +156,12 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
             $validation->add('user_authority', 'ユーザ権限')
                 // ->add_rule('required')
             ;
+            // ユーザ名チェック
+            $validation->add('customer_code', 'お客様番号')
+                // ->add_rule('required')
+                ->add_rule('trim_max_lengths', 10)
+                ->add_rule('table_duplicate2', 'customer_code', 'm_customer')
+            ;
         }
 		$validation->run();
 		return $validation;
@@ -429,6 +435,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
             'password_limit',
             'password_error_count',
             'lock_status',
+            'customer_code',
             'start_date',
             'end_date',
             'processing_division',
@@ -477,7 +484,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                 foreach($validation->error() as $key => $e) {
                     switch ($key){
                         case 'member_code':
-                            $error_column = '従業員コード';
+                            $error_column = 'ユーザー番号';
                             break;
                         case 'full_name':
                             $error_column = '氏名';
@@ -494,6 +501,9 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                         case 'user_authority':
                             $error_column = 'ユーザ権限';
                             break;
+                        case 'customer_code':
+                            $error_column = 'お客様番号';
+                            break;
                     }
                     if ($validation->error()[$key]->rule == 'required') {
                         $error_msg = str_replace('XXXXX',$error_column,Config::get('m_CW0005'));
@@ -503,13 +513,14 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                         $error_msg = str_replace('xxxxx','6',str_replace('XXXXX',$error_column,Config::get('m_CW0016')));
                     } elseif ($validation->error()[$key]->rule == 'valid_email') {
                         $error_msg = str_replace('XXXXX',$error_column,Config::get('m_CW0023'));
+                    } elseif ($validation->error()[$key]->rule == 'table_duplicate2') {
+                        $error_msg = str_replace('XXXXX',$error_column,Config::get('m_CW0028'));
                     } else {
                         // $error_msg = str_replace('XXXXX',$error_column,Config::get('m_CW0007'));
                     }
                     break;
                 }
             }
-
             if (empty($error_msg)) {
                 switch ($conditions['processing_division']){
                     case '1':

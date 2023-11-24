@@ -4,7 +4,14 @@ use \Model\Common\SystemConfig;
 
 class GenerateList extends \Model {
 
-    public static $db       = 'MAKINO';
+    public static $db                   = 'MAKINO';
+
+    /**
+     * 予約管理権限設定(m_memberのuser_authority)
+     * 1：システム管理者、2：管理職、3：業務管理者、4：一般
+     */
+    // 予約管理での使用ユーザー判定
+    public static $schedule_authority   = array(1, 2, 3);
 
     /**
      * 保管場所列リスト取得
@@ -334,7 +341,7 @@ class GenerateList extends \Model {
      * ユニットリスト取得
      * $all_flag リストに"全て"を含めるフラグ（trueで含める）
      */
-    public static function getUnitList($all_flag, $db) {
+    public static function getUnitList($all_flag, $schedule_type, $db) {
 
         // データ取得
         // 項目
@@ -345,6 +352,10 @@ class GenerateList extends \Model {
 
         // テーブル
         $stmt->from(array('m_unit', 'm'));
+
+        if (!empty($schedule_type)) {
+            $stmt->where('schedule_type', $schedule_type);
+        }
         // ソート
         $stmt->order_by('m.id', 'ASC');
         // 検索実行
@@ -366,6 +377,24 @@ class GenerateList extends \Model {
 
         return $list;
     }
+
+    /**
+     * 予約タイプリスト取得
+     * $all_flag リストに"全て"を含めるフラグ（trueで含める）
+     */
+    public static function getScheduleTypeList($all_flag) {
+
+        $result = array('usually'=>"通常", 'delivery'=>"配達");
+
+        if ($all_flag) {
+            // リストの先頭に"全て"を追加
+            $result = array_merge(array('all'=>"全て"), $result);
+        }
+
+        return $result;
+    }
+
+
 
     /**
      * 依頼区分リスト取得

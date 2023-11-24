@@ -61,7 +61,7 @@
                         <th style="width: 60px">選択</th>
                         <th style="width: 110px">お客様番号</th>
                         <th style="width: 180px">氏名</th>
-                        <th style="width: 150px">ふりがな</th>
+                        <!-- <th style="width: 150px">ふりがな</th> -->
                         <th style="width: 160px">メールアドレス</th>
                         <th style="width: 160px">勤務先</th>
                     </tr>
@@ -76,7 +76,7 @@
                             <?php echo Form::close(); ?></td>
                             <td style="width: 110px"><?php echo $val['customer_code']; ?></td>
                             <td style="width: 180px;font-size:14px"><?php echo $val['customer_name']; ?></td>
-                            <td style="width: 150px;font-size:14px"><?php echo $val['customer_name_kana']; ?></td>
+                            <!-- <td style="width: 150px;font-size:14px"><?php echo $val['customer_name_kana']; ?></td> -->
                             <td style="width: 160px;font-size:14px"><?php echo (empty($val['mail_address'])) ? "-" : $val['mail_address']; ?></td>
                             <td style="width: 160px;font-size:14px"><?php echo (empty($val['office_name'])) ? "-" : $val['office_name']; ?></td>
                         </tr>

@@ -18,7 +18,8 @@ class M0024 extends \Model {
     public static function create_record($conditions, $db) {
 
         $data = array(
-            'unit_name'	=> $conditions['unit_name'],
+            'schedule_type' => $conditions['schedule_type'],
+            'unit_name'     => $conditions['unit_name'],
             );
 
         //得意先マスタ登録
@@ -38,7 +39,8 @@ class M0024 extends \Model {
 
         // 項目セット
         $set = array(
-            'name'			=> $items['unit_name'],
+            'schedule_type' => $items['schedule_type'],
+            'name'          => $items['unit_name'],
             'start_date'    => Date::forge()->format('mysql_date'),
             'end_date'      => Date::create_from_string("9999-12-31" , "mysql_date")->format('mysql_date')
             );

@@ -22,6 +22,7 @@ class M0020 extends \Model {
         $stmt = \DB::select(
                 array('m.id', 'unit_code'),
                 array('m.name', 'unit_name'),
+                array('m.schedule_type', 'schedule_type'),
                 );
 
         // テーブル
@@ -46,6 +47,7 @@ class M0020 extends \Model {
         $stmt = \DB::select(
                 array('m.id', 'unit_code'),
                 array('m.name', 'unit_name'),
+                array('m.schedule_type', 'schedule_type'),
                 );
 
         // テーブル
@@ -62,21 +64,21 @@ class M0020 extends \Model {
     }
 
     /**
-     * 得意先マスタ検索件数取得
+     * ユニットマスタ検索件数取得
      */
     public static function getSearchCount($conditions, $db) {
         return S0020::getSearch(true, $conditions, null, null, $db);
     }
 
     /**
-     * 得意先マスタ検索
+     * ユニットマスタ検索
      */
     public static function getSearch($conditions, $offset, $limit, $db) {
         return S0020::getSearch(false, $conditions, $offset, $limit, $db);
     }
 
     /**
-     * 得意先データ削除
+     * ユニットデータ削除
      */
     public static function delUnit($unit_code, $db = null) {
         return M0025::delete_record($unit_code, $db);

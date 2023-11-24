@@ -22,6 +22,9 @@ class Controller_Mainte_M0025 extends Controller_Hybrid {
 	private $sidemenu 	= 'sidemenu';
 	private $footer   	= 'footer';
 
+    // 予約タイプリスト
+    private $schedule_type_list = array();
+
     /**
     * 画面共通初期設定
     **/
@@ -76,6 +79,9 @@ class Controller_Mainte_M0025 extends Controller_Hybrid {
         $this->template->sidemenu       = $sidemenu;
         $this->template->footer         = $footer;
 
+        // 予約タイプリスト
+        $this->schedule_type_list = GenerateList::getScheduleTypeList(false);
+
     }
 
 	public function before() {
@@ -110,8 +116,9 @@ class Controller_Mainte_M0025 extends Controller_Hybrid {
         }
 
         $conditions = array(
-            'unit_code' => $unit_data['unit_code'],
-            'unit_name' => $unit_data['unit_name'],
+            'unit_code'     => $unit_data['unit_code'],
+            'schedule_type' => $unit_data['schedule_type'],
+            'unit_name'     => $unit_data['unit_name'],
         );
 
         return $conditions;
@@ -201,6 +208,7 @@ class Controller_Mainte_M0025 extends Controller_Hybrid {
         $error_msg      = null;
         $conditions 	= array_fill_keys(array(
             'unit_code',
+            'schedule_type',
             'unit_name',
         ), '');
 
@@ -303,6 +311,7 @@ class Controller_Mainte_M0025 extends Controller_Hybrid {
         $this->template->content = View::forge(AccessControl::getActiveController(),
             array(
                 'error_message'             => $error_msg,
+                'schedule_type_list'        => $this->schedule_type_list,
                 'data'                      => $conditions,
             )
         );

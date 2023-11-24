@@ -612,4 +612,22 @@ class MyValidation {
         return empty($res) ? true : false;
     }
 
+    /**
+     * 存在確認(del_flg用)
+     */
+    public static function _validation_table_duplicate2($val, $type, $table) {
+
+        if (is_null($val) || empty($type) || empty($table)) {
+            return false;
+        }
+        $res = \DB::select()
+        ->from($table)
+        ->where('del_flg', 'NO')
+        ->where($type, $val)
+        ->execute(self::$db)
+        ->as_array();
+
+        return !empty($res) ? true : false;
+    }
+
 }

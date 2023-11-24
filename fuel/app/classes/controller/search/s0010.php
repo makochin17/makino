@@ -93,8 +93,8 @@ class Controller_Search_S0010 extends Controller_Hybrid {
 		// 入力チェック
 		$validation = Validation::forge('valid_master');
         $validation->add_callable('myvalidation');
-		// 社員コードチェック
-		$validation->add('member_code', '社員コード')
+		// お客様番号チェック
+		$validation->add('customer_code', 'お客様番号')
 			->add_rule('is_numeric');
 		$validation->run();
 		return $validation;

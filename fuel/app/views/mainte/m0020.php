@@ -45,7 +45,8 @@
             <div class="table-wrap">
                 <table class="table-inq" style="width: 720px">
                     <tr>
-                        <th style="width: 60px">操作</th>
+                        <th style="width: 100px">操作</th>
+                        <th style="width: 80px">タイプ</th>
                         <th style="width: 160px">ユニット名</th>
                     </tr>
                     <?php if (!empty($list_data)) : ?>
@@ -55,6 +56,7 @@
                                 <button type="button" onclick="onEdit('<?php echo Uri::create('mainte/m0025'); ?>', '<?php echo $val['unit_code']; ?>')" class="buttonA"><i class='fa fa-edit' style="font-size:14px;"></i> 編集</button>
                                 <button type="button" onclick="onDelete(<?php echo $val['unit_code']; ?>, '<?php echo $val['unit_name']; ?>')" class="buttonA"><i class='fa fa-trash' style="font-size:15px;"></i> 削除</button>
                             </td>
+                            <td style="width: 160px"><?php echo (isset($schedule_type_list[$val['schedule_type']])) ? $schedule_type_list[$val['schedule_type']]:'不明'; ?></td>
                             <td style="width: 160px"><?php echo $val['unit_name']; ?></td>
                         </tr>
                       <?php endforeach; ?>

@@ -11,6 +11,7 @@ use \Model\Common\GenerateList;
 use \Model\Common\PagingConfig;
 use \Model\Common\OpeLog;
 use \Model\Schedule\S0010;
+use \Model\Logistics\L0010;
 
 class Controller_Schedule_Fullcalendar_AddSchedule extends Controller_Rest {
 
@@ -29,48 +30,109 @@ class Controller_Schedule_Fullcalendar_AddSchedule extends Controller_Rest {
 	}
 
     // 登録処理
-    private function create_record($conditions) {
+    private function create_record($conditions, &$item) {
 
         $error_msg = null;
         try {
-            DB::start_transaction(C0011::$db);
+            DB::start_transaction(S0010::$db);
 
-            $error_msg = C0011::create_record($conditions, C0011::$db);
-            if (!is_null($error_msg)) {
-                return $error_msg;
+            // 予約情報登録
+            $error_msg = S0010::create_record($conditions, $item, S0010::$db);
+            if (!empty($error_msg)) {
+                throw new Exception($error_msg, 1);
             }
-            DB::commit_transaction(C0011::$db);
+            // 入出庫登録
+            // 持込みフラグのチェックがない場合のみ
+            if (empty($conditions['carry_flg']) || $conditions['carry_flg'] == 'NO') {
+                $logistics_list = L0010::getForms();
+                $list           = array(
+                    'schedule_id'               => $item['schedule_id'],
+                    'delivery_schedule_date'    => $conditions['start_date'],
+                    'delivery_schedule_time'    => $conditions['start_time'],
+                );
+                if (!$data = L0010::getLogisticsBySchedule($list, S0010::$db)) {
+                    $logistics_list['delivery_schedule_date']   = $conditions['start_date'];
+                    $logistics_list['delivery_schedule_time']   = $conditions['start_time'];
+                    $logistics_list['receipt_date']             = $conditions['start_date'];
+                    $logistics_list['receipt_time']             = $conditions['start_time'];
+                    $logistics_list['car_id']                   = $item['car_id'];
+                    $logistics_list['car_code']                 = $item['car_code'];
+                    $logistics_list['car_name']                 = $item['car_name'];
+                    $logistics_list['customer_code']            = $item['customer_code'];
+                    $logistics_list['customer_name']            = $item['customer_name'];
+                    $logistics_list['consumer_name']            = $item['consumer_name'];
+                    $logistics_list['schedule_id']              = $item['schedule_id'];
+
+                    $error_msg = L0010::create_record($logistics_list, $logistics_create_list, S0010::$db);
+                    if (!empty($error_msg)) {
+                        throw new Exception($error_msg, 1);
+                    }
+                }
+            }
+
+            DB::commit_transaction(S0010::$db);
         } catch (Exception $e) {
             // トランザクションクエリをロールバックする
-            DB::rollback_transaction(C0011::$db);
+            DB::rollback_transaction(S0010::$db);
             Log::error($e->getMessage());
+            $item['return'] = $e->getMessage();
             // var_dump($e->getMessage());
             return Config::get('m_CE0001');
         }
-        echo "<script type='text/javascript'>alert('".Config::get('m_CAR004')."');</script>";
         return null;
     }
 
     // 登録処理
-    private function create_record($conditions) {
+    private function update_record($conditions, &$item) {
 
         $error_msg = null;
         try {
-            DB::start_transaction(C0011::$db);
+            DB::start_transaction(S0010::$db);
 
-            $error_msg = C0011::create_record($conditions, C0011::$db);
-            if (!is_null($error_msg)) {
-                return $error_msg;
+            // 予約情報更新
+            $error_msg = S0010::update_record($conditions, $item, S0010::$db);
+            if (!empty($error_msg)) {
+                throw new Exception($error_msg, 1);
             }
-            DB::commit_transaction(C0011::$db);
+            // 入出庫更新
+            // 持込みフラグのチェックがない場合のみ
+            if (empty($conditions['carry_flg']) || $conditions['carry_flg'] == 'NO') {
+                $logistics_list = L0010::getForms();
+                $list           = array(
+                    'schedule_id'               => $conditions['id'],
+                    'delivery_schedule_date'    => $conditions['start_date'],
+                    'delivery_schedule_time'    => $conditions['start_time'],
+                );
+                if ($data = L0010::getLogisticsBySchedule($list, S0010::$db)) {
+                    $logistics_list['logistics_id']             = $data['logistics_id'];
+                    $logistics_list['schedule_id']              = $conditions['id'];
+                    $logistics_list['delivery_schedule_date']   = $conditions['start_date'];
+                    $logistics_list['delivery_schedule_time']   = $conditions['start_time'];
+                    $logistics_list['receipt_date']             = $conditions['start_date'];
+                    $logistics_list['receipt_time']             = $conditions['start_time'];
+                    $logistics_list['car_id']                   = $item['car_id'];
+                    $logistics_list['car_code']                 = $item['car_code'];
+                    $logistics_list['car_name']                 = $item['car_name'];
+                    $logistics_list['customer_code']            = $item['customer_code'];
+                    $logistics_list['customer_name']            = $item['customer_name'];
+                    $logistics_list['consumer_name']            = $item['consumer_name'];
+
+                    $error_msg = L0010::update_record($logistics_list, $logistics_create_list, S0010::$db);
+                    if (!empty($error_msg)) {
+                        throw new Exception($error_msg, 1);
+                    }
+                }
+            }
+
+            DB::commit_transaction(S0010::$db);
         } catch (Exception $e) {
             // トランザクションクエリをロールバックする
-            DB::rollback_transaction(C0011::$db);
+            DB::rollback_transaction(S0010::$db);
             Log::error($e->getMessage());
+            $item['return'] = $e->getMessage();
             // var_dump($e->getMessage());
             return Config::get('m_CE0001');
         }
-        echo "<script type='text/javascript'>alert('".Config::get('m_CAR004')."');</script>";
         return null;
     }
 
@@ -83,11 +145,12 @@ class Controller_Schedule_Fullcalendar_AddSchedule extends Controller_Rest {
          */
         $error_msg          = null;
         // Postデータを設定
-        $conditions         = C0011::setForms('set', null, Input::param());
+        $conditions         = S0010::setForms('set', null, Input::param());
         // Xmlデータ初期化
         $data               = array();
         $data['item']       = array(
             'schedule_id'       => 0,
+            'unit_id'           => '',
             'car_id'            => '',
             'car_code'          => '',
             'car_name'          => '',
@@ -96,62 +159,25 @@ class Controller_Schedule_Fullcalendar_AddSchedule extends Controller_Rest {
             'consumer_name'     => '',
             'cancel'            => '',
             'commit'            => '',
+            'carry_flg'         => '',
             'back_color'        => '',
-            'fore_color'        => '',
+            'text_color'        => '',
+            'request_class'     => '',
+            'request_memo'      => '',
+            'memo'              => '',
             'return'            => '',
         );
-
-        try {
-            // 車両番号で検索
-            if ($res = S0010::getScheduleById($conditions['id'], S0010::$db)) {
-                // 更新
-                if (!$schedule_id = S0010::update_record($conditions, S0010::$db)) {
-                    throw new Exception("[スケジュールの更新に失敗しました]", 1);
-                }
-            } else {
-                // 追加
-                if (!$schedule_id = S0010::create_record($conditions, S0010::$db)) {
-                    throw new Exception("[スケジュールの登録に失敗しました]", 1);
-                }
-            }
-
-            $data['item']       = array(
-                'schedule_id'       => $conditions['id'],
-                'car_id'            => '',
-                'car_code'          => '',
-                'car_name'          => '',
-                'customer_code'     => '',
-                'customer_name'     => '',
-                'consumer_name'     => '',
-                'cancel'            => '',
-                'commit'            => '',
-                'back_color'        => '',
-                'fore_color'        => '',
-                'return'            => '',
-            );
-        } catch (Exception $e) {
-            $data['item']['return'] = 'エラーが発生しました'.$e;
+        if ($conditions['request_class'] == 'undefined') {
+            $conditions['request_class'] = 'other';
         }
-
-<rss>
-    <item>
-        <new_seq><?php echo $seq; ?></new_seq>
-        <menu_nm1><?php echo $menu_nm1; ?></menu_nm1>
-        <menu_nm2><?php echo $menu_nm2; ?></menu_nm2>
-        <menu_nm3><?php echo $menu_nm3; ?></menu_nm3>
-        <unauthorized><?php echo $unauthorized; ?></unauthorized>
-        <tel_wait><?php echo $tel_wait; ?></tel_wait>
-        <tel_wait1><?php echo $tel_wait1; ?></tel_wait1>
-        <tel_wait2><?php echo $tel_wait2; ?></tel_wait2>
-        <tel_wait3><?php echo $tel_wait3; ?></tel_wait3>
-        <cancel><?php echo $cancel; ?></cancel>
-        <commit><?php echo $commit; ?></commit>
-        <back_color><?php echo $back_color; ?></back_color>
-        <fore_color><?php echo $fore_color; ?></fore_color>
-        <return><?php echo $return; ?></return>
-    </item>
-</rss>
-
+        // 予約スケジュールIDで検索
+        if ($res = S0010::getScheduleById($conditions['id'], S0010::$db)) {
+            // 更新
+            $this->update_record($conditions, $data['item']);
+        } else {
+            // 追加
+            $this->create_record($conditions, $data['item']);
+        }
         return $this->response($data);
 
     }

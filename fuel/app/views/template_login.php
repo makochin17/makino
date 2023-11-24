@@ -8,7 +8,8 @@
 	<?php echo $head; ?>
 </head>
 <body>
-	<header id="header" style="padding-top:1em;">
+	<header id="header" style="padding-top:1em;text-align:right;padding-right:10px;font-size:14px;">
+		R117110027　もの補助　機-３　※ものづくり補助金事業以外での使用禁止
 	</header>
 
 	<div id="wrapper" style="text-align:center;">

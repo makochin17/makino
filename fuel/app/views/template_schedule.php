@@ -5,7 +5,7 @@
 <html lang="ja">
  -->
  <head>
-	<?php echo $head_schedule; ?>
+	<?php echo $head_schedule2; ?>
 </head>
 <body>
 	<div id="wrapper">
@@ -14,6 +14,7 @@
 				<?php echo $header; ?>
 				<?php //echo $tree; ?>
 				<?php echo $content; ?>
+				<?php // echo $footer; ?>
 			</div>
 		</div>
 		<?php echo $sidemenu; ?>

@@ -22,6 +22,9 @@ class Controller_Mainte_M0021 extends Controller_Hybrid {
 	private $sidemenu 	= 'sidemenu';
 	private $footer   	= 'footer';
 
+    // 予約タイプリスト
+    private $schedule_type_list = array();
+
     /**
     * 画面共通初期設定
     **/
@@ -66,6 +69,9 @@ class Controller_Mainte_M0021 extends Controller_Hybrid {
 		$this->template->sidemenu 	= $sidemenu;
 		$this->template->footer 	= $footer;
         $this->template->tree       = $tree;
+
+        // 予約タイプリスト
+        $this->schedule_type_list = GenerateList::getScheduleTypeList(false);
 
 	}
 
@@ -157,6 +163,7 @@ class Controller_Mainte_M0021 extends Controller_Hybrid {
          */
         $error_msg      = null;
         $conditions 	= array_fill_keys(array(
+            'schedule_type',
             'unit_name',
         ), '');
 
@@ -236,6 +243,7 @@ class Controller_Mainte_M0021 extends Controller_Hybrid {
         $this->template->content = View::forge(AccessControl::getActiveController(),
             array(
                 'data'                          => $conditions,
+                'schedule_type_list'            => $this->schedule_type_list,
                 'error_message'                 => $error_msg
             )
         );
