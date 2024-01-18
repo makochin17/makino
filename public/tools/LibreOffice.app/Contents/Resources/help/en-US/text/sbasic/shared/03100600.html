@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>CLng Function</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+
+<a name="clng"></a>
+<a name="bm_id3153311"></a>
+  <meta itemprop="keywords" content="CLng function">
+
+
+<h1 id="hd_id3153311" dir="auto">CLng Function</h1>
+<p id="par_id3148686" class="paragraph" dir="auto">Converts any string or numeric expression to a long integer.</p>
+
+
+<div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+CLng (Expression As Variant) As Long
+</code></pre></div>
+
+<div class="embedded">
+<a name="functvalue"></a>
+<h3 id="hd_id061420171139087480" dir="auto">Return value:</h3>
+</div>
+<p id="par_id3153897" class="paragraph" dir="auto">Long</p>
+
+<div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+<div class="embedded">
+<a name="ExpressionArgument"></a>
+<p id="par_id3153897" class="paragraph" dir="auto"> <span class="emph">Expression</span>: Any string or numeric expression that you want to convert. To convert a string expression, the number must be entered using a dot "." as the decimal point and a comma "," as the thousands separator (for instance 123,456.78), which may differ from your LibreOffice <a target="_top" href="en-US/text/shared/optionen/01140000.html">language settings</a>.</p>
+</div>
+<p id="par_id3159414" class="paragraph" dir="auto">If <span class="literal">Expression</span> lies outside the valid long integer range between -2.147.483.648 and 2.147.483.647, LibreOffice Basic returns an overflow error.</p>
+<p id="par_id3150358" class="paragraph" dir="auto">This function always rounds the fractional part of a number to the nearest integer.</p>
+<div class="embedded">
+<a name="errorcode"></a>
+<h3 id="hd_id3152869" dir="auto">Error codes:</h3>
+</div>
+<div class="embedded"><p class="embedded" dir="auto">5 Invalid procedure call</p></div>
+
+<div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+<div class="embedded">
+<a name="ExampleCountryConvert"></a>
+<p id="par_id761652451117906" class="paragraph" dir="auto">Numeric expressions are displayed according to LibreOffice <a target="_top" href="en-US/text/shared/optionen/01140000.html">language settings</a>:</p>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+Sub ExampleCountryConvert
+    MsgBox CDbl(1234.5678) ' 1234.5678
+    MsgBox CInt(1234.5678) ' 1235
+    MsgBox CLng(1234+5678) ' 6912
+    MsgBox CSng(1234.5678) ' 1234.567749023
+
+    MsgBox CDbl(expression := 5678.1234) ' 5678.1234
+    MsgBox CInt(expression := 5678.1234) ' 5678
+    MsgBox CLng(expression := 5678+1234) ' 6912
+    MsgBox CSng(expression := 5678.1234) ' 5678.123535156
+End Sub
+</code></pre></div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03100600.xhp" target="_blank">/text/sbasic/shared/03100600.xhp</a></p>
+<p dir="auto">Title is: CLng Function</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

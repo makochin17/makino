@@ -474,6 +474,13 @@ class Controller_Car_C0012 extends Controller_Hybrid {
             // 検索画面へリダイレクト
             Session::delete('c0012_list');
             \Response::redirect(\Uri::create('car/c0010'));
+        } elseif (!empty(Input::param('mode')) && Input::param('mode') == 'list' && Input::method() == 'POST' && Security::check_token()) {
+            // 検索画面へリダイレクト
+            Session::delete('c0012_list');
+            if ($result = C0012::getCar($car_id, C0012::$db)) {
+                $conditions = C0012::setForms('car', $conditions, $result);
+                Session::set('c0012_list', $conditions);
+            }
         } elseif (!empty(Input::param('execution')) && Input::method() == 'POST' && Security::check_token()) {
             // 確定ボタンが押下された場合の処理
             $conditions = C0012::setForms('car', $conditions, Input::param());
@@ -575,7 +582,6 @@ class Controller_Car_C0012 extends Controller_Hybrid {
                 // 登録処理
                 try {
                     DB::start_transaction(C0012::$db);
-
                     switch ($conditions['mode']){
                         case '1':
                             // 登録処理
@@ -597,15 +603,18 @@ class Controller_Car_C0012 extends Controller_Hybrid {
                         throw new Exception($error_msg, 1);
                     }
                     // 成功したらフォーム情報を初期化
-                    $conditions = C0012::getForms();
-                    Session::delete('c0012_list');
+                    // $conditions = C0012::getForms();
+                    // Session::delete('c0012_list');
                     $redirect_flag = true;
+                    // var_dump($conditions['mode']);
 
                 } catch (Exception $e) {
                     // トランザクションクエリをロールバックする
                     DB::rollback_transaction(C0012::$db);
                     // return $e->getMessage();
                     Log::error($e->getMessage());
+                    // var_dump($conditions['mode']);
+                    // var_dump($e->getMessage());
                     $error_msg = $e->getMessage();
                     // $error_msg = Config::get('m_CE0001');
                 }

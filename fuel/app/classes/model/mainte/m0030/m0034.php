@@ -18,11 +18,12 @@ class M0034 extends \Model {
     public static function create_record($conditions, $db) {
 
         //存在チェック
-        if ($result = M0030::getStorageLocationBySubCode($conditions['storage_column_id'], $conditions['storage_depth_id'], $conditions['storage_height_id'], $db)) {
+        if ($result = M0030::getStorageLocationBySubCode($conditions['storage_warehouse_id'], $conditions['storage_column_id'], $conditions['storage_depth_id'], $conditions['storage_height_id'], $db)) {
             return Config::get('m_MW0004');
         }
 
         $data = array(
+            'storage_warehouse_id'  => $conditions['storage_warehouse_id'],
             'storage_column_id'     => $conditions['storage_column_id'],
             'storage_depth_id'      => $conditions['storage_depth_id'],
             'storage_height_id'     => $conditions['storage_height_id'],
@@ -45,6 +46,7 @@ class M0034 extends \Model {
 
         // 項目セット
         $set = array(
+            'storage_warehouse_id'  => $items['storage_warehouse_id'],
             'storage_column_id'     => $items['storage_column_id'],
             'storage_depth_id'      => $items['storage_depth_id'],
             'storage_height_id'     => $items['storage_height_id'],
@@ -55,6 +57,7 @@ class M0034 extends \Model {
 
         // ON DUPLICATE KEY UPDATE用の更新項目セット
         $duplicate_key_update = 'ON DUPLICATE KEY UPDATE '
+                . 'storage_warehouse_id = VALUES(storage_warehouse_id),'
                 . 'storage_column_id = VALUES(storage_column_id),'
                 . 'storage_depth_id = VALUES(storage_depth_id),'
                 . 'storage_height_id = VALUES(storage_height_id),'

@@ -88,7 +88,7 @@ class Controller_Customer_C0010 extends Controller_Hybrid {
         $paging_config = PagingConfig::getPagingConfig("UIC0010", C0010::$db);
         $this->pagenation_config['num_links'] = $paging_config['display_link_number'];
         $this->pagenation_config['per_page'] = $paging_config['display_record_number'];
-        $this->pagenation_config['per_page'] = 10;
+        $this->pagenation_config['per_page'] = 50;
 
         // 性別リスト取得
         $this->sex_list                 = GenerateList::getSexList(true, C0010::$db);

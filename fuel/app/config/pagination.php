@@ -30,7 +30,7 @@ return array(
 	// default FuelPHP pagination template, compatible with pre-1.4 applications
 	'default'                     => array(
 		'wrapper'                 => "<div class=\"pagination\">\n\t{pagination}\n\t<p style=\"margin-left:20px;\">{pagenumber}&nbsp;ページ</p></div>\n",
-        
+
 		'first'                   => "<span class=\"first\">\n\t{link}\n</span>\n",
         'first-marker'            => "&lt;&lt;",
 		'first-link'              => "\t\t<a href=\"{uri}\">{page}</a>\n",

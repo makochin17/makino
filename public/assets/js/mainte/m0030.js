@@ -49,3 +49,43 @@ function onDelete(storage_location_id, storage_location_name) {
 
     return true;
 }
+
+$(function(){
+
+    // バーコードフラグ
+    $('input[id^=form_barcode_flg]').on('change', function(e) {
+
+        var prop                = $(this).prop('checked');
+        var id                  = $(this).attr('id');
+        var names               = id.split('_');
+        var listno              = names[3];
+        var storage_location_id = $('#storage_location_id_'+listno).val();
+
+        if (!prop) {
+            var barcode_flg = 'NO';
+        } else {
+            var barcode_flg = 'YES';
+        }
+
+        $.ajax({
+            type: "POST",
+            url: $('[name=update_url]').val(),
+            data: {
+                "storage_location_id":storage_location_id,
+                "barcode_flg":barcode_flg
+            },
+            success: function(res){
+                if (res.status == false) {
+                    alert('バーコードフラグの変更に失敗しました');
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+            }
+        });
+
+        return e.preventDefault();
+    });
+
+});
+

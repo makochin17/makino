@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Function OPT_BARRIER</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+    <a name="optbarrier"></a>
+        <a name="bm_id511575065323638"></a>
+            <meta itemprop="keywords" content="OPT_BARRIER function">
+        
+        <a name="bm_id941575063871993"></a>
+        <h1 id="hd_id241575063871994" dir="auto">
+<a name="optbrarrierh1"></a>OPT_BARRIER</h1>
+        <p id="par_id121575063871995" class="paragraph" dir="auto"><a name="variable%20name"></a><span class="avis">Returns the pricing for a barrier option, calculated using the Black-Scholes option pricing model.</span></p>
+    
+    <div class="embedded">
+<a name="opttip"></a>
+        <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id371575066515276" dir="auto">For relevant background information, visit the <a target="_blank" href="https://en.wikipedia.org/wiki/Option_(finance)">Options (finance)</a> and <a target="_blank" href="https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model">Black-Scholes</a> model Wikipedia pages.</p></div>
+</div>
+<br>
+    </div>
+    <div class="embedded">
+<a name="func_head_syntax"></a>
+    <h3 id="hd_id126511265112651" dir="auto">Syntax</h3>
+  </div>
+    <p id="par_id371575067051846" class="code" dir="auto">OPT_BARRIER(Spot; Volatility; Rate; Foreign Rate; Maturity; Strike; LowerBarrier; UpperBarrier; Rebate; PutCall; InOut; BarrierMonitoring [; Greek])</p>
+    <p id="par_id641575073609823" class="paragraph" dir="auto"><span class="emph">Spot</span> is the price / value of the underlying asset and should be greater than 0.0.</p>
+    <p id="par_id731575073617425" class="paragraph" dir="auto"><span class="emph">Volatility</span> is the annual percentage volatility of the underlying asset expressed as a decimal (for example, enter 30% as 0.3). The value should be greater than 0.0.</p>
+    <p id="par_id341575073621215" class="paragraph" dir="auto"><span class="emph">Rate</span> is the continuously compounded interest rate. This is a percentage expressed as a decimal (for example, enter 40% as 0.4).</p>
+    <p id="par_id391575073625097" class="paragraph" dir="auto"><span class="emph">ForeignRate</span> is the continuously compounded foreign interest rate. This is a percentage expressed as a decimal (for example, enter 50% as 0.5).</p>
+    <p id="par_id541575073629073" class="paragraph" dir="auto"><span class="emph">Maturity</span> is the time to maturity of the option, in years, and should be non-negative.</p>
+    <p id="par_id681575073426941" class="paragraph" dir="auto"><span class="emph">Strike</span> is the strike price of the option and should be non-negative.</p>
+    <p id="par_id321575073632473" class="paragraph" dir="auto"><span class="emph">LowerBarrier</span> is the predetermined lower barrier price; set to zero for no lower barrier.</p>
+    <p id="par_id541575073636017" class="paragraph" dir="auto"><span class="emph">UpperBarrier</span> is the predetermined upper barrier price; set to zero for no upper barrier.</p>
+    <p id="par_id671575073495724" class="paragraph" dir="auto"><span class="emph">Rebate</span> is the amount of money to be paid at maturity if the barrier is hit.</p>
+    <p id="par_id691575073511191" class="paragraph" dir="auto"><a name="optputcall"></a><span class="emph">Put or Call</span> is a string that defines whether the option is a put (“p”) or a call (“c”).</p>
+    <p id="par_id11575073641257" class="paragraph" dir="auto"><span class="emph">InOut</span> is a string that defines whether the option is knock-in (“i”) or knock-out (“o”).</p>
+    <p id="par_id211575073645423" class="paragraph" dir="auto"><span class="emph">BarrierMonitoring</span> is a string that defines whether the barrier is monitored continuously (“c”) or only at the end / maturity (“e”).</p>
+    <div class="embedded">
+<a name="optgreek"></a>
+        <p id="par_id721575066374340" class="paragraph" dir="auto"><span class="emph">Greek</span> (optional) is a string argument. If omitted or set to “value”, “v”, “price”, or “p”, then the function simply returns the option price. If another valid string is entered, the function returns price sensitivities (Greeks) to one of the input parameters. The valid options in this case are as follows.</p>
+        <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+            <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+                <p id="par_id951575063536153" class="listitem" dir="auto">“delta” or “d”.</p>
+            </li>
+            <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+                <p id="par_id361575063554232" class="listitem" dir="auto">“gamma” or “g”.</p>
+            </li>
+            <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+                <p id="par_id961575063563017" class="listitem" dir="auto">“theta” or “t”.</p>
+            </li>
+            <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+                <p id="par_id971575063570632" class="listitem" dir="auto">“vega” or “e”.</p>
+            </li>
+            <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+                <p id="par_id631575063580705" class="listitem" dir="auto">“volga” or “o”.</p>
+            </li>
+            <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+                <p id="par_id981575063594505" class="listitem" dir="auto">“vanna” or “a”.</p>
+            </li>
+            <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+                <p id="par_id191575063598656" class="listitem" dir="auto">“rho” or “r”.</p>
+            </li>
+            <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+                <p id="par_id751575063602288" class="listitem" dir="auto">“rhof” or “f”.</p>
+            </li>
+        </ul>
+    </div>
+    <div class="embedded">
+<a name="func_head_example"></a>
+    <h3 id="hd_id980889808898088" dir="auto">Examples</h3>
+  </div>
+    <p id="par_id651575073773761" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">=OPT_BARRIER(30;0.2;0.06;0;1;40;25;0;0;"c";"o";"c")</span> returns the value 0.4243.</p>
+    <p id="par_id401575073777593" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">=OPT_BARRIER(50;0.4;0.05;0;0.5;65;0;80;0;"p";"o";"c";"e")</span> returns the value 10.1585.</p>
+    <div class="embedded">
+<a name="sectiontechinfo"></a>
+        <h4 id="hd_id301640873452726" dir="auto">Technical information</h4>
+    </div>
+    <div class="embedded">
+<a name="4.0"></a>
+        <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id651551401041640" dir="auto">This function is available since LibreOffice 4.0.</p></div>
+</div>
+<br>
+    </div>
+    <div class="embedded">
+<a name="notODFF"></a>
+        <p id="par_id251640873774457" class="paragraph" dir="auto">This function is not part of the <span class="emph">Open Document Format for Office Applications (OpenDocument) Version 1.3. Part 4: Recalculated Formula (OpenFormula) Format</span> standard. The name space is</p>
+    </div>
+    <p id="par_id341640873986703" class="paragraph" dir="auto"><span class="literal">COM.SUN.STAR.SHEET.ADDIN.PRICINGFUNCTIONS.GETOPTBARRIER</span></p>
+    <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+        <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id471677015317570" dir="auto"><a target="_blank" href="https://wiki.documentfoundation.org/Documentation/Calc_Functions/OPT_BARRIER">OPT_BARRIER wiki page</a>.</p></div>
+</div>
+<br>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/scalc/01/func_opt_barrier.html">OPT_BARRIER</a></p></div>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/scalc/01/func_opt_touch.html">OPT_TOUCH</a></p></div>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/scalc/01/func_opt_prob_inmoney.html">OPT_PROB_INMONEY</a></p></div>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/scalc/01/func_opt_prob_hit.html">OPT_PROB_HIT</a></p></div>
+        <div class="embedded">
+<a name="relatedfinancial"></a>
+            <p id="par_id121575125779535" class="paragraph" dir="auto"><a target="_top" href="en-US/text/scalc/01/04060103.html">Financial Functions Part One</a></p>
+            <p id="par_id251575125873714" class="paragraph" dir="auto"><a target="_top" href="en-US/text/scalc/01/04060119.html">Financial Functions Part Two</a></p>
+            <p id="par_id191575125878595" class="paragraph" dir="auto"><a target="_top" href="en-US/text/scalc/01/04060118.html">Financial Functions Part Three</a></p>
+        </div>
+    </div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/scalc/01/func_opt_barrier.xhp" target="_blank">/text/scalc/01/func_opt_barrier.xhp</a></p>
+<p dir="auto">Title is: Function OPT_BARRIER</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

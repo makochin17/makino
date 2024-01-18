@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>SFDialogs.Dialog service</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="SFDocuments-sf_Dialog"></a>
+   <a name="bm_id41582391760252"></a>
+      <meta itemprop="keywords" content="Dialog service">
+   
+
+<a name="abstract"></a>
+  <h1 id="bm_id781582391760253" dir="auto">
+<a name="dlg_h1"></a><span class="literal">SFDialogs</span>.<span class="literal">Dialog</span> service</h1>
+  <p id="par_id931583589764919" class="paragraph" dir="auto">The <span class="literal">Dialog</span> service contributes to the management of dialogs created with the Basic <a target="_top" href="en-US/text/sbasic/guide/create_dialog.html">Dialog Editor</a>. Each instance of the current class represents a single dialog box displayed to the user.</p>
+
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id831598110550771" dir="auto">A dialog box can be displayed in modal or in non-modal modes.</p></div>
+</div>
+<br>
+  <p id="par_id221598110444025" class="paragraph" dir="auto">In modal mode, the box is displayed and the execution of the macro process is suspended until one of the OK or Cancel buttons is pressed. In the meantime, user actions executed on the box can trigger specific actions.</p>
+  <p id="par_id981598110463521" class="paragraph" dir="auto">In non-modal mode, the dialog box is "floating" on the user desktop and the execution of the macro process continues normally. A non-modal dialog closes when it is terminated with the <span class="literal">Terminate()</span> method or when the LibreOffice session ends. The window close button is inactive in non-modal dialogs.</p>
+  <p id="par_id721598110472337" class="paragraph" dir="auto">A dialog box disappears from memory after its explicit termination.</p>
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id891598188164936" dir="auto">The <span class="literal">SFDialogs.Dialog</span> service is closely related to the <span class="literal">SFDialogs.DialogControl</span> service.</p></div>
+</div>
+<br>
+
+   <h2 id="hd_id581582885621841" dir="auto">Service invocation and usage</h2>
+   <p id="par_id141609955500101" class="paragraph" dir="auto">Before using the <span class="literal">Dialog</span> service the <span class="literal">ScriptForge</span> library needs to be loaded or imported:</p>
+   <div class="embedded">
+<a name="importLibs"></a>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id901528999850603" dir="auto">• Basic macros require to load <span class="literal">ScriptForge</span> library using the following statement:<br><span class="literal">GlobalScope.BasicLibraries.loadLibrary("ScriptForge")</span><br><br>• Python scripts require an import from <span class="literal">scriptforge</span> module:<br><span class="literal">from scriptforge import CreateScriptService</span>
+    </p></div>
+</div>
+<br>
+  </div>
+
+   <p id="par_id361598174756160" class="paragraph" dir="auto">The <span class="literal">Dialog</span> service is invoked through the <span class="literal">CreateScriptService</span> method. It requires three positional arguments to specify the dialog box to activate:</p>
+   <p id="par_id31612271944733" class="paragraph" dir="auto"><span class="emph">Container</span>: "<a target="_top" href="en-US/text/sbasic/shared/03131900.html"><span class="literal">GlobalScope</span></a>" for preinstalled libraries or a window name as defined by <a target="_top" href="en-US/text/sbasic/shared/03/sf_ui.html"><span class="literal">ScriptForge.UI</span></a> service. Empty string "" default value stands for the current document.</p>
+   <p id="par_id311612271947124" class="paragraph" dir="auto"><span class="emph">Library</span>: The case-sensitive name of a library contained in the container. Default value is "Standard".</p>
+   <p id="par_id821612271946316" class="paragraph" dir="auto"><span class="emph">DialogName</span>: A case-sensitive string designating the dialog.</p>
+   <p id="par_id761620142701399" class="paragraph" dir="auto">The examples below in Basic and Python display the <span class="literal">dlgConsole</span> dialog that belongs to the <span class="literal">ScriptForge</span> shared library:</p>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      Dim oDlg As Object, lButton As Long
+      Dim Container As String, Library As String, DialogName As String
+      Set oDlg = CreateScriptService("SFDialogs.Dialog", "GlobalScope", "ScriptForge", "dlgConsole")
+      '... controls initialization goes here...
+      lButton = oDlg.Execute()
+      'Default mode = Modal
+      If lButton = oDlg.OKBUTTON Then
+      '... Process controls and do what is needed here
+      End If
+      oDlg.Terminate()
+  </code></pre></div>
+    <p id="par_id601619622310089" class="paragraph" dir="auto">Or using Python:</p>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    dlg = CreateScriptService('SFDialogs.Dialog', 'GlobalScope', 'ScriptForge', 'dlgConsole')
+    # ... controls initialization goes here...
+    rc = dlg.Execute()
+    # Default mode is Modal
+    if rc == dlg.OKBUTTON:
+        # ... Process controls and do what is needed here
+    dlg.Terminate()
+  </code></pre></div>
+  <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id811670854106781" dir="auto">Use the string "GlobalScope" as the <span class="emph">container</span> argument when the dialog is stored either in <span class="menuitem">My Macros &amp; Dialogs</span> or in <span class="menuitem">Application Macros &amp; Dialogs</span>.</p></div>
+</div>
+<br>
+
+  <h2 id="hd_id141670854511382" dir="auto">Retrieving the Dialog instance that triggered a dialog event</h2>
+  <p id="par_id951598174966322" class="paragraph" dir="auto">An instance of the <span class="literal">Dialog</span> service can be retrieved via the <span class="literal">SFDialogs.DialogEvent</span> service, provided that the dialog was initiated with the <span class="literal">Dialog</span> service. In the example below, <span class="literal">oDlg</span> contains the <span class="literal">Dialog</span> instance that triggered the dialog event.</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    Sub aDialogEventHander(ByRef poEvent As Object)
+        Dim oDlg As Object
+        Set oDlg = CreateScriptService("SFDialogs.DialogEvent", poEvent)
+        ' ...
+    End Sub
+  </code></pre></div>
+  <p id="par_id741619625211462" class="paragraph" dir="auto">Or using Python:</p>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    def control_event_handler(event: uno):
+        dlg = CreateScriptService("SFDialogs.DialogEvent", event)
+        # ...
+  </code></pre></div>
+  <p id="par_id251598176312571" class="paragraph" dir="auto">Note that in the previous examples, the prefix <span class="literal">"SFDialogs."</span> may be omitted when deemed appropriate.</p>
+  <h2 id="hd_id681670854491710" dir="auto">Handling exceptions in event handlers</h2>
+  <p id="par_id971670855125683" class="paragraph" dir="auto">When creating an event handler for dialog events it is good practice to handle errors inside the subroutine itself. For instance, suppose the event handler below is called when the mouse button is pressed in the dialog window.</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    Sub OnMouseButtonPressed(ByRef oEvent As Object)
+    On Local Error GoTo Catch
+        Dim oDialog As Object
+        oDialog = CreateScriptService("DialogEvent", oEvent)
+        ' Process the event
+        Exit Sub
+    Catch:
+        MsgBox SF_Exception.Description
+        SF_Exception.Clear
+    End Sub
+  </code></pre></div>
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id691670857377446" dir="auto">Call <span class="literal">SF_Exception.Clear</span> if you do not want the error to propagate after the dialog execution ended.</p></div>
+</div>
+<br>
+  <p id="par_id741619625211445" class="paragraph" dir="auto">In Python use native <span class="literal">try/except</span> blocks for exception handling as shown below:</p>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    def on_mouse_button_pressed(event=None):
+        try:
+            dlg = CreateScriptService("DialogEvent", event)
+            # Process the event
+        except Exception as e:
+            # The object "bas" is an instance of the Basic service
+            bas.MsgBox(str(e))
+  </code></pre></div>
+
+  <h2 id="hd_id651583668365757" dir="auto">Properties</h2>
+  <a name="properties_toc"></a>
+    <table border="1" class="" cellpadding="0" cellspacing="0">
+      <tr>
+         <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+            <p id="par_id871583668386455" class="tableheadintable" dir="auto">Name</p>
+         </th>
+         <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+            <p id="par_id491583668386455" class="tableheadintable" dir="auto">ReadOnly</p>
+         </th>
+         <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+            <p id="par_id271583668474014" class="tableheadintable" dir="auto">Type</p>
+         </th>
+         <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+            <p id="par_id401583668386455" class="tableheadintable" dir="auto">Description</p>
+         </th>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id151583668386455" class="tablecontentintable" dir="auto">OKBUTTON</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id371583668519172" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id271583668386455" class="tablecontentintable" dir="auto">Integer</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id771583668386455" class="tablecontentintable" dir="auto">Value = 1. An OK button was pressed.</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id951583839708571" class="tablecontentintable" dir="auto">CANCELBUTTON</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id541583839708548" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id751583839708362" class="tablecontentintable" dir="auto">Integer</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id731583839708412" class="tablecontentintable" dir="auto">Value = 0. A Cancel button was pressed.</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id511584027709311" class="tablecontentintable" dir="auto">Caption</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id761584027709516" class="tablecontent intable" dir="auto">No</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id491584027709825" class="tablecontentintable" dir="auto">String</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id971584027709752" class="tablecontentintable" dir="auto">Specify the title of the dialog.</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id491583839767611" class="tablecontentintable" dir="auto">Height</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id31583839767743" class="tablecontent intable" dir="auto">No</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id741583839767926" class="tablecontentintable" dir="auto">Long</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id111583839767195" class="tablecontentintable" dir="auto">Specify the height of the dialog box.</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id83158383992056" class="tablecontentintable" dir="auto">Modal</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id771583839920487" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id971583839920282" class="tablecontentintable" dir="auto">Boolean</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id451583839920858" class="tablecontentintable" dir="auto">Specifies if the dialog box is currently in execution in modal mode.</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id751588333908795" class="tablecontentintable" dir="auto">Name</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id571588333908716" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id781588333908500" class="tablecontentintable" dir="auto">String</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id721588333908708" class="tablecontentintable" dir="auto">The name of the dialog</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id251583774433989" class="tablecontentintable" dir="auto">Page</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id501583774433513" class="tablecontentintable" dir="auto">No</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id411583774433779" class="tablecontentintable" dir="auto">Integer</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id151598177605296" class="paragraphintable" dir="auto">A dialog may have several pages that can be traversed by the user step by step. The Page property of the Dialog object defines which page of the dialog is active.</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id731588334016220" class="tablecontentintable" dir="auto">Visible</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id271588334016191" class="tablecontentintable" dir="auto">No</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id991588334016273" class="tablecontentintable" dir="auto">Boolean</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id251588334016874" class="tablecontentintable" dir="auto">Specify if the dialog box is visible on the desktop. By default it is not visible until the Execute() method is run and visible afterwards.</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id741598177924441" class="tablecontentintable" dir="auto">XDialogModel</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id451598177924437" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <a name="bm_id141598187953729"></a>
+               <meta itemprop="keywords" content="API,UnoControlDialogModel">
+            
+            <p id="par_id94159817792441" class="tablecontentintable" dir="auto">UNO<br>object</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id191598177924897" class="tablecontentintable" dir="auto">The UNO object representing the dialog model. Refer to <a target="_blank" href="https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XControlModel.html">XControlModel</a> and <a target="_blank" href="https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1UnoControlDialogModel-members.html">UnoControlDialogModel</a> in Application Programming Interface (API) documentation for detailed information.</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id801598178083859" class="tablecontentintable" dir="auto">XDialogView</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id811598178083501" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <a name="bm_id141598187953729"></a>
+               <meta itemprop="keywords" content="API,UnoControlDialog">
+            
+            <p id="par_id981598178083938" class="tablecontentintable" dir="auto">UNO<br>object</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id731598178083442" class="tablecontentintable" dir="auto">The UNO object representing the dialog view. Refer to <a target="_blank" href="https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XControlModel.html">XControl</a> and <a target="_blank" href="https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1UnoControlDialog-members.html">UnoControlDialog</a> in Application Programming Interface (API) documentation for detailed information.</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id491583938767611" class="tablecontentintable" dir="auto">Width</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id31385839767743" class="tablecontentintable" dir="auto">No</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id147583839767926" class="tablecontentintable" dir="auto">Long</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id111583839717695" class="tablecontentintable" dir="auto">Specify the width of the dialog box.</p>
+         </td>
+      </tr>
+   </table>
+<br>
+   <h2 id="hd_id421612628828054" dir="auto">Event properties</h2>
+   <p id="par_id41612629140856" class="paragraph" dir="auto">Returns a URI string with the reference to the script triggered by the event. Read its specification in the <a target="_blank" href="https://wiki.documentfoundation.org/Documentation/DevGuide/Scripting_Framework#Scripting_Framework_URI_Specification">scripting framework URI specification</a>.</p>
+   <table border="1" class="" cellpadding="0" cellspacing="0">
+      <tr>
+         <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+            <p id="par_id961612628879819" class="tableheadintable" dir="auto">Name</p>
+         </th>
+         <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+            <p id="par_id401612628879819" class="tableheadintable" dir="auto">ReadOnly</p>
+         </th>
+         <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+            <p id="par_id281612628879819" class="tableheadintable" dir="auto">Basic IDE Description</p>
+         </th>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id431612629836735" class="tablecontentintable" dir="auto">OnFocusGained</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id111612629836630" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id1001612629836902" class="tablecontentintable" dir="auto">When receiving focus</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id701612629836389" class="tablecontentintable" dir="auto">OnFocusLost</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id291612629836294" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id62161262983683" class="tablecontentintable" dir="auto">When losing focus</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id241612629836863" class="tablecontentintable" dir="auto">OnKeyPressed</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id81612629836634" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id881612629836744" class="tablecontentintable" dir="auto">Key pressed</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id201612629836996" class="tablecontentintable" dir="auto">OnKeyReleased</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id591612629836830" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id161612629836775" class="tablecontentintable" dir="auto">Key released</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id111612629836950" class="tablecontentintable" dir="auto">OnMouseDragged</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id891612629836630" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id461612629836679" class="tablecontentintable" dir="auto">Mouse moved while key presses</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id711612629836495" class="tablecontentintable" dir="auto">OnMouseEntered</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id131612629836291" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id151612629836151" class="tablecontentintable" dir="auto">Mouse inside</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id971612629836286" class="tablecontentintable" dir="auto">OnMouseExited</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id211612629836725" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id361612629836624" class="tablecontentintable" dir="auto">Mouse outside</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id721612629836537" class="tablecontentintable" dir="auto">OnMouseMoved</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id311612629836481" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id721612629836752" class="tablecontentintable" dir="auto">Mouse moved</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id55161262983695" class="tablecontentintable" dir="auto">OnMousePressed</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id981612629836116" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id381612629836635" class="tablecontentintable" dir="auto">Mouse button pressed</p>
+         </td>
+      </tr>
+      <tr>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id621612629836155" class="tablecontentintable" dir="auto">OnMouseReleased</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id711612629836704" class="tablecontentintable" dir="auto">Yes</p>
+         </td>
+         <td rowspan="" colspan="" dir="auto">
+            <p id="par_id35161262983642" class="tablecontentintable" dir="auto">Mouse button released</p>
+         </td>
+      </tr>
+    </table>
+<br>
+  
+  <a name="methods_toc"></a>
+  <table border="1" class="" cellpadding="0" cellspacing="0">
+    <tr>
+      <th rowspan="" colspan="3" class="tableheadcell" dir="auto">
+        <p id="par_id891611613601554" class="tableheadintable" dir="auto">List of Methods in the Dialog Service</p>
+      </th>
+    </tr>
+    <tr>
+       <td rowspan="" colspan="" dir="auto">
+         <p id="par_id381606472825856" class="tablecontentintable" dir="auto">
+           <a target="_top" href="en-US/text/sbasic/shared/03/sf_dialog.html#Activate">Activate</a><br>
+           <a target="_top" href="en-US/text/sbasic/shared/03/sf_dialog.html#Center">Center</a><br>
+           <a target="_top" href="en-US/text/sbasic/shared/03/sf_dialog.html#Controls">Controls</a><br>
+         </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+         <p id="par_id451606472825856" class="tablecontentintable" dir="auto">
+           <a target="_top" href="en-US/text/sbasic/shared/03/sf_dialog.html#EndExecute">EndExecute</a><br>
+           <a target="_top" href="en-US/text/sbasic/shared/03/sf_dialog.html#Execute">Execute</a><br>
+           <a target="_top" href="en-US/text/sbasic/shared/03/sf_dialog.html#GetTextsFromL10N">GetTextsFromL10N</a><br>
+         </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+         <p id="par_id161606472825856" class="tablecontentintable" dir="auto">
+           <a target="_top" href="en-US/text/sbasic/shared/03/sf_dialog.html#Resize">Resize</a><br>
+           <a target="_top" href="en-US/text/sbasic/shared/03/sf_dialog.html#SetPageManager">SetPageManager</a><br>
+           <a target="_top" href="en-US/text/sbasic/shared/03/sf_dialog.html#Terminate">Terminate</a><br>
+         </p>
+       </td>
+    </tr>
+  </table>
+<br>
+  
+
+<a name="Activate"></a>
+  
+   <a name="bm_id721583933076548"></a>
+      <meta itemprop="keywords" content="Dialog service,Activate">
+   
+   <h2 id="hd_id681583933076692" dir="auto">Activate</h2>
+   <p id="par_id871583933076448" class="paragraph" dir="auto">Set the focus on the current <span class="literal">Dialog</span> instance. Return <span class="literal">True</span> if focusing was successful.</p>
+   <p id="par_id151598178880227" class="paragraph" dir="auto">This method is called from a dialog or control event, or when a dialog is displayed in non-modal mode.</p>
+   <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+   <p id="par_id581619625572111" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.Activate(): bool</span></p>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      Dim oDlg As Object
+      Set oDlg = CreateScriptService(,, "myDialog")
+      oDlg.Execute()
+      ' ...
+      oDlg.Activate()
+   </code></pre></div>
+   <p id="par_id811620109056270" class="paragraph" dir="auto">Python and LibreOffice Basic examples both assume that the dialog is stored in current document's <span class="literal">Standard</span> library.</p>
+   <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+     dlg = CreateScriptService(,,'myDialog')
+     dlg.Execute()
+     # ...
+     dlg.Activate()
+   </code></pre></div>
+
+
+<a name="Center"></a>
+  
+   <a name="bm_id41584541257826"></a>
+      <meta itemprop="keywords" content="Dialog service,Center">
+   
+   <h2 id="hd_id95518454125767" dir="auto">Center</h2>
+   <p id="par_id391651225506119" class="paragraph" dir="auto">Centers the current dialog instance in the middle of a parent window. Without arguments, the method centers the dialog in the middle of the current window.</p>
+   <p id="par_id391651552206119" class="paragraph" dir="auto">Returns <span class="literal">True</span> when successful.</p>
+   <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+   <p id="par_id81619265753895" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.Center(opt Parent: obj): bool</span></p>
+   <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+   <p id="par_id1001585441257789" class="paragraph" dir="auto"><span class="emph">Parent</span>: An optional object that can be either …</p>
+   <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+         <p id="par_id412598177970993" class="listitem" dir="auto">a ScriptForge dialog object</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+         <p id="par_id81591858229301" class="listitem" dir="auto">a ScriptForge document (Calc, Base, ...) object</p>
+      </li>
+   </ul>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+     Sub TriggerEvent(oEvent As Object)
+         Dim oDialog1 As Object, oDialog2 As Object, lExec As Long
+         Set oDialog1 = CreateScriptService("DialogEvent", oEvent) ' The dialog that caused the event
+         Set oDialog2 = CreateScriptService("Dialog", ...) ' Open a second dialog
+         oDialog2.Center(oDialog1)
+         lExec = oDialog2.Execute()
+         Select Case lExec
+             ...
+     End Sub
+  </code></pre></div>
+   <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+   <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+     def triggerEvent(event: uno):
+       dlg1 = CreateScriptService('DialogEvent.Dialog', event)  # The dialog having caused the event
+       dlg2 = CreateScriptService('Dialog', ...)  # Open a second dialog
+       dlg2.Center(dlg1)
+       rc = dlg2.Execute()
+       if rc is False:
+         # ...
+   </code></pre></div>
+
+
+<a name="Controls"></a>
+  
+   <a name="bm_id41584541257826"></a>
+      <meta itemprop="keywords" content="Dialog service,Controls">
+   
+   <h2 id="hd_id95158454125767" dir="auto">Controls</h2>
+   <p id="par_id161584541257982" class="paragraph" dir="auto">Return either:</p>
+   <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+         <p id="par_id421598179770993" class="listitem" dir="auto">the list of the controls contained in the dialog</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+         <p id="par_id81598185229301" class="listitem" dir="auto">a <span class="literal">DialogControl</span> class instance based on its name</p>
+      </li>
+   </ul>
+   <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+   <p id="par_id81619625753895" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.Controls(): str[0..*]</span></p>
+   <p id="par_id61819625753598" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.Controls(controlname: str): svc</span></p>
+   <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+   <p id="par_id1001584541257789" class="paragraph" dir="auto"><span class="emph">ControlName</span> : A valid control name as a case-sensitive string. If absent, the list of control names is returned as a zero-based array.</p>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      Dim myDialog As Object, myList As Variant, myControl As Object
+      Set myDialog = CreateScriptService("SFDialogs.Dialog", , "Standard", "Dialog1")
+      myList = myDialog.Controls()
+      Set myControl = myDialog.Controls("myTextBox")
+   </code></pre></div>
+   <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+     dlg = CreateScriptService('SFDialogs.Dialog','', 'Standard', 'Dialog1')
+     ctrls = dlg.Controls()
+     ctrl = dlg.Controls('myTextBox')
+   </code></pre></div>
+
+
+<a name="EndExecute"></a>
+  
+   <a name="bm_id171598185776261"></a>
+      <meta itemprop="keywords" content="Dialog service,EndExecute">
+   
+   <h2 id="hd_id491598185776436" dir="auto">EndExecute</h2>
+   <p id="par_id381598185776500" class="paragraph" dir="auto">Ends the display of a modal dialog and gives back the argument as return value for the current <span class="literal">Execute()</span> running action.</p>
+   <p id="par_id551598185953362" class="paragraph" dir="auto"><span class="literal">EndExecute()</span> is usually contained in the processing of a macro triggered by a dialog or control event.</p>
+   <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+   <p id="par_id451619627879243" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.EndExecute(returnvalue: int)</span></p>
+   <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+   <p id="par_id451598185776957" class="paragraph" dir="auto"><span class="emph">returnvalue</span>: The value passed to the running <span class="literal">Execute()</span> method.</p>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <p id="par_id411620110780170" class="paragraph" dir="auto">Using LibreOffice Basic:</p>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      Sub OnEvent(poEvent As com.sun.star.lang.EventObject)
+          Dim oDlg As Object
+          Set oDlg = CreateScriptService("SFDialogs.DialogEvent", poEvent)
+          oDlg.EndExecute(ReturnValue := 25)
+      End Sub
+   </code></pre></div>
+   <p id="par_id11620110819754" class="paragraph" dir="auto">Using Python:</p>
+   <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+     from com.sun.star.lang import EventObject
+     def on_event(event: EventObject):
+         dlg = CreateScriptService("SFDialogs.DialogEvent", event)
+         dlg.EndExecute(25)
+   </code></pre></div>
+     <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id81620201915101" dir="auto">Above <a target="_blank" href="https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1lang_1_1EventObject.html">com.sun.star.lang.EventObject</a> mentions are optional. Such annotations help identify LibreOffice Application Programming Interface (API).</p></div>
+</div>
+<br>
+
+
+<a name="Execute"></a>
+  
+    <a name="bm_id351598186461621"></a>
+   <meta itemprop="keywords" content="Dialog service,Execute">
+   <h2 id="hd_id531598186461915" dir="auto">Execute</h2>
+   <p id="par_id29159818646178" class="paragraph" dir="auto">Display the dialog box and, when modal, wait for its termination by the user. The returned value is either:</p>
+   <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+         <p id="par_id541598186676277" class="listitem" dir="auto">0 : <span class="literal">Cancel</span> button pressed</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+         <p id="par_id821598186716345" class="listitem" dir="auto">1 : <span class="literal">OK</span> button pressed</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+         <p id="par_id951598186738346" class="listitem" dir="auto">Otherwise the dialog stopped with an <span class="literal">EndExecute()</span> statement issued by a dialog or control event</p>
+      </li>
+   </ul>
+   <p id="par_id741598187335869" class="paragraph" dir="auto">For non-modal dialog boxes the method always returns 0 and the execution of the macro continues.</p>
+   <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+   <p id="par_id291619628195418" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.Execute(modal: bool = True): int</span></p>
+   <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+   <p id="par_id11598186461227" class="paragraph" dir="auto"><span class="emph">modal</span>: <span class="literal">False</span> when non-modal dialog. Default = <span class="literal">True</span>.</p>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <p id="par_id231620110023843" class="paragraph" dir="auto">In this Basic example <span class="literal">myDialog</span> dialog is stored in current document's <span class="literal">Standard</span> library.</p>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      Dim oDlg As Object, lReturn As Long
+      Set oDlg = CreateScriptService("SFDialogs.Dialog", , , "myDialog")
+      lReturn = oDlg.Execute(Modal := False)
+      Select Case lReturn
+          ' ...
+      End Select
+   </code></pre></div>
+   <p id="par_id191620110162627" class="paragraph" dir="auto">This Python code displays <span class="literal">DlgConvert</span> modal dialog from <span class="literal">Euro</span> shared Basic library.</p>
+   <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+     dlg = CreateScriptService("SFDialogs.Dialog", 'GlobalScope', 'Euro', "DlgConvert")
+     rc = dlg.Execute()
+     if rc == dlg.CANCELBUTTON:
+         # ...
+   </code></pre></div>
+
+
+<a name="GetTextsFromL10N"></a>
+  
+   <a name="bm_id141598187953209"></a>
+      <meta itemprop="keywords" content="Dialog service,GetTextsFromL10N">
+   
+   <h2 id="hd_id101598187950391" dir="auto">GetTextsFromL10N</h2>
+   <p id="par_id21598187900349" class="paragraph" dir="auto">Replaces all fixed text strings in a dialog by their translated versions based on a <span class="literal">L10N</span> service instance. This method translates the following strings:</p>
+   <div class="embedded">
+<a name="L10NDlgControls"></a>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+          <p id="par_id621637863440015" class="listitem" dir="auto">The title of the dialog.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+          <p id="par_id61637863440399" class="listitem" dir="auto">The caption of the following control types: Button, CheckBox, FixedLine, FixedText, GroupBox and RadioButton.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+          <p id="par_id251637863440626" class="listitem" dir="auto">Static strings in ListBoxes and ComboBoxes.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+          <p id="par_id811637863596791" class="listitem" dir="auto">The tooltip or help text displayed when the mouse hovers over the control.</p>
+      </li>
+    </ul>
+  </div>
+   <p id="par_id641625855723650" class="paragraph" dir="auto">The method returns <span class="literal">True</span> if successful.</p>
+   <p id="par_id61637871260604" class="paragraph" dir="auto">To create a list of translatable strings in a dialog use the <a target="_top" href="en-US/text/sbasic/shared/03/sf_l10n.html#AddTextsFromDialog">AddTextsFromDialog</a> method from the L10N service.</p>
+   <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+   <p id="par_id171619628383909" class="paragraph" dir="auto">
+     <span class="input" data-tooltip="Click on text to copy to clipboard">svc.GetTextsFromL10N(l10n: svc): bool</span>
+   </p>
+   <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+   <p id="par_id451598185776205" class="paragraph" dir="auto"><span class="emph">l10n</span>: A <span class="literal">L10N</span> service instance from which translated strings will be retrieved.</p>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <p id="par_id951620300689850" class="paragraph" dir="auto">The following example loads translated strings and applies them to the dialog "MyDialog".</p>
+   <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+     oDlg = CreateScriptService("Dialog", "GlobalScope", "Standard", "MyDialog")
+     myPO = CreateScriptService("L10N", "/home/user/po_files/")
+     oDlg.GetTextsFromL10N(myPO)
+     oDlg.Execute()
+   </code></pre></div>
+   <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+   <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+     dlg = CreateScriptService("Dialog", "GlobalScope", "Standard", "MyDialog")
+     myPO = CreateScriptService("L10N", "/home/user/po_files/")
+     dlg.GetTextsFromL10N(myPO)
+     dlg.Execute()
+   </code></pre></div>
+   <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id901637872163895" dir="auto">Read the <a target="_top" href="en-US/text/sbasic/shared/03/sf_l10n.html">L10N service</a> help page to learn more about how PO and POT files are handled.</p></div>
+</div>
+<br>
+
+
+<a name="Resize"></a>
+  
+   <a name="bm_id141598187953729"></a>
+      <meta itemprop="keywords" content="Dialog service,Resize">
+   
+   <h2 id="hd_id101598187953210" dir="auto">Resize</h2>
+   <p id="par_id21598187953697" class="paragraph" dir="auto">Moves the topleft corner of a dialog to new coordinates and/or modify its dimensions. All distances are expressed in 1/100 mm. Without arguments, the method resets the initial dimensions. Return <span class="literal">True</span> if the resize was successful.</p>
+   <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+   <p id="par_id711619628389339" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.Resize(opt Left: num, opt Top: num, opt Width: num, opt Height: num): bool</span></p>
+   <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+   <p id="par_id481651236673068" class="paragraph" dir="auto"><span class="emph">Left</span>: the horizontal distance from the top-left corner</p>
+   <p id="par_id721651236674379" class="paragraph" dir="auto"><span class="emph">Top</span>: the vertical distance from the top-left corner</p>
+   <p id="par_id991651236674995" class="paragraph" dir="auto"><span class="emph">Width</span>: the width of the rectangle containing the dialog</p>
+   <p id="par_id771651236675564" class="paragraph" dir="auto"><span class="emph">Height</span>: the height of the rectangle containing the dialog</p>
+   <p id="par_id211651236676180" class="paragraph" dir="auto">Negative or missing arguments are left unchanged</p>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+     oDialog.Resize(1000, 2000, Height := 6000) ' Width is not changed
+   </code></pre></div>
+   <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+   <p id="par_id181620112217958" class="paragraph" dir="auto">With Python:</p>
+   <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+     oDialog.Resize(1000, 2000, Height = 6000)  # Width is not changed
+   </code></pre></div>
+
+
+<a name="SetPageManager"></a>
+  
+  <a name="bm_id141598187953104"></a>
+    <meta itemprop="keywords" content="Dialog service,SetPageManager">
+  
+  <h2 id="hd_id101598187953960" dir="auto">SetPageManager</h2>
+  <p id="par_id21598187950047" class="paragraph" dir="auto">Defines which controls in a dialog are responsible for switching pages, making it easier to manage the <span class="literal">Page</span> property of a dialog and its controls.</p>
+  <p id="par_id291670871829824" class="paragraph" dir="auto">Dialogs may have multiple pages and the currently visible page is defined by the <span class="literal">Page</span> dialog property. If the <span class="literal">Page</span> property is left unchanged, the default visible page is equal to 0 (zero), meaning that no particular page is defined and all visible controls are displayed regardless of the value set in their own <span class="literal">Page</span> property.</p>
+  <p id="par_id431670872095503" class="paragraph" dir="auto">When the <span class="literal">Page</span> property of a dialog is changed to some other value such as 1, 2, 3 and so forth, then only the controls whose <span class="literal">Page</span> property match the current dialog page will be displayed.</p>
+  <p id="par_id161670872517032" class="paragraph" dir="auto">By using the <span class="literal">SetPageManager</span> method it is possible to define four types of page managers:</p>
+  <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id161670872665432" class="listitem" dir="auto"><span class="emph">List box or combo box:</span> in this case, each entry in the list box or combo box corresponds to a page. The first item refers to Page 1, the second items refers to Page 2 and so on.</p>
+    </li>
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id141670872835955" class="listitem" dir="auto"><span class="emph">Group of radio buttons:</span> defines a group of radio buttons that will control which page is visible.</p>
+    </li>
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id11670872840588" class="listitem" dir="auto"><span class="emph">Sequence of buttons:</span> defines a set of buttons, each of which corresponding to a dialog page. This can be used to emulate a tabbed interface by placing buttons side by side in the dialog.</p>
+    </li>
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id461670873122132" class="listitem" dir="auto"><span class="emph">Previous/Next buttons:</span> defines which buttons in the dialog that will be used to navigate to the Previous/Next page in the dialog.</p>
+    </li>
+  </ul>
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id871670874232499" dir="auto">It is possible to use more than one page management mechanism at the same time.</p></div>
+</div>
+<br>
+  <p id="par_id831670873941232" class="paragraph" dir="auto">This method is supposed to be called just once before calling the <span class="literal">Execute</span> method. Subsequent calls are ignored.</p>
+  <p id="par_id371670874142972" class="paragraph" dir="auto"> If successful this method returns <span class="literal">True</span>.</p>
+  <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+  <p id="par_id711619628364179" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.SetPageManager(pilotcontrols: str = "", tabcontrols: str = "", wizardcontrols: str = "", opt lastpage: int): bool</span></p>
+  <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+  <p id="par_id481651236673466" class="paragraph" dir="auto"><span class="emph">pilotcontrols:</span> a comma-separated list of <span class="literal">ListBox</span>, <span class="literal">ComboBox</span> or <span class="literal">RadioButton</span> control names used as page managers. For RadioButton controls, specify the name of the first control in the group to be used.</p>
+  <p id="par_id721651236670589" class="paragraph" dir="auto"><span class="emph">tabcontrols:</span> a comma-separated list of button names that will be used as page managers. The order in which they are specified in this argument corresponds to the page number they are associated with.</p>
+  <p id="par_id991651236674963" class="paragraph" dir="auto"><span class="emph">wizardcontrols:</span> a comma-separated list with the names of two buttons that will be used as the Previous/Next buttons.</p>
+  <p id="par_id771651236671764" class="paragraph" dir="auto"><span class="emph">lastpage:</span> the number of the last available page. It is recommended to specify this value when using the Previous/Next page manager.</p>
+  <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+  <p id="par_id861670874176863" class="paragraph" dir="auto">Consider a dialog with three pages. The dialog has a <span class="literal">ListBox</span> control named "aPageList" that will be used to control the visible page. Additionally, there are two buttons named "btnPrevious" and "btnNext" that will be used as the Previous/Next buttons in the dialog.</p>
+  <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    oDialog.SetPageManager(PilotControls := "aPageList", _
+                           WizardControls := "btnPrevious,btnNext", _
+                           LastPage := 3)
+    oDialog.Execute()
+  </code></pre></div>
+  <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    dlg.SetPageManager(pilotcontrols="aPageList",
+                       wizardcontrols="btnPrevious,btnNext",
+                       lastpage=3)
+    dlg.Execute()
+  </code></pre></div>
+
+
+<a name="Terminate"></a>
+  
+   <a name="bm_id141598187953729"></a>
+      <meta itemprop="keywords" content="Dialog service,Terminate">
+   
+   <h2 id="hd_id101598187953201" dir="auto">Terminate</h2>
+   <p id="par_id21598187953679" class="paragraph" dir="auto">Terminate the <span class="literal">Dialog</span> service for the current instance. Return <span class="literal">True</span> if the termination was successful.</p>
+   <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+   <p id="par_id171619628389339" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.Terminate(): bool</span></p>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <p id="par_id951620300687150" class="paragraph" dir="auto">Below Basic and Python examples open <span class="literal">DlgConsole</span> and <span class="literal">dlgTrace</span> non-modal dialogs. They are respectively stored in <span class="literal">ScriptForge</span> and <span class="literal">Access2Base</span> shared libraries. Dialog close buttons are disabled and explicit termination is performed at the end of a running process.</p>
+   <p id="par_id301620302137482" class="paragraph" dir="auto">In this example a button in <span class="literal">DlgConsole</span> is substituting inhibited window closing:</p>
+   <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+     oDlg = CreateScriptService("SFDialogs.Dialog","GlobalScope","ScriptForge","DlgConsole")
+     oDlg.Execute(modal:=False)
+     Wait 5000
+     oDlg.Terminate()
+   </code></pre></div>
+   <p id="par_id811620112217958" class="paragraph" dir="auto">With Python:</p>
+   <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+<div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+     from time import sleep
+     dlg = CreateScriptService('SFDialogs.Dialog',"GlobalScope",'Access2Base',"dlgTrace")
+     dlg.Execute(modal=False)
+     sleep 5
+     dlg.Terminate()
+   </code></pre></div>
+
+
+   <div class="embedded">
+<a name="SF_InternalUse"></a>
+      <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id851506659675843" dir="auto">All <span class="literal">ScriptForge</span> Basic routines or identifiers that are prefixed with an underscore character "_" are reserved for internal use. They are not meant be used in Basic macros or Python scripts.</p></div>
+</div>
+<br>
+    </div>
+   <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+      <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_dialogcontrol.html"><span class="literal">SFDialogs</span>.<span class="literal">DialogControl</span> service</a></p></div>
+      <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_ui.html"><span class="literal">ScriptForge</span>.<span class="literal">UI</span> service</a></p></div>
+   </div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03/sf_dialog.xhp" target="_blank">/text/sbasic/shared/03/sf_dialog.xhp</a></p>
+<p dir="auto">Title is: SFDialogs.Dialog service</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

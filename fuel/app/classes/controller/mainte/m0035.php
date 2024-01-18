@@ -23,6 +23,9 @@ class Controller_Mainte_M0035 extends Controller_Hybrid {
 	private $sidemenu 	= 'sidemenu';
 	private $footer   	= 'footer';
 
+    // 保管場所倉庫リスト
+    private $storage_warehouse_list = array();
+
     // 保管場所列リスト
     private $storage_column_list = array();
 
@@ -86,6 +89,8 @@ class Controller_Mainte_M0035 extends Controller_Hybrid {
         $this->template->sidemenu       = $sidemenu;
         $this->template->footer         = $footer;
 
+        // 保管場所倉庫リスト取得
+        $this->storage_warehouse_list   = GenerateList::getStorageWarehouseList(true, M0034::$db);
         // 保管場所列リスト取得
         $this->storage_column_list      = GenerateList::getStorageColumnList(true, M0034::$db);
         // 保管場所奥行リスト取得
@@ -125,15 +130,17 @@ class Controller_Mainte_M0035 extends Controller_Hybrid {
         }
 
         $conditions = array(
-            'storage_location_id'	=> $storage_location_data['storage_location_id'],
-            'storage_location_name' => $storage_location_data['storage_location_name'],
-            'storage_column_id'		=> $storage_location_data['storage_column_id'],
-            'storage_column_name'	=> $storage_location_data['storage_column_name'],
-            'storage_depth_id'		=> $storage_location_data['storage_depth_id'],
-            'storage_depth_name'	=> $storage_location_data['storage_depth_name'],
-            'storage_height_id'	    => $storage_location_data['storage_height_id'],
-            'storage_height_name'	=> $storage_location_data['storage_height_name'],
-            'del_flg'               => $storage_location_data['del_flg'],
+            'storage_location_id'	  => $storage_location_data['storage_location_id'],
+            'storage_location_name'   => $storage_location_data['storage_location_name'],
+            'storage_warehouse_id'    => $storage_location_data['storage_warehouse_id'],
+            'storage_warehouse_name'  => $storage_location_data['storage_warehouse_name'],
+            'storage_column_id'       => $storage_location_data['storage_column_id'],
+            'storage_column_name'     => $storage_location_data['storage_column_name'],
+            'storage_depth_id'		  => $storage_location_data['storage_depth_id'],
+            'storage_depth_name'	  => $storage_location_data['storage_depth_name'],
+            'storage_height_id'	      => $storage_location_data['storage_height_id'],
+            'storage_height_name'	  => $storage_location_data['storage_height_name'],
+            'del_flg'                 => $storage_location_data['del_flg'],
         );
 
         return $conditions;
@@ -145,6 +152,10 @@ class Controller_Mainte_M0035 extends Controller_Hybrid {
         // 入力チェック
         $validation = Validation::forge('valid_master');
         $validation->add_callable('myvalidation');
+        // 保管場所倉庫チェック
+        $validation->add('storage_warehouse_id', '保管場所倉庫')
+            ->add_rule('required_select')
+        ;
         // 保管場所列チェック
         $validation->add('storage_column_id', '保管場所列')
             ->add_rule('required_select')
@@ -230,6 +241,7 @@ class Controller_Mainte_M0035 extends Controller_Hybrid {
         $error_msg      = null;
         $conditions 	= array_fill_keys(array(
             'storage_location_id',
+            'storage_warehouse_id',
             'storage_column_id',
             'storage_depth_id',
             'storage_height_id',
@@ -262,6 +274,9 @@ class Controller_Mainte_M0035 extends Controller_Hybrid {
             if (!empty($errors)) {
                 foreach($validation->error() as $key => $e) {
                     switch ($key){
+                        case 'storage_warehouse_id':
+                            $error_column = '保管場所倉庫';
+                            break;
                         case 'storage_column_id':
                             $error_column = '保管場所列';
                             break;
@@ -342,6 +357,7 @@ class Controller_Mainte_M0035 extends Controller_Hybrid {
             array(
                 'error_message'             => $error_msg,
                 'data'                      => $conditions,
+                'storage_warehouse_list'    => $this->storage_warehouse_list,
                 'storage_column_list'       => $this->storage_column_list,
                 'storage_depth_list'        => $this->storage_depth_list,
                 'storage_height_list'       => $this->storage_height_list,

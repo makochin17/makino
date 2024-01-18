@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Conditional Formatting - All cells</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+
+    <a name="allcells"></a>
+        <h1 id="hd_id861662937013389" dir="auto">
+<a name="h1"></a>Condition - All cells</h1>
+        <p id="par_id31662915586650" class="paragraph" dir="auto">Applies the conditional formatting to the set of cells defined in the selected range. The formatting is applied based on the contents of the whole range.</p>
+    
+    <a name="colorscale"></a>
+        <h2 id="hd_id3147394" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120400.html#colorscale">Color Scale</a></h2>
+        <p id="par_id3155602" class="paragraph" dir="auto">Applies a color scale to a range consisting of displaying a bicolor or tricolor gradient on this range depending on the value of each cell.</p>
+    
+    <a name="howtoget"></a><div class="howtoget">
+<div><p class="howtogetheader" dir="auto"><a name="wie"></a>To access this command...</p></div>
+<div class="howtogetbody">
+        <div class="embedded">
+<a name="s_conditionalcolorscale"></a>
+  <p id="par_id31663542115011" class="paragraph" dir="auto"><a name="conditionalcolorscale"></a>Choose <span class="menuitem">Format - Conditional - Color Scale</span></p>
+  <p id="par_id211663543104186" class="paragraph" dir="auto">On the <span class="emph">Formatting</span> bar, click</p>
+  
+    <div class="icontable">
+      <div class="iconcell">
+        <p id="par_id431663540719713" class="paragraphintable" dir="auto">
+          <img src="media/icon-themes/cmd/lc_colorscaleformatdialog.svg" class="iconimage" alt="Icon Color Scale" style="width:38px;height:38px" itemprop="icon" itemscope="true" itemtype="http://schema.org/ImageObject">
+        </p>
+      </div>
+      <div class="iconcell">
+        <p id="par_id841663540719717" class="paragraphintable" dir="auto">Color Scale</p>
+      </div>
+    </div>
+  
+</div>
+    </div>
+</div>
+<br>
+
+    <h3 id="hd_id541663598275609" dir="auto">Conditions</h3>
+    <p id="par_id231663598294535" class="paragraph" dir="auto">The calculation of the color scale depends on 2 or 3 conditions, defined as follows:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id701864449697771" class="listitem" dir="auto"><span class="emph">Min (Max)</span>: calculates using the minimum (maximum) values in the range.</p>
+        </li>
+    </ul>
+    <a name="commonconditions"></a>
+        <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id321663440728295" class="listitem" dir="auto"><span class="emph">Value</span>: a fixed value. Enter the value in the text box.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id611663440697270" class="listitem" dir="auto"><span class="emph">Percentile</span>: A percentile is each of the 99 values which divide the sorted data in 100 equal parts, so that each part represents 1/100 of the sample population. A percentile return the value for a data series going from the smallest to the largest value in a set of data. For P = 25, the percentile means the first quartile. P = 50 is also the MEDIAN of the data set. Enter the percentile value in the text box. Valid values are from 0 to 100.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id211663440834104" class="listitem" dir="auto"><span class="emph">Percent</span>: a fixed value representing the percentage of the minimum (maximum) of the length defined by minimum and maximum values in the range. A minimum of 10% selects the values below 10% of the segment [Min,Max]. A maximum of 80% select values above 80% of the segment [Min,Max]. Valid values are from 0 (zero) to 100. Do not enter a percent (%) sign.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id961663440848168" class="listitem" dir="auto"><span class="emph">Formula</span>: A formula expression starting with the equal sign (=) that calculates a numeric value. Values can be numbers, dates or time. Enter the formula expression in the text box.</p>
+        </li>
+        </ul>
+    
+    <div class="embedded">
+<a name="conditionalformatting"></a>
+        <p id="par_id591563765191143" class="paragraph" dir="auto"></p>
+    </div>
+    <a name="databar"></a>
+        <h2 id="par_id991609782427459" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120400.html#databar">Data Bar</a></h2>
+        <p id="par_id41609780964157" class="paragraph" dir="auto">Data bar option fills the cell with solid or gradient color corresponding to the numeric value in the cell.</p>
+    
+    <a name="howtoget"></a><div class="howtoget">
+<div><p class="howtogetheader" dir="auto"><a name="wie"></a>To access this command...</p></div>
+<div class="howtogetbody">
+        <div class="embedded">
+<a name="s_conditionaldatabar"></a>
+  <p id="par_id491663542108169" class="paragraph" dir="auto"><a name="conditionaldatabar"></a>Choose <span class="menuitem">Format - Conditional - Data Bar</span></p>
+  <p id="par_id81663543094977" class="paragraph" dir="auto">On the <span class="emph">Formatting</span> bar, click</p>
+  
+    <div class="icontable">
+      <div class="iconcell">
+        <p id="par_id301663541161943" class="paragraphintable" dir="auto">
+          <img src="media/icon-themes/cmd/lc_databarformatdialog.svg" class="iconimage" alt="Icon Data Bar" style="width:38px;height:38px" itemprop="icon" itemscope="true" itemtype="http://schema.org/ImageObject">
+        </p>
+      </div>
+      <div class="iconcell">
+        <p id="par_id101663541161947" class="paragraphintable" dir="auto">Data Bar</p>
+      </div>
+    </div>
+  
+</div>
+    </div>
+</div>
+<br>
+    <h3 id="hd_id631663449553346" dir="auto">Conditions</h3>
+    <p id="par_id931609781970981" class="paragraph" dir="auto">The calculation of the bar area fill is based on the conditions below:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id281663449673792" class="listitem" dir="auto"><span class="emph">Automatic</span>: calculates using the minimum and maximum values in the range.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id701663449697771" class="listitem" dir="auto"><span class="emph">Min (Max)</span>: calculates using the minimum (maximum) values in the range.</p>
+        </li>
+    </ul>
+    <div class="embedded">
+<a name="commonconditions"></a>
+        <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id321663440728295" class="listitem" dir="auto"><span class="emph">Value</span>: a fixed value. Enter the value in the text box.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id611663440697270" class="listitem" dir="auto"><span class="emph">Percentile</span>: A percentile is each of the 99 values which divide the sorted data in 100 equal parts, so that each part represents 1/100 of the sample population. A percentile return the value for a data series going from the smallest to the largest value in a set of data. For P = 25, the percentile means the first quartile. P = 50 is also the MEDIAN of the data set. Enter the percentile value in the text box. Valid values are from 0 to 100.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id211663440834104" class="listitem" dir="auto"><span class="emph">Percent</span>: a fixed value representing the percentage of the minimum (maximum) of the length defined by minimum and maximum values in the range. A minimum of 10% selects the values below 10% of the segment [Min,Max]. A maximum of 80% select values above 80% of the segment [Min,Max]. Valid values are from 0 (zero) to 100. Do not enter a percent (%) sign.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id961663440848168" class="listitem" dir="auto"><span class="emph">Formula</span>: A formula expression starting with the equal sign (=) that calculates a numeric value. Values can be numbers, dates or time. Enter the formula expression in the text box.</p>
+        </li>
+        </ul>
+    </div>
+    <h3 id="par_id281609781729359" dir="auto">More Options</h3>
+    <p id="par_id501663454998977" class="paragraph" dir="auto">The Data Bar dialog opens to add details on the display of data bars.</p>
+    <h4 id="hd_id221663453502042" dir="auto">Entry values</h4>
+    <p id="par_id891663453681870" class="paragraph" dir="auto">Same as the conditions above.</p>
+    <h4 id="hd_id511663453530293" dir="auto">Bar Colors</h4>
+    <p id="par_id371663453564807" class="paragraph" dir="auto">Choose the color for positive and negative values.</p>
+    <h4 id="hd_id891663453607961" dir="auto">Fill</h4>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id671663453639829" class="listitem" dir="auto"><span class="emph">Gradient</span>: set a color scale between the color of positive (negative) values and white.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id551663453647462" class="listitem" dir="auto"><span class="emph">Color</span>: use the positive (negative) color for the entire data bar, no fade out gradient.</p>
+        </li>
+    </ul>
+    <h4 id="hd_id701663453750779" dir="auto">Axis</h4>
+    <p id="par_id691663453763746" class="paragraph" dir="auto">Set the position of the vertical axis for the data bar. Values are</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id381663453792294" class="listitem" dir="auto"><span class="emph">Automatic:</span> position the vertical axis in the middle of the maximum and minimum values.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id791663453800602" class="listitem" dir="auto"><span class="emph">Middle:</span> set the vertical axis in the middle of the column.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id461663453808288" class="listitem" dir="auto"><span class="emph">None:</span> do not display a vertical axis.</p>
+        </li>
+    </ul>
+    <h4 id="hd_id511663453851599" dir="auto">Bar Lengths</h4>
+    <p id="par_id601663453865023" class="paragraph" dir="auto">Sets the minimum (maximum) length of the data bars, as a percentage of the column width.</p>
+    <h4 id="hd_id211663453914830" dir="auto">Display bars only</h4>
+    <p id="par_id561663453936590" class="paragraph" dir="auto">Do not display values in the cell, only the data bars.</p>
+    <div class="embedded">
+<a name="conditionalformatting"></a>
+        <p id="par_id591563765191143" class="paragraph" dir="auto"></p>
+    </div>
+    <a name="iconset"></a>
+        <h2 id="hd_id3153709" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120400.html#iconset">Icon Set</a></h2>
+        <p id="par_id3153764" class="paragraph" dir="auto">Add an icon to the cell based on the value relative to the specified thresholds. Several icon sets are available.</p>
+    
+    <a name="howtoget"></a><div class="howtoget">
+<div><p class="howtogetheader" dir="auto"><a name="wie"></a>To access this command...</p></div>
+<div class="howtogetbody">
+        <div class="embedded">
+<a name="s_conditionaliconset"></a>
+  <p id="par_id851663542093712" class="paragraph" dir="auto"><a name="conditionaliconset"></a>Choose <span class="menuitem">Format - Conditional - Icon Set</span></p>
+  <p id="par_id501663543087343" class="paragraph" dir="auto">On the <span class="emph">Formatting</span> bar, click</p>
+  
+    <div class="icontable">
+      <div class="iconcell">
+        <p id="par_id51663541228728" class="paragraphintable" dir="auto">
+          <img src="media/icon-themes/cmd/lc_iconsetformatdialog.svg" class="iconimage" alt="Icon Icon Set" style="width:38px;height:38px" itemprop="icon" itemscope="true" itemtype="http://schema.org/ImageObject">
+        </p>
+      </div>
+      <div class="iconcell">
+        <p id="par_id61663541228732" class="paragraphintable" dir="auto">Icon Set</p>
+      </div>
+    </div>
+  
+</div>
+    </div>
+</div>
+<br>
+    <h3 id="hd_id191663440362309" dir="auto">Available Icon Sets</h3>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id31494140" class="listitem" dir="auto">3, 4 or 5 - arrows</p>
+            <p id="par_id91663429174806" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-colorarrows-up.svg" class="iconimage" alt="Color arrow up" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-colorarrows-slightly-up.svg" class="iconimage" alt="Color arrow slightly up" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-colorarrows-same.svg" class="iconimage" alt="Color arrow same" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-colorarrows-slightly-down.svg" class="iconimage" alt="Color arrow slightly down" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-colorarrows-down.svg" class="iconimage" alt="Color arrow down" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id31494141" class="listitem" dir="auto">3, 4 or 5 - gray arrows</p>
+            <p id="par_id91661429174806" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-grayarrows-up.svg" class="iconimage" alt="Gray arrow up" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-grayarrows-slightly-up.svg" class="iconimage" alt="Gray arrow slightly up" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-grayarrows-same.svg" class="iconimage" alt="Gray arrow same" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-grayarrows-slightly-down.svg" class="iconimage" alt="Gray arrow slightly down" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-grayarrows-down.svg" class="iconimage" alt="Gray arrow down" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id31494142" class="listitem" dir="auto">3 - flags</p>
+            <p id="par_id101663433624185" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-flags-yellow.svg" class="iconimage" alt="Yellow flag" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-flags-red.svg" class="iconimage" alt="Red flag" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-flags-green.svg" class="iconimage" alt="Green flag" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id31494143" class="listitem" dir="auto">3 - traffic lights 1 and 2 (two different designs)</p>
+            <p id="par_id721663433917655" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-circles1-yellow.svg" class="iconimage" alt="Yellow traffic light 1" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-circles1-red.svg" class="iconimage" alt="Red traffic light 1" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-circles1-green.svg" class="iconimage" alt="Green traffic light 1" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+            <p id="par_id501663433925207" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-trafficlights-yellow.svg" class="iconimage" alt="Yellow traffic light 2" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-trafficlights-red.svg" class="iconimage" alt="Red traffic light 2" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-trafficlights-green.svg" class="iconimage" alt="Green traffic light 2" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id701663438522480" class="listitem" dir="auto">3 - Smileys 1 and 2</p>
+            <p id="par_id991663438568052" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-positive-yellow-smilie.svg" class="iconimage" alt="Yellow positive smiley" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-neutral-yellow-smilie.svg" class="iconimage" alt="Yellow neutral smiley" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-negative-yellow-smilie.svg" class="iconimage" alt="Yellow negative smiley" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+            <p id="par_id991663438966721" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-positive-green-smilie.svg" class="iconimage" alt="Green positive smiley" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-neutral-yellow-smilie.svg" class="iconimage" alt="Yellow neutral smiley" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-negative-red-smilie.svg" class="iconimage" alt="Red negative smiley" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id31494144" class="listitem" dir="auto">3 - symbols </p>
+            <p id="par_id421663434453517" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-shapes-triangle.svg" class="iconimage" alt="Shape triangle" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-shapes-diamond.svg" class="iconimage" alt="Shape diamond" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-shapes-circle.svg" class="iconimage" alt="Shape circle" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+            <p id="par_id961663439450424" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-symbols1-exclamation-mark.svg" class="iconimage" alt="Exclamation mark" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-symbols1-cross.svg" class="iconimage" alt="Cross" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-symbols1-check.svg" class="iconimage" alt="Check mark" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+            <p id="par_id1001663439805133" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-stars-empty.svg" class="iconimage" alt="Empty star" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-stars-half.svg" class="iconimage" alt="Half star" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-stars-full.svg" class="iconimage" alt="Full star" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+            <p id="par_id171663440020964" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-triangles-up.svg" class="iconimage" alt="Triangle up" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-triangles-same.svg" class="iconimage" alt="Same" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-triangles-down.svg" class="iconimage" alt="Triangle down" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id31494145" class="listitem" dir="auto">4 - circles from red to black</p>
+            <p id="par_id481663434995022" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-circles2-dark-red.svg" class="iconimage" alt="Dark red" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-circles2-light-red.svg" class="iconimage" alt="Light red" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-circles2-light-gray.svg" class="iconimage" alt="Light gray" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-circles2-dark-gray.svg" class="iconimage" alt="Dark gray" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id31494146" class="listitem" dir="auto">4 or 5 - ratings</p>
+            <p id="par_id631663435728155" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-bars-empty.svg" class="iconimage" alt="Empty bars" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-bars-one-quarter.svg" class="iconimage" alt="One quarters bars" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-bars-half.svg" class="iconimage" alt="Half bars" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-bars-three-quarters.svg" class="iconimage" alt="Three quarters bars" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-bars-full.svg" class="iconimage" alt="Full bars" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id31494147" class="ilistitem" dir="auto">5 - quarters</p>
+            <p id="par_id741663436015689" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-pies-empty.svg" class="iconimage" alt="Empty" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-pies-one-quarter.svg" class="iconimage" alt="One quarter" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-pies-half.svg" class="iconimage" alt="Half" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-pies-three-quarters.svg" class="iconimage" alt="Three quarters" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-pies-full.svg" class="iconimage" alt="Full" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id821663436639070" class="listitem" dir="auto">5 - boxes</p>
+            <p id="par_id811663438472751" class="paragraph" dir="auto">
+                <img src="media/icon-themes/sc/res/icon-set-squares-empty.svg" class="iconimage" alt="Empty" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-squares-one-quarter.svg" class="iconimage" alt="One quarter" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-squares-half.svg" class="iconimage" alt="Half" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-squares-three-quarters.svg" class="iconimage" alt="Three quarters" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+                <img src="media/icon-themes/sc/res/icon-set-squares-full.svg" class="iconimage" alt="Full" style="width:38px;height:38px" itemprop="image" itemscope="true" itemtype="http://schema.org/ImageObject">
+            </p>
+        </li>
+    </ul>
+    <h3 id="hd_id621663440395987" dir="auto">Conditions for thresholds</h3>
+    <p id="par_id3153765" class="paragraph" dir="auto">Conditions to set the thresholds for each icon can be specified as follows</p>
+    <div class="embedded">
+<a name="commonconditions"></a>
+        <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id321663440728295" class="listitem" dir="auto"><span class="emph">Value</span>: a fixed value. Enter the value in the text box.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id611663440697270" class="listitem" dir="auto"><span class="emph">Percentile</span>: A percentile is each of the 99 values which divide the sorted data in 100 equal parts, so that each part represents 1/100 of the sample population. A percentile return the value for a data series going from the smallest to the largest value in a set of data. For P = 25, the percentile means the first quartile. P = 50 is also the MEDIAN of the data set. Enter the percentile value in the text box. Valid values are from 0 to 100.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id211663440834104" class="listitem" dir="auto"><span class="emph">Percent</span>: a fixed value representing the percentage of the minimum (maximum) of the length defined by minimum and maximum values in the range. A minimum of 10% selects the values below 10% of the segment [Min,Max]. A maximum of 80% select values above 80% of the segment [Min,Max]. Valid values are from 0 (zero) to 100. Do not enter a percent (%) sign.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id961663440848168" class="listitem" dir="auto"><span class="emph">Formula</span>: A formula expression starting with the equal sign (=) that calculates a numeric value. Values can be numbers, dates or time. Enter the formula expression in the text box.</p>
+        </li>
+        </ul>
+    </div>
+    <div class="embedded">
+<a name="conditionalformatting"></a>
+        <p id="par_id591563765191143" class="paragraph" dir="auto"></p>
+    </div>
+    <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+        <p id="par_id471665407993996" class="paragraph" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120000.html">Conditional Formatting</a></p>
+        <p id="par_id3155606" class="paragraph" dir="auto"><a target="_blank" href="https://wiki.documentfoundation.org/Faq/Calc/141">How to use Icon Set Conditional Formatting page</a> in TDF Wiki.</p>
+        <p id="par_id651663598549283" class="paragraph" dir="auto"><a target="_blank" href="https://wiki.documentfoundation.org/Faq/Calc/142">How to apply a Color Scale Conditional Formatting page</a> in TDF Wiki.</p>
+    </div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/scalc/01/05120400.xhp" target="_blank">/text/scalc/01/05120400.xhp</a></p>
+<p dir="auto">Title is: Conditional Formatting - All cells</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

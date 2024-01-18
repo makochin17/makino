@@ -77,6 +77,11 @@ class Controller_Mainte_M0031 extends Controller_Hybrid {
 		$this->template->footer       = $footer;
         $this->template->tree         = $tree;
 
+        $paging_config = PagingConfig::getPagingConfig("UIM0011", C0010::$db);
+        $this->pagenation_config['num_links'] = $paging_config['display_link_number'];
+        $this->pagenation_config['per_page'] = $paging_config['display_record_number'];
+        $this->pagenation_config['per_page'] = 50;
+
 	}
 
 	public function before() {

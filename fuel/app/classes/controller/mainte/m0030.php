@@ -34,6 +34,9 @@ class Controller_Mainte_M0030 extends Controller_Hybrid {
     	'show_last' 	=> true,
     );
 
+    // 保管場所倉庫リスト
+    private $storage_warehouse_list = array();
+
     // 保管場所列リスト
     private $storage_column_list = array();
 
@@ -42,6 +45,26 @@ class Controller_Mainte_M0030 extends Controller_Hybrid {
 
     // 保管場所高さリスト
     private $storage_height_list = array();
+
+    /**
+    * 画面共通初期設定
+    **/
+    public function is_restful()
+    {
+        /**
+         * Actionが index かつ
+         * GET 変数に exceldownload がある場合は
+         * Restful とする
+         */
+        switch (Request::main()->action) {
+            case 'updbarcode':
+                return true;
+                break;
+            default:
+                return false;
+                break;
+        }
+    }
 
     /**
     * 画面共通初期設定
@@ -98,10 +121,13 @@ class Controller_Mainte_M0030 extends Controller_Hybrid {
         $this->template->footer         = $footer;
 
         // ページング設定値取得
-        $paging_config = PagingConfig::getPagingConfig("UIS0030", M0030::$db);
+        $paging_config = PagingConfig::getPagingConfig("UIM0011", C0010::$db);
         $this->pagenation_config['num_links'] = $paging_config['display_link_number'];
         $this->pagenation_config['per_page'] = $paging_config['display_record_number'];
+        $this->pagenation_config['per_page'] = 50;
 
+        // 保管場所倉庫リスト
+        $this->storage_warehouse_list   = GenerateList::getStorageWarehouseList(false, M0030::$db);
         // 保管場所列リスト取得
         $this->storage_column_list      = GenerateList::getStorageColumnList(false, M0030::$db);
         // 保管場所奥行リスト取得
@@ -125,7 +151,9 @@ class Controller_Mainte_M0030 extends Controller_Hybrid {
 		//if (!AccessControl::isPagePermission($auth_data['permission_level'])) {
 		//	Response::redirect(\Uri::create('top'));
 		//}
-		$this->initViewForge($auth_data);
+        if (!$this->is_restful()) {
+            $this->initViewForge($auth_data);
+        }
 	}
 
 	private function validate_info() {
@@ -185,6 +213,8 @@ class Controller_Mainte_M0030 extends Controller_Hybrid {
         $conditions 	= array_fill_keys(array(
         	'storage_location_id',
         	'storage_location_name',
+            'storage_warehouse_id',
+            'storage_warehouse_name',
             'storage_column_id',
             'storage_column_name',
             'storage_depth_id',
@@ -284,6 +314,7 @@ class Controller_Mainte_M0030 extends Controller_Hybrid {
 
         $this->template->content = View::forge(AccessControl::getActiveController(),
             array(
+                'update_url'            => \Uri::create(AccessControl::getActiveController().'/updbarcode'),
                 'total'                 => $total,
                 'data'                  => $conditions,
                 'list_data'             => $list_data,
@@ -292,6 +323,46 @@ class Controller_Mainte_M0030 extends Controller_Hybrid {
             )
         );
         $this->template->content->set_safe('pager', $pagination->render());
+    }
+
+    /**
+    * バーコードフラグ更新
+    **/
+    public function action_updbarcode() {
+
+        $res                    = array();
+        $storage_location_id    = Input::param('storage_location_id', '');
+        $barcode_flg            = Input::param('barcode_flg', '');
+        $res['status']          = false;
+
+        if (!empty($storage_location_id) && !empty($barcode_flg)) {
+
+            try {
+                DB::start_transaction(M0030::$db);
+                // レコード存在チェック
+                if (!$result = M0030::getStorageLocation($storage_location_id, M0030::$db)) {
+                    throw new Exception("", 1);
+                }
+
+                // レコード更新
+                $error_msg = M0030::updStorageLocationBarcode($storage_location_id, $barcode_flg, M0030::$db);
+                if (!is_null($error_msg) && $error_msg !== true) {
+                    DB::rollback_transaction(M0030::$db);
+                    throw new Exception("", 1);
+                }
+
+
+                DB::commit_transaction(M0030::$db);
+                $res['status'] = true;
+
+            } catch (Exception $e) {
+                // トランザクションクエリをロールバックする
+                DB::rollback_transaction(M0030::$db);
+            }
+        }
+
+        $this->response->set_header('Access-Control-Allow-Origin', '*');
+        return $this->response($res);
     }
 
 }

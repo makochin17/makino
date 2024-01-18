@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Tools Library</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+    <h1 id="hd_id31529004750471" dir="auto">
+<a name="tools_lib"></a>The <span class="literal">Tools</span> Library</h1>
+    <a name="bm_id491529070339774"></a>
+        <meta itemprop="keywords" content="BASIC Tools library">
+    
+    <a name="howtoget"></a><div class="howtoget">
+<div><p class="howtogetheader" dir="auto"><a name="wie"></a>To access this command...</p></div>
+<div class="howtogetbody">
+        <div class="embedded">
+<a name="basiclibhowtoget"></a>
+    <p id="par_id631529000528928" class="paragraph" dir="auto">Open <span class="menuitem">Tools - Macros - LibreOffice Basic - Edit</span>  and select <span class="menuitem">Application Macros</span> container.</p>
+</div>
+    </div>
+</div>
+<br>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="Note Icon 
+" style="width:40px;height:40px;"></div>
+<div class="notetext"><p dir="auto">This library must be loaded before execution. Execute the following statement before running any macro that uses this library:<br>
+        <span class="literal">GlobalScope.BasicLibraries.LoadLibrary("Tools")</span></p></div>
+</div>
+<br>
+    <p id="par_id161529001339405" class="paragraph" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/lib_tools.html#debug_module"><span class="literal">Debug</span> Module</a></p>
+    <p id="par_id41529001348561" class="paragraph" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/lib_tools.html#listbox_module"><span class="literal">ListBox</span> Module</a></p>
+    <p id="par_id341529001354451" class="paragraph" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/lib_tools.html#misc_module"><span class="literal">Misc</span> Module</a></p>
+    <p id="par_id311529001362049" class="paragraph" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/lib_tools.html#modulecontrols_module"><span class="literal">ModuleControls</span> Module</a></p>
+    <p id="par_id701529001368064" class="paragraph" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/lib_tools.html#strings_module"><span class="literal">Strings</span> Module</a></p>
+    <p id="par_id251529001373426" class="paragraph" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/lib_tools.html#ucb_module"><span class="literal">UCB</span> Module</a></p>
+    <a name="bm_id271529062442803"></a>
+        <meta itemprop="keywords" content="BASIC Tools library,Debug module">
+    
+    <a name="debug_module"></a>
+        <h2 id="hd_id371529000826947" dir="auto">
+<span class="literal">Debug</span> Module</h2>
+        <p id="par_id441529064369519" class="paragraph" dir="auto">Functions and subroutines for debugging Basic macros.</p>
+        <h3 id="hd_id711529001004857" dir="auto">ActivateReadOnlyFlag</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ActivateReadOnlyFlag()
+        </code></pre></div>
+        <h3 id="hd_id71529001663903" dir="auto">DeactivateReadOnlyFlag</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub DeactivateReadOnlyFlag()
+        </code></pre></div>
+        <h3 id="hd_id421529001727178" dir="auto">SetBasicReadOnlyFlag</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub SetBasicReadOnlyFlag(bReadOnly as Boolean)
+        </code></pre></div>
+        <h3 id="hd_id651529001954868" dir="auto">WritedbgInfo</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub WritedbgInfo(LocObject as Object)
+        </code></pre></div>
+        <h3 id="hd_id841529001994821" dir="auto">WriteDbgString</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub WriteDbgString(LocString as String)
+        </code></pre></div>
+        <h3 id="hd_id741529002099962" dir="auto">ShowArray</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowArray(LocArray())
+        </code></pre></div>
+        <h3 id="hd_id321529002327444" dir="auto">ShowPropertyValues</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowPropertyValues(oLocObject as Object)
+        </code></pre></div>
+        <h3 id="hd_id451529002368600" dir="auto">ShowNameValuePair</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowNameValuePair(Pair())
+        </code></pre></div>
+        <h3 id="hd_id551529002415495" dir="auto">ShowElementNames</h3>
+        <p id="par_id111529003255859" class="paragraph" dir="auto">' Retrieves all the Elements of aSequence of an object, with the</p>
+        <p id="par_id41529003238747" class="paragraph" dir="auto">' possibility to define a filter(sfilter &lt;&gt; "")</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowElementNames(
+            oLocElements() as Object,
+            Optional sFiltername as String)
+        </code></pre></div>
+        <h3 id="hd_id581529003295045" dir="auto">ShowSupportedServiceNames</h3>
+        <p id="par_id851529003295045" class="paragraph" dir="auto">' Retrieves all the supported servicenames of an object, with the </p>
+        <p id="par_id301529003401893" class="paragraph" dir="auto">' possibility to define a filter(sfilter &lt;&gt; "")</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowSupportedServiceNames(
+            oLocObject as Object,
+            Optional sFilterName as String)
+        </code></pre></div>
+        <h3 id="hd_id831529003429502" dir="auto">ShowAvailableServiceNames</h3>
+        <p id="par_id401529003494638" class="paragraph" dir="auto">' Retrieves all the available Servicenames of an object, with the</p>
+        <p id="par_id801529003504707" class="paragraph" dir="auto">' possibility to define a filter(sfilter &lt;&gt; "")</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowAvailableServiceNames(
+            oLocObject as Object, 
+            Optional sFilterName as String)
+        </code></pre></div>
+        <h3 id="hd_id591529003562090" dir="auto">ShowCommands</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowCommands(oLocObject as Object)
+        </code></pre></div>
+        <h3 id="hd_id881529003602892" dir="auto">ProtectCurrentSheets</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ProtectCurrentSheets()
+        </code></pre></div>
+        <h3 id="hd_id691529003635074" dir="auto">FillDocument</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub FillDocument()
+        </code></pre></div>
+    
+    <a name="bm_id131529062501888"></a>
+        <meta itemprop="keywords" content="BASIC Tools library,ListBox module">
+    
+    <a name="listbox_module"></a>
+        <h2 id="hd_id11529005753099" dir="auto">
+<span class="literal">ListBox</span> Module</h2>
+        <p id="par_id381529064415052" class="paragraph" dir="auto">Functions and subroutines for handling ListBox elements.</p>
+        <div class="embedded">
+<a name="needhelp"></a>
+    <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="Warning Icon 
+" style="width:40px;height:40px;"></div>
+<div class="notetext"><p dir="auto">This help page needs further work for correctness and completion. Please join the LibreOffice project and help us out to write the missing information. Visit our <a target="_blank" href="https://documentation.libreoffice.org/en/join-community/update-help-contents"><span class="emph">web page on writing Help contents</span></a>.</p></div>
+</div>
+<br>
+</div>
+    
+    <a name="bm_id571529062538621"></a>
+        <meta itemprop="keywords" content="BASIC Tools library,Misc module">
+    
+    <a name="misc_module"></a>
+        <h2 id="hd_id341529005758494" dir="auto">
+<span class="literal">Misc</span> Module</h2>
+        <p id="par_id681529064596175" class="paragraph" dir="auto">Miscellaneous functions and subroutines.</p>
+        <h3 id="hd_id801529006604779" dir="auto">RegisterNewDataSource</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function RegisterNewDataSource(
+            DSName as  String, 
+            PropertyList(), 
+            Optional DriverProperties() 
+            as New com.sun.star.beans.PropertyValue)
+        </code></pre></div>
+        <h3 id="hd_id501529006725521" dir="auto">ConnecttoDatabase</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function ConnecttoDatabase(
+            DSName as String, 
+            UserID as String, 
+            Password as String, 
+            Optional Propertylist(), 
+            Optional DriverProperties() 
+            as New com.sun.star.beans.PropertyValue)
+        </code></pre></div>
+        <h3 id="hd_id411529006832985" dir="auto">GetStarOfficeLocale</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetStarOfficeLocale() 
+            as New com.sun.star.lang.Locale
+        </code></pre></div>
+        <h3 id="hd_id361529006902547" dir="auto">GetRegistryKeyContent</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetRegistryKeyContent(
+            sKeyName as string, 
+            Optional bforUpdate as Boolean)
+        </code></pre></div>
+        <h3 id="hd_id851529006965105" dir="auto">GetProductname</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetProductname() as String
+        </code></pre></div>
+        <h3 id="hd_id771529007007439" dir="auto">OpenDocument</h3>
+        <p id="par_id821529007072253" class="paragraph" dir="auto">' Opens a Document, checks beforehand, whether it has to be loaded or whether it is already on the desktop. If the parameter bDisposable is set to False then the returned document should not be disposed afterwards, because it is already opened.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function OpenDocument(
+            DocPath as String, 
+            Args(), 
+            Optional bDisposable as Boolean)
+        </code></pre></div>
+        <h3 id="hd_id481529007130534" dir="auto">TaskonDesktop</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function TaskonDesktop(DocPath as String) as Boolean
+        </code></pre></div>
+        <h3 id="hd_id201529007205755" dir="auto">RetrieveFileName</h3>
+        <p id="par_id81529007245965" class="paragraph" dir="auto">' Retrieves a FileName out of a StarOffice-Document.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function RetrieveFileName(LocDoc as Object)
+        </code></pre></div>
+        <h3 id="hd_id121529007269721" dir="auto">GetPathSettings</h3>
+        <p id="par_id801529007338550" class="paragraph" dir="auto">' Gets a special configured PathSetting.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetPathSettings(
+            sPathType as String,
+            Optional bshowall as Boolean, 
+            Optional ListIndex as integer) as String
+        </code></pre></div>
+        <h3 id="hd_id571529007381828" dir="auto">GetOfficeSubPath</h3>
+        <p id="par_id761529007616982" class="paragraph" dir="auto">' Gets the fully qualified path to a subdirectory of the Template Directory, e. g. with the parameter "wizard/bitmap". The parameter must be passed over in Url-scription. The return-Value is in Urlscription.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetOfficeSubPath(
+            sOfficePath as String, 
+            ByVal sSubDir as String)
+        </code></pre></div>
+        <h3 id="hd_id591529007658281" dir="auto">ShowNoOfficePathError</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowNoOfficePathError() 
+        </code></pre></div>
+        <h3 id="hd_id431529007692356" dir="auto">InitResources</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function InitResources(
+            Description, 
+            ShortDescription as String) as boolean
+        </code></pre></div>
+        <h3 id="hd_id611529007790857" dir="auto">GetResText</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetResText( nID as integer ) As string
+        </code></pre></div>
+        <h3 id="hd_id971529007839780" dir="auto">CutPathView</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function CutPathView(
+            sDocUrl as String, 
+            Optional PathLen as Integer)
+        </code></pre></div>
+        <h3 id="hd_id51529007902118" dir="auto">DeleteInputCells</h3>
+        <p id="par_id311529007997114" class="paragraph" dir="auto">' Deletes the content of all cells that are softformatted according to the 'InputStyleName'.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub DeleteInputCells(
+            oSheet as Object, 
+            InputStyleName as String)
+        </code></pre></div>
+        <h3 id="hd_id881529008035409" dir="auto">ChangeValueofRange</h3>
+        <p id="par_id261529008090521" class="paragraph" dir="auto">' Inserts a certain String to all cells of a Range that is passed over either as an object or as the RangeName.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ChangeValueofRange(
+            oSheet as Object, 
+            Range, 
+            ReplaceValue, 
+            Optional StyleName as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547275154" dir="auto">ReplaceRangeValues</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ReplaceRangeValues(
+            oRange as Object, 
+            ReplaceValue)
+        </code></pre></div>
+        <h3 id="hd_id06142018054727953" dir="auto">GetValueofCellbyName</h3>
+        <p id="par_id061420180547271480" class="paragraph" dir="auto">' Returns the Value of the first cell of a Range.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetValueofCellbyName(
+            oSheet as Object, 
+            sCellName as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547273177" dir="auto">DuplicateRow</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function DuplicateRow(
+            oSheet as Object, 
+            RangeName as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547271951" dir="auto">GetStringofCellbyName</h3>
+        <p id="par_id061420180547275159" class="paragraph" dir="auto">' Returns the String of the first cell of a Range.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetStringofCellbyName(
+            oSheet as Object, 
+            sCellName as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547271528" dir="auto">GetCellByName</h3>
+        <p id="par_id061420180547271588" class="paragraph" dir="auto">' Returns a named Cell</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetCellByName(
+            oSheet as Object, 
+            sCellName as String) as Object
+        </code></pre></div>
+        <h3 id="hd_id061420180547288062" dir="auto">ChangeCellValue</h3>
+        <p id="par_id061420180547288384" class="paragraph" dir="auto">' Changes the numeric Value of a cell by transmitting the String of the numeric Value.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ChangeCellValue(
+            oCell as Object, 
+            ValueString as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547283259" dir="auto">GetDocumentType</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetDocumentType(oDocument)
+        </code></pre></div>
+        <h3 id="hd_id061420180547288146" dir="auto">GetNumberFormatType</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetNumberFormatType(
+            oDocFormats, 
+            oFormatObject as Object) as Integer
+        </code></pre></div>
+        <h3 id="hd_id061420180547282335" dir="auto">ProtectSheets</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ProtectSheets(Optional oSheets as Object)
+        </code></pre></div>
+        <h3 id="hd_id061420180547285130" dir="auto">UnprotectSheets</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub UnprotectSheets(Optional oSheets as Object)
+        </code></pre></div>
+        <h3 id="hd_id061420180547284142" dir="auto">GetRowIndex</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetRowIndex(
+            oSheet as Object, 
+            RowName as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547284556" dir="auto">GetColumnIndex</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetColumnIndex(
+            oSheet as Object, 
+            ColName as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547285141" dir="auto">CopySheetbyName</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function CopySheetbyName(
+            oSheets as Object, 
+            OldName as String, 
+            NewName as String, 
+            DestPos as Integer) as Object
+        </code></pre></div>
+        <h3 id="hd_id0614201805472944" dir="auto">ToggleWindow</h3>
+        <p id="par_id061420180547292068" class="paragraph" dir="auto">' Dis-or enables a Window and adjusts the mousepointer accordingly</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ToggleWindow(bDoEnable as Boolean)
+        </code></pre></div>
+        <h3 id="hd_id061420180547294361" dir="auto">CheckNewSheetname</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function CheckNewSheetname(
+            oSheets as Object, 
+            Sheetname as String, 
+            Optional oLocale) as String
+        </code></pre></div>
+        <h3 id="hd_id061420180547298278" dir="auto">AddNewSheetName</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub AddNewSheetName(
+            oSheets as Object, 
+            ByVal SheetName as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547293964" dir="auto">GetSheetIndex</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetSheetIndex(oSheets, sName) as Integer
+        </code></pre></div>
+        <h3 id="hd_id061420180547298034" dir="auto">GetLastUsedRow</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetLastUsedRow(oSheet as Object) as Integer
+        </code></pre></div>
+        <h3 id="hd_id061420180547294665" dir="auto">ModifyBorderLineWidth</h3>
+        <p id="par_id061420180547295117" class="paragraph" dir="auto">' Note To set a one lined frame you have to set the inner width to 0 In the API all Units that refer to pt-Heights are "1/100mm" The convert factor from 1pt to 1/100 mm is approximately 35 </p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function ModifyBorderLineWidth(
+            ByVal oStyleBorder, 
+            iInnerLineWidth as Integer, 
+            iOuterLineWidth as Integer)
+        </code></pre></div>
+        <h3 id="hd_id06142018054729303" dir="auto">AttachBasicMacroToEvent</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub AttachBasicMacroToEvent(
+            oDocument as Object, 
+            EventName as String, 
+            SubPath as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547308735" dir="auto">ModifyPropertyValue</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function ModifyPropertyValue(
+            oContent() as New com.sun.star.beans.PropertyValue, 
+            TargetProperties() 
+            as New com.sun.star.beans.PropertyValue)
+        </code></pre></div>
+        <h3 id="hd_id06142018054730528" dir="auto">GetPropertyValueIndex</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetPropertyValueIndex(
+            SearchName as String, 
+            TargetProperties() 
+            as New com.sun.star.beans.PropertyValue ) as Integer
+        </code></pre></div>
+        <h3 id="hd_id061420180547305379" dir="auto">DispatchSlot</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub DispatchSlot(SlotID as Integer)
+        </code></pre></div>
+        <h3 id="hd_id061420180547308065" dir="auto">IsFatOffice</h3>
+        <p id="par_id061420180547306757" class="paragraph" dir="auto">'returns the type of the office application FatOffice = 0, WebTop = 1 This routine has to be changed if the Product Name is being changed! </p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function IsFatOffice() As Boolean
+        </code></pre></div>
+        <h3 id="hd_id06142018054730408" dir="auto">GetLocale</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetLocale(
+            sLanguage as String, 
+            sCountry as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180547305357" dir="auto">ToggleDesignMode</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ToggleDesignMode(oDocument as Object)
+        </code></pre></div>
+        <h3 id="hd_id061420180547301521" dir="auto">isHighContrast</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function isHighContrast(oPeer as Object)
+        </code></pre></div>
+        <h3 id="hd_id061420180547302524" dir="auto">CreateNewDocument</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function CreateNewDocument(
+            sType as String, 
+            Optional sAddMsg as String) as Object
+        </code></pre></div>
+        <h3 id="hd_id061420180547306821" dir="auto">DisposeDocument</h3>
+        <p id="par_id061420180547308844" class="paragraph" dir="auto">' This Sub has been used in order to ensure that after disposing a document from the backing window it is returned to the backing window, so the office won't be closed</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub DisposeDocument(oDocument as Object)
+        </code></pre></div>
+        <h3 id="hd_id061420180547316190" dir="auto">CalIsLeapYear</h3>
+        <p id="par_id061420180547311590" class="paragraph" dir="auto">'Function to calculate if the year is a leap year</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function CalIsLeapYear(
+            ByVal iYear as Integer) as Boolean
+        </code></pre></div>
+    
+    <a name="bm_id21529062611375"></a>
+        <meta itemprop="keywords" content="BASIC Tools library,ModuleControl module">
+    
+    <a name="modulecontrols_module"></a>
+        <h2 id="hd_id451529005764422" dir="auto">
+<span class="literal">ModuleControls</span> Module</h2>
+        <p id="par_id841529064645990" class="paragraph" dir="auto">Functions and subroutines for module control.</p>
+        <h3 id="hd_id061520180728405758" dir="auto">GetControlShape</h3>
+        <p id="par_id061520180728404186" class="paragraph" dir="auto">' Gets the Shape of a Control( e. g. to reset the size or Position of the control</p>
+        <p id="par_id061520180728405899" class="paragraph" dir="auto">' Parameters:</p>
+        <p id="par_id061520180728401929" class="paragraph" dir="auto">' The 'oContainer' is the Document or a specific sheet of a Calc - Document</p>
+        <p id="par_id061520180728406561" class="paragraph" dir="auto">' 'CName' is the Name of the Control</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetControlShape(
+            oContainer as Object,
+            CName as String)
+        </code></pre></div>
+        <h3 id="hd_id061520180728402154" dir="auto">getControlView</h3>
+        <p id="par_id061520180728406447" class="paragraph" dir="auto">' Returns the View of a Control</p>
+        <p id="par_id061520180728405250" class="paragraph" dir="auto">' Parameters:</p>
+        <p id="par_id061520180728407354" class="paragraph" dir="auto">' The 'oContainer' is the Document or a specific sheet of a Calc - Document</p>
+        <p id="par_id061520180728407546" class="paragraph" dir="auto">' The 'oController' is always directly attached to the Document</p>
+        <p id="par_id061520180728401894" class="paragraph" dir="auto">' 'CName' is the Name of the Control</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function getControlView(
+            oContainer , 
+            oController as Object, 
+            CName as String) as Object
+        </code></pre></div>
+        <h3 id="hd_id061520180728409398" dir="auto">DisposeControl</h3>
+        <p id="par_id061520180728406445" class="paragraph" dir="auto">' Parameters:</p>
+        <p id="par_id061520180728405024" class="paragraph" dir="auto">' The 'oContainer' is the Document or a specific sheet of a Calc - Document</p>
+        <p id="par_id061520180728403834" class="paragraph" dir="auto">' 'CName' is the Name of the Control</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function DisposeControl(
+            oContainer as Object, 
+            CName as String) as Boolean
+        </code></pre></div>
+        <h3 id="hd_id061520180728401986" dir="auto">GetControlGroupModel</h3>
+        <p id="par_id061520180728404727" class="paragraph" dir="auto">' Returns a sequence of a group of controls like option buttons or checkboxes</p>
+        <p id="par_id061520180728404702" class="paragraph" dir="auto">' The 'oContainer' is the Document or a specific sheet of a Calc - Document</p>
+        <p id="par_id061520180728402498" class="paragraph" dir="auto">' 'sGroupName' is the Name of the Controlgroup</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetControlGroupModel(
+            oContainer as Object, 
+            sGroupName as String )
+        </code></pre></div>
+        <h3 id="hd_id061520180728404995" dir="auto">GetRefValue</h3>
+        <p id="par_id06152018072840427" class="paragraph" dir="auto">' Returns the Referencevalue of a group of e.g. option buttons or check boxes</p>
+        <p id="par_id061520180728401645" class="paragraph" dir="auto">' 'oControlGroup' is a sequence of the Control objects</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetRefValue(
+            oControlGroup() as Object)
+        </code></pre></div>
+        <h3 id="hd_id06152018072841458" dir="auto">GetRefValueOfControlGroup</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetRefValueOfControlGroup(
+            oContainer as Object, 
+            GroupName as String)
+        </code></pre></div>
+        <h3 id="hd_id061520180728416653" dir="auto">GetOptionGroupValue</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetOptionGroupValue(
+            oContainer as Object, 
+            OptGroupName as String) as Boolean
+        </code></pre></div>
+        <h3 id="hd_id061520180728419761" dir="auto">WriteOptValueToCell</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function WriteOptValueToCell(
+            oSheet as Object, 
+            OptGroupName as String, 
+            iCol as Integer, 
+            iRow as Integer) as Boolean
+        </code></pre></div>
+        <h3 id="hd_id061520180728411084" dir="auto">LoadDialog</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function LoadDialog(
+            Libname as String, 
+            DialogName as String, 
+            Optional oLibContainer)
+        </code></pre></div>
+        <p id="par_id261558858921700" class="paragraph" dir="auto">Refer to <a target="_top" href="en-US/text/sbasic/guide/show_dialog.html#show_dialog">Opening a Dialog with Basic</a> for an example of LoadDialog function.</p>
+        <h3 id="hd_id061520180728417528" dir="auto">GetFolderName</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub GetFolderName(oRefModel as Object)
+        </code></pre></div>
+        <h3 id="hd_id061520180728412942" dir="auto">GetFileName</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub GetFileName(
+            oRefModel as Object, 
+            Filternames())
+        </code></pre></div>
+        <h3 id="hd_id061520180728414394" dir="auto">StoreDocument</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function StoreDocument(
+            oDocument as Object, 
+            FilterNames() as String, 
+            DefaultName as String, 
+            DisplayDirectory as String, 
+            Optional iAddProcedure as Integer) as String
+        </code></pre></div>
+        <h3 id="hd_id061520180728424363" dir="auto">AddFiltersToDialog</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub AddFiltersToDialog(
+            FilterNames() as String, 
+            oDialog as Object)
+        </code></pre></div>
+        <h3 id="hd_id061520180728422388" dir="auto">SwitchMousePointer</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub SwitchMousePointer(
+            oWindowPeer as Object, 
+            bDoEnable as Boolean)
+        </code></pre></div>
+        <h3 id="hd_id061520180728428854" dir="auto">ShowOverwriteAllDialog</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowOverwriteAllDialog(
+            FilePath as String, 
+            sTitle as String)
+        </code></pre></div>
+        <h3 id="hd_id061520180728429649" dir="auto">SetOVERWRITEToQuery</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub SetOVERWRITEToQuery()
+        </code></pre></div>
+        <h3 id="hd_id061520180728428255" dir="auto">SetOVERWRITEToAlways</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub SetOVERWRITEToAlways()
+        </code></pre></div>
+        <h3 id="hd_id06152018072842702" dir="auto">SetOVERWRITEToNever</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub SetOVERWRITEToNever()
+        </code></pre></div>
+    
+    <a name="bm_id271529062660965"></a>
+        <meta itemprop="keywords" content="BASIC Tools library,Strings module">
+    
+    <a name="strings_module"></a>
+        <h2 id="hd_id461529005770576" dir="auto">
+<span class="literal">Strings</span> Module</h2>
+        <p id="par_id631529064722315" class="paragraph" dir="auto">Advanced functions and subroutines for string manipulation.</p>
+        <h3 id="hd_id061420180708276674" dir="auto">ElimChar</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function ElimChar(
+            ByVal BigString as String, 
+            ElimArray() as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180708279224" dir="auto">DeleteStr</h3>
+        <p id="par_id061420180708275363" class="paragraph" dir="auto">' Deletes out of a String 'BigString' a possible Partstring 'CompString'</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function DeleteStr(
+            ByVal BigString,
+            CompString as String) as String
+        </code></pre></div>
+        <h3 id="hd_id061420180708308611" dir="auto">FindPartString</h3>
+        <p id="par_id061420180708308479" class="paragraph" dir="auto">' Finds a PartString, that is framed by the Strings 'Prestring' and 'PostString'</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function FindPartString(
+            BigString, 
+            PreString, 
+            PostString as String, 
+            SearchPos as Integer) as String
+        </code></pre></div>
+        <h3 id="hd_id06142018070830220" dir="auto">PartStringInArray</h3>
+        <p id="par_id061420180708302715" class="paragraph" dir="auto">' Note iCompare = 0 (Binary comparison)</p>
+        <p id="par_id06142018070830615" class="paragraph" dir="auto">'  iCompare = 1 (Text comparison)</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function PartStringInArray(
+            BigArray(), 
+            SearchString as String, 
+            iCompare as Integer) as Integer
+        </code></pre></div>
+        <h3 id="hd_id061420180708307208" dir="auto">RTrimStr</h3>
+        <p id="par_id061420180708304034" class="paragraph" dir="auto">' Deletes the String 'SmallString' out of the String 'BigString'</p>
+        <p id="par_id06142018070830656" class="paragraph" dir="auto">' in case SmallString's Position in BigString is right at the end</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function RtrimStr(
+            ByVal BigString, 
+            SmallString as String) as String
+        </code></pre></div>
+        <h3 id="hd_id061420180708314304" dir="auto">LTRimChar</h3>
+        <p id="par_id061420180708318862" class="paragraph" dir="auto">' Deletes the Char 'CompChar' out of the String 'BigString'</p>
+        <p id="par_id061420180708319364" class="paragraph" dir="auto">' in case CompChar's Position in BigString is right at the beginning</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function LTRimChar(
+            ByVal BigString as String,
+            CompChar as String) as String
+        </code></pre></div>
+        <h3 id="hd_id061420180708314113" dir="auto">ArrayOutOfString</h3>
+        <p id="par_id061420180708315726" class="paragraph" dir="auto">' Retrieves an Array out of a String.</p>
+        <p id="par_id061420180708316680" class="paragraph" dir="auto">' The fields of the Array are separated by the parameter 'Separator', that is contained</p>
+        <p id="par_id06142018070831860" class="paragraph" dir="auto">' in the Array</p>
+        <p id="par_id061420180708318872" class="paragraph" dir="auto">' The Array MaxIndex delivers the highest Index of this Array</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function ArrayOutOfString(
+            BigString, 
+            Separator as String, 
+            Optional MaxIndex as Integer)
+        </code></pre></div>
+        <h3 id="hd_id061420180708313207" dir="auto">ClearArray</h3>
+        <p id="par_id06142018070831823" class="paragraph" dir="auto">' Deletes all fieldvalues in one-dimensional Array</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ClearArray(BigArray)
+        </code></pre></div>
+        <h3 id="hd_id061420180708315939" dir="auto">ClearMultiDimArray</h3>
+        <p id="par_id061420180708319653" class="paragraph" dir="auto">' Deletes all fieldvalues in a multidimensional Array</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ClearMultiDimArray(
+            BigArray,
+            DimCount as integer)
+        </code></pre></div>
+        <h3 id="hd_id0614201807083186" dir="auto">FieldinArray</h3>
+        <p id="par_id061420180708316541" class="paragraph" dir="auto">' Checks if a Field (LocField) is already defined in an Array</p>
+        <p id="par_id061420180708319616" class="paragraph" dir="auto">' Returns 'True' or 'False'</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function FieldinArray(
+            LocArray(), 
+            MaxIndex as integer, 
+            LocField as String) As Boolean
+        </code></pre></div>
+        <h3 id="hd_id061420180708311512" dir="auto">FieldinList</h3>
+        <p id="par_id061420180708322561" class="paragraph" dir="auto">' Checks if a Field (LocField) is already defined in an Array</p>
+        <p id="par_id061420180708329146" class="paragraph" dir="auto">' Returns 'True' or 'False'</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function FieldinList(
+            LocField, 
+            BigList()) As Boolean
+        </code></pre></div>
+        <h3 id="hd_id061420180708323374" dir="auto">IndexinArray</h3>
+        <p id="par_id061420180708321488" class="paragraph" dir="auto">' Retrieves the Index of the delivered String 'SearchString' in</p>
+        <p id="par_id061420180708323577" class="paragraph" dir="auto">' the Array LocList()'</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function IndexinArray(
+            SearchString as String, 
+            LocList()) as Integer
+        </code></pre></div>
+        <h3 id="hd_id061420180708324642" dir="auto">MultiArrayInListbox</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub MultiArrayInListbox(
+            oDialog as Object, 
+            ListboxName as String, 
+            ValList(), 
+            iDim as Integer)
+        </code></pre></div>
+        <h3 id="hd_id061420180708325766" dir="auto">StringInMultiArray</h3>
+        <p id="par_id061420180708328772" class="paragraph" dir="auto">' Searches for a String in a two-dimensional Array by querying all Searchindexes of the second dimension </p>
+        <p id="par_id061420180708324136" class="paragraph" dir="auto">' and delivers the specific String of the ReturnIndex in the second dimension of the Searchlist()</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function StringInMultiArray(
+            SearchList(), 
+            SearchString as String, 
+            SearchIndex as Integer, 
+            ReturnIndex as Integer, 
+            Optional MaxIndex as Integer) as String
+        </code></pre></div>
+        <h3 id="hd_id061420180708327934" dir="auto">GetIndexInMultiArray</h3>
+        <p id="par_id06142018070832514" class="paragraph" dir="auto">' Searches for a Value in multidimensial Array by querying all Searchindices of the passed dimension </p>
+        <p id="par_id061420180708329496" class="paragraph" dir="auto">' and delivers the Index where it is found.</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetIndexInMultiArray(
+            SearchList(), 
+            SearchValue, 
+            SearchIndex as Integer) as Integer
+        </code></pre></div>
+        <h3 id="hd_id061420180708336858" dir="auto">GetIndexForPartString_</h3>
+        inMultiArray
+        <p id="par_id061420180708337261" class="paragraph" dir="auto">' Searches for a Value in multidimensial Array by querying all Searchindices of the passed dimension </p>
+        <p id="par_id061420180708334301" class="paragraph" dir="auto">' and delivers the Index where the Searchvalue is found as a part string</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetIndexForPartStringinMultiArray(
+            SearchList(), 
+            SearchValue, 
+            SearchIndex as Integer) as Integer
+        </code></pre></div>
+        <h3 id="hd_id061420180708331666" dir="auto">ArrayfromMultiArray</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function ArrayfromMultiArray(
+            MultiArray as String, 
+            iDim as Integer)
+        </code></pre></div>
+        <h3 id="hd_id061420180708335847" dir="auto">ReplaceString</h3>
+        <p id="par_id061420180708332382" class="paragraph" dir="auto">' Replaces the string "OldReplace" through the String "NewReplace" in the String</p>
+        <p id="par_id061420180708334998" class="paragraph" dir="auto">' 'BigString'</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function ReplaceString(
+            ByVal Bigstring, 
+            NewReplace, 
+            OldReplace as String) as String
+        </code></pre></div>
+        <h3 id="hd_id061420180708336841" dir="auto">FindSecondValue</h3>
+        <p id="par_id061420180708337504" class="paragraph" dir="auto">' Retrieves the second value for a next to 'SearchString' in</p>
+        <p id="par_id061420180708335341" class="paragraph" dir="auto">' a two-dimensional string-Array</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function FindSecondValue(
+            SearchString as String, 
+            TwoDimList() as String ) as String
+        </code></pre></div>
+        <h3 id="hd_id061420180708339122" dir="auto">Power</h3>
+        <p id="par_id061420180708332948" class="paragraph" dir="auto">' raises a base to a certain power</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function Power(
+            Basis as Double, 
+            Exponent as Double) as Double
+        </code></pre></div>
+        <h3 id="hd_id0614201807083362" dir="auto">Round</h3>
+        <p id="par_id061420180708349543" class="paragraph" dir="auto">' rounds a Real to a given Number of Decimals</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function Round(
+            BaseValue as Double, 
+            Decimals as Integer) as Double
+        </code></pre></div>
+        <h3 id="hd_id061420180708344826" dir="auto">FileNameoutofPath</h3>
+        <p id="par_id061420180708348505" class="paragraph" dir="auto">'Retrieves the mere filename out of a whole path</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function FileNameoutofPath(
+            ByVal Path as String, 
+            Optional Separator as String) as String
+        </code></pre></div>
+        <h3 id="hd_id06142018070834616" dir="auto">GetFileNameExtension</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetFileNameExtension(
+            ByVal FileName as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180708342472" dir="auto">GetFileNameWithoutExtension</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetFileNameWithoutExtension(
+            ByVal FileName as String, 
+            Optional Separator as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180708347642" dir="auto">DirectoryNameoutofPath</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function DirectoryNameoutofPath(
+            sPath as String, 
+            Separator as String) as String
+        </code></pre></div>
+        <h3 id="hd_id061420180708348485" dir="auto">CountCharsinString</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function CountCharsinString(
+            BigString, 
+            LocChar as String, 
+            ByVal StartPos as Integer) as Integer
+        </code></pre></div>
+        <h3 id="hd_id061420180708344129" dir="auto">BubbleSortList</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function BubbleSortList(
+            ByVal SortList(),
+            optional sort2ndValue as Boolean)
+        </code></pre></div>
+        <p id="par_id061420180708355329" class="paragraph" dir="auto">'This function bubble sorts an array of maximum 2 dimensions.</p>
+        <p id="par_id061420180708351446" class="paragraph" dir="auto">'The default sorting order is the first dimension</p>
+        <p id="par_id061420180708359513" class="paragraph" dir="auto">'Only if sort2ndValue is True the second dimension is the relevant for the sorting order</p>
+        <h3 id="hd_id061420180708356687" dir="auto">GetValueoutofList</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetValueoutofList(
+            SearchValue, 
+            BigList(), 
+            iDim as Integer, 
+            Optional ValueIndex)
+        </code></pre></div>
+        <h3 id="hd_id06142018070835957" dir="auto">AddListtoList</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function AddListtoList(
+            ByVal FirstArray(), 
+            ByVal SecondArray(), 
+            Optional StartIndex)
+        </code></pre></div>
+        <h3 id="hd_id06142018070835769" dir="auto">CheckDouble</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function CheckDouble(DoubleString as String)
+        </code></pre></div>
+    
+    <a name="bm_id731529062695476"></a>
+        <meta itemprop="keywords" content="BASIC Tools library,UCB module">
+    
+    <a name="ucb_module"></a>
+        <h2 id="hd_id461529005780299" dir="auto">
+<span class="literal">UCB</span> Module</h2>
+        <p id="par_id131529064870824" class="paragraph" dir="auto"><span class="emph">Universal Content Broker</span> functions and subroutines.</p>
+        <h3 id="hd_id061420180727434845" dir="auto">ReadDirectories</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function ReadDirectories(
+            ByVal AnchorDir As String, 
+            bRecursive as Boolean, 
+            bcheckFileType as Boolean, 
+            bGetByTitle as Boolean, 
+            Optional sFileContent(), 
+            Optional sExtension as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180727437838" dir="auto">AddFoldertoList</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub AddFoldertoList(
+            sDirURL as String, 
+            iDirIndex)
+        </code></pre></div>
+        <h3 id="hd_id061420180727432439" dir="auto">AddFileNameToList</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub AddFileNameToList(
+            sFileArray(), 
+            FileName as String, 
+            FileContent as String, 
+            bGetByTitle as Boolean, 
+            CurIndex)
+        </code></pre></div>
+        <h3 id="hd_id061420180727448222" dir="auto">RetrieveDocTitle</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function RetrieveDocTitle(
+            oDocProps as Object, 
+            sFileName as String) As String
+        </code></pre></div>
+        <h3 id="hd_id061420180727441588" dir="auto">GetRealFileContent</h3>
+        <p id="par_id061420180727444743" class="paragraph" dir="auto">' Retrieves The Filecontent of a Document by extracting the content</p>
+        <p id="par_id061420180727441850" class="paragraph" dir="auto">' from the Header of the document</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function GetRealFileContent(
+            FileName as String) As String
+        </code></pre></div>
+        <h3 id="hd_id061420180727441712" dir="auto">CopyRecursively</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function CopyRecursively(
+            SourceFilePath as String, 
+            SourceStemDir as String, 
+            TargetStemDir as String)
+        </code></pre></div>
+        <h3 id="hd_id061420180727445345" dir="auto">ShowHelperDialog</h3>
+        <p id="par_id061420180727445226" class="paragraph" dir="auto">' Opens a help url referenced by a Help ID that is retrieved from the calling button tag</p>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub ShowHelperDialog(aEvent)
+        </code></pre></div>
+        <h3 id="hd_id061420180727442283" dir="auto">SaveDataToFile</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Sub SaveDataToFile(
+            FilePath as String, 
+            DataList())
+        </code></pre></div>
+        <h3 id="hd_id061420180727442501" dir="auto">LoadDataFromFile</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function LoadDataFromFile(
+            FilePath as String, 
+            DataList()) as Boolean
+        </code></pre></div>
+        <h3 id="hd_id06142018072744521" dir="auto">CreateFolder</h3>
+        <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+            Function CreateFolder(sNewFolder) as Boolean
+        </code></pre></div>
+    
+    <a name="relatedTopics"></a>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/python/python_platform.html">Identifying the operating system</a></p></div>
+    
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03/lib_tools.xhp" target="_blank">/text/sbasic/shared/03/lib_tools.xhp</a></p>
+<p dir="auto">Title is: Tools Library</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

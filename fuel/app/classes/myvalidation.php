@@ -617,7 +617,11 @@ class MyValidation {
      */
     public static function _validation_table_duplicate2($val, $type, $table) {
 
-        if (is_null($val) || empty($type) || empty($table)) {
+        if (empty($val)) {
+            return true;
+        }
+
+        if (empty($type) || empty($table)) {
             return false;
         }
         $res = \DB::select()

@@ -16,34 +16,37 @@
       </header>
       <ul>
         <li>
-          <span class="opener">予約管理</span>
+          <span class="opener">お客様メニュー</span>
           <ul>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0012'), '予約スケジュール'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0013'), '配達予約スケジュール'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('car/c0020'), '車両情報'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('customer/c0020'), 'お客様情報'); ?></li>
           </ul>
         </li>
         <li>
           <span class="opener">入出庫管理</span>
           <ul>
-            <li><?php echo Html::anchor(\Uri::create('top/c0040'), '出庫指示'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('top/c0040'), '入出庫一覧'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('top/c0040'), '入庫入力'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('top/c0040'), '出庫入力'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('logistics/l0010'), '入出庫一覧'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('logistics/l0011'), '入庫入力'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('logistics/l0013'), '出庫指示'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('logistics/l0012'), '出庫入力'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('location/l0010'), '保管場所検索'); ?></li>
           </ul>
         </li>
         <li>
           <span class="opener">社内管理</span>
           <ul>
-            <li><?php echo Html::anchor(\Uri::create('customer/c0010'), 'お客様情報'); ?></li>
-            <li><?php echo Html::anchor(\Uri::create('car/c0010'), '車両情報'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0010'), '予約スケジュール'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0011'), '配達予約スケジュール'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('car/c0010'), '車両情報'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('customer/c0010'), 'お客様情報'); ?></li>
           </ul>
         </li>
         <li>
           <span class="opener">マスタ管理</span>
           <ul>
-            <li><?php echo Html::anchor(\Uri::create('mainte/m0010'), 'ユーザーマスタ'); ?></li>
+            <li><?php echo Html::anchor(\Uri::create('mainte/m0011'), 'ユーザーマスタ'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('mainte/m0020'), 'ユニットマスタ'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('mainte/m0030'), '保管場所リレーション'); ?></li>
           </ul>

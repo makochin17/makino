@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>CompatibilityMode function</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+    <a name="N0103"></a>
+        <meta itemprop="keywords" content="CompatibilityMode">
+        <meta itemprop="keywords" content="VBA compatibility mode">
+    
+    <a name="compatibilitymodefunction"></a>
+        <h1 id="N0118" dir="auto">
+<a name="compatibilitymodeh1"></a>CompatibilityMode() Function</h1>
+        <p id="N0120" class="paragraph" dir="auto"><span class="literal">CompatibilityMode()</span> function controls or queries runtime mode. It affects all code executed after setting or resetting the runtime mode. </p>
+    
+    <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="N0119" dir="auto">Use this feature with caution, limit it to document conversion for example.</p></div>
+</div>
+<br>
+
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      CompatibilityMode(Optional Enable As Boolean) As Boolean
+    </code></pre></div>
+
+    <div class="embedded">
+<a name="functvalue"></a>
+<h3 id="hd_id061420171139087480" dir="auto">Return value:</h3>
+</div>
+    <p id="par_id551648117368688" class="paragraph" dir="auto"><span class="literal">CompatibilityMode</span> function always returns the mode that is active after its execution. That is, if called with an argument, it returns the new mode; if called without an argument, it returns the active mode without modifying it.</p>
+
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id971648117815981" class="paragraph" dir="auto"><span class="emph">Enable</span>: Sets or unsets new compatibility mode when the argument is present.</p>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id371648123169691" dir="auto"><span class="literal">CompatibilityMode</span> function relates to <a target="_top" href="en-US/text/sbasic/shared/03103350.html#vbasupportstatement">Option VBASupport 1</a>, in which case it always returns <span class="literal">True</span>. It is unrelated to <a target="_top" href="en-US/text/sbasic/shared/compatible.html#compatiblestatement">Option Compatible</a> compiler directive.</p></div>
+</div>
+<br>
+
+    <p id="N0121" class="paragraph" dir="auto">This function may affect or help in the following situations:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto"><p id="par_id301645018760314" class="listitem" dir="auto">Scoping of variables.</p></li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto"><p id="N0124" class="listitem" dir="auto">Running <span class="literal">RmDir</span> command in VBA mode. In VBA only empty directories are removed by <span class="literal">RmDir</span> while LibreOffice Basic removes a directory recursively.</p></li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto"><p id="N0125" class="listitem" dir="auto">Changing behavior of Basic <span class="literal">Dir</span> command. The directory flag (16) for the <span class="literal">Dir</span> command means that only directories are returned in LibreOffice Basic, while in VBA normal files and directories are returned.</p></li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id901639929393688" class="listitem" dir="auto">Color components calculation with the <a target="_top" href="en-US/text/sbasic/shared/03010303.html"><span class="literal">Red</span></a> and <a target="_top" href="en-US/text/sbasic/shared/03010301.html"><span class="literal">Blue</span></a> functions which <span class="emph">are interchanged</span> (The <a target="_top" href="en-US/text/sbasic/shared/03010302.html"><span class="literal">Green</span></a> function is not affected).</p>
+        </li>
+    </ul>
+
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <p id="par_id541561646705787" class="paragraph" dir="auto">Given a NOT empty directory at <span class="emph">file:///home/me/Test</span></p>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      Sub RemoveDir
+      <p id="par_id731546017105932" class="paragraph" dir="auto">    MsgBox CompatibilityMode() ' False</p>
+      <p id="par_id341645017408891" class="paragraph" dir="auto"></p>
+          CompatibilityMode( True )
+          RmDir( "file:///home/me/Test" )
+          CompatibilityMode False 
+      
+      <p id="par_id731645017105932" class="paragraph" dir="auto">    MsgBox CompatibilityMode ' False</p>
+      End Sub
+   </code></pre></div>
+   <p id="par_id461561646613414" class="paragraph" dir="auto">With <span class="literal">CompatibilityMode( True )</span> the program raises an error, otherwise the <span class="literal">Test</span> directory and all its content is deleted.</p>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <p id="par_id411561647797398" class="paragraph" dir="auto">Modifying <span class="literal">Dir</span> behavior</p>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    Sub VBADirCommand
+        CompatibilityMode( Enable := True )   ' Shows also normal files
+        Entry$ = Dir( "file:///home/me/Tmp/*.*", 16 )
+        Total$ = ""
+        While Entry$ &lt;&gt; ""
+            Total$ = Total$ + Entry$ + Chr$(13)
+            Entry$ = Dir
+        Wend
+        MsgBox Total$
+        CompatibilityMode Enable := False ' Shows only directories
+    End Sub
+   </code></pre></div>
+
+   <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/compatible.html">Option Compatible Statement</a></p></div>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03090407.html">Rem Statement</a></p></div>
+        <p id="N0131" class="paragraph" dir="auto">
+            Variables scope modification in <a target="_top" href="en-US/text/sbasic/shared/01020300.html">Using Procedures and Functions</a> with <span class="literal">CompatibilityMode()</span> function.
+        </p>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03103200.html">Option Base Statement</a></p></div>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03103300.html">Option Explicit Statement</a></p></div>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03103350.html">Option VBASupport Statement</a></p></div>
+        <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/classmodule.html">Option ClassModule Statement</a></p></div>
+    </div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/compatibilitymode.xhp" target="_blank">/text/sbasic/shared/compatibilitymode.xhp</a></p>
+<p dir="auto">Title is: CompatibilityMode function</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

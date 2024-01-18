@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Special Tags</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="bm_id3154106"></a><meta itemprop="keywords" content="tags, in LibreOffice Writer">
+<meta itemprop="keywords" content="LibreOffice Writer, special HTML tags">
+<meta itemprop="keywords" content="HTML,special tags for fields">
+<meta itemprop="keywords" content="fields,HTML import and export">
+<meta itemprop="keywords" content="time fields,HTML">
+<meta itemprop="keywords" content="date fields,HTML">
+<meta itemprop="keywords" content="DocInformation fields">
+
+<h1 id="hd_id3154106" dir="auto">Special Tags</h1>
+<p id="par_id3153669" class="paragraph" dir="auto">When you save a document that contains fields as an HTML document, LibreOffice automatically converts date, time, and DocInformation fields to special HTML tags. The field contents are inserted between the opening and closing HTML tags of the converted fields. These special HTML tags do not correspond to standard HTML tags.</p>
+<p id="par_id3152960" class="paragraph" dir="auto">LibreOffice Writer fields are identified by the &lt;SDFIELD&gt; tag in an HTML document. The field type, the format, and the name of the special field are included in the opening HTML tag. The format of a field tag that is recognized by an HTML filter depends on the field type.</p>
+<a name="date_and_time"></a>
+<h2 id="hd_id3154570" dir="auto">Date and Time Fields</h2>
+<p id="par_id3149696" class="paragraph" dir="auto">For "Date" and "Time" fields, the TYPE parameter equals DATETIME. The format of the date or the time is specified by the SDNUM parameter, for example, DD:MM:YY for dates, or HH:MM:SS for time.</p>
+<p id="par_id3155183" class="paragraph" dir="auto">For fixed date and time fields, the date or the time is specified by the SDVAL parameter.</p>
+<p id="par_id3149485" class="paragraph" dir="auto">Examples of date and time special HTML tags that are recognized by LibreOffice as fields are shown in the following table:</p>
+<table border="1" class="" cellpadding="0" cellspacing="0">
+<tr>
+<th rowspan="" colspan="" class="tableheadcell" dir="auto">
+<p id="par_id3151257" class="tableheadintable" dir="auto">Fields</p>
+</th>
+<th rowspan="" colspan="" class="tableheadcell" dir="auto">
+<p id="par_id3148970" class="tableheadintable" dir="auto">LibreOffice Tag</p>
+</th>
+</tr>
+<tr>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3147102" class="tablecontentintable" dir="auto">Date is fixed</p>
+</td>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3153634" class="tablecontentintable" dir="auto">&lt;SDFIELD TYPE=DATETIME SDVAL="35843,4239988426" SDNUM="1031;1031;DD/MM/YY"&gt;17/02/98&lt;/SDFIELD&gt;</p>
+</td>
+</tr>
+<tr>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3155137" class="tablecontentintable" dir="auto">Date is variable</p>
+</td>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3156275" class="tablecontentintable" dir="auto">&lt;SDFIELD TYPE=DATETIME SDNUM="1031;1031;DD/MM/YY"&gt;17/02/98&lt;/SDFIELD&gt;</p>
+</td>
+</tr>
+<tr>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3145774" class="tablecontentintable" dir="auto">Time is fixed</p>
+</td>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3155915" class="tablecontentintable" dir="auto">&lt;SDFIELD TYPE=DATETIME SDVAL="35843,4240335648" SDNUM="1031;1031;HH:MM:SS"&gt;10:10:36&lt;/SDFIELD&gt;</p>
+</td>
+</tr>
+<tr>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3150110" class="tablecontentintable" dir="auto">Time is variable</p>
+</td>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3155862" class="tablecontentintable" dir="auto">&lt;SDFIELD TYPE=DATETIME SDNUM="1031;1031;HH:MM:SS"&gt;10:10:36&lt;/SDFIELD&gt;</p>
+</td>
+</tr>
+</table>
+<br>
+
+
+<a name="DocInformation"></a>
+<h2 id="hd_id3147409" dir="auto">DocInformation Fields</h2>
+<p id="par_id3147487" class="paragraph" dir="auto">For DocInformation fields, the TYPE parameter equals DOCINFO. The SUBTYPE parameter displays the specific field type, for example, for the "Created" DocInformation field, SUBTYPE=CREATE. For date and time DocInformation fields, the FORMAT parameter equals DATE or TIME, and the SDNUM parameter indicates the number format that is used. The SDFIXED parameter indicates if the content of the DocInformation field is fixed or not.</p>
+<p id="par_id3147501" class="paragraph" dir="auto">The contents of a fixed date or time field are equal to the SDVAL parameter, otherwise the contents are equal to the text found between the SDFIELD HTML tags.</p>
+<p id="par_id3149562" class="paragraph" dir="auto">Examples of DocInformation special HTML tags that are recognized by LibreOffice as fields are shown in the following table:</p>
+<table border="1" class="" cellpadding="0" cellspacing="0">
+<tr>
+<th rowspan="" colspan="" class="tableheadcell" dir="auto">
+<p id="par_id3147738" class="tableheadintable" dir="auto">Fields</p>
+</th>
+<th rowspan="" colspan="" class="tableheadcell" dir="auto">
+<p id="par_id3146334" class="tableheadintable" dir="auto">LibreOffice Tag</p>
+</th>
+</tr>
+<tr>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3149846" class="tablecontentintable" dir="auto">Description (fixed content)</p>
+</td>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3148863" class="tablecontentintable" dir="auto">&lt;SDFIELD TYPE=DOCINFO SUBTYPE=COMMENT SDFIXED&gt;Description&lt;/SDFIELD&gt;</p>
+</td>
+</tr>
+<tr>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3151083" class="tablecontentintable" dir="auto">Creation date</p>
+</td>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3153298" class="tablecontentintable" dir="auto">&lt;SDFIELD TYPE=DOCINFO SUBTYPE=CREATE FORMAT=DATE SDNUM="1031;1031;QQ YY"&gt;1. Quarter 98&lt;/SDFIELD&gt;</p>
+</td>
+</tr>
+<tr>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3150175" class="tablecontentintable" dir="auto">Creation time (fixed content)</p>
+</td>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3156134" class="tablecontentintable" dir="auto">&lt;SDFIELD TYPE=DOCINFO SUBTYPE=CREATE FORMAT=TIME SDVAL="0" SDNUM="1031;1031;HH:MM:SS AM/PM" SDFIXED&gt;03:58:35 PM&lt;/SDFIELD&gt;</p>
+</td>
+</tr>
+<tr>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3155077" class="tablecontentintable" dir="auto">Modification date</p>
+</td>
+<td rowspan="" colspan="" dir="auto">
+<p id="par_id3154330" class="tablecontentintable" dir="auto">&lt;SDFIELD TYPE=DOCINFO SUBTYPE=CHANGE FORMAT=DATE SDNUM="1031;1031;NN DD MMM, YY"&gt;Mo 23 Feb, 98&lt;/SDFIELD&gt;</p>
+</td>
+</tr>
+</table>
+<br>
+
+
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/swriter/01/04090007.xhp" target="_blank">/text/swriter/01/04090007.xhp</a></p>
+<p dir="auto">Title is: Special Tags</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

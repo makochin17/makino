@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>DateSerial Function</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="dateserial"></a>
+<a name="bm_id3157896"></a><meta itemprop="keywords" content="DateSerial function">
+
+<h1 id="hd_id381619878817271" dir="auto">
+<a name="DateSerial_H1"></a>DateSerial Function</h1>
+<p id="par_id3143267" class="paragraph" dir="auto">Returns a <span class="emph">Date</span> value for a specified year, month, and day.</p>
+
+<div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+DateSerial (year, month, day)
+</code></pre></div>
+<div class="embedded">
+<a name="functvalue"></a>
+<h3 id="hd_id061420171139087480" dir="auto">Return value:</h3>
+</div>
+<p id="par_id3150398" class="paragraph" dir="auto">Date</p>
+<div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+<p id="par_id3147229" class="paragraph" dir="auto">
+<span class="emph">Year:</span> Integer expression that indicates a year. All values between 0 and 99 are interpreted as the years 1900-1999. For years that fall outside this range, you must enter all four digits.</p>
+<p id="par_id3156280" class="paragraph" dir="auto">
+<span class="emph">Month:</span> Integer expression that indicates the month of the specified year. The accepted range is from 1-12.</p>
+<p id="par_id3151043" class="paragraph" dir="auto">
+<span class="emph">Day:</span> Integer expression that indicates the day of the specified month. The accepted range is from 1-31. No error is returned when you enter a non-existing day for a month shorter than 31 days.</p>
+<p id="par_id3161832" class="paragraph" dir="auto">The <span class="emph">DateSerial function</span> returns the number of days between December 30,1899 and the given date. You can use this function to calculate the difference between two dates.</p>
+<p id="par_id3155306" class="paragraph" dir="auto">The <span class="emph">DateSerial function</span> returns the data type Variant with VarType 7 (Date). Internally, this value is stored as a Double value, so that when the given date is 1.1.1900, the returned value is 2. Negative values correspond to dates before December 30, 1899 (not inclusive).</p>
+<p id="par_id3152576" class="paragraph" dir="auto">If a date is defined that lies outside of the accepted range, LibreOffice Basic returns an error message.</p>
+<p id="par_id3149481" class="paragraph" dir="auto">Whereas you define the <span class="emph">DateValue function</span> as a string that contains the date, the <span class="emph">DateSerial function</span> evaluates each of the parameters (year, month, day) as separate numeric expressions.</p>
+<div class="embedded">
+<a name="errorcode"></a>
+<h3 id="hd_id3152869" dir="auto">Error codes:</h3>
+</div>
+<div class="embedded"><p class="embedded" dir="auto">5 Invalid procedure call</p></div>
+<div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+  Sub ExampleDateSerial
+  Dim lDate As Long
+  Dim sDate As String
+      lDate = DateSerial(1964, 4, 9)
+      sDate = DateSerial(1964, 4, 9)
+      MsgBox lDate ' returns 23476
+      MsgBox sDate ' returns 04/09/1964
+  End Sub
+</code></pre></div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03030101.xhp" target="_blank">/text/sbasic/shared/03030101.xhp</a></p>
+<p dir="auto">Title is: DateSerial Function</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

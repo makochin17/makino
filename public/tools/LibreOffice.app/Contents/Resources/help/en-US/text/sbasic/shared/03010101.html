@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MsgBox Statement</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="msgbox"></a>
+<a name="bm_id1807916"></a>
+  <meta itemprop="keywords" content="MsgBox statement">
+
+
+<h1 id="hd_id3154927" dir="auto">
+<a name="msgbox_h1"></a>MsgBox Statement</h1>
+<p id="par_id3148947" class="paragraph" dir="auto">Displays a dialog box containing a message.</p>
+
+
+<div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+   MsgBox prompt As String [,buttons = MB_OK [,title As String]]
+   response = MsgBox( prompt As String [,buttons = MB_OK [,title As String]])
+</code></pre></div>
+
+<a name="MsgBox_statement"></a>
+<div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+<a name="parameters"></a>
+<p id="par_id3148798" class="paragraph" dir="auto"> <span class="emph">prompt</span>: String expression displayed as a message in the dialog box. Line breaks can be inserted with Chr$(13).</p>
+<p id="par_id3150769" class="paragraph" dir="auto"> <span class="emph">title</span>: String expression displayed in the title bar of the dialog. If omitted, the title bar displays the name of the respective application.</p>
+<p id="par_id3147228" class="paragraph" dir="auto"> <span class="emph">buttons</span>: Any integer expression that specifies the dialog type, as well as the number and type of buttons to display, and the icon type. <span class="emph">buttons</span> represents a combination of bit patterns, that is, a combination of elements can be defined by adding their respective values:</p>
+
+
+<a name="MsgBox_constants"></a>
+<table border="1" class="" cellpadding="0" cellspacing="0">
+  <tr>
+    <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+      <p id="par_id051220170241588881" class="tableheadintable" dir="auto">Named constant</p>
+    </th>
+    <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+      <p id="par_id051220170241585541" class="tableheadintable" dir="auto">Integer value</p>
+    </th>
+    <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+      <p id="par_id051220170241585124" class="tableheadintable" dir="auto">Definition</p>
+    </th>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241588348" class="tablecontentintable" dir="auto">MB_OK</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241583191" class="tablecontentintable" dir="auto">0</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3147397" class="paragraphintable" dir="auto">Display OK button only.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241583930" class="tablecontentintable" dir="auto">MB_OKCANCEL</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241598544" class="tablecontentintable" dir="auto">1</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3145646" class="paragraphintable" dir="auto">Display OK and Cancel buttons.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241591470" class="tablecontentintable" dir="auto">MB_ABORTRETRYIGNORE</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241592832" class="tablecontentintable" dir="auto">2</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3149410" class="paragraphintable" dir="auto">Display Abort, Retry, and Ignore buttons.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241594311" class="tablecontentintable" dir="auto">MB_YESNOCANCEL</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241594996" class="tablecontentintable" dir="auto">3</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3151075" class="paragraphintable" dir="auto">Display Yes, No, and Cancel buttons.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241596937" class="tablecontentintable" dir="auto">MB_YESNO</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241592706" class="tablecontentintable" dir="auto">4</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3153878" class="paragraphintable" dir="auto">Display Yes and No buttons.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241591119" class="tablecontentintable" dir="auto">MB_RETRYCANCEL</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241595093" class="tablecontentintable" dir="auto">5</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3155601" class="paragraphintable" dir="auto">Display Retry and Cancel buttons.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id05122017024159933" class="tablecontentintable" dir="auto">MB_ICONSTOP</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id05122017024159655" class="tablecontentintable" dir="auto">16</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3150716" class="paragraphintable" dir="auto">Add the Stop icon to the dialog.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241591424" class="tablecontentintable" dir="auto">MB_ICONQUESTION</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241593191" class="tablecontentintable" dir="auto">32</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3153837" class="paragraphintable" dir="auto">Add the Question icon to the dialog.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170241598357" class="tablecontentintable" dir="auto">MB_ICONEXCLAMATION</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170242002870" class="tablecontentintable" dir="auto">48</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3150751" class="paragraphintable" dir="auto">Add the Exclamation Point icon to the dialog.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170242001511" class="tablecontentintable" dir="auto">MB_ICONINFORMATION</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170242008091" class="tablecontentintable" dir="auto">64</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3146915" class="paragraphintable" dir="auto">Add the Information icon to the dialog.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170242003564" class="tablecontentintable" dir="auto"> </p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170242001398" class="tablecontentintable" dir="auto">128</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3145640" class="paragraphintable" dir="auto">First button in the dialog as default button.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170242007839" class="tablecontentintable" dir="auto">MB_DEFBUTTON2</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170242005589" class="tablecontentintable" dir="auto">256</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3153765" class="paragraphintable" dir="auto">Second button in the dialog as default button.</p>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170242005074" class="tablecontentintable" dir="auto">MB_DEFBUTTON3</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id051220170242001655" class="tablecontentintable" dir="auto">512</p>
+    </td>
+    <td rowspan="" colspan="" dir="auto">
+      <p id="par_id3153715" class="paragraphintable" dir="auto">Third button in the dialog as default button.</p>
+    </td>
+  </tr>
+</table>
+<br>
+
+
+
+<div class="embedded">
+<a name="errorcode"></a>
+<h3 id="hd_id3152869" dir="auto">Error codes:</h3>
+</div>
+<div class="embedded"><p class="embedded" dir="auto">5 Invalid procedure call</p></div>
+
+<div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+Sub ExampleMsgBox
+ Const sText1 = "An unexpected error occurred."
+ Const sText2 = "The program execution will continue, however."
+ Const sText3 = "Error"
+ MsgBox(sText1 + Chr(13) + sText2,16,sText3)
+ MsgBox(sText1 + Chr(13) + sText2, MB_ICONSTOP, sText3)
+End Sub
+</code></pre></div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03010101.xhp" target="_blank">/text/sbasic/shared/03010101.xhp</a></p>
+<p dir="auto">Title is: MsgBox Statement</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

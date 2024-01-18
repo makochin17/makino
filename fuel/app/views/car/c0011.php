@@ -39,7 +39,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('old_car_id', (!empty($data['old_car_id'])) ? $data['old_car_id'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'old_car_id', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '15', 'tabindex' => '1')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'old_car_id', 'style' => 'width:200px;', 'minlength' => '1', 'maxlength' => '15', 'tabindex' => '1')); ?>
                     <i class='fa fa-asterisk' style="color:#FF4040;font-size:12px;margin-left:10px;">旧システムの車両IDを入力してください</i>
 					</td>
 				</tr>
@@ -91,7 +91,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
 				        <?php echo Form::select('work_required_time', $data['work_required_time'], $work_time_list,
-				            array('class' => 'select-item', 'id' => 'work_required_time', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '7')); ?>
+				            array('class' => 'select-item', 'id' => 'work_required_time', 'style' => 'width: 100px', 'onchange' => 'change()', 'tabindex' => '7')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -118,7 +118,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('summer_tire_size', (!empty($data['summer_tire_size'])) ? $data['summer_tire_size'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_size', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '10')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_size', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '10')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -127,7 +127,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('summer_tire_size2', (!empty($data['summer_tire_size2'])) ? $data['summer_tire_size2'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_size2', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '11')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_size2', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '11')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -154,7 +154,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('summer_tire_wheel_size', (!empty($data['summer_tire_wheel_size'])) ? $data['summer_tire_wheel_size'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_wheel_size', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '14')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_wheel_size', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '14')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -163,7 +163,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('summer_tire_wheel_size2', (!empty($data['summer_tire_wheel_size2'])) ? $data['summer_tire_wheel_size2'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_wheel_size2', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '15')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_wheel_size2', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '15')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -172,7 +172,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('summer_tire_made_date', (!empty($data['summer_tire_made_date'])) ? $data['summer_tire_made_date'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_made_date', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '4', 'tabindex' => '16')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_made_date', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '4', 'tabindex' => '16')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -222,11 +222,29 @@
 				</tr>
 				<tr>
 					<td style="width: 200px; height: 30px;">
+						夏タイヤナット有無
+					</td>
+					<td style="width: 600px; height: 30px;">
+				        <?php echo Form::select('summer_nut_flg', $data['summer_nut_flg'], $yes_no_list,
+				            array('class' => 'select-item', 'id' => 'summer_nut_flg', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '22')); ?>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 200px; height: 30px;">
+						夏タイヤ保管場所
+					</td>
+					<td style="width: 600px; height: 30px;">
+				        <?php echo Form::select('summer_location_id', $data['summer_location_id'], $location_list,
+				            array('class' => 'select-item', 'id' => 'summer_location_id', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '23')); ?>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 200px; height: 30px;">
 						冬タイヤメーカー
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_maker', (!empty($data['winter_tire_maker'])) ? $data['winter_tire_maker'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_maker', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '22')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_maker', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '24')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -235,7 +253,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_product_name', (!empty($data['winter_tire_product_name'])) ? $data['winter_tire_product_name'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_product_name', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '23')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_product_name', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '25')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -244,7 +262,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_size', (!empty($data['winter_tire_size'])) ? $data['winter_tire_size'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_size', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '24')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_size', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '26')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -253,7 +271,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_size2', (!empty($data['winter_tire_size2'])) ? $data['winter_tire_size2'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_size2', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '25')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_size2', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '27')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -262,7 +280,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_pattern', (!empty($data['winter_tire_pattern'])) ? $data['winter_tire_pattern'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_pattern', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '26')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_pattern', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '28')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -271,7 +289,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_wheel_product_name', (!empty($data['winter_tire_wheel_product_name'])) ? $data['winter_tire_wheel_product_name'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_wheel_product_name', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '27')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_wheel_product_name', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '29')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -280,7 +298,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_wheel_size', (!empty($data['winter_tire_wheel_size'])) ? $data['winter_tire_wheel_size'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_wheel_size', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '28')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_wheel_size', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '30')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -289,7 +307,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_wheel_size2', (!empty($data['winter_tire_wheel_size2'])) ? $data['winter_tire_wheel_size2'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_wheel_size2', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '29')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_wheel_size2', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '50', 'tabindex' => '31')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -298,7 +316,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_made_date', (!empty($data['winter_tire_made_date'])) ? $data['winter_tire_made_date'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_made_date', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '4', 'tabindex' => '30')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_made_date', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '4', 'tabindex' => '32')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -307,7 +325,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_remaining_groove1', (!empty($data['winter_tire_remaining_groove1'])) ? $data['winter_tire_remaining_groove1'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_remaining_groove1', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '10', 'tabindex' => '31')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_remaining_groove1', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '10', 'tabindex' => '33')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -316,7 +334,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_remaining_groove2', (!empty($data['winter_tire_remaining_groove2'])) ? $data['winter_tire_remaining_groove2'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_remaining_groove2', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '10', 'tabindex' => '32')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_remaining_groove2', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '10', 'tabindex' => '34')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -325,7 +343,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_remaining_groove3', (!empty($data['winter_tire_remaining_groove3'])) ? $data['winter_tire_remaining_groove3'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_remaining_groove3', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '10', 'tabindex' => '33')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_remaining_groove3', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '10', 'tabindex' => '35')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -334,7 +352,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_remaining_groove4', (!empty($data['winter_tire_remaining_groove4'])) ? $data['winter_tire_remaining_groove4'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_remaining_groove4', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '10', 'tabindex' => '34')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_remaining_groove4', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '10', 'tabindex' => '36')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -343,25 +361,25 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('winter_tire_punk', (!empty($data['winter_tire_punk'])) ? $data['winter_tire_punk'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_punk', 'style' => 'width:600px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '35')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'winter_tire_punk', 'style' => 'width:600px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '37')); ?>
 					</td>
 				</tr>
 				<tr>
 					<td style="width: 200px; height: 30px;">
-						タイヤナット有無
+						冬タイヤナット有無
 					</td>
 					<td style="width: 600px; height: 30px;">
-				        <?php echo Form::select('nut_flg', $data['nut_flg'], $yes_no_list,
-				            array('class' => 'select-item', 'id' => 'nut_flg', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '36')); ?>
+				        <?php echo Form::select('winter_nut_flg', $data['winter_nut_flg'], $yes_no_list,
+				            array('class' => 'select-item', 'id' => 'winter_nut_flg', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '38')); ?>
 					</td>
 				</tr>
 				<tr>
 					<td style="width: 200px; height: 30px;">
-						保管場所
+						冬タイヤ保管場所
 					</td>
 					<td style="width: 600px; height: 30px;">
-				        <?php echo Form::select('location_id', $data['location_id'], $location_list,
-				            array('class' => 'select-item', 'id' => 'location_id', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '37')); ?>
+				        <?php echo Form::select('winter_location_id', $data['winter_location_id'], $location_list,
+				            array('class' => 'select-item', 'id' => 'winter_location_id', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '39')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -370,7 +388,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
 				        <?php echo Form::select('summer_class_flg', $data['summer_class_flg'], $yes_no_list,
-				            array('class' => 'select-item', 'id' => 'summer_class_flg', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '38')); ?>
+				            array('class' => 'select-item', 'id' => 'summer_class_flg', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '40')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -379,7 +397,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
 				        <?php echo Form::select('winter_class_flg', $data['winter_class_flg'], $yes_no_list,
-				            array('class' => 'select-item', 'id' => 'winter_class_flg', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '39')); ?>
+				            array('class' => 'select-item', 'id' => 'winter_class_flg', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '41')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -388,7 +406,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('note', (!empty($data['note'])) ? $data['note'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'note', 'style' => 'width:600px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '40')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'note', 'style' => 'width:600px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '41')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -397,7 +415,7 @@
 					</td>
 					<td style="width: 600px; height: 30px;">
                     <?php echo Form::input('message', (!empty($data['message'])) ? $data['message'] : '', 
-                    array('class' => 'input-text', 'type' => 'text', 'id' => 'message', 'style' => 'width:600px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '41')); ?>
+                    array('class' => 'input-text', 'type' => 'text', 'id' => 'message', 'style' => 'width:600px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '42')); ?>
 					</td>
 				</tr>
 			</table>

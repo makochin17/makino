@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>TypeName Function; VarType Function</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="typename"></a>
+<a name="bm_id3143267"></a>
+<meta itemprop="keywords" content="TypeName function">
+<meta itemprop="keywords" content="VarType function">
+<meta itemprop="keywords" content="Basic Variable Type constants">
+
+<h1 id="hd_id3143267" dir="auto">TypeName Function; VarType Function</h1>
+<p id="par_id3159157" class="paragraph" dir="auto">Returns text or a numeric value that contain type information for a variable.</p>
+
+
+<div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+  TypeName (Varname As Variant) As String
+  VarType (Varname As Variant) As Integer
+</code></pre></div>
+
+<div class="embedded">
+<a name="functvalue"></a>
+<h3 id="hd_id061420171139087480" dir="auto">Return value:</h3>
+</div>
+<ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id591667555032629" class="listitem" dir="auto">A text for <span class="literal">TypeName</span> suffixed with '()' for arrays.</p>
+    </li>
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id371667555034757" class="listitem" dir="auto">An integer for <span class="literal">VarType</span>. The number 8192 is added to the returned value for arrays of type <span class="literal">VarType</span>.</p>
+    </li>
+</ul>
+
+<div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+<p id="par_id3148664" class="paragraph" dir="auto"> <span class="emph">Varname</span>: The variable name that you want to determine the type of.</p>
+<p id="par_id461667489910930" class="paragraph" dir="auto">The following values are returned:</p>
+
+<a name="VarType_constants"></a>
+<table border="1" class="" cellpadding="0" cellspacing="0">
+  <tr>
+    <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+      <p id="par_id3145171" class="tableheadintable" dir="auto">TypeName<br>values</p>
+    </th>
+    <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+      <p id="par_id051620170608269696" class="tableheadintable" dir="auto">Named<br>constant</p>
+    </th>
+    <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+      <p id="par_id3156212" class="tableheadintable" dir="auto">VarType<br>values</p>
+    </th>
+    <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+      <p id="par_id3154684" class="tableheadintable" dir="auto">Variable type</p>
+    </th>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="2" dir="auto"><p id="par_id401667566896518" class="paragraphintable" dir="auto">…()</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id561667566907413" class="paragraphintable" dir="auto">8192</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id501667566908366" class="paragraphintable" dir="auto"><span class="literal">Array</span> of variables</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="2" dir="auto"><p id="par_id3151041" class="paragraphintable" dir="auto">Boolean</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3153367" class="paragraphintable" dir="auto">11</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3148645" class="paragraphintable" dir="auto"><span class="literal">Boolean</span> variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="2" dir="auto"><p id="par_id3151042" class="paragraphintable" dir="auto">Byte</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3253367" class="paragraphintable" dir="auto">17</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3158645" class="paragraphintable" dir="auto"><span class="literal">Byte</span> variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3153138" class="paragraphintable" dir="auto">Date</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id051620170608329367" class="paragraphintable" dir="auto">V_DATE</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3153363" class="paragraphintable" dir="auto">7</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3155411" class="paragraphintable" dir="auto"><span class="literal">Date</span> variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id051620170608331783" class="paragraphintable" dir="auto">Currency</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id051620170608333476" class="paragraphintable" dir="auto">V_CURRENCY</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id051620170608333808" class="paragraphintable" dir="auto">6</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id051620170608331416" class="paragraphintable" dir="auto"><span class="literal">Currency</span> variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3146975" class="paragraphintable" dir="auto">Double</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id051620170608337319" class="paragraphintable" dir="auto">V_DOUBLE</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3150486" class="paragraphintable" dir="auto">5</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3148616" class="paragraphintable" dir="auto">Double-precision floating-point variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="2" dir="auto"><p id="par_id401657666896518" class="paragraphintable" dir="auto">Error</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id566617566907413" class="paragraphintable" dir="auto">11</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id501666576908366" class="paragraphintable" dir="auto">Error type variable</p></td>
+  </tr>
+
+  <tr>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3148457" class="paragraphintable" dir="auto">Integer</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id05162017060833922" class="paragraphintable" dir="auto">V_INTEGER</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3145647" class="paragraphintable" dir="auto">2</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3154490" class="paragraphintable" dir="auto"><span class="literal">Integer</span> variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3149960" class="paragraphintable" dir="auto">Long</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id051620170608332124" class="paragraphintable" dir="auto">V_LONG</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3154513" class="paragraphintable" dir="auto">3</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3151318" class="paragraphintable" dir="auto"><span class="literal">Long</span> integer variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="2" dir="auto"><p id="par_id3146972" class="paragraphintable" dir="auto">Object</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3154482" class="paragraphintable" dir="auto">9</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3150323" class="paragraphintable" dir="auto"><span class="literal">Object</span> variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3148405" class="paragraphintable" dir="auto">Single</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id051620170608337392" class="paragraphintable" dir="auto">V_SINGLE</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3149020" class="paragraphintable" dir="auto">4</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3147341" class="paragraphintable" dir="auto">Single-precision floating-point variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3155901" class="paragraphintable" dir="auto">String</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id05162017060833587" class="paragraphintable" dir="auto">V_STRING</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3155960" class="paragraphintable" dir="auto">8</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3146313" class="paragraphintable" dir="auto"><span class="literal">String</span> variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="2" dir="auto"><p id="par_id3145149" class="paragraphintable" dir="auto">Variant</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3154021" class="paragraphintable" dir="auto">12</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3145789" class="paragraphintable" dir="auto"><span class="literal">Variant</span> variable (can contain all types specified by the definition)</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3148630" class="paragraphintable" dir="auto">Empty</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id051620170608331395" class="paragraphintable" dir="auto">V_EMPTY</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3152584" class="paragraphintable" dir="auto">0</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3151278" class="paragraphintable" dir="auto">Uninitialized <span class="literal">Variant</span> variable</p></td>
+  </tr>
+  <tr>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3154576" class="paragraphintable" dir="auto">Null</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id05162017060833692" class="paragraphintable" dir="auto">V_NULL</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3166424" class="paragraphintable" dir="auto">1</p></td>
+    <td rowspan="" colspan="" dir="auto"><p id="par_id3145131" class="paragraphintable" dir="auto">No valid data</p></td>
+  </tr>
+</table>
+<br>
+
+
+<div class="embedded">
+<a name="errorcode"></a>
+<h3 id="hd_id3152869" dir="auto">Error codes:</h3>
+</div>
+<div class="embedded"><p class="embedded" dir="auto">5 Invalid procedure call</p></div>
+<div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+  Sub TypeName_VarType_example
+    Const __Object=9, __Error=10, __Boolean=11, __Variant=12, __Byte=17, _
+      __Array = 8192, aText = "Lorem ipsum dolor sit amet, consectetur …"
+    Dim int16 As Integer,  int32() As Long   ' V_INTEGER,  V_LONG
+    Dim flt32!,            flt64() As Double ' V_SINGLE,   V_DOUBLE
+    Dim curr@,             dat3 As Date      ' V_CURRENCY, V_DATE
+    Dim strng() As String, objct() As Object ' V_STRING,   …
+    Dim bool As Boolean,   unkwn(), byt3 As Byte ' …,      V_EMPTY, …
+    Dim table(-3 To 5)
+    MsgBox _
+     TypeName(int16) &amp;" "&amp; Vartype(int16) &amp;" "&amp; V_INTEGER        &amp;" "&amp; Chr(13) &amp;_
+     TypeName(int32) &amp;" "&amp; Vartype(int32) &amp;" "&amp; V_LONG+__Array   &amp;" "&amp; Chr(13) &amp;_
+     TypeName(flt32) &amp;" "&amp; VarType(flt32) &amp;" "&amp; V_SINGLE         &amp;" "&amp; Chr(13) &amp;_
+     TypeName(flt64) &amp;" "&amp; VarType(flt64) &amp;" "&amp; V_DOUBLE+__Array &amp;" "&amp; Chr(13) &amp;_
+     TypeName(dat3)  &amp;" "&amp; VarType(dat3)  &amp;" "&amp; V_DATE           &amp;" "&amp; Chr(13) &amp;_
+     TypeName(curr)  &amp;" "&amp; VarType(curr)  &amp;" "&amp; V_CURRENCY       &amp;" "&amp; Chr(13) &amp;_
+     TypeName(atext) &amp;" "&amp; VarType(aText) &amp;" "&amp; V_STRING         &amp;" "&amp; Chr(13) &amp;_
+     TypeName(strng) &amp;" "&amp; VarType(strng) &amp;" "&amp; V_STRING+__Array &amp;" "&amp; Chr(13) &amp;_
+     TypeName(objct) &amp;" "&amp; VarType(objct) &amp;" "&amp; __Object+__Array &amp;" "&amp; Chr(13) &amp;_
+     TypeName(unkwn) &amp;" "&amp; VarType(unkwn) &amp;" "&amp; V_EMPTY          &amp;" "&amp; Chr(13) &amp;_
+     TypeName(bool)  &amp;" "&amp; VarType(bool)  &amp;" "&amp; __Boolean        &amp;" "&amp; Chr(13) &amp;_
+     TypeName(varnt) &amp;" "&amp; VarType(varnt) &amp;" "&amp; V_EMPTY          &amp;" "&amp; Chr(13) &amp;_
+     TypeName(table) &amp;" "&amp; VarType(table) &amp;" "&amp;__Variant+__Array &amp;" "&amp; Chr(13) &amp;_
+     TypeName(byt3)  &amp;" "&amp; VarType(byt3)  &amp;" "&amp; __Byte           _
+     ,, "Data types in LibreOffice Basic"
+    Msgbox "TypeName(table): "&amp;TypeName(table) &amp;Chr(13)&amp; _
+      "VarType(table)="&amp;Vartype(table) _
+      ,,"Array of Variant values"
+  End Sub ' TypeName_VarType_example
+</code></pre></div>
+
+<a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+  <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03100700.html">Const Statement</a></p></div>
+  <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03102100.html">Dim Statement</a></p></div>
+  <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03010101.html">MsgBox Statement</a></p></div>
+</div>
+</div>  
+
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03103600.xhp" target="_blank">/text/sbasic/shared/03103600.xhp</a></p>
+<p dir="auto">Title is: TypeName Function; VarType Function</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

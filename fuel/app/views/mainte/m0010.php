@@ -25,7 +25,8 @@
         <p class="error-message-head"><?php echo $error_message; ?></p>
         <br />
         <div style="padding-top:10px;">
-            <input type="button" value="検索" class='buttonB' tabindex="2" onclick="carModelSearch('<?php echo Uri::create('search/s0090'); ?>')"/>
+            <!-- <input type="button" value="検索" class='buttonB' tabindex="2" onclick="carModelSearch('<?php echo Uri::create('search/s0090'); ?>')"/> -->
+            <?php echo Form::submit('back', '戻　　　る', array('class' => 'buttonB', 'onclick' => 'return submitChkBack()', 'tabindex' => '2')); ?>
             <?php echo Form::submit('input_clear', '入力項目クリア', array('class' => 'buttonB', 'style' => 'margin-left: 20px;', 'onclick' => 'return submitChkClear()' , 'tabindex' => '3')); ?>
             <?php echo Form::submit('excel', 'エクセル出力', array('class' => 'buttonB', 'style' => 'margin-left: 20px;', 'tabindex' => '4')); ?>
             <?php // echo Form::submit('csv_download', 'CSVフォーマット', array('class' => 'buttonB', 'tabindex' => '4')); ?>

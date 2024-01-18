@@ -385,7 +385,7 @@
 						$('[id=cmdCommit]').css('display', 'inline');
 
 						<?php if (!in_array($userinfo['user_authority'], $schedule_authority)) : ?>
-							var postData = {"id":event_id, "customer_code":<?php echo $userinfo['customer_code'];?>};
+							var postData = {"id":event_id, "customer_code":<?php echo (!empty($userinfo['customer_code'])) ? $userinfo['customer_code']:"''";?>};
 							// 操作しているお客様が自分のスケジュールをクリックしたか判定
 							$.post(
 							     '<?php echo $customer_check_url; ?>',

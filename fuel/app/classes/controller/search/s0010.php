@@ -39,7 +39,7 @@ class Controller_Search_S0010 extends Controller_Hybrid {
 	private function initViewForge($auth_data){
 		// サイト設定
 		$cnf                                = \Config::load('siteinfo', true);
-		$cnf['header_title'] 				= '社員検索';
+		$cnf['header_title'] 				= 'お客様検索';
 
 		$head                               = View::forge($this->head);
 		$head->title                        = $cnf['header_title'];

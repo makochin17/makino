@@ -21,7 +21,9 @@ class M0035 extends \Model {
         // 項目
         $stmt = \DB::select(
                 array('rsl.id', 'storage_location_id'),
-                array(\DB::expr("CONCAT(msc.name, '-', msd.name, '-', msh.name)"), 'storage_location_name'),
+                array(\DB::expr("CONCAT(msw.name, '-', msc.name, '-', msd.name, '-', msh.name)"), 'storage_location_name'),
+                array('rsl.storage_warehouse_id', 'storage_warehouse_id'),
+                array('msw.name', 'storage_warehouse_name'),
                 array('rsl.storage_column_id', 'storage_column_id'),
                 array('msc.name', 'storage_column_name'),
                 array('rsl.storage_depth_id', 'storage_depth_id'),
@@ -33,6 +35,10 @@ class M0035 extends \Model {
                 );
 
         $stmt->from(array('rel_storage_location', 'rsl'))
+            ->join(array('m_storage_warehouse', 'msw'), 'left outer')
+                ->on('msw.id', '=', 'rsl.storage_warehouse_id')
+                ->on('msw.start_date', '<=', '\''.date("Y-m-d").'\'')
+                ->on('msw.end_date', '>', '\''.date("Y-m-d").'\'')
             ->join(array('m_storage_column', 'msc'), 'left outer')
                 ->on('msc.id', '=', 'rsl.storage_column_id')
                 ->on('msc.start_date', '<=', '\''.date("Y-m-d").'\'')
@@ -108,7 +114,7 @@ class M0035 extends \Model {
         ////////////////////////////////////////////
         //保管場所マスタ更新
         // レコードの重複チェック(各種コードで重複チェック)
-        if ($result = M0030::getStorageLocationBySubCode($conditions['storage_column_id'], $conditions['storage_depth_id'], $conditions['storage_height_id'], $db)) {
+        if ($result = M0030::getStorageLocationBySubCode($conditions['storage_warehouse_id'], $conditions['storage_column_id'], $conditions['storage_depth_id'], $conditions['storage_height_id'], $db)) {
             return Config::get('m_MW0004');
         }
 
@@ -116,6 +122,7 @@ class M0035 extends \Model {
         if (strtotime($data['start_date']) < strtotime(Date::forge()->format('mysql_date'))) {
 
            $data = array(
+                'storage_warehouse_id'  => $conditions['storage_warehouse_id'],
                 'storage_column_id'     => $conditions['storage_column_id'],
                 'storage_depth_id'      => $conditions['storage_depth_id'],
                 'storage_height_id'     => $conditions['storage_height_id'],
@@ -156,6 +163,7 @@ class M0035 extends \Model {
 
         // 項目セット
         $set = array(
+            'storage_warehouse_id'  => $items['storage_warehouse_id'],
             'storage_column_id'     => $items['storage_column_id'],
             'storage_depth_id'		=> $items['storage_depth_id'],
             'storage_height_id'		=> $items['storage_height_id'],

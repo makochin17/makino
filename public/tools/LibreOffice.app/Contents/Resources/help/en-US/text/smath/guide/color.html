@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Applying Color to Formula Parts</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+  <a name="bm_id3156384"></a>
+    <meta itemprop="keywords" content="Color in formulas">
+  
+  <h1 id="hd_id601641846107898" dir="auto">
+<a name="color"></a>Applying Color to Formula Parts</h1>
+  <p id="par_id481641846189425" class="paragraph" dir="auto">Use the command <span class="literal">color</span> to apply color to the subsequent formula part.</p>
+  <p id="par_id141641846432331" class="paragraph" dir="auto">The example below creates a formula where <span class="emph">a</span> is shown using the default color (black) and <span class="emph">b</span> is shown in red.</p>
+  <p id="par_id351641846485158" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">a + color red b</span>
+  </p>
+  <p id="par_id211641848286949" class="paragraph" dir="auto">Be aware that the <span class="literal">color</span> command only changes the color of the formula part that comes immediately after it. For example, in the formula below only <span class="emph">b</span> will be shown in red, whereas <span class="emph">c</span> will be shown in black.</p>
+  <p id="par_id351641840365858" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">a + color red b + c</span>
+  </p>
+  <p id="par_id841641848475043" class="paragraph" dir="auto">Use braces to apply color to more parts of the formula. In the following example, <span class="emph">b</span> and <span class="emph">c</span> are shown in red.</p>
+  <p id="par_id351641840365128" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">a + color red { b + c }</span>
+  </p>
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id651641851485699" dir="auto">A list with predefined color names is available <a target="_top" href="en-US/text/smath/guide/color.html#PredefinedColors">here</a>.</p></div>
+</div>
+<br>
+
+  <a name="bm_id521641858375937"></a>
+    <meta itemprop="keywords" content="RGB colors">
+  
+  <h2 id="hd_id831641851472401" dir="auto">Using RGB colors</h2>
+  <p id="par_id701641851641673" class="paragraph" dir="auto">Use the command <span class="literal">color rgb</span> to apply colors using RGB (Red, Green, Blue) values.</p>
+  <p id="par_id351641840365134" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">color rgb 192 0 128 var</span>
+  </p>
+  <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id941641851779414" dir="auto">RGB values range between 0 and 255.</p></div>
+</div>
+<br>
+
+  <a name="bm_id521641858372217"></a>
+    <meta itemprop="keywords" content="Hex colors">
+  
+  <h2 id="hd_id901641851813499" dir="auto">Using hex notation</h2>
+  <p id="par_id271641851832464" class="paragraph" dir="auto">Use the command <span class="literal">color hex</span> to apply colors using the hexadecimal notation.</p>
+  <p id="par_id351641840365002" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">color hex C00080 var</span>
+  </p>
+
+  <h2 id="hd_id121641851982125" dir="auto">Combining color with other commands</h2>
+  <p id="par_id321641852002469" class="paragraph" dir="auto">It is possible to combine the color command with other commands as <span class="literal">bold</span>, <span class="literal">italic</span> or <span class="literal">size</span>.</p>
+  <p id="par_id521641852051767" class="paragraph" dir="auto">The example below writes <span class="emph">var</span> in bold blue:</p>
+  <p id="par_id35164184033258" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">color blue bold var</span>
+  </p>
+  <p id="par_id21641852173099" class="paragraph" dir="auto">To change color and font size, use <span class="literal">color</span> in combination with <span class="literal">size</span> and the desired font size.</p>
+  <p id="par_id351641840335284" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">color blue size 20 var</span>
+  </p>
+
+  <a name="bm_id52164185802587"></a>
+    <meta itemprop="keywords" content="List of predefined colors">
+  
+  <a name="PredefinedColors"></a>
+    <h2 id="hd_id621641846264365" dir="auto">Predefined color names</h2>
+    <p id="par_id911641846282038" class="paragraph" dir="auto">LibreOffice provides a set of predefined color names that can be used along with the <span class="literal">color</span> command.</p>
+  
+  <table border="1" class="" cellpadding="0" cellspacing="0">
+    <tr>
+      <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+        <p id="par_id871641846833413" class="tableheadintable" dir="auto">Markup language</p>
+      </th>
+      <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+        <p id="par_id661641846833413" class="tableheadintable" dir="auto">Color</p>
+      </th>
+      <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+        <p id="par_id741641846833413" class="tableheadintable" dir="auto">Hex value</p>
+      </th>
+      <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+        <p id="par_id741641846833014" class="tableheadintable" dir="auto">RGB values</p>
+      </th>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846833413" class="tablecontentintable" dir="auto"><span class="literal">aqua</span> or <span class="literal">cyan</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846833413" class="tablecontentintable" dir="auto">Aqua</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846833413" class="tablecontentintable" dir="auto">00FFFF</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846833228" class="tablecontentintable" dir="auto">rgb(0, 255, 255)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846832580" class="tablecontentintable" dir="auto"><span class="literal">black</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846830036" class="tablecontentintable" dir="auto">Black</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846895473" class="tablecontentintable" dir="auto">000000</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846830228" class="tablecontentintable" dir="auto">rgb(0, 0, 0)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641818533413" class="tablecontentintable" dir="auto"><span class="literal">blue</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846320113" class="tablecontentintable" dir="auto">Blue</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846830022" class="tablecontentintable" dir="auto">0000FF</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846830214" class="tablecontentintable" dir="auto">rgb(0, 0, 255)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846830214" class="tablecontentintable" dir="auto"><span class="literal">coral</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846833363" class="tablecontentintable" dir="auto">Coral</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846836325" class="tablecontentintable" dir="auto">FF7F50</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846830218" class="tablecontentintable" dir="auto">rgb(255, 127, 80)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846830854" class="tablecontentintable" dir="auto"><span class="literal">crimson</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846833014" class="tablecontentintable" dir="auto">Crimson</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846833398" class="tablecontentintable" dir="auto">DC143C</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846836328" class="tablecontentintable" dir="auto">rgb(220, 20, 60)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846830853" class="tablecontentintable" dir="auto"><span class="literal">fuchsia</span> or <span class="literal">magenta</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846800325" class="tablecontentintable" dir="auto">Fuchsia</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846369853" class="tablecontentintable" dir="auto">FF00FF</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846865874" class="tablecontentintable" dir="auto">rgb(255, 0, 255)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846830213" class="tablecontentintable" dir="auto"><span class="literal">gray</span> or <span class="literal">grey</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846896513" class="tablecontentintable" dir="auto">Gray</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846021463" class="tablecontentintable" dir="auto">808080</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846830854" class="tablecontentintable" dir="auto">rgb(128, 128, 128)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846869350" class="tablecontentintable" dir="auto"><span class="literal">green</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846830214" class="tablecontentintable" dir="auto">Green</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846839658" class="tablecontentintable" dir="auto">008000</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846833973" class="tablecontentintable" dir="auto">rgb(0, 128, 0)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846832058" class="tablecontentintable" dir="auto"><span class="literal">hotpink</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846836253" class="tablecontentintable" dir="auto">Hot pink</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846844587" class="tablecontentintable" dir="auto">FF69B4</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846833652" class="tablecontentintable" dir="auto">rgb(255, 105, 180)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846896541" class="tablecontentintable" dir="auto"><span class="literal">indigo</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846812385" class="tablecontentintable" dir="auto">Indigo</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846833363" class="tablecontentintable" dir="auto">4B0082</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846864150" class="tablecontentintable" dir="auto">rgb(75, 0, 130)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846830325" class="tablecontentintable" dir="auto"><span class="literal">lavender</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846835521" class="tablecontentintable" dir="auto">Lavender</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846632584" class="tablecontentintable" dir="auto">E6E6FA</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846652828" class="tablecontentintable" dir="auto">rgb(230, 230, 250)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846830258" class="tablecontentintable" dir="auto"><span class="literal">lime</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846036523" class="tablecontentintable" dir="auto">Lime</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846855213" class="tablecontentintable" dir="auto">00FF00</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846830968" class="tablecontentintable" dir="auto">rgb(0, 255, 0)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846860143" class="tablecontentintable" dir="auto"><span class="literal">maroon</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846833649" class="tablecontentintable" dir="auto">Maroon</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846896433" class="tablecontentintable" dir="auto">800000</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846830328" class="tablecontentintable" dir="auto">rgb(128, 0, 0)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846003673" class="tablecontentintable" dir="auto"><span class="literal">midnightblue</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846837653" class="tablecontentintable" dir="auto">Midnight</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846863257" class="tablecontentintable" dir="auto">191970</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846833628" class="tablecontentintable" dir="auto">rgb(25, 25, 112)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846836325" class="tablecontentintable" dir="auto"><span class="literal">navy</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846867458" class="tablecontentintable" dir="auto">Navy</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846864203" class="tablecontentintable" dir="auto">000080</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846830998" class="tablecontentintable" dir="auto">rgb(0, 0, 128)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846833993" class="tablecontentintable" dir="auto"><span class="literal">olive</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846837663" class="tablecontentintable" dir="auto">Olive</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271640366833413" class="tablecontentintable" dir="auto">808000</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846965228" class="tablecontentintable" dir="auto">rgb(128, 128, 0)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846688413" class="tablecontentintable" dir="auto"><span class="literal">orange</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846838053" class="tablecontentintable" dir="auto">Orange</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846806613" class="tablecontentintable" dir="auto">FFA500</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846836508" class="tablecontentintable" dir="auto">rgb(255, 165, 0)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846860513" class="tablecontentintable" dir="auto"><span class="literal">orangered</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846836041" class="tablecontentintable" dir="auto">Orange red</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846815593" class="tablecontentintable" dir="auto">FF4500</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846839025" class="tablecontentintable" dir="auto">rgb(255, 69, 0)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846833003" class="tablecontentintable" dir="auto"><span class="literal">purple</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846833063" class="tablecontentintable" dir="auto">Purple</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846836013" class="tablecontentintable" dir="auto">0x800080</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641820513228" class="tablecontentintable" dir="auto">rgb(128, 0, 128)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846800698" class="tablecontentintable" dir="auto"><span class="literal">red</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846833902" class="tablecontentintable" dir="auto">Red</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846822843" class="tablecontentintable" dir="auto">FF0000</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846833008" class="tablecontentintable" dir="auto">rgb(255, 0, 0)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846830963" class="tablecontentintable" dir="auto"><span class="literal">seagreen</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846836613" class="tablecontentintable" dir="auto">Sea green</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846831113" class="tablecontentintable" dir="auto">2E8B57</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846838908" class="tablecontentintable" dir="auto">rgb(46, 139, 87)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846830993" class="tablecontentintable" dir="auto"><span class="literal">silver</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641840569413" class="tablecontentintable" dir="auto">Silver</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846806358" class="tablecontentintable" dir="auto">C0C0C0</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846863988" class="tablecontentintable" dir="auto">rgb(192, 192, 192)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846806325" class="tablecontentintable" dir="auto"><span class="literal">teal</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846896587" class="tablecontentintable" dir="auto">Teal</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846774513" class="tablecontentintable" dir="auto">008080</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846877108" class="tablecontentintable" dir="auto">rgb(0, 128, 128)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951641846830369" class="tablecontentintable" dir="auto"><span class="literal">violet</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846006745" class="tablecontentintable" dir="auto">Violet</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846830973" class="tablecontentintable" dir="auto">EE82EE</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641877833228" class="tablecontentintable" dir="auto">rgb(238, 130, 238)</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id951661846830258" class="tablecontentintable" dir="auto"><span class="literal">yellow</span></p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id841641846837556" class="tablecontentintable" dir="auto">Yellow</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846937413" class="tablecontentintable" dir="auto">FFFF00</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id271641846641728" class="tablecontentintable" dir="auto">rgb(255, 255, 0)</p>
+      </td>
+    </tr>
+  </table>
+<br>
+
+  <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/smath/01/03091500.html">Formula Reference Tables</a>
+</p></div>
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/smath/guide/brackets.html">Merging Formula Parts in Brackets</a>
+</p></div>
+  </div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/smath/guide/color.xhp" target="_blank">/text/smath/guide/color.xhp</a></p>
+<p dir="auto">Title is: Applying Color to Formula Parts</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

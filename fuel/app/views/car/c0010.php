@@ -26,17 +26,19 @@
                     <td style="width: 460px; height: 30px;">
                         <?php echo Form::input('customer_name', (!empty($data['customer_name'])) ? $data['customer_name']:'', array('class' => 'input-text', 'id' => 'customer_name', 'maxlength' => '5', 'style' => 'width: 250px;', 'tabindex' => '2')); ?>
                         <?php echo Form::hidden('customer_code', (!empty($data['customer_code'])) ? $data['customer_code']:'');?>
-                        <input type="button" name="s_client" value="検索" class='buttonA' tabindex="15" onclick="onClientSearch('<?php echo Uri::create('search/s0010'); ?>', 0)" />
+                        <input type="button" name="s_client" value="検索" class='buttonA' tabindex="15" onclick="onCustomerSearch('<?php echo Uri::create('search/s0010'); ?>', 0)" />
                     </td>
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 30px;">車番</td>
                     <td style="width: 460px; height: 30px;">
-                        <?php echo Form::input('car_code', (!empty($data['car_code'])) ? $data['car_code']:'', array('class' => 'input-text', 'id' => 'car_code', 'maxlength' => '5', 'style' => 'width: 250px;', 'tabindex' => '3')); ?>
+                        <?php echo Form::input('car_code', (!empty($data['car_code'])) ? $data['car_code'] : '', 
+                        array('class' => 'input-text', 'type' => 'text', 'id' => 'car_code', 'style' => 'width:250px;', 'maxlength' => '50', 'tabindex' => '3')); ?>
+                        <input type="button" name="s_client" value="検索" class='buttonA' tabindex="15" onclick="onCarCodeSearch('<?php echo Uri::create('search/s0020?mode=num'); ?>', 0)" />
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 30px;">お客様区分</td>
+                    <td style="width: 200px; height: 30px;">タイヤ種別</td>
                     <td style="width: 460px; height: 30px;">
                         <?php echo Form::select('class_flg', ($data['class_flg'] != '') ? $data['class_flg'] : '', $tire_kind_list,
                         array('class' => 'select-item', 'id' => 'class_flg', 'style' => 'width: 150px', 'tabindex' => '4')); ?></td>
@@ -68,6 +70,7 @@
         <?php echo Form::hidden('processing_division', '');?>
         <?php echo Form::hidden('car_id', '');?>
         <?php echo Form::hidden('select_record', '');?>
+        <?php echo Form::hidden('mode', '');?>
         <?php echo Form::hidden('list_count', $list_count);?>
         <?php echo Form::hidden(\Config::get('security.csrf_token_key'), \Security::fetch_token());?>
         <?php if ($total > 0) : ?>
@@ -85,7 +88,8 @@
             <div class="table-wrap" style="clear: right">
                 <table class="table-inq" style="width: 1400px;">
                     <tr>
-                        <th style="width: 70px;">選択</th>
+                        <th style="width: 70px;">詳細</th>
+                        <th style="width: 70px;">更新</th>
                         <th style="width: 180px;">お客様名</th>
                         <th style="width: 100px;">車番</th>
                         <th style="width: 160px;">車種</th>
@@ -100,6 +104,10 @@
                       <?php foreach ($list_data as $key => $val) : ?>
                         <?php $i++; ?>
                         <tr>
+                            <td style="width: 60px; text-align: center;">
+                                <button type="button" onclick="onDetail('<?php echo Uri::create('car/c0013'); ?>', <?php echo $val['car_id']; ?>)" class="buttonA">
+                                    詳細</button>
+                            </td>
                             <td style="width: 60px; text-align: center;">
                                 <button type="button" onclick="onEdit('<?php echo Uri::create('car/c0012'); ?>', <?php echo $val['car_id']; ?>)" class="buttonA">
                                     <i class='fa fa-edit' style="font-size:14px;"></i> 編集</button>

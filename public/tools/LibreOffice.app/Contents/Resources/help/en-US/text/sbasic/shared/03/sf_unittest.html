@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>SFUnitTests.UnitTest service</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="ScriptForge-sf_unittest"></a>
+  <a name="bm_id501600788079507"></a>
+    <meta itemprop="keywords" content="UnitTest service">
+  
+
+<a name="abstract"></a>
+  <h1 id="bm_id681600788076499" dir="auto">
+<a name="UnitTestService"></a><span class="literal">SFUnitTests</span>.<span class="literal">UnitTest</span> service</h1>
+  <p id="par_id181600788076612" class="paragraph" dir="auto">The <span class="literal">UnitTest</span> service provides a framework for automating unit tests using the Basic language, including the ability to:</p>
+  <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+      <p id="par_id301600788076785" class="listitem" dir="auto">Aggregate test cases into test suites and unit tests.</p>
+    </li>
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+      <p id="par_id1001600788076848" class="listitem" dir="auto">Share setup and shutdown code among test cases.</p>
+    </li>
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+      <p id="par_id67160078807676" class="listitem" dir="auto">Report test results using the <span class="literal">Console</span>.</p>
+    </li>
+  </ul>
+
+  <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id411656351918942" dir="auto">Both the unit tests and the code to be tested must be written in Basic. The code being tested may call functions written in other languages.</p></div>
+</div>
+<br>
+  <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id601656621416963" dir="auto">The <span class="literal">UnitTest</span> service is not available for Python scripts.</p></div>
+</div>
+<br>
+
+  <h2 id="hd_id491656351958796" dir="auto">Definitions</h2>
+  <h3 id="hd_id31656351967453" dir="auto">Test Case</h3>
+  <p id="par_id571656351977812" class="paragraph" dir="auto">A test case is the individual unit of testing. It checks for a specific response to a particular set of inputs.</p>
+  <p id="par_id391656352078166" class="paragraph" dir="auto">In the <span class="literal">UnitTest</span> service, a test case is represented by a single Basic <span class="literal">Sub</span> whose name starts with a common prefix (the default is "Test_").</p>
+  <p id="par_id701656352338645" class="paragraph" dir="auto">The test case fails if one of the <span class="literal">AssertX</span> methods returns <span class="literal">False</span>.</p>
+  <h3 id="hd_id431656352497598" dir="auto">Test Suite</h3>
+  <p id="par_id771656352513789" class="paragraph" dir="auto">A test suite is a collection of test cases that should be executed together.</p>
+  <p id="par_id941656352597973" class="paragraph" dir="auto">All test cases of a test suite are stored in a single Basic module.</p>
+  <p id="par_id51656352696989" class="paragraph" dir="auto">A test suite may implement the <span class="literal">SetUp</span> and <span class="literal">TearDown</span> methods to prepare for test cases in its module.</p>
+  <h3 id="hd_id351656352884283" dir="auto">Unit Test</h3>
+  <p id="par_id461656352894003" class="paragraph" dir="auto">A full unit test consists of a set of test suites in the same Basic library.</p>
+
+  <h2 id="hd_id991656353328287" dir="auto">Service invocation</h2>
+  <p id="par_id141609955500101" class="paragraph" dir="auto">Before using the <span class="literal">UnitTest</span> service the <span class="literal">ScriptForge</span> library needs to be loaded or imported:</p>
+  <div class="embedded">
+<a name="importLibs"></a>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id901528999850603" dir="auto">• Basic macros require to load <span class="literal">ScriptForge</span> library using the following statement:<br><span class="literal">GlobalScope.BasicLibraries.loadLibrary("ScriptForge")</span><br><br>• Python scripts require an import from <span class="literal">scriptforge</span> module:<br><span class="literal">from scriptforge import CreateScriptService</span>
+    </p></div>
+</div>
+<br>
+  </div>
+  <h3 id="hd_id941656357981021" dir="auto">Simple mode</h3>
+  <p id="par_id381656357996613" class="paragraph" dir="auto">Invoke the service in <span class="emph">simple mode</span> to call <span class="literal">AssertX</span> functions without having to build the full hierarchy of test suites and test cases.</p>
+  <p id="par_id331656358092318" class="paragraph" dir="auto">In simple mode, the service is invoked inside the test case, as shown in the example below:</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    Sub SimpleTest
+        On Local Error GoTo CatchError
+        Dim myTest As Variant
+        myTest = CreateScriptService("UnitTest")
+        ' A few dummy tests
+        myTest.AssertEqual(1 + 1, 2)
+        myTest.AssertEqual(1 - 1, 0)
+        MsgBox("All tests passed")
+        Exit Sub
+    CatchError:
+        myTest.ReportError("A test failed")
+    End Sub
+  </code></pre></div>
+  <p id="par_id321656421319505" class="paragraph" dir="auto">In this example, if any of the <span class="literal">AssertEqual</span> calls fail, the interpreter will go to the <span class="literal">CatchError</span> label and report the error by calling the <span class="literal">ReportError</span> method.</p>
+  <h3 id="hd_id341656353807950" dir="auto">Full mode</h3>
+  <p id="par_id881656353390116" class="paragraph" dir="auto">When invoked in <span class="emph">full mode</span>, the service creation is external to the test code and all tests are organized into test cases and test suites inside a single library.</p>
+  <p id="par_id41656354017140" class="paragraph" dir="auto">The following example creates a <span class="literal">UnitTest</span> instance whose tests are located inside the current document (<span class="literal">ThisComponent</span>) in the "Tests" library.</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    GlobalScope.BasicLibraries.loadLibrary("ScriptForge")
+    Dim myUnitTest As Variant
+    myUnitTest = CreateScriptService("UnitTest", ThisComponent, "Tests")
+  </code></pre></div>
+  <h3 id="hd_id731656421609300" dir="auto">A minimalist example in full mode</h3>
+  <p id="par_id721656421629357" class="paragraph" dir="auto">Consider that a ODS file has a module named "MathUtils" in its "Standard" library with the following code:</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    ' Code in module Standard.MathUtils
+    Function Sum(a, b) As Double
+        Sum = a + b
+    End Function
+    
+    Function Multiply(a, b) As Double
+        Multiply = a * b
+    End Function
+  </code></pre></div>
+  <p id="par_id871656422027581" class="paragraph" dir="auto">To create a full test suite, consider that a new library named "Tests" is created in the file with a single module "AllTests" containing the code below:</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    ' Code in module Tests.AllTests
+    Sub Main()
+        GlobalScope.BasicLibraries.loadLibrary("ScriptForge")
+        Dim test As Variant
+        test = CreateScriptService("UnitTest", ThisComponent, "Tests")
+        test.RunTest("AllTests")
+        test.Dispose()
+    End Sub
+    
+    Sub Setup(test)
+        ' Preparation code ran prior to the first test case
+        Dim exc As Variant
+        exc = CreateScriptService("Exception")
+        exc.Console(Modal := False)
+    End Sub
+    
+    Sub TearDown(test)
+        ' Optional cleanup code called after the last test case
+    End Sub
+    
+    Sub Test_Sum(test)
+        On Local Error GoTo CatchError
+        test.AssertEqual(Sum(1, 1), 2, "Sum two positive integers")
+        test.AssertEqual(Sum(-10, 20), 10, "Sum of negative and positive integers")
+        test.AssertEqual(Sum(1.5, 1), 2.5, "Sum of float and integer values")
+        Exit Sub
+    CatchError:
+        test.ReportError("Sum method is broken")
+    End Sub
+    
+    Sub Test_Multiply(test)
+        On Local Error GoTo CatchError
+        test.AssertEqual(Multiply(2, 2), 4, "Multiply two positive integers")
+        test.AssertEqual(Multiply(-4, 2), -8, "Multiply negative and positive integers")
+        test.AssertEqual(Multiply(1.5, 3), 4.5, "Multiply of float and integer values")
+        Exit Sub
+    CatchError:
+        test.ReportError("Multiply method is broken")
+    End Sub
+  </code></pre></div>
+  <p id="par_id681656423030706" class="paragraph" dir="auto">The test suite above consists of two test cases <span class="literal">Test_Sum</span> and <span class="literal">Test_Multiply</span>. To run all tests simply run the <span class="literal">Main</span> method from the "AllTests" module.</p>
+  <p id="par_id681656423146183" class="paragraph" dir="auto">The <a target="_top" href="en-US/text/sbasic/shared/03/sf_exception.html#Console"><span class="literal">Console</span></a> from the <span class="literal">Exception</span> service is used as the default output to print test results. After running the example above, the following output will be displayed in the console:</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    ' RUNTEST ENTER testsuite='Tests.AllTests', pattern='Test_*'
+    '   SETUP Tests.AllTests.Setup() ENTER
+    '   SETUP Tests.AllTests.Setup() EXIT
+    '   TESTCASE Tests.AllTests.Test_Multiply() ENTER
+    '   TESTCASE Tests.AllTests.Test_Multiply() EXIT (0,017 sec)
+    '   TESTCASE Tests.AllTests.Test_Sum() ENTER
+    '   TESTCASE Tests.AllTests.Test_Sum() EXIT (0,016 sec)
+    '   TEARDOWN Tests.AllTests.TearDown() ENTER
+    '   TEARDOWN Tests.AllTests.TearDown() EXIT
+    ' RUNTEST EXIT testsuite='Tests.AllTests' (0,223 sec)
+  </code></pre></div>
+  <p id="par_id161656423510879" class="paragraph" dir="auto">If any of the <span class="literal">AssertEqual</span> methods fails during these tests, an error message is added to the console.</p>
+
+  <a name="bm_id11161490151416"></a>
+    <meta itemprop="keywords" content="Region service,LongMessage">
+    <meta itemprop="keywords" content="Region service,ReturnCode">
+    <meta itemprop="keywords" content="Region service,Verbose">
+    <meta itemprop="keywords" content="Region service,WhenAssertionFails">
+  
+
+  <h2 id="hd_id711600788076834" dir="auto">Properties</h2>
+  <a name="properties_toc"></a>
+   <table border="1" class="" cellpadding="0" cellspacing="0">
+    <tr>
+      <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+        <p id="par_id461600788076917" class="tableheadintable" dir="auto">Name</p>
+      </th>
+      <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+        <p id="par_id221600788076591" class="tableheadintable" dir="auto">Readonly</p>
+      </th>
+      <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+        <p id="par_id761600788076328" class="tableheadintable" dir="auto">Type</p>
+      </th>
+      <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+        <p id="par_id67160078807636" class="tableheadintable" dir="auto">Description</p>
+      </th>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id491600788076621" class="tablecontentintable" dir="auto">LongMessage</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id311600788076756" class="tablecontentintable" dir="auto">No</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id831600788076785" class="tablecontentintable" dir="auto">Boolean</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id441600788076826" class="tablecontentintable" dir="auto">When set to <span class="literal">True</span> (default) the console shows the standard message appended to the message provided by the tester. When <span class="literal">False</span>, only the message defined by the tester is used.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id941600788076595" class="tablecontentintable" dir="auto">ReturnCode</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id49160078807654" class="tablecontentintable" dir="auto">Yes</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id961600788076376" class="tablecontentintable" dir="auto">Integer</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id81600788076419" class="tablecontentintable" dir="auto">Value returned by <span class="literal">RunTest</span> after the unit test is finished. Next is a list of possible values:</p>
+        <p id="par_id141656425588260" class="paragraphintable" dir="auto">0 - Test finished without errors or test not started<br>
+        1 - An assertion within a test case returned <span class="literal">False</span><br>
+        2 - A <span class="literal">SkipTest</span> was issued by the <span class="literal">Setup</span> method or by one of the test cases.<br>
+        3 - Abnormal end of test</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id721600788076638" class="tablecontentintable" dir="auto">Verbose</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id711600788076534" class="tablecontentintable" dir="auto">No</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id911600788076842" class="tablecontentintable" dir="auto">Boolean</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id541600788076645" class="tablecontentintable" dir="auto">When set to <span class="literal">True</span>, all assertions are reported in the console (failing or not). When <span class="literal">False</span> (default), only failing assertions are reported.</p>
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id961600788076890" class="tablecontentintable" dir="auto">WhenAssertionFails</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id891600788076190" class="tablecontentintable" dir="auto">No</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id761600788076562" class="tablecontentintable" dir="auto">Integer</p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id91600788076674" class="tablecontentintable" dir="auto">Defines what is done when an assertion fails. Next is a list of possible values:</p>
+        <p id="par_id671656425606077" class="paragraphintable" dir="auto">0 - Ignore the failure and continue running the test<br>
+        1 - The <span class="literal">TearDown</span> method in the module is executed in the current test suite and the next suite is started (default in full mode).<br>
+        2 - Stop immediately (default in simple mode)</p>
+      </td>
+    </tr>
+   </table>
+<br>
+  
+
+  <a name="methods_toc"></a>
+   <table border="1" class="" cellpadding="0" cellspacing="0">
+    <tr>
+      <th rowspan="" colspan="3" class="tableheadcell" dir="auto">
+        <p id="par_id651606319520519" class="tableheadintable" dir="auto">List of Methods in the UnitTest Service</p>
+      </th>
+    </tr>
+    <tr>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id761611086279902" class="tablecontentintable" dir="auto">
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertAlmostEqual">AssertAlmostEqual</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertEqual">AssertEqual</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertFalse">AssertFalse</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertGreater">AssertGreater</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertGreaterEqual">AssertGreaterEqual</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertIn">AssertIn</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertIsInstance">AssertIsInstance</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertIsNothing">AssertIsNothing</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertLike">AssertLike</a><br>
+        </p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id141611086279902" class="tablecontentintable" dir="auto">
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertNotRegex">AssertNotRegex</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertIsNull">AssertIsNull</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertLess">AssertLess</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertLessEqual">AssertLessEqual</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertNotAlmostEqual">AssertNotAlmostEqual</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertNotEqual">AssertNotEqual</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertNotIn">AssertNotIn</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertNotInstance">AssertNotInstance</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertNotLike">AssertNotLike</a><br>
+        </p>
+      </td>
+      <td rowspan="" colspan="" dir="auto">
+        <p id="par_id761611086279903" class="tablecontentintable" dir="auto">
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertNotNothing">AssertNotNothing</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertNotNull">AssertNotNull</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertRegex">AssertRegex</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertTrue">AssertTrue</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#Fail">Fail</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#Log">Log</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#ReportError">ReportError</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#RunTest">RunTest</a><br>
+          <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#SkipTest">SkipTest</a><br>
+        </p>
+      </td>
+    </tr>
+   </table>
+<br>
+  
+
+  <h2 id="hd_id201656428230690" dir="auto">Arguments of the AssertX methods</h2>
+  <p id="par_id591656428251124" class="paragraph" dir="auto">All assertions test one or two expressions, referred in the remainder of this help page as <span class="emph">A</span> and <span class="emph">B</span>. They are always the first one or two arguments in the <span class="literal">AssertX</span> method.</p>
+  <p id="par_id231656428367462" class="paragraph" dir="auto">All <span class="literal">AssertX</span> methods accept a <span class="literal">message</span> argument specifying a custom message to be reported in the console regarding the assertion. By default an empty string is used. This argument is always in the last position of the assertion.</p>
+  <p id="par_id91656451227291" class="paragraph" dir="auto">Some <span class="literal">AssertX</span> methods also accept additional arguments, as described by their syntaxes below.</p>
+
+  <a name="AssertAlmostEqual"></a>
+    
+    <a name="bm_id92158919665187"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertAlmostEqual">
+    
+    <h2 id="hd_id201589199698020" dir="auto">AssertAlmostEqual</h2>
+    <p id="par_id71621894833351" class="paragraph" dir="auto">Returns <span class="literal">True</span> when <span class="emph">A</span> and <span class="emph">B</span> are numerical values and are considered to be close to each other, given a relative tolerance.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897232817" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertAlmostEqual(a: any, b: any, tolerance: double = 1E-09, message: str = ""): bool</span>
+    </p>
+    <p id="par_id241656426318310" class="paragraph" dir="auto">This assertion returns <span class="literal">True</span> if the two conditions below are met:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id861656426361793" class="listitem" dir="auto">A and B can be converted to the <span class="literal">Double</span> type.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id851656426362072" class="listitem" dir="auto">The absolute difference between A and B divided by the largest absolute value of A or B is <span class="emph">lower</span> than the value specified in <span class="literal">tolerance</span>.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertEqual"></a>
+    
+    <a name="bm_id92158919960367"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertEqual">
+    
+    <h2 id="hd_id2015891996965210" dir="auto">AssertEqual</h2>
+    <p id="par_id71621894830182" class="paragraph" dir="auto">Returns <span class="literal">True</span> when <span class="emph">A</span> and <span class="emph">B</span> are considered to be equal.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897208117" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertEqual(a: any, b: any, message: str = ""): bool</span>
+    </p>
+    <p id="par_id241656426317440" class="paragraph" dir="auto">When A and B are scalars, <span class="literal">True</span> is returned if:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id861656426361808" class="listitem" dir="auto">Both expressions have the same <span class="literal">VarType</span> or are both numeric.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id851656426362362" class="listitem" dir="auto">Booleans and numeric values are compared with the = operator.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id201656427500186" class="listitem" dir="auto">Strings are compared with the builtin <span class="literal">StrComp</span> function. The comparison is case-sensitive.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id861656427531067" class="listitem" dir="auto">Dates and times are compared up to the second.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id361656427557940" class="listitem" dir="auto"><span class="literal">Null</span>, <span class="literal">Empty</span> and <span class="literal">Nothing</span> are not equal, but <span class="literal">AssertEqual(Nothing, Nothing)</span> returns <span class="literal">True</span>.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id31656427624016" class="listitem" dir="auto">UNO objects are compared with the builtin <span class="literal">EqualUnoObjects</span> method.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id301656427695507" class="listitem" dir="auto">Note that Basic objects are never equal.</p>
+      </li>
+    </ul>
+    <p id="par_id691656427837518" class="paragraph" dir="auto">When A and B are arrays, <span class="literal">True</span> is returned if:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id831656427894608" class="listitem" dir="auto">Both arrays have the same number of dimensions (up to 2 dimensions) and their lower and upper bounds are identical for all dimensions.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id851656427895040" class="listitem" dir="auto">All items in both arrays are equal, one by one.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id571656427895400" class="listitem" dir="auto">Two empty arrays are considered to be equal.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertFalse"></a>
+    
+    <a name="bm_id92158919969204"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertFalse">
+    
+    <h2 id="hd_id201589199693690" dir="auto">AssertFalse</h2>
+    <p id="par_id71621894830071" class="paragraph" dir="auto">Returns <span class="literal">True</span> when the type of A is <span class="literal">Boolean</span> and its value is <span class="literal">False</span>.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897203045" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertFalse(a: any, message: str = ""): bool</span>
+    </p>
+  
+
+  <a name="AssertGreater"></a>
+    
+    <a name="bm_id92158919969108"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertGreater">
+    
+    <h2 id="hd_id201589199665410" dir="auto">AssertGreater</h2>
+    <p id="par_id71621894830337" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A is greater than B.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897207037" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertGreater(a: any, b: any, message: str = ""): bool</span>
+    </p>
+    <p id="par_id991656428670110" class="paragraph" dir="auto">The comparison between A and B assumes the following:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id591656428689390" class="listitem" dir="auto">Eligible data types are <span class="literal">String</span>, <span class="literal">Date</span> or numeric.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id516564286489629" class="listitem" dir="auto">Both expressions must have the same <span class="literal">VarType</span> or both must be numeric.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id211656428689774" class="listitem" dir="auto">String comparisons are case-sensitive.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertGreaterEqual"></a>
+    
+    <a name="bm_id92158919963398"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertGreaterEqual">
+    
+    <h2 id="hd_id201589199666322" dir="auto">AssertGreaterEqual</h2>
+    <p id="par_id71621894838548" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A is greater than or equal to B.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897203210" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertGreaterEqual(a: any, b: any, message: str = ""): bool</span>
+    </p>
+    <p id="par_id991656428670202" class="paragraph" dir="auto">The comparison between A and B assumes the following:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id591656428689207" class="listitem" dir="auto">Eligible data types are <span class="literal">String</span>, <span class="literal">Date</span> or numeric.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id516564286455529" class="listitem" dir="auto">Both expressions must have the same <span class="literal">VarType</span> or both must be numeric.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id211656428663284" class="listitem" dir="auto">String comparisons are case-sensitive.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertIn"></a>
+    
+    <a name="bm_id92158919964658"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertIn">
+    
+    <h2 id="hd_id201589199666309" dir="auto">AssertIn</h2>
+    <p id="par_id71621894831448" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A is found in B.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897203344" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertIn(a: any, b: any, message: str = ""): bool</span>
+    </p>
+    <p id="par_id991656428677632" class="paragraph" dir="auto">This assertion assumes the following:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id591656428688858" class="listitem" dir="auto">Expression B may be a 1D array, a ScriptForge <span class="literal">Dictionary</span> object or a string.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id516564286454219" class="listitem" dir="auto">When expression B is a 1D array, expression A may be a date or a numeric value.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id51656678140228" class="listitem" dir="auto">When expression B is a ScriptForge <span class="literal">Dictionary</span> object, then string A is searched for among the keys in B.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id211656428663299" class="listitem" dir="auto">String comparisons are case-sensitive.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertIsInstance"></a>
+    
+    <a name="bm_id92158919963087"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertIsInstance">
+    
+    <h2 id="hd_id201589199666212" dir="auto">AssertIsInstance</h2>
+    <p id="par_id71621894831399" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A is an instance of a specified object type, specified as a string containing the type name.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897201284" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertIsInstance(a: any, objecttype: str, message: str = ""): bool</span>
+    </p>
+    <p id="par_id991656428676302" class="paragraph" dir="auto">Expression A may be one of the following:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id591656428676428" class="listitem" dir="auto">A ScriptForge object. In this case, the <span class="literal">objecttype</span> argument is a string such as "DICTIONARY", "calc", "Dialog", etc.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id516564286456619" class="listitem" dir="auto">A UNO object. In this case, the <span class="literal">objecttype</span> argument must be a string identical to the value returned by the <span class="literal">SF_Session.UnoObjectType()</span> method.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id211656428680559" class="listitem" dir="auto">An Array. In this case, the <span class="literal">objecttype</span> argument is expected to be "array".</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id891656439858783" class="listitem" dir="auto">Any other variable (neither an <span class="literal">Object</span> nor an <span class="literal">Array</span>). In this case, <span class="literal">objecttype</span> is a string matching the value returned by the builtin <span class="literal">TypeName</span> function.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertIsNothing"></a>
+    
+    <a name="bm_id92158919936404"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertIsNothing">
+    
+    <h2 id="hd_id201589199693766" dir="auto">AssertIsNothing</h2>
+    <p id="par_id71621894830197" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A is an object that has the <span class="literal">Nothing</span> value.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897221145" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertIsNothing(a: any, message: str = ""): bool</span>
+    </p>
+  
+
+  <a name="AssertIsNull"></a>
+    
+    <a name="bm_id92158919969366"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertIsNull">
+    
+    <h2 id="hd_id201589199693825" dir="auto">AssertIsNull</h2>
+    <p id="par_id71621894863251" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A has the <span class="literal">Null</span> value.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897202545" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertIsNull(a: any, message: str = ""): bool</span>
+    </p>
+  
+
+  <a name="AssertLess"></a>
+    
+    <a name="bm_id92158919964338"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertLess">
+    
+    <h2 id="hd_id201589199663022" dir="auto">AssertLess</h2>
+    <p id="par_id71621894838018" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A is less than B.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id59162189726574" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertLess(a: any, b: any, message: str = ""): bool</span>
+    </p>
+    <p id="par_id991656428672332" class="paragraph" dir="auto">The comparison between A and B assumes the following:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id591656428689311" class="listitem" dir="auto">Eligible data types are <span class="literal">String</span>, <span class="literal">Date</span> or numeric.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id516564286265809" class="listitem" dir="auto">Both expressions must have the same <span class="literal">VarType</span> or both must be numeric.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id211656428660996" class="listitem" dir="auto">String comparisons are case-sensitive.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertLessEqual"></a>
+    
+    <a name="bm_id92158919964174"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertLessEqual">
+    
+    <h2 id="hd_id201589199661992" dir="auto">AssertLessEqual</h2>
+    <p id="par_id71621894208818" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A is less than or equal to B.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id59162189720864" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertLessEqual(a: any, b: any, message: str = ""): bool</span>
+    </p>
+    <p id="par_id991656428606322" class="paragraph" dir="auto">The comparison between A and B assumes the following:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id591656428682251" class="listitem" dir="auto">Eligible data types are <span class="literal">String</span>, <span class="literal">Date</span> or numeric.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id516564286265711" class="listitem" dir="auto">Both expressions must have the same <span class="literal">VarType</span> or both must be numeric.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id211656428660176" class="listitem" dir="auto">String comparisons are case-sensitive.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertLike"></a>
+    
+    <a name="bm_id92158919968226"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertLike">
+    
+    <h2 id="hd_id201589199611825" dir="auto">AssertLike</h2>
+    <p id="par_id71621894862651" class="paragraph" dir="auto">Returns <span class="literal">True</span> if string A matches a given pattern containing wildcards.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897207315" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertLike(a: any, pattern: str = "", message: str = ""): bool</span>
+    </p>
+    <p id="par_id51656446203238" class="paragraph" dir="auto">The following wildcards are accepted:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id661656446233484" class="listitem" dir="auto">? - Represents any single character.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id681656446233831" class="listitem" dir="auto">* - Represents zero, one, or multiple characters.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertNotAlmostEqual"></a>
+    
+    <a name="bm_id92158919665187"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertNotAlmostEqual">
+    
+    <h2 id="hd_id2015891996638414" dir="auto">AssertNotAlmostEqual</h2>
+    <p id="par_id71621894832641" class="paragraph" dir="auto">Returns <span class="literal">True</span> when <span class="emph">A</span> and <span class="emph">B</span> are numerical values and are <span class="emph">not</span> considered to be close to each other, given a relative tolerance.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id5916218972331205" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertNotAlmostEqual(a: any, b: any, tolerance: double = 1E-09, message: str = ""): bool</span>
+    </p>
+    <p id="par_id241656426317970" class="paragraph" dir="auto">This assertion returns <span class="literal">True</span> if the two conditions below are met:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id861656426361686" class="listitem" dir="auto">A and B can be converted to the <span class="literal">Double</span> type.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id851656426332052" class="listitem" dir="auto">The absolute difference between A and B divided by the largest absolute value of A or B is <span class="emph">greater</span> than the value specified in <span class="literal">tolerance</span>.</p>
+      </li>
+    </ul>
+  
+
+  <a name="AssertNotEqual"></a>
+    
+    <a name="bm_id92158919961047"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertNotEqual">
+    
+    <h2 id="hd_id2015891996963410" dir="auto">AssertNotEqual</h2>
+    <p id="par_id71621894862842" class="paragraph" dir="auto">Returns <span class="literal">True</span> when <span class="emph">A</span> and <span class="emph">B</span> are <span class="emph">not</span> considered to be equal.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897227497" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertNotEqual(a: any, b: any, message: str = ""): bool</span>
+    </p>
+    <p id="par_id581656446598206" class="paragraph" dir="auto">This method works both for scalars and arrays. Read the instructions in <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertEqual"><span class="literal">AssertEqual</span></a> for more information on what equality means in this assertion.</p>
+  
+
+  <a name="AssertNotIn"></a>
+    
+    <a name="bm_id92158919932358"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertNotIn">
+    
+    <h2 id="hd_id201589199617409" dir="auto">AssertNotIn</h2>
+    <p id="par_id71621894832638" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A (a string) is <span class="emph">not</span> found in B.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897212544" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertNotIn(a: any, b: any, message: str = ""): bool</span>
+    </p>
+    <p id="par_id271656446302516" class="paragraph" dir="auto">Read the instructions in <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertIn"><span class="literal">AssertIn</span></a> for more information on the assumptions of this method.</p>
+  
+
+  <a name="AssertNotInstance"></a>
+    
+    <a name="bm_id92158919963186"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertNotInstance">
+    
+    <h2 id="hd_id201589199676312" dir="auto">AssertNotInstance</h2>
+    <p id="par_id71621894831403" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A is <span class="emph">not</span> an instance of a specified object type.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897136284" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertNotInstance(a: any, objecttype: str, message: str = ""): bool</span>
+    </p>
+    <p id="par_id271656446949396" class="paragraph" dir="auto">Read the instructions in <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertIsInstance"><span class="literal">AssertIsInstance</span></a> for more information on the assumptions of this method.</p>
+  
+
+  <a name="AssertNotLike"></a>
+    
+    <a name="bm_id92158919967256"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertNotLike">
+    
+    <h2 id="hd_id201589199612225" dir="auto">AssertNotLike</h2>
+    <p id="par_id71621894863961" class="paragraph" dir="auto">Returns <span class="literal">True</span> if string A <span class="emph">does not</span> match a given pattern containing wildcards.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897237415" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertNotLike(a: any, pattern: str = "", message: str = ""): bool</span>
+    </p>
+    <p id="par_id271656446258396" class="paragraph" dir="auto">Read the instructions in <a target="_top" href="en-US/text/sbasic/shared/03/sf_unittest.html#AssertLike"><span class="literal">AssertLike</span></a> for more information on the assumptions of this method.</p>
+  
+
+  <a name="AssertNotNothing"></a>
+    
+    <a name="bm_id92158914467256"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertNotNothing">
+    
+    <h2 id="hd_id201589199743855" dir="auto">AssertNotNothing</h2>
+    <p id="par_id71621894420261" class="paragraph" dir="auto">Returns <span class="literal">True</span> except when A is an object that has the <span class="literal">Nothing</span> value.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621843337415" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertNotNothing(a: any, message: str = ""): bool</span>
+    </p>
+  
+
+  <a name="AssertNotNull"></a>
+    
+    <a name="bm_id92158919966555"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertNotNull">
+    
+    <h2 id="hd_id201589199602825" dir="auto">AssertNotNull</h2>
+    <p id="par_id71621894876551" class="paragraph" dir="auto">Returns <span class="literal">True</span> except when A has the <span class="literal">Null</span> value.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621897223945" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertNotNull(a: any, message: str = ""): bool</span>
+    </p>
+  
+
+  <a name="AssertNotRegex"></a>
+    
+    <a name="bm_id92158919964125"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertNotRegex">
+    
+    <h2 id="hd_id201589199602432" dir="auto">AssertNotRegex</h2>
+    <p id="par_id71621894860331" class="paragraph" dir="auto">Returns <span class="literal">True</span> when A is <span class="emph">not</span> a string or <span class="emph">does not</span> match the given regular expression.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621898163945" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertNotRegex(a: any, regex: str = "", message: str = ""): bool</span>
+    </p>
+    <p id="par_id931656448163772" class="paragraph" dir="auto">The comparison is case-sensitive.</p>
+  
+
+  <a name="AssertRegex"></a>
+    
+    <a name="bm_id92158919933525"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertRegex">
+    
+    <h2 id="hd_id201589199601132" dir="auto">AssertRegex</h2>
+    <p id="par_id71621894836031" class="paragraph" dir="auto">Returns <span class="literal">True</span> when string A matches the given regular expression.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621898142945" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertRegex(a: any, regex: str = "", message: str = ""): bool</span>
+    </p>
+    <p id="par_id931656448163625" class="paragraph" dir="auto">The comparison is case-sensitive.</p>
+  
+
+  <a name="AssertTrue"></a>
+    
+    <a name="bm_id92158919986595"></a>
+      <meta itemprop="keywords" content="UnitTest service,AssertTrue">
+    
+    <h2 id="hd_id20158919962312" dir="auto">AssertTrue</h2>
+    <p id="par_id71621894063449" class="paragraph" dir="auto">Returns <span class="literal">True</span> when expression A is a <span class="literal">Boolean</span> and its value is <span class="literal">True</span>.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621898125645" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.AssertTrue(a: any, message: str = ""): bool</span>
+    </p>
+  
+
+  <a name="Fail"></a>
+    
+    <a name="bm_id92158919986595"></a>
+      <meta itemprop="keywords" content="UnitTest service,Fail">
+    
+    <h2 id="hd_id20158919736312" dir="auto">Fail</h2>
+    <p id="par_id71621894086431" class="paragraph" dir="auto">Forces a test case to fail.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621890114545" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Fail(message: str = "")</span>
+    </p>
+    <p id="par_id751656448550854" class="paragraph" dir="auto">A message can be provided to be reported in the console.</p>
+  
+
+  <a name="Log"></a>
+    
+    <a name="bm_id92158919986595"></a>
+      <meta itemprop="keywords" content="UnitTest service,Log">
+    
+    <h2 id="hd_id20158919909612" dir="auto">Log</h2>
+    <p id="par_id71621894063631" class="paragraph" dir="auto">Writes the specified <span class="literal">message</span> in the console.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621898149545" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Log(message: str = "")</span>
+    </p>
+    <p id="par_id751656448510894" class="paragraph" dir="auto">A message can be provided to be reported in the console.</p>
+  
+
+  <a name="ReportError"></a>
+    
+    <a name="bm_id92158919949695"></a>
+      <meta itemprop="keywords" content="UnitTest service,ReportError">
+    
+    <h2 id="hd_id20158919658972" dir="auto">ReportError</h2>
+    <p id="par_id71621894199311" class="paragraph" dir="auto">Displays a message box with a message and the current property values of the <span class="literal">Exception</span> service.</p>
+    <p id="par_id851656622819891" class="paragraph" dir="auto">This method is commonly used in the exception handling section of the <span class="literal">Sub</span> containing the test case, which is reached when an assertion fails or when the <span class="literal">Fail</span> method is called.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591639698323545" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.ReportError(message: str = "")</span>
+    </p>
+    <p id="par_id291656448892783" class="paragraph" dir="auto">Depending on the value of the property <span class="literal">WhenAssertionFails</span>, the test execution may continue or be interrupted.</p>
+    <p id="par_id551656448951538" class="paragraph" dir="auto">When writing test cases it is recommended to include a call to the <span class="literal">ReportError</span> method in the exception handling section of the <span class="literal">Sub</span>.</p>
+    <p id="par_id711656449128572" class="paragraph" dir="auto">If the property <span class="literal">LongMessage</span> is equal to <span class="literal">True</span>, the specified <span class="literal">message</span> is followed by the standard error message description. Otherwise only the <span class="literal">message</span> is displayed.</p>
+  
+
+  <a name="RunTest"></a>
+    
+    <a name="bm_id92158919984145"></a>
+      <meta itemprop="keywords" content="UnitTest service,RunTest">
+    
+    <h2 id="hd_id20158919960992" dir="auto">RunTest</h2>
+    <p id="par_id71621894063361" class="paragraph" dir="auto">Executes the complete test suite implemented in the specified module. Each test case is run independently from each other.</p>
+    <p id="par_id201656449688023" class="paragraph" dir="auto">Running a test suite consists of:</p>
+    <ol itemprop="HowTo" itemscope="true" itemtype="http://schema.org/HowToSection" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/HowToStep" dir="auto">
+        <p id="par_id751656449718279" class="listitem" dir="auto">Executing the optional <span class="literal">Setup</span> method present in the module.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/HowToStep" dir="auto">
+        <p id="par_id611656449718505" class="listitem" dir="auto">Executing once each test case, in no specific order.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/HowToStep" dir="auto">
+        <p id="par_id461656449718687" class="listitem" dir="auto">Executing the optional <span class="literal">TearDown</span> method present in the module.</p>
+      </li>
+    </ol>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591621898140525" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.RunTest(testsuite: str, testcasepattern: str = "", message: str = ""): int</span>
+    </p>
+    <p id="par_id751656448521144" class="paragraph" dir="auto">The argument <span class="literal">testcasepattern</span> specifies a pattern composed of "?" and "*" wildcards to select which test cases will be run. The comparison is not case-sensitive.</p>
+    <p id="par_id81656448858455" class="paragraph" dir="auto">If a <span class="literal">message</span> is provided, it is written to the console when the test starts.</p>
+  
+
+  <a name="SkipTest"></a>
+    
+    <a name="bm_id92158919949695"></a>
+      <meta itemprop="keywords" content="UnitTest service,SkipTest">
+    
+    <h2 id="hd_id20158919952512" dir="auto">SkipTest</h2>
+    <p id="par_id71621894064311" class="paragraph" dir="auto">Interrupts the running test suite without calling the <span class="literal">TearDown</span> method.</p>
+    <p id="par_id781656450313544" class="paragraph" dir="auto">Skipping a test is usually meaningful during the <span class="literal">Setup</span> method when not all conditions to run the test are met.</p>
+    <p id="par_id531656450405799" class="paragraph" dir="auto">It is up to the <span class="literal">Setup</span> method to exit the <span class="literal">Sub</span> shortly after the <span class="literal">SkipTest</span> call.</p>
+    <p id="par_id581656450504005" class="paragraph" dir="auto">If <span class="literal">SkipTest</span> is called from within a test case, the execution of the test suite is interrupted and the remaining test cases are not run. Keep in mind that the order in which test cases are run is arbitrary within a test suite.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id591639698149545" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.SkipTest(message: str = "")</span>
+    </p>
+    <p id="par_id81656449618455" class="paragraph" dir="auto">If a <span class="literal">message</span> is provided, it is written to the console.</p>
+  
+
+  <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_exception.html"><span class="literal">ScriptForge</span>.<span class="literal">Exception</span> service</a></p></div>
+  </div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03/sf_unittest.xhp" target="_blank">/text/sbasic/shared/03/sf_unittest.xhp</a></p>
+<p dir="auto">Title is: SFUnitTests.UnitTest service</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

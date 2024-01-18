@@ -14,6 +14,28 @@ function change() {
     }
 }
 
+// 動的にhidden追加
+function make_hidden(name, value, formname) {
+    var q = document.createElement('input');
+    q.type = 'hidden';
+    q.name = name;
+    q.value = value;
+    if (formname) {
+        if ( document.forms[formname] == undefined ){
+            console.error( "ERROR: form " + formname + " is not exists." );
+        }
+        document.forms[formname].appendChild(q);
+    } else {
+        document.forms[0].appendChild(q);
+    }
+}
+
+function submitChkBack() {
+    change();
+    make_hidden('back', '1');
+    document.entryForm.submit();
+}
+
 // 「入力項目クリア」の確認ダイアログ表示
 function submitChkClear() {
     var flag = window.confirm (clear_msg);

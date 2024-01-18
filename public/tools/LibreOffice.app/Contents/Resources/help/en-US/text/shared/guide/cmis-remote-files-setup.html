@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Using Remote Files</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in all modules" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+
+<a name="setup_remote_files"></a>
+<a name="@@nowidget@@"></a>
+<a name="bm_id19391"></a>
+<a name="bm_id32365"></a>
+<a name="bm_id58969"></a>
+<a name="bm_id23742"></a>
+<a name="bm_id43702"></a>
+<a name="bm_id3799"></a>
+<a name="bm_id42698"></a>
+<a name="bm_id4325"></a>
+<a name="bm_id16884"></a>
+<a name="bm_id48392"></a>
+<a name="bm_id13518"></a>
+<a name="bm_id26499"></a>
+<a name="bm_id34632"></a>
+<a name="bm_id44849"></a>
+<a name="bm_id16811"></a>
+<a name="bm_id27954"></a>
+<a name="bm_id26508"></a>
+<a name="bm_id16650"></a>
+<a name="bm_id52156"></a>
+
+<a name="bm_id170820161244279161"></a>
+  <meta itemprop="keywords" content="remote file service,setup">
+
+
+<h1 id="hd_id200820161036353610" dir="auto">Setting up a remote file service connection</h1>
+
+
+<a name="howtoget"></a><div class="howtoget">
+<div><p class="howtogetheader" dir="auto"><a name="wie"></a>To access this command...</p></div>
+<div class="howtogetbody">
+<p id="par_id150820161816033744" class="paragraph" dir="auto">To enable a remote server connection, use one of these methods:</p>
+
+<ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816032923" class="listitem" dir="auto">Click on the Remote Files button in the Start Center.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816031470" class="listitem" dir="auto">Select <span class="menuitem">File - Open Remote</span></p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816037870" class="listitem" dir="auto">Select <span class="menuitem">File - Save Remote</span></p>
+  </li>
+</ul>
+  <p id="par_id150820161816033600" class="paragraph" dir="auto">Then press <span class="widget">Manage Services</span> button in the dialog to open the File Services dialog.</p>
+</div>
+</div>
+<br>
+<a name="bm_id170820162240508275"></a>
+  <meta itemprop="keywords" content="WebDAV,remote file service setup">
+  <meta itemprop="keywords" content="remote file service setup,WebDAV">
+
+
+<a name="bm_id42632"></a>
+<h3 id="hd_id1501201618160340" dir="auto">Connecting to a <a target="_top" href="en-US/text/shared/00/00000002.html#webdav">WebDAV</a> server</h3>
+<p id="par_id150820161816034989" class="paragraph" dir="auto"><a name="introservice"></a>In the File Services dialog, set:</p>
+
+<ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816033753" class="listitem" dir="auto"><span class="emph">Type</span>: WebDAV</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816034500" class="listitem" dir="auto"><span class="emph">Host</span>: the server URL, usually in the form <span class="literal">file.service.com</span></p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816037709" class="listitem" dir="auto"><span class="emph">Port</span>: port number (usually <span class="literal">80</span>)</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816032816" class="listitem" dir="auto">Select <span class="emph">Secure Connection</span> checkbox to access the service through <span class="literal">https</span> protocol and port <span class="literal">443</span></p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816035209" class="listitem" dir="auto"><a name="labelpar"></a><span class="emph">Label</span>: give a name for this connection. This name will show in the Service listbox of the Open or Save remote files dialog.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id15082016181603431" class="listitem" dir="auto"><a name="rootpar"></a><span class="emph">Root</span>: enter the path to the root URL of your account.</p>
+  </li>
+</ul>
+<div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id150820161816034394" dir="auto">Note: the root of the file service is provided by the file service administrator and may consists of scripts files, parameters and paths. </p></div>
+</div>
+<br>
+<p id="par_id150820161816036744" class="paragraph" dir="auto"><a name="okbutton"></a>Once the connection is defined, click <span class="emph">OK</span> to connect. The dialog will dim until the connection is established with the server. A dialog asking for the user name and the password may pop up to let you log in the server. Proceed entering the right user name and password.</p>
+<a name="bm_id170820161240508275"></a>
+  <meta itemprop="keywords" content="SSH,remote file service setup">
+  <meta itemprop="keywords" content="FTP,remote file service setup">
+  <meta itemprop="keywords" content="remote file service setup,FTP">
+  <meta itemprop="keywords" content="remote file service setup,SSH">
+
+
+<h3 id="hd_id1508201618160340" dir="auto">Connecting to <a target="_top" href="en-US/text/shared/00/00000002.html#ftp">FTP</a> and SSH servers</h3>
+<p id="par_id150820161816034969" class="paragraph" dir="auto">In the File Services dialog, set:</p>
+
+<ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816039418" class="listitem" dir="auto"><span class="emph">Type</span>: FTP or SSH</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id15082016181603238" class="listitem" dir="auto"><span class="emph">Host</span>: the server URL, usually in the form <span class="literal">file.service.com</span></p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816046286" class="listitem" dir="auto"><span class="emph">Port</span>: port number (usually 21 for FTP and 22 for SSH).</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816041989" class="listitem" dir="auto"><span class="emph">User, Password</span>: the username and password of the FTP service.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+      <p id="par_id150820161816047387" class="listitem" dir="auto"><a name="rememberpw"></a><span class="emph">Remember password</span>: Check to store the password in LibreOffice’s user profile. The password will be secured by the master password in <span id="swlnsystextsharedguidecmisremotefilessetupxml_1" class="switchinline"><span hidden="true" id="MACtextsharedguidecmisremotefilessetupxml_1" class="MAC"><span class="menuitem">LibreOffice - Preferences</span></span><span hidden="true" id="defaulttextsharedguidecmisremotefilessetupxml_1"><span class="menuitem">Tools - Options</span></span></span><span class="menuitem"> - LibreOffice - Security - Internet passwords</span>.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816045167" class="listitem" dir="auto"><span class="emph">Label</span>: give a name for this connection. This name will show in the Service listbox of the Open or Save remote files dialog.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816045015" class="listitem" dir="auto"><span class="emph">Root</span>: enter the path to the root URL of your account.</p>
+  </li>
+</ul>
+<p id="par_id150820161816045804" class="paragraph" dir="auto">Once the connection is defined, click <span class="emph">OK</span> to connect. The dialog will dim until the connection is established with the server.</p>
+
+<h3 id="hd_id150820161816049600" dir="auto">Connecting to a Windows share</h3>
+<a name="bm_id170820161249395796"></a>
+  <meta itemprop="keywords" content="remote file service,Windows share">
+  <meta itemprop="keywords" content="Windows share,remote file service">
+  <meta itemprop="keywords" content="Windows share,remote file service setup">
+  <meta itemprop="keywords" content="remote file service setup,Windows share">
+
+
+<p id="par_id150820161816046729" class="paragraph" dir="auto">In the File Services dialog, set:</p>
+
+<ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816041482" class="listitem" dir="auto"><span class="emph">Type</span>: Windows Share</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816041093" class="listitem" dir="auto"><span class="emph">Host</span>: the server URL, usually in the form <span class="literal">file.service.com</span></p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816042364" class="listitem" dir="auto"><span class="emph">Share</span>: The Windows share.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816049" class="listitem" dir="auto"><span class="emph">Remember password</span>: Check to store the password in LibreOffice’s user profile. The password will be secured by the master password in <span id="swlnsystextsharedguidecmisremotefilessetupxml_1" class="switchinline"><span hidden="true" id="MACtextsharedguidecmisremotefilessetupxml_1" class="MAC"><span class="menuitem">LibreOffice - Preferences</span></span><span hidden="true" id="defaulttextsharedguidecmisremotefilessetupxml_1"><span class="menuitem">Tools - Options</span></span></span><span class="menuitem"> - LibreOffice - Security - Internet passwords</span>.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816048365" class="listitem" dir="auto"><span class="emph">Label</span>: give a name for this connection. This name will show in the Service listbox of the Open or Save remote files dialog.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816048181" class="listitem" dir="auto"><span class="emph">Root</span>: enter the path to the root URL of your account.</p>
+  </li>
+</ul>
+<p id="par_id150820161816047868" class="paragraph" dir="auto">Once the connection is defined, click <span class="emph">OK</span> to connect. The dialog will dim until the connection is established with the server.</p>
+
+<h3 id="hd_id160820161759157773" dir="auto">Connecting to Google Drive</h3>
+<a name="bm_id170820161251022847"></a>
+  <meta itemprop="keywords" content="remote file service,Google Drive">
+  <meta itemprop="keywords" content="Google Drive,remote file service">
+  <meta itemprop="keywords" content="Google Drive,remote file service setup">
+  <meta itemprop="keywords" content="remote file service setup,Google Drive">
+
+
+<p id="par_id160820161759169124" class="paragraph" dir="auto">In the File Services dialog, set:</p>
+
+<ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id160820161759169511" class="listitem" dir="auto"><span class="emph">Type</span>: Google Drive.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id16082016175916814" class="listitem" dir="auto"><span class="emph">User, Password</span>: the username and password of the Google account.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id160820161759162239" class="listitem" dir="auto"><span class="emph">Remember password</span>: Check to store the password in LibreOffice’s user profile. The password will be secured by the master password in <span id="swlnsystextsharedguidecmisremotefilessetupxml_1" class="switchinline"><span hidden="true" id="MACtextsharedguidecmisremotefilessetupxml_1" class="MAC"><span class="menuitem">LibreOffice - Preferences</span></span><span hidden="true" id="defaulttextsharedguidecmisremotefilessetupxml_1"><span class="menuitem">Tools - Options</span></span></span><span class="menuitem"> - LibreOffice - Security - Internet passwords</span>.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id160820161759166391" class="listitem" dir="auto"><span class="emph">Label</span>: give a name for this connection. This name will show in the Service listbox of the Open or Save remote files dialog.</p>
+  </li>
+</ul>
+<p id="par_id160820161759163527" class="paragraph" dir="auto">Once the connection is defined, click <span class="emph">OK</span> to connect. The dialog will dim until the connection is established with the server.</p>
+
+<h3 id="hd_id150820161816044879" dir="auto">Connecting to a <a target="_top" href="en-US/text/shared/00/00000002.html#cmis">CMIS</a> server</h3>
+<a name="bm_id170820161254261587"></a>
+  <meta itemprop="keywords" content="remote file service setup,other file services">
+  <meta itemprop="keywords" content="remote file service setup,Lotus">
+  <meta itemprop="keywords" content="remote file service setup,SharePoint">
+  <meta itemprop="keywords" content="remote file service setup,IBM">
+  <meta itemprop="keywords" content="remote file service setup,Nuxeo">
+  <meta itemprop="keywords" content="remote file service setup,Alfresco">
+  <meta itemprop="keywords" content="remote file service setup,CMIS server">
+
+
+<p id="par_id150820161816048323" class="paragraph" dir="auto">In the File Services dialog, set:</p>
+
+<ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816042787" class="listitem" dir="auto"><span class="emph">Type</span>: Select the type of server in the list.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816045515" class="listitem" dir="auto"><span class="emph">Host</span>: the server URL. A URL default template is provided according to the server type. Set data accordingly.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816046632" class="listitem" dir="auto"><span class="emph">User, Password</span>: the username and password of the CMIS service.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816054077" class="listitem" dir="auto"><span class="emph">Remember password</span>: Check to store the password in LibreOffice’s user profile. The password will be secured by the master password in <span id="swlnsystextsharedguidecmisremotefilessetupxml_1" class="switchinline"><span hidden="true" id="MACtextsharedguidecmisremotefilessetupxml_1" class="MAC"><span class="menuitem">LibreOffice - Preferences</span></span><span hidden="true" id="defaulttextsharedguidecmisremotefilessetupxml_1"><span class="menuitem">Tools - Options</span></span></span><span class="menuitem"> - LibreOffice - Security - Internet passwords</span>.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816053608" class="listitem" dir="auto"><span class="emph">Repository</span>: select the files repository in the drop-down list.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816054065" class="listitem" dir="auto"><span class="emph">Refresh button</span>: click to refresh the contents of the repository list.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816054039" class="listitem" dir="auto"><span class="emph">Label</span>: give a name for this connection. This name will show in the Service listbox of the Open or Save remote files dialog.</p>
+  </li>
+  <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id150820161816052286" class="listitem" dir="auto"><span class="emph">Root</span>: enter the path to the root URL of your account.</p>
+  </li>
+</ul>
+
+<a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+
+<p id="par_id210820361039438142" class="paragraph" dir="auto"><a target="_top" href="en-US/text/shared/guide/cmis-remote-files.html">Opening and saving documents in remote file servers</a></p>
+<p id="par_id210820161039438142" class="paragraph" dir="auto"><a target="_top" href="en-US/text/shared/guide/cmis-remote-files.html#check">Checking-in and checking-out documents</a></p>
+</div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/shared/guide/cmis-remote-files-setup.xhp" target="_blank">/text/shared/guide/cmis-remote-files-setup.xhp</a></p>
+<p dir="auto">Title is: Using Remote Files</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

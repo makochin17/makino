@@ -20,11 +20,20 @@
 			<table class="search-area" style="height: 90px; width: 780px">
 				<tr>
 					<td style="width: 140px; height: 30px;">
+						保管場所倉庫<i class='fa fa-asterisk' style="color:#FF4040;font-size:10px;"></i>
+					</td>
+					<td style="width: 480px; height: 30px;">
+                        <?php echo Form::select('storage_warehouse_id', $data['storage_warehouse_id'], $storage_warehouse_list,
+				            array('class' => 'select-item', 'id' => 'storage_warehouse_id', 'style' => 'width: 140px;margin-right: 10px;', 'tabindex' => '1')); ?>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 140px; height: 30px;">
 						保管場所列<i class='fa fa-asterisk' style="color:#FF4040;font-size:10px;"></i>
 					</td>
 					<td style="width: 480px; height: 30px;">
                         <?php echo Form::select('storage_column_id', $data['storage_column_id'], $storage_column_list,
-				            array('class' => 'select-item', 'id' => 'storage_column_id', 'style' => 'width: 90px;margin-right: 10px;', 'tabindex' => '1')); ?>
+				            array('class' => 'select-item', 'id' => 'storage_column_id', 'style' => 'width: 140px;margin-right: 10px;', 'tabindex' => '1')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -33,7 +42,7 @@
 					</td>
 					<td style="width: 480px; height: 30px;">
                         <?php echo Form::select('storage_depth_id', $data['storage_depth_id'], $storage_depth_list,
-				            array('class' => 'select-item', 'id' => 'storage_depth_id', 'style' => 'width: 90px;margin-right: 10px;', 'tabindex' => '1')); ?>
+				            array('class' => 'select-item', 'id' => 'storage_depth_id', 'style' => 'width: 140px;margin-right: 10px;', 'tabindex' => '1')); ?>
 					</td>
 				</tr>
 				<tr>
@@ -42,7 +51,7 @@
 					</td>
 					<td style="width: 480px; height: 30px;">
                         <?php echo Form::select('storage_height_id', $data['storage_height_id'], $storage_height_list,
-				            array('class' => 'select-item', 'id' => 'storage_height_id', 'style' => 'width: 90px;margin-right: 10px;', 'tabindex' => '1')); ?>
+				            array('class' => 'select-item', 'id' => 'storage_height_id', 'style' => 'width: 140px;margin-right: 10px;', 'tabindex' => '1')); ?>
 					</td>
 				</tr>
 			</table>

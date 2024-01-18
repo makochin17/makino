@@ -123,6 +123,8 @@ class S0010 extends \Model {
                     'summer_tire_remaining_groove3'     => '',
                     'summer_tire_remaining_groove4'     => '',
                     'summer_tire_punk'                  => '',
+                    'summer_nut_flg'                    => '',
+                    'summer_location_id'                => '',
                     'winter_tire_maker'                 => '',
                     'winter_tire_product_name'          => '',
                     'winter_tire_size'                  => '',
@@ -137,8 +139,8 @@ class S0010 extends \Model {
                     'winter_tire_remaining_groove3'     => '',
                     'winter_tire_remaining_groove4'     => '',
                     'winter_tire_punk'                  => '',
-                    'nut_flg'                           => '',
-                    'location_id'                       => '',
+                    'winter_nut_flg'                    => '',
+                    'winter_location_id'                => '',
                     'summer_class_flg'                  => '',
                     'winter_class_flg'                  => '',
                     'summer_tire_img_path1'             => '',
@@ -1143,7 +1145,7 @@ class S0010 extends \Model {
             }
 
             //日付をひとつ作成
-            $html .= $tab."\t\t\t".'<td'.$class.' '.$style.'><a href="'.$url."?y=".$year."&m=".$month."&d=".$i.'">'.$i.'</a></td>'."\n";
+            $html .= $tab."\t\t\t".'<td'.$class.' '.$style.'><a href="'.$url."?y=".$year."&m=".sprintf('%02d', $month)."&d=".sprintf('%02d', $i).'">'.$i.'</a></td>'."\n";
             // switch ($mode) {
             //     case '1':   //休日
             //         $html .= $tab."\t\t\t".'<td'.$class.' '.$style.'><a href="#"'.$class.' '.$style.' id="days" data-year="'.$year.'"" data-month="'.$month.'" data-day="'.$i.'" data-mode="0" >'.$i.'</a></td>'."\n";
@@ -1277,6 +1279,8 @@ class S0010 extends \Model {
                 array('m.summer_tire_remaining_groove3', 'summer_tire_remaining_groove3'),
                 array('m.summer_tire_remaining_groove4', 'summer_tire_remaining_groove4'),
                 array('m.summer_tire_punk', 'summer_tire_punk'),
+                array('m.summer_nut_flg', 'summer_nut_flg'),
+                array('m.summer_location_id', 'summer_location_id'),
                 array('m.winter_tire_maker', 'winter_tire_maker'),
                 array('m.winter_tire_product_name', 'winter_tire_product_name'),
                 array('m.winter_tire_size', 'winter_tire_size'),
@@ -1291,8 +1295,8 @@ class S0010 extends \Model {
                 array('m.winter_tire_remaining_groove3', 'winter_tire_remaining_groove3'),
                 array('m.winter_tire_remaining_groove4', 'winter_tire_remaining_groove4'),
                 array('m.winter_tire_punk', 'winter_tire_punk'),
-                array('m.nut_flg', 'nut_flg'),
-                array('m.location_id', 'location_id'),
+                array('m.winter_nut_flg', 'winter_nut_flg'),
+                array('m.winter_location_id', 'winter_location_id'),
                 array('m.summer_class_flg', 'summer_class_flg'),
                 array('m.winter_class_flg', 'winter_class_flg'),
                 array('m.note', 'note'),

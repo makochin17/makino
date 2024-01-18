@@ -97,7 +97,7 @@ class Controller_Car_C0010 extends Controller_Hybrid {
         $paging_config = PagingConfig::getPagingConfig("UIC0010", C0010::$db);
         $this->pagenation_config['num_links'] = $paging_config['display_link_number'];
         $this->pagenation_config['per_page'] = $paging_config['display_record_number'];
-        $this->pagenation_config['per_page'] = 10;
+        $this->pagenation_config['per_page'] = 50;
 
         // 会社マスタリスト
         $this->company_list             = GenerateList::getCompanyList(true, C0010::$db);
@@ -159,6 +159,22 @@ class Controller_Car_C0010 extends Controller_Hybrid {
                 $error_msg = Config::get('m_CUS011');
             }
             Session::delete('select_customer_code');
+        } elseif ($code = Session::get('select_car_code')) {
+            // 得意先の検索にてレコード選択された場合
+            if ($result = C0010::getSearchCarByCode($code, C0010::$db)) {
+                $conditions['car_id']   = $result['car_id'];
+                if (Session::get('select_car_mode') == 'num') {
+                    $conditions['car_code'] = $result['car_code'];
+                } elseif (Session::get('select_car_mode') == 'name') {
+                    $conditions['car_name'] = $result['car_name'];
+                } else {
+                    $conditions['car_code'] = $result['car_code'];
+                    $conditions['car_name'] = $result['car_name'];
+                }
+            } else {
+                $error_msg = Config::get('m_CAR011');
+            }
+            Session::delete('select_car_code');
         }
 
         return $error_msg;

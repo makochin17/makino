@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>TRUNC function</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+  <a name="bm_id3156384"></a>
+    <meta itemprop="keywords" content="TRUNC function">
+    <meta itemprop="keywords" content="decimal places,cutting off">
+    <meta itemprop="keywords" content="numbers,truncate">
+  
+  <a name="bm_id3157849"></a>
+  <h1 id="hd_id601641846107898" dir="auto">
+<a name="trunc_h1"></a>TRUNC function</h1>
+  <a name="trunc_desc"></a>
+    <p id="par_id841641927277474" class="paragraph" dir="auto">Truncates a number while keeping a specified number of decimal digits.</p>
+  
+  <p id="par_id701642530512560" class="paragraph" dir="auto">This function is equivalent to the <a target="_top" href="en-US/text/scalc/01/func_rounddown.html">ROUNDDOWN function</a>.</p>
+  <a name="trunc_tip"></a>
+    <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id321641927458888" dir="auto">The rounding method used by this function is known as <span class="emph">rounding towards zero</span>. The magnitude of the resulting number will always be less than or equal to the original number.</p></div>
+</div>
+<br>
+  
+  <div class="embedded">
+<a name="func_head_syntax"></a>
+    <h3 id="hd_id126511265112651" dir="auto">Syntax</h3>
+  </div>
+  <p id="par_id341641927560587" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">TRUNC(Number [; Count])</span>
+  </p>
+  <a name="trunc_parameters"></a>
+    <p id="par_id11641927688319" class="paragraph" dir="auto"><span class="emph">Number:</span> The number to be truncated.</p>
+    <p id="par_id861641927715672" class="paragraph" dir="auto"><span class="emph">Count:</span> Optional parameter that defines the number of decimal places to be kept. The default value is 0 (zero).</p>
+    <p id="par_id911641928545976" class="paragraph" dir="auto">Use negative values for <span class="emph">Count</span> to round the integer part of the original <span class="emph">Number</span>. For example, -1 will round down the first integer number before the decimal separator, -2 will round down the two integer numbers before the decimal separator, and so forth.</p>
+  
+  <div class="embedded">
+<a name="func_head_example"></a>
+    <h3 id="hd_id980889808898088" dir="auto">Examples</h3>
+  </div>
+  <p id="par_id901641928192870" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">=TRUNC(21.89)</span> returns 21. Note that this example uses the default value for <span class="emph">Count</span> which is 0.</p>
+  <p id="par_id901641928192110" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">=TRUNC(103.37,1)</span> returns 103.3.</p>
+  <p id="par_id171641928456743" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">=TRUNC(0.664,2)</span> returns 0.66.</p>
+  <p id="par_id641641928712287" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">=TRUNC(214.2,-1)</span> returns 210. Note the negative value for <span class="emph">Count</span>, which causes the first integer value before the decimal separator to be rounded towards zero.</p>
+
+  <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id821677013765236" dir="auto"><a target="_blank" href="https://wiki.documentfoundation.org/Documentation/Calc_Functions/TRUNC">TRUNC wiki page</a>.</p></div>
+</div>
+<br>
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/scalc/01/func_rounddown.html">ROUNDDOWN function</a></p></div>
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/scalc/01/04060106.html">Mathematical Functions</a></p></div>
+  </div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/scalc/01/func_trunc.xhp" target="_blank">/text/scalc/01/func_trunc.xhp</a></p>
+<p dir="auto">Title is: TRUNC function</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PostgreSQL Connection</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+    <a name="bm_id861587404584956"></a>
+<meta itemprop="keywords" content="PostgreSQL settings (Base)">
+    
+    <a name="pgsqlHead"></a>
+        <h1 id="hd_id971643043442131" dir="auto">
+<a name="pgsqlh1"></a>PostgreSQL Connection</h1>
+        <p id="par_id811643043442133" class="paragraph" dir="auto">Specifies the options for connecting to PostgreSQL databases.</p>
+    
+    <h2 id="hd_id651688208054254" dir="auto">Direct connection to PostgreSQL databases</h2>
+    <p id="par_id771688208079289" class="paragraph" dir="auto">The data for the direct connection to a PostgreSQL database can be provided in two different ways:</p>
+    <h3 id="hd_id861688208111738" dir="auto">Fill in the data</h3>
+    <p id="par_id421688208147990" class="paragraph" dir="auto">Connection data can be provided by filling in the top three text boxes. Ask the database administrator for the correct data.</p>
+    <a name="bm_id301688517436297"></a>
+    <a name="bm_id261688517538018"></a>
+    <a name="bm_id111688517542714"></a>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id451688208281422" class="listitem" dir="auto"><span class="emph">Database name</span>: type the name of the specific database.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id431688208308832" class="listitem" dir="auto"><span class="emph">Server</span>: provide the URL or IP address of the DBMS server.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id781688208333506" class="listitem" dir="auto"><span class="emph">Port number</span>: enter the port number of the DBMS server.</p>
+        </li>
+    </ul>
+    <a name="bm_id881688517530306"></a>
+    <h3 id="hd_id321643044241406" dir="auto">DBMS/driver-specific connection string</h3>
+    <p id="par_id341643044249556" class="paragraph" dir="auto">Instead of entering the data in the text boxes as explained above, or if you need to specify more parameter for the connection, you can enter the driver specific connection string. The connection string is a sequence of keyword/value pairs separated by spaces. For example</p>
+    <p id="par_id471643044279530" class="paragraph" dir="auto"><span class="literal">dbname=MyDatabase host=myHost port=5432</span></p>
+    <p id="par_id301643045873140" class="paragraph" dir="auto">where</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id511643044303340" class="listitem" dir="auto"><span class="emph">dbname</span>: the name of the database hosted in the DBMS server.</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id331643044364699" class="listitem" dir="auto"><span class="emph">host</span>: the fully qualified name of the RDBMS server</p>
+        </li>
+        <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+            <p id="par_id931643044367236" class="listitem" dir="auto"><span class="emph">port</span>: the server port. The default port for PostgreSQL is 5432.</p>
+        </li>
+    </ul>
+    <p id="par_id421643049901759" class="paragraph" dir="auto">You can also enter the connection string as</p> <p id="par_id51643050033680" class="paragraph" dir="auto"><span class="literal">postgresql://myHost:port/MyDatabase</span>.</p>
+
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id71643046088031" dir="auto">Refer to the database server administrator for the correct values of the keywords passed in the connection string. Values for <span class="emph">user=</span> and <span class="emph">password=</span> are ignored but will be requested at connection time.</p></div>
+</div>
+<br>
+    <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id131643048856194" dir="auto">The connection string is displayed in the LibreOffice Base status bar.</p></div>
+</div>
+<br>
+    <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+        <p id="par_id571643046067450" class="paragraph" dir="auto">List of all keyword/value pairs for <a target="_blank" href="https://www.postgresql.org/docs/13/libpq-connect.html#LIBPQ-PARAMKEYWORDS">PostgreSQL 13</a> connection string. Not every pair is handled by the LibreOffice driver manager.</p>
+    </div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sdatabase/dabawiz02pgsql.xhp" target="_blank">/text/sdatabase/dabawiz02pgsql.xhp</a></p>
+<p dir="auto">Title is: PostgreSQL Connection</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

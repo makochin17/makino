@@ -444,6 +444,10 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
         if (!empty(Input::param('input_clear')) && Input::method() == 'POST' && Security::check_token()) {
             // 入力項目クリアボタンが押下された場合の処理
             Session::delete('m0010_list');
+        } elseif (!empty(Input::param('back'))) {
+            // 戻るボタンが押下された場合の処理
+            Session::delete('m0010_list');
+            \Response::redirect(\Uri::create('mainte/m0011'));
         } elseif (!empty(Input::param('excel'))) {
             // エクセル出力ボタンが押下された場合の処理
             M0010::createTsv(M0010::$db);
@@ -551,6 +555,14 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                     $conditions[$key] = $val;
                 }
                 Session::delete('m0010_list');
+            }
+
+            // ユーザー一覧から遷移してきた場合
+            if (!empty(Input::param('list')) && Input::method() == 'POST' && Security::check_token()) {
+                foreach ($conditions as $key => $val) {
+                    $conditions[$key] = Input::param($key, ''); // 検索項目
+                }
+                Session::set('select_member_code', $conditions['member_code']);
             }
 
             if (!empty(Input::param('select_record'))) {

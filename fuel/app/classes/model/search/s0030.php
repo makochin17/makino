@@ -25,19 +25,26 @@ class S0030 extends \Model {
 
             $stmt = \DB::select(
                         array('rsl.id', 'storage_location_id'),
-                        array(\DB::expr("CONCAT(msc.name, '-', msd.name, '-', msh.name)"), 'storage_location_name'),
+                        array(\DB::expr("CONCAT(msw.name, '-', msc.name, '-', msd.name, '-', msh.name)"), 'storage_location_name'),
+                        array('rsl.storage_warehouse_id', 'storage_warehouse_id'),
+                        array('msw.name', 'storage_warehouse_name'),
                         array('rsl.storage_column_id', 'storage_column_id'),
                         array('msc.name', 'storage_column_name'),
                         array('rsl.storage_depth_id', 'storage_depth_id'),
                         array('msd.name', 'storage_depth_name'),
                         array('rsl.storage_height_id', 'storage_height_id'),
                         array('msh.name', 'storage_height_name'),
+                        array('rsl.barcode_flg', 'barcode_flg'),
                         array('rsl.del_flg', 'del_flg'),
                     );
         }
 
         // テーブル
         $stmt->from(array('rel_storage_location', 'rsl'))
+            ->join(array('m_storage_warehouse', 'msw'), 'left outer')
+                ->on('msw.id', '=', 'rsl.storage_warehouse_id')
+                ->on('msw.start_date', '<=', '\''.date("Y-m-d").'\'')
+                ->on('msw.end_date', '>', '\''.date("Y-m-d").'\'')
             ->join(array('m_storage_column', 'msc'), 'left outer')
                 ->on('msc.id', '=', 'rsl.storage_column_id')
                 ->on('msc.start_date', '<=', '\''.date("Y-m-d").'\'')
@@ -58,6 +65,14 @@ class S0030 extends \Model {
         // 保管場所名称
         if (trim($conditions['storage_location_name']) != '') {
             $stmt->where(\DB::expr("CONCAT(msc.name, '-', msd.name, '-', msh.name)"), 'LIKE', \DB::expr("'%".$conditions['storage_location_name']."%'"));
+        }
+        // 保管場所倉庫コード
+        if (trim($conditions['storage_warehouse_id']) != '') {
+            $stmt->where('rsl.storage_warehouse_id', '=', $conditions['storage_warehouse_id']);
+        }
+        // 保管場所倉庫名
+        if (trim($conditions['storage_warehouse_name']) != '') {
+            $stmt->where('msw.name', 'LIKE', \DB::expr("'%".$conditions['storage_warehouse_name']."%'"));
         }
         // 保管場所列コード
         if (trim($conditions['storage_column_id']) != '') {

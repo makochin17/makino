@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>RGB Function</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="rgb"></a>
+<a name="bm_id851576768070903"></a>
+   <meta itemprop="keywords" content="RGB function">
+
+
+<h1 id="hd_id3150792" dir="auto">RGB Function</h1>
+  <p id="par_id3150447" class="paragraph" dir="auto">Returns a <span class="literal">Long</span> integer color value consisting of red, green, and blue components.</p>
+
+
+<div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+RGB (Red, Green, Blue)
+</code></pre></div>
+
+<div class="embedded">
+<a name="functvalue"></a>
+<h3 id="hd_id061420171139087480" dir="auto">Return value:</h3>
+</div>
+<p id="par_id3159153" class="paragraph" dir="auto">Long</p>
+
+<div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+<a name="parameters"></a>
+<a name="parameters1"></a>
+<p id="par_id3152597" class="paragraph" dir="auto"> <span class="emph">red</span>: Any integer expression that represents the red component (0-255) of the composite color.</p>
+<p id="par_id3146974" class="paragraph" dir="auto"> <span class="emph">green</span>: Any integer expression that represents the green component (0-255) of the composite color.</p>
+<p id="par_id3151113" class="paragraph" dir="auto"> <span class="emph">blue</span>: Any integer expression that represents the blue component (0-255) of the composite color.</p>
+
+<p id="par_id101639922410794" class="paragraph" dir="auto">The resulting <span class="literal">Long</span> value is calculated with the following formula:<br>
+<span class="literal">Result = red×65536 + green×256 + blue</span>.
+</p>
+<div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id671639922129017" dir="auto">Under VBA compatibility mode (<a target="_top" href="en-US/text/sbasic/shared/03103350.html"><span class="literal">Option VBASupport 1</span></a>), the <span class="literal">Long</span> value is calculated as
+<br>
+<span class="literal">Result = red + green×256 + blue×65536</span><br>
+See <a target="_top" href="en-US/text/sbasic/shared/03010306.html">RGB Function [VBA]</a>
+</p></div>
+</div>
+<br>
+
+<div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id211587653651037" dir="auto">The <a target="_top" href="en-US/text/shared/optionen/01010501.html">color picker dialog</a> helps computing red, green and blue components of a composite color. <a target="_top" href="en-US/text/shared/guide/text_color.html">Changing the color of text</a> and selecting <span class="emph">Custom color</span> displays the color picker dialog.</p></div>
+</div>
+<br>
+
+
+<div class="embedded">
+<a name="errorcode"></a>
+<h3 id="hd_id3152869" dir="auto">Error codes:</h3>
+</div>
+<div class="embedded"><p class="embedded" dir="auto">5 Invalid procedure call</p></div>
+
+<div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+Sub ExampleColor
+Dim lVar As Long
+    lVar = rgb(128,0,200)
+    MsgBox "The color " &amp; lVar &amp; " consists of:" &amp; Chr(13) &amp;_
+        "red= " &amp; red(lVar) &amp; Chr(13)&amp;_
+        "green= " &amp; green(lVar) &amp; Chr(13)&amp;_
+        "blue= " &amp; blue(lVar) &amp; Chr(13) , 64,"colors"
+End Sub
+</code></pre></div>
+
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03010305.xhp" target="_blank">/text/sbasic/shared/03010305.xhp</a></p>
+<p dir="auto">Title is: RGB Function</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

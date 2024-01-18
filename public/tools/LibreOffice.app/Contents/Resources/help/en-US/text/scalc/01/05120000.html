@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Conditional Formatting</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 7.6 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('en-US');">Module</button><nav id="modules-nav"></nav>
+</div></div></header><aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label" dir="auto">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in chosen module" dir="auto"><nav class="index" dir="auto"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+      <a name="bm_id5008046"></a>
+      <a name="bm_id5008047"></a>
+      <a name="bm_id3152518"></a>
+      <a name="bm_id3152518"></a>
+      <h1 id="hd_id51665407876959" dir="auto">
+<a name="ConditionalFormattingh1"></a>Conditional Formatting</h1>
+      <p id="par_id3163710" class="paragraph" dir="auto"><a name="bedingtetext"></a><span class="avis">Use <span class="emph">Conditional Formatting</span> to define range-based conditions that determine which <a target="_top" href="en-US/text/scalc/01/cell_styles.html">cell style</a> will be applied to each cell in a given range based on its contents.</span> The cell style corresponding to the first condition that evaluates to <span class="emph">true</span> is applied. Cell styles applied through Conditional Formatting override cell styles applied manually using the <a target="_top" href="en-US/text/scalc/main0202.html"><span class="emph">Formatting Bar</span></a> or the <a target="_top" href="en-US/text/scalc/01/05100000.html"><span class="emph">Styles</span> sidebar</a>.</p>
+      <p id="par_id3163711" class="paragraph" dir="auto">You can enter several conditions that query the cell values or results of formulas. The conditions are evaluated from first to the last. If <span class="emph">Condition 1</span> is true based on the current cell contents, the corresponding cell style is applied. Otherwise, <span class="emph">Condition 2</span> is evaluated to determine if its corresponding style will be applied. If none of the conditions match cell contents, then no changes are made to the cell format.</p>
+      <p id="par_id431642031216368" class="paragraph" dir="auto">Conditional formats do not overwrite cell styles and direct formatting applied manually. They remain saved as cell properties and are applied when the cell matches no conditions or when you remove all conditional formats.</p>
+      <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id2414014" dir="auto">To apply conditional formatting, AutoCalculate must be enabled. Choose <span class="emph">Data - Calculate - AutoCalculate</span> (you see a check mark next to the command when AutoCalculate is enabled).</p></div>
+</div>
+<br>
+
+      <h2 id="hd_id961662926287139" dir="auto">Cell range</h2>
+      <a name="howtoget"></a><div class="howtoget">
+<div><p class="howtogetheader" dir="auto"><a name="wie"></a>To access this command...</p></div>
+<div class="howtogetbody">
+            <div class="embedded">
+<a name="s_conditionalcondition"></a>
+  <p id="par_id3154618" class="paragraph" dir="auto"><a name="bedingte"></a>Choose <span class="menuitem">Format - Conditional - Condition</span>.</p>
+  <p id="par_id141663543112100" class="paragraph" dir="auto">On the <span class="emph">Formatting</span> bar, click</p>
+  
+    <div class="icontable">
+      <div class="iconcell">
+        <p id="par_id1001663540244130" class="paragraphintable" dir="auto">
+          <img src="media/icon-themes/cmd/lc_conditionalformatdialog.svg" class="iconimage" alt="Icon Conditional Format - Condition" style="width:38px;height:38px" itemprop="icon" itemscope="true" itemtype="http://schema.org/ImageObject">
+        </p>
+      </div>
+      <div class="iconcell">
+        <p id="par_id151663540244134" class="paragraphintable" dir="auto">Conditional Format</p>
+      </div>
+    </div>
+  
+</div>
+      </div>
+</div>
+<br>
+      <h3 id="hd_id431662926282555" dir="auto">Range</h3>
+      <p id="par_id31494138" class="paragraph" dir="auto">Defines the range of cells concerned by the conditional formatting. Click on the <span class="emph">Shrink</span> button to minimize the dialog box. Click again on the button to come back to the dialog box once the range is selected.</p>
+
+      <a name="bm_id3153189"></a><meta itemprop="keywords" content="conditional formatting, conditions">
+      
+      <a name="bm_id5008050"></a>
+
+      <a name="bm_id5008055"></a>
+      <h2 id="hd_id71624649758112" dir="auto">Condition list</h2>
+      <p id="par_id3149413" class="paragraph" dir="auto">List of the conditions defined for the cell range in order of evaluation. You can define as many conditions as you want.</p>
+      <a name="bm_id5008053"></a>
+      <h3 id="hd_id41624649786605" dir="auto">Up</h3>
+      <p id="par_id3149414" class="paragraph" dir="auto"><span class="avis">Increase priority of the selected condition.</span></p>
+      <h3 id="hd_id861624649792266" dir="auto">Down</h3>
+      <a name="bm_id5008054"></a>
+      <p id="par_id3149415" class="paragraph" dir="auto"><span class="avis">Decrease priority of the selected condition.</span></p>
+      <a name="bm_id5008051"></a>
+      <h3 id="hd_id71662926011736" dir="auto">Add</h3>
+      <p id="par_id721662926016039" class="paragraph" dir="auto">Adds the condition to the condition list.</p>
+      <a name="bm_id5008052"></a>
+      <h3 id="hd_id401662926020291" dir="auto">Delete</h3>
+      <p id="par_id301662926026944" class="paragraph" dir="auto">Deletes the condition from the condition list.</p>
+      <a name="bm_id941662938267119"></a>
+      <h2 id="hd_id31531891" dir="auto">Condition list entries</h2>
+      <p id="par_id31494132" class="paragraph" dir="auto">Specify if conditional formatting is dependent on one of the entry listed on the drop down box.</p>
+
+      <div class="embedded">
+<a name="cellvalueis"></a>
+        <h2 id="hd_id431662935550205" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120100.html">Condition - Cell value is</a></h2>
+        <p id="par_id11662915615351" class="paragraph" dir="auto">Applies a cell style on the cell or cell range controlled by the condition set in the drop down list. The formatting is applied to each cell individually and the condition may depend on other cells values of the selected range.</p>
+    </div>
+      <div class="embedded">
+<a name="formulais"></a>
+        <h2 id="hd_id471662936567369" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120200.html">Condition - Formula is</a></h2>
+        <p id="par_id31494139" class="paragraph" dir="auto">Applies the selected style to the cell when the formula expression in the text box in the right is <span class="emph">not</span> zero.</p>
+    </div>
+      <div class="embedded">
+<a name="dateis"></a>
+        <h2 id="hd_id321662936831682" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120300.html">Condition - Date is</a></h2>
+        <p id="par_id31662934883939" class="paragraph" dir="auto">Applies the selected style to the cell when the cell contents is formatted as date and the condition is one of the available date interval in the dropdown list.</p>
+    </div>
+      <div class="embedded">
+<a name="allcells"></a>
+        <h2 id="hd_id861662937013389" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120400.html">Condition - All cells</a></h2>
+        <p id="par_id31662915586650" class="paragraph" dir="auto">Applies the conditional formatting to the set of cells defined in the selected range. The formatting is applied based on the contents of the whole range.</p>
+    </div>
+      <div class="embedded">
+<a name="colorscale"></a>
+        <h3 id="hd_id3147394" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120400.html#colorscale">Color Scale</a></h3>
+        <p id="par_id3155602" class="paragraph" dir="auto">Applies a color scale to a range consisting of displaying a bicolor or tricolor gradient on this range depending on the value of each cell.</p>
+    </div>
+      <div class="embedded">
+<a name="databar"></a>
+        <h3 id="par_id991609782427459" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120400.html#databar">Data Bar</a></h3>
+        <p id="par_id41609780964157" class="paragraph" dir="auto">Data bar option fills the cell with solid or gradient color corresponding to the numeric value in the cell.</p>
+    </div>
+      <div class="embedded">
+<a name="iconset"></a>
+        <h3 id="hd_id3153709" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120400.html#iconset">Icon Set</a></h3>
+        <p id="par_id3153764" class="paragraph" dir="auto">Add an icon to the cell based on the value relative to the specified thresholds. Several icon sets are available.</p>
+    </div>
+      <a name="bm_id241662938779751"></a>
+      <h2 id="hd_id431662938949798" dir="auto">Apply Style</h2>
+      <p id="par_id971662939043786" class="paragraph" dir="auto">Select the cell style to apply when the condition is verified. Select <span class="emph">New Style</span> to open the <a target="_top" href="en-US/text/scalc/01/cell_styles.html">Cell Style dialog</a> and define the style properties.</p>
+      <div class="embedded">
+<a name="manageconditions"></a>
+        <h2 id="hd_id391662937414401" dir="auto"><a target="_top" href="en-US/text/scalc/01/05120500.html">Manage Conditions</a></h2>
+        <p id="par_id3155906" class="paragraph" dir="auto">Manage all the conditional formatting defined in the spreadsheet.</p>
+    </div>
+      <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+            <p id="par_idN107E1" class="paragraph" dir="auto">
+                  <a target="_top" href="en-US/text/scalc/guide/cellstyle_conditional.html">Applying Conditional Formatting</a>
+
+            </p>
+      </div>
+</div>
+</div>
+<div id="SearchFrame"></div>
+<div id="DonationFrame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/scalc/01/05120000.xhp" target="_blank">/text/scalc/01/05120000.xhp</a></p>
+<p dir="auto">Title is: Conditional Formatting</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>
