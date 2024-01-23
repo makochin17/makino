@@ -21,8 +21,7 @@
         "picqer/php-barcode-generator": "^2.4",
         "phpoffice/phpspreadsheet": "^1.8",
         "tecnickcom/tcpdf": "^6.6",
-        "endroid/qr-code": "4.3.5",
-        "aspose/barcode": "^23.12"
+        "endroid/qr-code": "4.3.5"
     },
     "require-dev": {
         "fuel/docs": "1.8.*"

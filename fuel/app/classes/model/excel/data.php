@@ -4,6 +4,7 @@
  */
 namespace Model\Excel;
 use \Model\Common\GenerateList;
+use \Model\Common\BarcodeConfig;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;               // スプレッドシート用
 use PhpOffice\PhpSpreadsheet\IOFactory;                 // IOFactory
@@ -741,7 +742,7 @@ class Data extends \Model {
                                 // バーコード生成
                                 if (isset($location_list[$data[$dcnt]['location_id']])) {
                                     // 文字変換
-                                    $barcode_name       = preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($location_list[$data[$dcnt]['location_id']], 'as', 'UTF-8')));
+                                    $barcode_name       = self::getBarcodeData($data[$dcnt]['location_id'], self::$db);
                                     $column_name        = Coordinate::stringFromColumnIndex($col);
                                     $create_dir_data    = array($data[$dcnt]['location_id']);
                                     $create_dir         = self::create_dir($create_dir_data, DOCROOT.'template/barcode/');
@@ -771,7 +772,7 @@ class Data extends \Model {
 
                                     // バーコード生成
                                     $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-                                    file_put_contents(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png', $generator->getBarcode($barcode_name, $generator::TYPE_CODE_128, 10, 200));
+                                    file_put_contents(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png', $generator->getBarcode($barcode_name, $generator::TYPE_ITF_8, 8, 200));
                                     //画像の貼り付け
                                     $drawing            = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
                                     $drawing->setName($location_list[$data[$dcnt]['location_id']]);
@@ -793,6 +794,47 @@ class Data extends \Model {
             }
             $countup_no = $countup_no + ($line_offset * $i);
         }
+    }
+
+    // バーコードの値を取得
+    public static function getBarcodeData($location_id, $db = null) {
+
+        if (is_null($db)) {
+            $db = self::$db;
+        }
+
+        $list = array();
+        $stmt = \DB::select(
+                array('m.id', 'location_id'),
+                array(\DB::expr('(SELECT name FROM m_storage_column WHERE id = m.storage_column_id)'), 'storage_column'),
+                array(\DB::expr('(SELECT name FROM m_storage_depth WHERE id = m.storage_depth_id)'), 'storage_depth'),
+                array(\DB::expr('(SELECT name FROM m_storage_height WHERE id = m.storage_height_id)'), 'storage_height'),
+                array(\DB::expr('CONCAT(
+                    (SELECT name FROM m_storage_column WHERE id = m.storage_column_id),
+                    " - ",
+                    (SELECT name FROM m_storage_depth WHERE id = m.storage_depth_id),
+                    " - ",
+                    (SELECT name FROM m_storage_height WHERE id = m.storage_height_id)
+                    )'), 'location')
+                );
+
+        // テーブル
+        $stmt->from(array('rel_storage_location', 'm'));
+        // 条件
+        $stmt->where('m.id', $location_id);
+        // ソート
+        $stmt->order_by('m.id', 'ASC');
+        // 検索実行
+        $result = $stmt->execute($db)->current();
+
+        if (!empty($result)) {
+            $storage_column = sprintf('%02d', preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($result['storage_column'], 'as', 'UTF-8'))));
+            $storage_depth  = sprintf('%03d', preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($result['storage_depth'], 'as', 'UTF-8'))));
+            $storage_height = sprintf('%03d', preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($result['storage_height'], 'as', 'UTF-8'))));
+            return $storage_column.$storage_depth.$storage_height;
+        }
+
+        return false;
     }
 
 }
