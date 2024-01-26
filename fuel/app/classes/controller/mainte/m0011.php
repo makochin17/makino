@@ -110,7 +110,7 @@ class Controller_Mainte_M0011 extends Controller_Hybrid {
         $this->template->footer         = $footer;
 
         // ページング設定値取得
-        $paging_config = PagingConfig::getPagingConfig("UIM0011", C0010::$db);
+        $paging_config = PagingConfig::getPagingConfig("UIM0011", M0010::$db);
         $this->pagenation_config['num_links'] = $paging_config['display_link_number'];
         $this->pagenation_config['per_page'] = $paging_config['display_record_number'];
         $this->pagenation_config['per_page'] = 50;
