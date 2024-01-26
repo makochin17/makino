@@ -133,7 +133,13 @@ function submitChkExecution(value) {
 
 // 入庫シール印刷ボタン押下時処理
 function submitReceiptPrint(url_str, logistics_id) {
-    var f = document.forms["selectForm"];
+
+    var flag = window.confirm(processing_msg4);
+    if (!flag)return false;
+
+    var f = document.forms["entryForm"];
+
+    make_hidden('print_status_id', logistics_id, 'entryForm');
     // f.processing_division.value = '2';
     f.logistics_id.value = logistics_id;
     f.mode.value = 'print';
@@ -155,5 +161,17 @@ function onCarCodeSearch(url_str) {
     }
     //第2引数でcallbackのID名を渡す。子画面側では window.name として取得できる。
     window.open(url_str, callback_id, 'width=1500,height=700');
+}
+
+// 保管場所検索ボタン押下時処理
+function onLocationCodeSearch(url_str) {
+    var callback_id = 'callback_s0040';
+    window[callback_id] = function() { //windowにコールバックを登録
+        //コールバック時処理
+        document.entryForm.select_record.value = '1';
+        document.entryForm.submit();
+    }
+    //第2引数でcallbackのID名を渡す。子画面側では window.name として取得できる。
+    window.open(url_str, callback_id, 'width=1200,height=700');
 }
 

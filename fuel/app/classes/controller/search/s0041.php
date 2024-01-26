@@ -9,7 +9,7 @@ use \Model\Common\PagingConfig;
 use \Model\Common\GenerateList;
 use \Model\Search\S0040;
 
-class Controller_Search_S0040 extends Controller_Hybrid {
+class Controller_Search_S0041 extends Controller_Hybrid {
 
     protected $format = 'json';
 
@@ -118,13 +118,14 @@ class Controller_Search_S0040 extends Controller_Hybrid {
         $error_msg      = null;
         $list_data      = array();
         $location_id    = Input::param('location_id', '');
+        $warehouse_id   = Input::param('warehouse_id', '');
         $total          = S0040::getTotalCnt(S0040::$db);
-        $storage_list   = S0040::getLocationWarehouse(S0040::$db);
+        $storage_list   = S0040::getLocationColumn($warehouse_id, S0040::$db);
 
         if (!empty(Input::param('cancel')) && Security::check_token()) {
             // キャンセルボタンが押下された場合の処理
             Session::set('select_cancel', true);
-            Session::delete('s0040_list');
+            Session::delete('s0041_list');
             echo "<script type='text/javascript'>window.opener[window.name]();</script>";
             echo "<script type='text/javascript'>window.close();</script>";
         }
@@ -132,10 +133,10 @@ class Controller_Search_S0040 extends Controller_Hybrid {
         if (!empty($storage_list)) {
             foreach ($storage_list as $key => $val) {
                 $list_data[] = array(
-                    'warehouse_cnt'             => $val['warehouse_cnt'],
-                    'storage_warehouse_id'      => $val['storage_warehouse_id'],
-                    'storage_warehouse_name'    => $val['storage_warehouse_name'],
-                    'stock_cnt'                 => S0040::getLocationDetail('count', $val['storage_warehouse_id'], null, null, null, S0040::$db),
+                    'column_cnt'                => $val['column_cnt'],
+                    'storage_column_id'         => $val['storage_column_id'],
+                    'storage_column_name'       => $val['storage_column_name'],
+                    'stock_cnt'                 => S0040::getLocationDetail('count', $warehouse_id, $val['storage_column_id'], null, null, S0040::$db),
                 );
             }
         }
@@ -145,6 +146,7 @@ class Controller_Search_S0040 extends Controller_Hybrid {
                 'total'                         => $total,
                 'list_data'                     => $list_data,
                 'location_id'                   => $location_id,
+                'warehouse_id'                  => $warehouse_id,
 
                 'userinfo'                      => AuthConfig::getAuthConfig('all'),
                 // 保管場所倉庫リスト
@@ -159,6 +161,5 @@ class Controller_Search_S0040 extends Controller_Hybrid {
                 'error_message'                 => $error_msg,
             )
         );
-
     }
 }

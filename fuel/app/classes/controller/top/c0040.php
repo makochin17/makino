@@ -58,7 +58,6 @@ class Controller_Top_C0040 extends Controller_Hybrid {
         $tree->tree                         = $cnf['tree'];
         $tree->tree                         = '';
         $sidemenu->login_user_name          = $auth_data['full_name'];
-        $sidemenu->customer_code            = (!empty($auth_data['customer_code'])) ? $auth_data['customer_code']:'';
         // $sidemenu->system_title             = $cnf['system_title'];
         // $sidemenu->system_title_alpha       = $cnf['system_title_alpha'];
         $sidemenu->copyright                = $cnf['copyright'];

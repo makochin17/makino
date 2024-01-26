@@ -22,6 +22,7 @@
             var processing_msg1 = '<?php echo Config::get('m_RE0001'); ?>';
             var processing_msg2 = '<?php echo Config::get('m_RE0002'); ?>';
             var processing_msg3 = '<?php echo Config::get('m_RE0003'); ?>';
+            var processing_msg4 = '<?php echo Config::get('m_RE0013'); ?>';
         </script>
         <p class="error-message-head"><?php echo $error_message; ?></p>
         <br />
@@ -239,11 +240,15 @@
 				</tr>
 				<tr>
 					<td style="width: 200px; height: 30px;">
-						保管場所
+						保管場所<i class='fa fa-asterisk' style="color:#FF4040;font-size:10px;"></i>
 					</td>
 					<td style="width: 600px; height: 30px;">
-				        <?php echo Form::select('location_id', $data['location_id'], $location_combo_list,
-				            array('class' => 'select-item', 'id' => 'location_id', 'style' => 'width: 300px', 'onchange' => 'change()', 'tabindex' => '16')); ?>
+				        <?php //echo Form::select('location_id', $data['location_id'], $location_combo_list,array('class' => 'select-item', 'id' => 'location_id', 'style' => 'width: 300px', 'onchange' => 'change()', 'tabindex' => '16')); ?>
+                        <input type="button" name="s_client" value="検索" class='buttonA' tabindex="15" onclick="onLocationCodeSearch('<?php echo Uri::create('search/s0040?mode=choose&location_id='.$data['location_id']); ?>', 0)" />
+                        <span style="padding-left: 10px;">
+							<?php echo Form::hidden('location_id', (!empty($data['location_id'])) ? $data['location_id'] : '');?>
+					        <?php echo (isset($location_list[$data['location_id']]) && !empty($data['location_id'])) ? $location_list[$data['location_id']]:''; ?>
+					    </span>
 					</td>
 				</tr>
 		        <?php echo Form::close(); ?>
@@ -464,7 +469,7 @@
 			<?php else: ?>
 	            <?php echo Form::submit('execution', '登　　　録', array('class' => 'buttonB', 'style' => 'margin-right: 20px;', 'onclick' => 'return submitChkExecution(1)', 'tabindex' => '901')); ?>
 			<?php endif; ?>
-            <?php echo Form::submit('execution', '入庫シール印刷', array('class' => 'buttonB', 'style' => 'margin-right: 20px;', 'onclick' => 'return submitReceiptPrint('.Uri::create('logistics/l0020').', '.$logistics_id.')', 'tabindex' => '902')); ?>
+            <button type="button" onclick="submitReceiptPrint('<?php echo Uri::create('logistics/l0020'); ?>', '<?php echo $logistics_id; ?>')" class="buttonB">　入庫シール印刷 </button>
         </div>
 	</div>
 </section>

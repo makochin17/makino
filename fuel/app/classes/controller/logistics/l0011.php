@@ -213,10 +213,8 @@ class Controller_Logistics_L0011 extends Controller_Hybrid {
             Session::delete('select_car_code');
         } elseif ($code = Session::get('select_location_code')) {
             // 得意先の検索にてレコード選択された場合
-            if ($result = L0010::getSearchCar($code, L0010::$db)) {
-                $conditions['location_id']      = $result['storage_location_id'];
-                $conditions['location_name']    = $result['storage_location_name'];
-                $conditions['barcode_flg']      = $result['barcode_flg'];
+            if ($result = L0011::getLocation($code, L0010::$db)) {
+                $conditions['location_id']      = $result['location_id'];
             } else {
                 $error_msg = Config::get('m_MI0025');
             }

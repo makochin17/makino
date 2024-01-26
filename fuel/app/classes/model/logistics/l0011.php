@@ -613,4 +613,40 @@ class L0011 extends \Model {
         return false;
     }
 
+    //=========================================================================//
+    //===========================   保管場所データ  =============================//
+    //=========================================================================//
+    /**
+     * レコード取得
+     */
+    public static function getLocation($code, $db = null) {
+
+        if (is_null($db)) {
+            $db = self::$db;
+        }
+
+        // データ取得
+        $stmt = \DB::select(
+                array('m.id', 'location_id'),
+                array(\DB::expr('CONCAT(
+                    (SELECT name FROM m_storage_warehouse WHERE id = m.storage_warehouse_id),
+                    " - ",
+                    (SELECT name FROM m_storage_column WHERE id = m.storage_column_id),
+                    " - ",
+                    (SELECT name FROM m_storage_depth WHERE id = m.storage_depth_id),
+                    " - ",
+                    (SELECT name FROM m_storage_height WHERE id = m.storage_height_id)
+                    )'), 'location')
+                );
+
+        // テーブル
+        $stmt->from(array('rel_storage_location', 'm'));
+        // お客様コード
+        $stmt->where('m.id', '=', $code);
+        // ソート
+        $stmt->order_by('m.id', 'ASC');
+        // 検索実行
+        return $stmt->execute($db)->current();
+    }
+
 }

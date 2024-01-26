@@ -9,7 +9,7 @@ use \Model\Common\PagingConfig;
 use \Model\Common\GenerateList;
 use \Model\Search\S0040;
 
-class Controller_Search_S0040 extends Controller_Hybrid {
+class Controller_Search_S0043 extends Controller_Hybrid {
 
     protected $format = 'json';
 
@@ -118,24 +118,45 @@ class Controller_Search_S0040 extends Controller_Hybrid {
         $error_msg      = null;
         $list_data      = array();
         $location_id    = Input::param('location_id', '');
+        $warehouse_id   = Input::param('warehouse_id', '');
+        $column_id      = Input::param('column_id', '');
+        $depth_id       = Input::param('depth_id', '');
+        $height_id      = Input::param('storage_height_id', '');
         $total          = S0040::getTotalCnt(S0040::$db);
-        $storage_list   = S0040::getLocationWarehouse(S0040::$db);
+        $storage_list   = S0040::getLocationHeight($warehouse_id, $column_id, $depth_id, S0040::$db);
 
         if (!empty(Input::param('cancel')) && Security::check_token()) {
             // キャンセルボタンが押下された場合の処理
             Session::set('select_cancel', true);
-            Session::delete('s0040_list');
+            Session::delete('s0041_list');
             echo "<script type='text/javascript'>window.opener[window.name]();</script>";
             echo "<script type='text/javascript'>window.close();</script>";
+
+        } elseif (!empty(Input::param('select')) && Security::check_token()) {
+            // 選択ボタンが押下された場合の処理
+
+            // 選択されたIDを元に保管場所リレーションを検索してリレーションIDを取得
+            $location_id = S0040::getLocationIdBySelectId($warehouse_id, $column_id, $depth_id, $height_id, S0040::$db);
+            Session::set('select_location_code', $location_id);
+            Session::delete('s0043_list');
+            echo "<script type='text/javascript'>window.opener[window.name]();</script>";
+            echo "<script type='text/javascript'>window.close();</script>";
+
         }
 
         if (!empty($storage_list)) {
             foreach ($storage_list as $key => $val) {
-                $list_data[] = array(
-                    'warehouse_cnt'             => $val['warehouse_cnt'],
-                    'storage_warehouse_id'      => $val['storage_warehouse_id'],
-                    'storage_warehouse_name'    => $val['storage_warehouse_name'],
-                    'stock_cnt'                 => S0040::getLocationDetail('count', $val['storage_warehouse_id'], null, null, null, S0040::$db),
+                $detail_data        = S0040::getLocationDetail('search', $warehouse_id, $column_id, $depth_id, $val['storage_height_id'], S0040::$db);
+
+                $list_data[$key]    = array(
+                    'height_cnt'                => $val['height_cnt'],
+                    'storage_height_id'         => $val['storage_height_id'],
+                    'storage_height_name'       => $val['storage_height_name'],
+                    'car_name'                  => (!empty($detail_data['car_name'])) ? $detail_data['car_name']:'',
+                    'car_code'                  => (!empty($detail_data['car_code'])) ? $detail_data['car_code']:'',
+                    'customer_code'             => (!empty($detail_data['customer_code'])) ? $detail_data['customer_code']:'',
+                    'customer_name'             => (!empty($detail_data['customer_name'])) ? $detail_data['customer_name']:'',
+                    'location_id'               => (!empty($detail_data['location_id'])) ? $detail_data['location_id']:'',
                 );
             }
         }
@@ -145,6 +166,9 @@ class Controller_Search_S0040 extends Controller_Hybrid {
                 'total'                         => $total,
                 'list_data'                     => $list_data,
                 'location_id'                   => $location_id,
+                'warehouse_id'                  => $warehouse_id,
+                'column_id'                     => $column_id,
+                'depth_id'                      => $depth_id,
 
                 'userinfo'                      => AuthConfig::getAuthConfig('all'),
                 // 保管場所倉庫リスト
@@ -159,6 +183,5 @@ class Controller_Search_S0040 extends Controller_Hybrid {
                 'error_message'                 => $error_msg,
             )
         );
-
     }
 }

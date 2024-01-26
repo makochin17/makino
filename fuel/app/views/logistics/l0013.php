@@ -25,9 +25,17 @@
                 </tr>
                 <?php */ ?>
                 <tr>
+                    <td style="width: 200px; height: 30px;">出庫予定日</td>
+                    <td style="width: 460px; height: 30px;">
+                        <?php echo Form::input('delivery_schedule_date_from', (!empty($data['delivery_schedule_date_from'])) ? $data['delivery_schedule_date_from']:'', array('type' => 'date', 'id' => 'delivery_schedule_date_from','class' => 'input-date','tabindex' => '1')); ?>
+                        <label style="margin: 0 10px;">〜</label>
+                        <?php echo Form::input('delivery_schedule_date_to', (!empty($data['delivery_schedule_date_to'])) ? $data['delivery_schedule_date_to']:'', array('type' => 'date', 'id' => 'delivery_schedule_date_to','class' => 'input-date','tabindex' => '2')); ?>
+                    </td>
+                </tr>
+                <tr>
                     <td style="width: 200px; height: 30px;">お客様名</td>
                     <td style="width: 460px; height: 30px;">
-                        <?php echo Form::input('customer_name', (!empty($data['customer_name'])) ? $data['customer_name']:'', array('class' => 'input-text', 'id' => 'customer_name', 'style' => 'width: 250px;', 'tabindex' => '2')); ?>
+                        <?php echo Form::input('customer_name', (!empty($data['customer_name'])) ? $data['customer_name']:'', array('class' => 'input-text', 'id' => 'customer_name', 'style' => 'width: 250px;', 'tabindex' => '3')); ?>
                         <?php echo Form::hidden('customer_code', (!empty($data['customer_code'])) ? $data['customer_code']:'');?>
                         <input type="button" name="s_client" value="検索" class='buttonA' tabindex="15" onclick="onCustomerSearch('<?php echo Uri::create('search/s0010'); ?>', 0)" />
                     </td>
@@ -36,14 +44,14 @@
                     <td style="width: 200px; height: 30px;">車両番号</td>
                     <td style="width: 460px; height: 30px;">
                         <?php echo Form::input('car_code', (!empty($data['car_code'])) ? $data['car_code'] : '', 
-                        array('class' => 'input-text', 'type' => 'text', 'id' => 'car_code', 'style' => 'width:250px;', 'maxlength' => '50', 'tabindex' => '3')); ?>
+                        array('class' => 'input-text', 'type' => 'text', 'id' => 'car_code', 'style' => 'width:250px;', 'maxlength' => '50', 'tabindex' => '4')); ?>
                         <input type="button" name="s_client" value="検索" class='buttonA' tabindex="15" onclick="onCarCodeSearch('<?php echo Uri::create('search/s0020?mode=num'); ?>', 0)" />
                     </td>
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 30px;">車種</td>
                     <td style="width: 460px; height: 30px;">
-                        <?php echo Form::input('car_name', (!empty($data['car_name'])) ? $data['car_name']:'', array('class' => 'input-text', 'id' => 'car_name', 'maxlength' => '5', 'style' => 'width: 250px;', 'tabindex' => '4')); ?>
+                        <?php echo Form::input('car_name', (!empty($data['car_name'])) ? $data['car_name']:'', array('class' => 'input-text', 'id' => 'car_name', 'maxlength' => '5', 'style' => 'width: 250px;', 'tabindex' => '5')); ?>
                         <?php echo Form::hidden('car_id', (!empty($data['car_id'])) ? $data['car_id']:'');?>
                         <input type="button" name="s_client" value="検索" class='buttonA' tabindex="15" onclick="onCarNameSearch('<?php echo Uri::create('search/s0020?mode=name'); ?>', 0)" />
                     </td>
