@@ -1,0 +1,54 @@
+table.calendar thead th,
+table.calendar thead td {
+	padding:0 0 2px;
+	text-align:center;
+}
+
+table.calendar tbody th,
+table.calendar tbody td {
+	padding:5px;
+	border:1px solid #ccc;
+	width:20px;
+	text-align:center;
+	font-size:11px;
+}
+
+table.calendar tbody th {
+	background-color:#eee;
+}
+
+table.calendar tbody td {
+	color:#666;
+}
+
+table.calendar th.sun,
+table.calendar td.sun {
+	color:#d00;
+}
+
+table.calendar th.sat,
+table.calendar td.sat {
+	color:#00d;
+}
+
+table.calendar td.today {
+	color:#000;
+	background-color:#eee;
+	font-weight:bold;
+}
+
+a.no {
+	color:#333;
+}
+
+a.sun {
+	color:#d00;
+}
+
+a.sat {
+	color:#00d;
+}
+
+a.today {
+	color:#000;
+}
