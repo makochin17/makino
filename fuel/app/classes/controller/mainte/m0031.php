@@ -6,6 +6,7 @@ use \Model\Init;
 use \Model\AccessControl;
 use \Model\Common\AuthConfig;
 use \Model\Common\GenerateList;
+use \Model\Common\PagingConfig;
 use \Model\Mainte\M0030\M0030;
 use \Model\Mainte\M0030\M0031;
 use \Model\Search\S0031;
@@ -77,7 +78,7 @@ class Controller_Mainte_M0031 extends Controller_Hybrid {
 		$this->template->footer       = $footer;
         $this->template->tree         = $tree;
 
-        $paging_config = PagingConfig::getPagingConfig("UIM0011", C0010::$db);
+        $paging_config = PagingConfig::getPagingConfig("UIM0011", M0030::$db);
         $this->pagenation_config['num_links'] = $paging_config['display_link_number'];
         $this->pagenation_config['per_page'] = $paging_config['display_record_number'];
         $this->pagenation_config['per_page'] = 50;
