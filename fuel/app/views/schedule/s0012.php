@@ -1286,12 +1286,17 @@
 				        <?php echo Form::open(array('id' => 'head_form', 'name' => 'head_form', 'action' => '', 'method' => 'post', 'class' => 'form-stacked','enctype'=>"multipart/form-data")); ?>
 				        <?php echo Form::hidden(\Config::get('security.csrf_token_key'), \Security::fetch_token());?>
 				        <?php echo Form::hidden('select_record', 1);?>
+
+				        <?php /* ?>
 						<div style="display:inline;" class="s_form">
 							ユニット：
 	                        <?php echo Form::select('cboUnit', (!empty($data['unit_id'])) ? $data['unit_id']:'', $unit_list, array('class' => 'select-item', 'id' => 'cboUser', 'style' => 'width: 200px')); ?>
         					<?php echo Form::submit('search', '表示', array('class' => 'buttonB', 'style' => 'margin-right:20px;width:80px;height:40px;')); ?>
 						</div>
 						<div style="display:inline;float:right;" class="s_form" >
+				        <?php */ ?>
+
+						<div style="display:inline;" class="s_form" >
 							お客様：
                     		<?php echo Form::input('txtCustomer', (!empty($data['customer_name'])) ? $data['customer_name']:'', array('class' => 'input-text', 'type' => 'text', 'id' => 'txtCustomer', 'style' => 'width:200px;', 'maxlength' => '50')); ?>
 	                        <input type="button" name="search_button1" value="検索" class='buttonB' id="search_button1" style="cursor:pointer;display:inline;color:red;width:80px;height:40px;" onclick="onCustomerSearch('<?php echo Uri::create('search/s0010'); ?>', 0)" />
