@@ -88,12 +88,17 @@
 				</tr>
 				<tr>
 					<td style="width: 200px; height: 30px;">
-						お客様番号
+						お客様紐付け
 					</td>
 					<td style="width: 480px; height: 30px;">
-	                    <?php echo Form::input('customer_code', (!empty($data['customer_code'])) ? $data['customer_code'] : '', 
-	                    array('class' => 'input-text', 'type' => 'text', 'id' => 'customer_code', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '5', 'tabindex' => '11')); ?>
-	                    <i class='fa fa-asterisk' style="color:#FF4040;font-size:12px;"> お客様情報がある場合にご入力ください</i>
+	                    <?php // echo Form::input('customer_code', (!empty($data['customer_code'])) ? $data['customer_code'] : '', array('class' => 'input-text', 'type' => 'text', 'id' => 'customer_code', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '5', 'tabindex' => '11')); ?>
+                        <?php echo Form::hidden('customer_code', (!empty($data['customer_code'])) ? $data['customer_code']:'');?>
+                        <?php echo Form::hidden('customer_name', (!empty($data['customer_name'])) ? $data['customer_name']:'');?>
+                        <input type="button" name="s_client" value="お客様検索" class='buttonA' tabindex="15" onclick="onCustomerSearch('<?php echo Uri::create('search/s0010'); ?>', 0)" />
+                        <span style="margin-left: 20px;margin-right: 10px;font-weight: bold;"><?php echo (!empty($data['customer_code'])) ? $data['customer_code'] : ''; ?></span>
+                        <span style="font-weight: bold;"><?php echo (!empty($data['customer_name'])) ? $data['customer_name'] : ''; ?></span>
+                        <br />
+	                    <i class='fa fa-asterisk' style="color:#FF4040;font-size:12px;margin-top: 5px;"> お客様情報と紐付ける場合にご選択ください</i>
 					</td>
 				</tr>
 				<tr>

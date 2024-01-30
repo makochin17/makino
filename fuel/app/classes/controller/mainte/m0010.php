@@ -171,36 +171,15 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
     private function set_info(&$conditions) {
         $error_msg = null;
 
-        if ($code = Session::get('select_car_code')) {
-            // 検索にてレコード選択された場合
-            $result = M0010::getCar($code, M0010::$db);
-            if (count($result) > 0) {
-                // レコード取得出来たら値をセット
-                foreach ($result[0] as $key => $val) {
-                    if ($key == 'car_code') {
-                        $conditions['car_code'] = (!empty($val)) ? sprintf('%04d', $val):'';
-                    }
-                }
+        if ($code = Session::get('select_customer_code')) {
+            // 得意先の検索にてレコード選択された場合
+            if ($result = M0010::getSearchCustomer($code, M0010::$db)) {
+                $conditions['customer_code'] = $result['customer_code'];
+                $conditions['customer_name'] = $result['customer_name'];
             } else {
-                $error_msg = Config::get('m_MW0003');
+                $error_msg = Config::get('m_CUS011');
             }
-            Session::delete('select_car_code');
-        }
-        if ($code = Session::get('select_member_code')) {
-            // 検索にてレコード選択された場合
-            $result = M0010::getMember($code, M0010::$db);
-            if (count($result) > 0) {
-                // レコード取得出来たら値をセット
-                foreach ($result[0] as $key => $val) {
-                    // $conditions[$key] = $result[0][$key];
-                    $conditions[$key] = $val;
-                }
-                $conditions['processing_division'] = 2;
-            } else {
-                $error_msg = Config::get('m_MW0003');
-                $conditions['processing_division'] = null;
-            }
-            Session::delete('select_member_code');
+            Session::delete('select_customer_code');
         }
 
         return $error_msg;
@@ -436,6 +415,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
             'password_error_count',
             'lock_status',
             'customer_code',
+            'customer_name',
             'start_date',
             'end_date',
             'processing_division',
@@ -557,14 +537,6 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                 Session::delete('m0010_list');
             }
 
-            // ユーザー一覧から遷移してきた場合
-            if (!empty(Input::param('list')) && Input::method() == 'POST' && Security::check_token()) {
-                foreach ($conditions as $key => $val) {
-                    $conditions[$key] = Input::param($key, ''); // 検索項目
-                }
-                Session::set('select_member_code', $conditions['member_code']);
-            }
-
             if (!empty(Input::param('select_record'))) {
                 // 検索画面からコードが連携された場合の処理
                 foreach ($conditions as $key => $val) {
@@ -572,6 +544,28 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                 }
                 // 連携されたコードによる情報取得＆値セット
                 $error_msg = $this->set_info($conditions);
+            }
+
+            // ユーザー一覧から遷移してきた場合
+            if (!empty(Input::param('list')) && Input::method() == 'POST' && Security::check_token()) {
+                foreach ($conditions as $key => $val) {
+                    $conditions[$key] = Input::param($key, ''); // 検索項目
+                }
+                if ($member = M0010::getMember($conditions['member_code'], M0010::$db)) {
+                    foreach ($member as $key => $val) {
+                        $conditions['member_code']      = $val['member_code'];
+                        $conditions['full_name']        = $val['full_name'];
+                        $conditions['name_furigana']    = $val['name_furigana'];
+                        $conditions['mail_address']     = $val['mail_address'];
+                        $conditions['user_id']          = $val['user_id'];
+                        $conditions['user_authority']   = $val['user_authority'];
+                        $conditions['lock_status']      = $val['lock_status'];
+                        $conditions['customer_code']    = $val['customer_code'];
+                    }
+                    if ($result = M0010::getSearchCustomer($conditions['customer_code'], M0010::$db)) {
+                        $conditions['customer_name'] = $result['customer_name'];
+                    }
+                }
             }
 
         }

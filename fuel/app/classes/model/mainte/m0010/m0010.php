@@ -416,6 +416,66 @@ class M0010 extends \Model {
         return $stmt->execute($db)->as_array();
     }
 
+    /**
+     * お客様情報データの取得
+     */
+    public static function getSearchCustomer($customer_code, $db = null) {
+
+        if (is_null($db)) {
+            $db = self::$db;
+        }
+
+        $encrypt_key = SystemConfig::getSystemConfig('encrypt_key',$db);
+
+        // 項目
+        $stmt = \DB::select(
+                    array('mc.customer_code', 'customer_code'),
+                    array(\DB::expr("
+                        CASE
+                            WHEN mc.customer_type = 'individual' THEN '個人'
+                            WHEN mc.customer_type = 'corporation' THEN '法人'
+                            WHEN mc.customer_type = 'dealer' THEN 'ディーラー'
+                            ELSE ''
+                        END
+                        "), 'customer_type'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.name),"'.$encrypt_key.'")'), 'customer_name'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.name_kana),"'.$encrypt_key.'")'), 'customer_name_kana'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.zip),"'.$encrypt_key.'")'), 'zip'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.addr1),"'.$encrypt_key.'")'), 'addr1'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.addr2),"'.$encrypt_key.'")'), 'addr2'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.tel),"'.$encrypt_key.'")'), 'tel'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.fax),"'.$encrypt_key.'")'), 'fax'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.mobile),"'.$encrypt_key.'")'), 'mobile'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.mail_address),"'.$encrypt_key.'")'), 'mail_address'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.office_name),"'.$encrypt_key.'")'), 'office_name'),
+                    array(\DB::expr('AES_DECRYPT(UNHEX(mc.manager_name),"'.$encrypt_key.'")'), 'manager_name'),
+                    array('mc.birth_date', 'birth_date'),
+                    array(\DB::expr("
+                        CASE
+                            WHEN mc.sex = 'Man' THEN '男性'
+                            WHEN mc.sex = 'Woman' THEN '女性'
+                            ELSE ''
+                        END
+                        "), 'sex'),
+                    array('mc.resign_flg', 'resign_flg'),
+                    array('mc.resign_date', 'resign_date'),
+                    array('mc.resign_reason', 'resign_reason'),
+                    array('mc.start_date', 'start_date'),
+                    array('mc.end_date', 'end_date')
+                );
+
+        // テーブル
+        $stmt->from(array('m_customer', 'mc'));
+
+        //削除フラグ
+        $stmt->where('mc.del_flg', '=', 'NO');
+        // お客様番号
+        $stmt->where('mc.customer_code', '=', $customer_code);
+
+        // 検索実行
+        return $stmt->execute($db)->current();
+    }
+
     //=========================================================================//
     //==============================   対象登録   ==============================//
     //=========================================================================//

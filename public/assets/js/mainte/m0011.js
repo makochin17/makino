@@ -29,6 +29,7 @@ function onEdit(url_str, member_code, user_id) {
     f.member_code.value = member_code;
     f.user_id.value = user_id;
     f.select_record.value = 1;
+    f.processing_division.value = 2;
     f.method = "POST";
     f.action = url_str;
     f.submit();
