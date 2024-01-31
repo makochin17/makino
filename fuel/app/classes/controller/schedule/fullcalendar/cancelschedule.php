@@ -11,6 +11,7 @@ use \Model\Common\GenerateList;
 use \Model\Common\PagingConfig;
 use \Model\Common\OpeLog;
 use \Model\Schedule\S0010;
+use \Model\Logistics\L0010;
 
 class Controller_Schedule_Fullcalendar_CancelSchedule extends Controller_Rest {
 

@@ -6,11 +6,11 @@ function enter(){
     }
 }
 
-$(document).ready( function(){
-	if( redirect_flag ){
-		window.location.href = $('input[name=list_url]').val();
-	}
-});
+// $(document).ready( function(){
+// 	if( redirect_flag ){
+// 		window.location.href = $('input[name=list_url]').val();
+// 	}
+// });
 
 $(function(){
 
@@ -93,7 +93,7 @@ function make_hidden(name, value, formname) {
 }
 
 function change() {
-    flag = (document.entryForm.division_code.value == '1') ? false : true;
+    // flag = (document.entryForm.division_code.value == '1') ? false : true;
     // document.entryForm.text_member_code.disabled = flag;
 }
 

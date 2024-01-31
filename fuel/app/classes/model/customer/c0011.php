@@ -368,14 +368,15 @@ class C0011 extends \Model {
         // 項目
         $stmt = \DB::select(
                 array('m.customer_code', 'customer_code'),
-                array(\DB::expr("
-                        CASE
-                            WHEN m.customer_type = 'individual' THEN '個人'
-                            WHEN m.customer_type = 'corporation' THEN '法人'
-                            WHEN m.customer_type = 'dealer' THEN 'ディーラー'
-                            ELSE ''
-                        END
-                        "), 'customer_type'),
+                array('m.customer_type', 'customer_type'),
+                // array(\DB::expr("
+                //         CASE
+                //             WHEN m.customer_type = 'individual' THEN '個人'
+                //             WHEN m.customer_type = 'corporation' THEN '法人'
+                //             WHEN m.customer_type = 'dealer' THEN 'ディーラー'
+                //             ELSE ''
+                //         END
+                //         "), 'customer_type'),
                 array(\DB::expr('AES_DECRYPT(UNHEX(m.name),"'.$encrypt_key.'")'), 'customer_name'),
                 array(\DB::expr('AES_DECRYPT(UNHEX(m.name_kana),"'.$encrypt_key.'")'), 'customer_name_kana'),
                 array(\DB::expr('AES_DECRYPT(UNHEX(m.zip),"'.$encrypt_key.'")'), 'zip'),

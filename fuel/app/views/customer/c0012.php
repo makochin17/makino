@@ -38,7 +38,7 @@
 						お客様区分<i class='fa fa-asterisk' style="color:#FF4040;font-size:10px;"></i>
 					</td>
 					<td style="width: 480px; height: 30px;">
-				        <?php echo (!empty($data['customer_type'])) ? $data['customer_type']:'不明'; ?>
+				        <?php echo (isset($customer_type_list[$data['customer_type']])) ? $customer_type_list[$data['customer_type']]:'不明'; ?>
 						<?php echo Form::hidden('customer_type', (isset($customer_type_value_list[$data['customer_type']])) ? $customer_type_value_list[$data['customer_type']]:'individual'); ?>
 				        <?php // echo Form::select('customer_type', $data['customer_type'], $customer_type_list, array('class' => 'select-item', 'id' => 'customer_type', 'style' => 'width: 170px', 'onchange' => 'change()', 'tabindex' => '1')); ?>
 					</td>

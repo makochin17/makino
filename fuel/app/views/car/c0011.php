@@ -55,10 +55,11 @@
 					<td style="width: 200px; height: 30px;">
 						お客様名<i class='fa fa-asterisk' style="color:#FF4040;font-size:10px;"></i></td>
 					<td style="width: 600px; height: 30px;">
-						<?php echo Form::hidden('customer_code', (!empty($data['customer_code'])) ? $data['customer_code'] : '');?>
-	                    <?php echo Form::input('customer_name', (!empty($data['customer_name'])) ? $data['customer_name'] : '', 
-    	                array('class' => 'input-text', 'type' => 'text', 'id' => 'customer_name', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '500', 'tabindex' => '3')); ?>
-                        <input type="button" name="s_client" value="検索" class='buttonA' tabindex="15" onclick="onCustomerSearch('<?php echo Uri::create('search/s0010'); ?>', 0)" />
+                        <?php echo Form::hidden('customer_code', (!empty($data['customer_code'])) ? $data['customer_code']:'');?>
+                        <?php echo Form::hidden('customer_name', (!empty($data['customer_name'])) ? $data['customer_name']:'');?>
+                        <input type="button" name="s_client" value="お客様検索" class='buttonA' tabindex="15" onclick="onCustomerSearch('<?php echo Uri::create('search/s0010'); ?>', 0)" />
+                        <span style="margin-left: 20px;margin-right: 10px;font-weight: bold;"><?php echo (!empty($data['customer_code'])) ? $data['customer_code'] : ''; ?></span>
+                        <span style="font-weight: bold;"><?php echo (!empty($data['customer_name'])) ? $data['customer_name'] : ''; ?></span>
 					</td>
 				</tr>
 				<tr>
