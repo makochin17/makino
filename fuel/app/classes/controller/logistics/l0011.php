@@ -243,15 +243,15 @@ class Controller_Logistics_L0011 extends Controller_Hybrid {
             ->add_rule('required')
         ;
         if (!empty($conditions['logistics_id'])) {
-            // 出庫指示日チェック
-            $validation->add('delivery_schedule_date', '出庫予定日（出庫指示日）')
-                ->add_rule('required')
-                ->add_rule('valid_date_format')
-            ;
-            // 出庫指示時間チェック
-            $validation->add('delivery_schedule_time', '出庫予定時間（出庫指示時間）')
-                ->add_rule('required')
-            ;
+            // // 出庫指示日チェック
+            // $validation->add('delivery_schedule_date', '出庫予定日（出庫指示日）')
+            //     ->add_rule('required')
+            //     ->add_rule('valid_date_format')
+            // ;
+            // // 出庫指示時間チェック
+            // $validation->add('delivery_schedule_time', '出庫予定時間（出庫指示時間）')
+            //     ->add_rule('required')
+            // ;
         }
         // タイヤ種別チェック
         $validation->add('tire_type', 'タイヤ種別')
@@ -453,10 +453,10 @@ class Controller_Logistics_L0011 extends Controller_Hybrid {
                         $error_column = '入庫日';
                     } elseif (preg_match('/receipt_time/', $key)) {
                         $error_column = '入庫時間';
-                    } elseif (preg_match('/delivery_schedule_date/', $key)) {
-                        $error_column = '出庫予定日（出庫指示日）';
-                    } elseif (preg_match('/delivery_schedule_time/', $key)) {
-                        $error_column = '出庫予定時間（出庫指示時間）';
+                    // } elseif (preg_match('/delivery_schedule_date/', $key)) {
+                    //     $error_column = '出庫予定日（出庫指示日）';
+                    // } elseif (preg_match('/delivery_schedule_time/', $key)) {
+                    //     $error_column = '出庫予定時間（出庫指示時間）';
                     } elseif (preg_match('/tire_type/', $key)) {
                         $error_column = 'タイヤ種別';
                     } elseif (preg_match('/car_code/', $key)) {

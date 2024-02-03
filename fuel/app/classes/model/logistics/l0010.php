@@ -671,7 +671,7 @@ class L0010 extends \Model {
 
         // 更新実行
         $result = $stmt->execute($db);
-        if($result > 0) {
+        if(!is_null($result)) {
             return $data['logistics_id'];
         }
         return false;
@@ -731,7 +731,7 @@ class L0010 extends \Model {
 
         // 更新実行
         $result = $stmt->execute($db);
-        if($result > 0) {
+        if(!is_null($result)) {
             return true;
         }
         return false;
@@ -975,6 +975,18 @@ class L0010 extends \Model {
         if (!empty($item['schedule_id'])) {
             $stmt->where('t.schedule_id', '=', $item['schedule_id']);
         }
+        // お客様番号
+        if (!empty($item['customer_code'])) {
+            $stmt->where('t.customer_code', '=', $item['customer_code']);
+        }
+        // 車両ID
+        if (!empty($item['car_id'])) {
+            $stmt->where('t.car_id', '=', $item['car_id']);
+        }
+        // 車両番号
+        if (!empty($item['car_code'])) {
+            $stmt->where('t.car_code', '=', $item['car_code']);
+        }
         // 出庫指示日／入庫予定日
         if (!empty($item['delivery_schedule_date'])) {
             // $stmt->where('t.delivery_schedule_date', '=', $item['delivery_schedule_date']);
@@ -1205,6 +1217,255 @@ class L0010 extends \Model {
 
         // 検索実行
         return $stmt->execute($db)->current();
+    }
+
+    //=========================================================================//
+    //==============   予約から遷移してきた情報を入出庫情報に更新する  ==============//
+    //=========================================================================//
+    /**
+     * 予約別入出庫情報取得
+     */
+    public static function getScheduleTypeLogisticsByScheduleData($item = array(), $db = null) {
+
+        if (is_null($db)) {
+            $db = self::$db;
+        }
+
+        $encrypt_key = SystemConfig::getSystemConfig('encrypt_key');
+
+        // 項目
+        $stmt = \DB::select(
+                array('t.id', 'logistics_id'),
+                array(\DB::expr("DATE_FORMAT(t.delivery_schedule_date,'%Y-%m-%d')"), 'delivery_schedule_date'),
+                array(\DB::expr("DATE_FORMAT(t.delivery_date,'%Y-%m-%d')"), 'delivery_date'),
+                array(\DB::expr("DATE_FORMAT(t.receipt_date,'%Y-%m-%d')"), 'receipt_date'),
+                array('t.delivery_schedule_time', 'delivery_schedule_time'),
+                array('t.delivery_time', 'delivery_time'),
+                array('t.receipt_time', 'receipt_time'),
+                array('t.location_id', 'location_id'),
+                array('t.car_id', 'car_id'),
+                array('t.car_code', 'car_code'),
+                array(\DB::expr("AES_DECRYPT(UNHEX(t.car_name),'".$encrypt_key."')"), 'car_name'),
+                array('t.customer_code', 'customer_code'),
+                array(\DB::expr("
+                    CASE
+                        WHEN t.customer_name IS NULL THEN AES_DECRYPT(UNHEX(m.name),'".$encrypt_key."')
+                        ELSE AES_DECRYPT(UNHEX(t.customer_name),'".$encrypt_key."')
+                    END
+                    "), 'customer_name'),
+                array(\DB::expr("
+                    CASE
+                        WHEN t.consumer_name IS NULL THEN ca.consumer_name
+                        ELSE AES_DECRYPT(UNHEX(t.consumer_name),'".$encrypt_key."')
+                    END
+                    "), 'consumer_name'),
+                array(\DB::expr("
+                    CASE
+                        WHEN t.owner_name IS NULL THEN ca.owner_name
+                        ELSE AES_DECRYPT(UNHEX(t.owner_name),'".$encrypt_key."')
+                    END
+                    "), 'owner_name'),
+                array('t.tire_type', 'tire_type'),
+                array('t.tire_maker', 'tire_maker'),
+                array('t.tire_product_name', 'tire_product_name'),
+                array('t.tire_size', 'tire_size'),
+                array('t.tire_pattern', 'tire_pattern'),
+                array('t.tire_made_date', 'tire_made_date'),
+                array('t.tire_punk', 'tire_punk'),
+                array('t.nut_flg', 'nut_flg'),
+                array('t.tire_remaining_groove1', 'tire_remaining_groove1'),
+                array('t.tire_remaining_groove2', 'tire_remaining_groove2'),
+                array('t.tire_remaining_groove3', 'tire_remaining_groove3'),
+                array('t.tire_remaining_groove4', 'tire_remaining_groove4'),
+                array('t.delivery_schedule_flg', 'delivery_schedule_flg'),
+                array('t.receipt_flg', 'receipt_flg'),
+                array('t.delivery_flg', 'delivery_flg'),
+                array('t.complete_flg', 'complete_flg'),
+                array('t.schedule_id', 'schedule_id'),
+                array('t.update_datetime', 'update_datetime')
+                );
+
+        // テーブル
+        $stmt->from(array('t_logistics', 't'))
+        ->join(array('m_customer', 'm'), 'LEFT')
+            ->on('m.customer_code', '=', 't.customer_code')
+        ->join(array('m_car', 'ca'), 'LEFT')
+            ->on('ca.id', '=', 't.car_id')
+            ->on('ca.del_flg', '=', \DB::expr("'NO'"))
+        ;
+        // 条件
+        // 未削除
+        $stmt->where('t.del_flg', '=', 'NO');
+        // 入庫済
+        $stmt->where('t.receipt_flg', '=', 'YES');
+        // 未出庫
+        $stmt->where('t.delivery_flg', '=', 'NO');
+        // 予約ID
+        if (!empty($item['schedule_id'])) {
+            $stmt->where('t.schedule_id', '=', $item['schedule_id']);
+        }
+        // お客様番号
+        if (!empty($item['customer_code'])) {
+            $stmt->where('t.customer_code', '=', $item['customer_code']);
+        }
+        // 車両ID
+        if (!empty($item['car_id'])) {
+            $stmt->where('t.car_id', '=', $item['car_id']);
+        }
+        // 車両番号
+        if (!empty($item['car_code'])) {
+            $stmt->where('t.car_code', '=', $item['car_code']);
+        }
+
+        // ソート
+        $stmt->order_by('t.id', 'ASC');
+        // 検索実行
+        $res = $stmt->execute($db)->as_array();
+
+        if (!empty($res)) {
+            return $res;
+        }
+        return false;
+    }
+
+    /**
+     * 入出庫情報更新
+     */
+    public static function updLogisticsByCusAndCar($type = 'update', $data, $db = null) {
+
+        if (is_null($db)) {
+            $db = self::$db;
+        }
+
+        if (empty($data)) {
+            return false;
+        }
+
+        $encrypt_key = SystemConfig::getSystemConfig('encrypt_key');
+
+        // 項目セット
+        $set = array();
+        switch ($type) {
+            case 'delete':
+                $set['delivery_schedule_date'] = null;
+                $set['delivery_schedule_time'] = '00:00';
+                break;
+            case 'update':
+            default:
+                if (!empty($data['delivery_schedule_date'])) {
+                    $set['delivery_schedule_date'] = date('Y-m-d', strtotime($data['delivery_schedule_date']));
+                }
+                if (!empty($data['delivery_schedule_time'])) {
+                    $set['delivery_schedule_time'] = $data['delivery_schedule_time'];
+                }
+                if (!empty($data['delivery_date'])) {
+                    $set['delivery_date'] = date('Y-m-d', strtotime($data['delivery_date']));
+                }
+                if (!empty($data['delivery_time'])) {
+                    $set['delivery_time'] = $data['delivery_time'];
+                }
+                if (!empty($data['receipt_date'])) {
+                    $set['receipt_date'] = date('Y-m-d', strtotime($data['receipt_date']));
+                }
+                if (!empty($data['receipt_time'])) {
+                    $set['receipt_time'] = $data['receipt_time'];
+                }
+                // if (!empty($data['car_id'])) {
+                //     $set['car_id'] = $data['car_id'];
+                // }
+                // if (!empty($data['car_code'])) {
+                //     $set['car_code'] = $data['car_code'];
+                // }
+                // if (!empty($data['car_name'])) {
+                //     $set['car_name'] = \DB::expr('HEX(AES_ENCRYPT("'.$data['car_name'].'","'.$encrypt_key.'"))');
+                // }
+                // if (!empty($data['customer_code'])) {
+                //     $set['customer_code'] = $data['customer_code'];
+                // }
+                // if (!empty($data['customer_name'])) {
+                //     $set['customer_name'] = \DB::expr('HEX(AES_ENCRYPT("'.$data['customer_name'].'","'.$encrypt_key.'"))');
+                // }
+                if (!empty($data['consumer_name'])) {
+                    $set['consumer_name'] = \DB::expr('HEX(AES_ENCRYPT("'.$data['consumer_name'].'","'.$encrypt_key.'"))');
+                }
+                if (!empty($data['owner_name'])) {
+                    $set['owner_name'] = \DB::expr('HEX(AES_ENCRYPT("'.$data['owner_name'].'","'.$encrypt_key.'"))');
+                }
+                if (!empty($data['location_id'])) {
+                    $set['location_id'] = $data['location_id'];
+                }
+                if (!empty($data['tire_type'])) {
+                    $set['tire_type'] = $data['tire_type'];
+                }
+                if (!empty($data['tire_maker'])) {
+                    $set['tire_maker'] = $data['tire_maker'];
+                }
+                if (!empty($data['tire_product_name'])) {
+                    $set['tire_product_name'] = $data['tire_product_name'];
+                }
+                if (!empty($data['tire_size'])) {
+                    $set['tire_size'] = $data['tire_size'];
+                }
+                if (!empty($data['tire_pattern'])) {
+                    $set['tire_pattern'] = $data['tire_pattern'];
+                }
+                if (!empty($data['tire_made_date'])) {
+                    $set['tire_made_date'] = $data['tire_made_date'];
+                }
+                if (!empty($data['tire_punk'])) {
+                    $set['tire_punk'] = $data['tire_punk'];
+                }
+                if (!empty($data['nut_flg'])) {
+                    $set['nut_flg'] = $data['nut_flg'];
+                }
+                if (!empty($data['tire_remaining_groove1'])) {
+                    $set['tire_remaining_groove1'] = $data['tire_remaining_groove1'];
+                }
+                if (!empty($data['tire_remaining_groove2'])) {
+                    $set['tire_remaining_groove2'] = $data['tire_remaining_groove2'];
+                }
+                if (!empty($data['tire_remaining_groove3'])) {
+                    $set['tire_remaining_groove3'] = $data['tire_remaining_groove3'];
+                }
+                if (!empty($data['tire_remaining_groove4'])) {
+                    $set['tire_remaining_groove4'] = $data['tire_remaining_groove4'];
+                }
+                break;
+        }
+
+        // テーブル
+        $stmt = \DB::update('t_logistics')->set(array_merge($set, self::getEtcData(false)));
+
+        // 未削除
+        $stmt->where('del_flg', '=', 'NO');
+        // 入庫済
+        $stmt->where('receipt_flg', '=', 'YES');
+        // 未出庫
+        $stmt->where('delivery_flg', '=', 'NO');
+        // 予約ID
+        if (!empty($data['schedule_id'])) {
+            $stmt->where('schedule_id', '=', $data['schedule_id']);
+        }
+        // お客様番号
+        if (!empty($data['customer_code'])) {
+            $stmt->where('customer_code', '=', $data['customer_code']);
+        }
+        // 車両ID
+        if (!empty($data['car_id'])) {
+            $stmt->where('car_id', '=', $data['car_id']);
+        }
+        // 車両番号
+        if (!empty($data['car_code'])) {
+            $stmt->where('car_code', '=', $data['car_code']);
+        }
+
+        // 更新実行
+        $result = $stmt->execute($db);
+        if(!is_null($result)) {
+            return null;
+        } else {
+            return \Config::get('m_LE0002');
+        }
     }
 
 }

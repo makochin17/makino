@@ -51,8 +51,8 @@ class Controller_Schedule_Fullcalendar_AddSchedule extends Controller_Rest {
                     'delivery_schedule_time'    => $conditions['start_time'],
                 );
                 if (!$data = L0010::getLogisticsBySchedule($list, S0010::$db)) {
-                    $logistics_list['delivery_schedule_date']   = $conditions['start_date'];
-                    $logistics_list['delivery_schedule_time']   = $conditions['start_time'];
+                    $logistics_list['delivery_schedule_date']   = '';
+                    $logistics_list['delivery_schedule_time']   = '';
                     $logistics_list['receipt_date']             = $conditions['start_date'];
                     $logistics_list['receipt_time']             = $conditions['start_time'];
                     $logistics_list['car_id']                   = $item['car_id'];
@@ -63,9 +63,28 @@ class Controller_Schedule_Fullcalendar_AddSchedule extends Controller_Rest {
                     $logistics_list['consumer_name']            = $item['consumer_name'];
                     $logistics_list['schedule_id']              = $item['schedule_id'];
 
+                    // 今回予約した情報を元に入出庫データを作成
                     $error_msg = L0010::create_record($logistics_list, $logistics_create_list, S0010::$db);
                     if (!empty($error_msg)) {
                         throw new Exception($error_msg, 1);
+                    }
+                    // 今回予約した情報を元に以前の入出庫データを取得して出荷指示日を更新
+                    $set_list   = array(
+                        'customer_code'     => $item['customer_code'],
+                        'car_id'            => $item['car_id'],
+                        'car_code'          => $item['car_code'],
+                    );
+                    if ($result = L0010::getScheduleTypeLogisticsByScheduleData($set_list, S0010::$db)) {
+                        foreach ($result as $key => $val) {
+                            $set['delivery_schedule_date']   = $conditions['start_date'];
+                            $set['delivery_schedule_time']   = $conditions['start_time'];
+                            $set['car_id']                   = $item['car_id'];
+                            $set['car_code']                 = $item['car_code'];
+                            $set['customer_code']            = $item['customer_code'];
+                            if ($error_msg = L0010::updLogisticsByCusAndCar('update', $set, S0010::$db)) {
+                                throw new Exception($error_msg, 1);
+                            }
+                        }
                     }
                 }
             }
