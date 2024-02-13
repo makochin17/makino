@@ -428,7 +428,7 @@ class Controller_Customer_C0011 extends Controller_Hybrid {
 
         $this->template->content = View::forge(AccessControl::getActiveController(),
             array(
-                'list_url'                  => \Uri::create(\Uri::create('customer/c1010')),
+                'list_url'                  => \Uri::create(\Uri::create('customer/c0010')),
 
                 'data'                      => $conditions,
 

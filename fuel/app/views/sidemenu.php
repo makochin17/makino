@@ -19,6 +19,7 @@
         <li>
           <span class="opener">お客様メニュー</span>
           <ul>
+            <li><?php echo Html::anchor(\Uri::create('schedule/s1020'), '予約状況一覧'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0012'), '予約スケジュール'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0013'), '配達予約スケジュール'); ?></li>
             <?php if (!empty($customer_code)) : ?>
@@ -41,6 +42,7 @@
           <li>
             <span class="opener">社内管理</span>
             <ul>
+              <li><?php echo Html::anchor(\Uri::create('schedule/s1010'), '予約状況一覧'); ?></li>
               <li><?php echo Html::anchor(\Uri::create('schedule/s0010'), '予約スケジュール'); ?></li>
               <li><?php echo Html::anchor(\Uri::create('schedule/s0011'), '配達予約スケジュール'); ?></li>
               <li><?php echo Html::anchor(\Uri::create('car/c0010'), '車両情報'); ?></li>
