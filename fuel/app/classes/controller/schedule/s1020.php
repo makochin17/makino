@@ -203,6 +203,10 @@ class Controller_Schedule_S1020 extends Controller_Hybrid {
         $conditions                     = S1010::getForms('search');
         $conditions['customer_code']    = $auth_data['customer_code'];
 
+        if (!empty(Input::param('init'))) {
+            Session::delete('s1020_list');
+        }
+
         if (!empty(Input::param('input_clear')) && Input::method() == 'POST' && Security::check_token()) {
             // 入力項目クリアボタンが押下された場合の処理
             Session::delete('s1020_list');
@@ -247,7 +251,6 @@ class Controller_Schedule_S1020 extends Controller_Hybrid {
                 }
 
             } else {
-                Session::delete('s1020_list');
                 $search_flag = false;
             }
 

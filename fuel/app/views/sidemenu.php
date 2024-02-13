@@ -19,7 +19,9 @@
         <li>
           <span class="opener">お客様メニュー</span>
           <ul>
-            <li><?php echo Html::anchor(\Uri::create('schedule/s1020'), '予約状況一覧'); ?></li>
+            <?php if (!empty($customer_code)) : ?>
+              <li><?php echo Html::anchor(\Uri::create('schedule/s1020?init=1'), '予約状況一覧'); ?></li>
+            <?php endif; ?>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0012'), '予約スケジュール'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0013'), '配達予約スケジュール'); ?></li>
             <?php if (!empty($customer_code)) : ?>
