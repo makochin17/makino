@@ -1,6 +1,6 @@
 <?php
 /**
- * 予約一覧画面
+ * 予約状況一覧画面
  */
 use \Model\Init;
 use \Model\AccessControl;
@@ -43,10 +43,10 @@ class Controller_Schedule_S1020 extends Controller_Hybrid {
     private function initViewForge($auth_data){
         // サイト設定
         $cnf                                = \Config::load('siteinfo', true);
-        $cnf['header_title']                = '予約一覧';
+        $cnf['header_title']                = '予約状況一覧';
         $cnf['page_id']                     = '[S1020]';
         $cnf['tree']['top']                 = \Uri::base(false);
-        $cnf['tree']['management_function'] = '予約一覧';
+        $cnf['tree']['management_function'] = '予約状況一覧';
         $cnf['tree']['page_url']            = \Uri::create(AccessControl::getActiveController());
         $cnf['tree']['page_title']          = '';
 
@@ -295,7 +295,27 @@ class Controller_Schedule_S1020 extends Controller_Hybrid {
 
         $list_data                  = array();
         if ($total > 0) {
-            $list_data              = S1010::getCustomerSearch('search', $conditions, $offset, $limit, $search_mode, S1010::$db);
+            if ($list                   = S1010::getCustomerSearch('search', $conditions, $offset, $limit, $search_mode, S1010::$db)) {
+                foreach ($list as $key => $val) {
+                    $search_list        = array(
+                        'schedule_id'   => $val['schedule_id'],
+                        // 'customer_code' => $val['customer_code'],
+                        // 'car_id'        => $val['car_id'],
+                        // 'car_code'      => $val['car_code'],
+                    );
+                    if ($logistics      = S1010::getLogisticsBySchedule($search_list, S1010::$db)) {
+                        $today          = date('Y-m-d');
+                        if (!empty($logistics['delivery_date']) && $logistics['delivery_flg'] == 'YES') {
+                            $target_day = date('Y-m-d', strtotime($logistics['delivery_date'].' +1 day'));
+                            if ($target_day > $today) {
+                                $list_data[]    = $val;
+                            }
+                        } else {
+                            $list_data[]    = $val;
+                        }
+                    }
+                }
+            }
         } elseif (Input::method() == 'POST' && Security::check_token() && empty($error_msg) && $search_flag === true) {
             $error_msg              = Config::get('m_CI0003');
         }

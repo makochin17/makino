@@ -52,6 +52,7 @@ class AuthConfig extends \Model {
                     'mail_address'      => \Auth::get_profile_fields('mail_address', ''),
                     'user_id'           => \Auth::get_profile_fields('user_id', ''),
                     'customer_code'     => \Auth::get_profile_fields('customer_code', ''),
+                    'customer_type'     => \Auth::get_profile_fields('customer_type', ''),
                     'user_authority'    => \Auth::get_profile_fields('user_authority', ''),
                     'lock_status'       => \Auth::get_profile_fields('lock_status', ''),
                 );
@@ -77,6 +78,7 @@ class AuthConfig extends \Model {
             'mail_address'      => $conditions['mail_address'],
             'user_id'           => $conditions['user_id'],
             'customer_code'     => $conditions['customer_code'],
+            'customer_type'     => $conditions['customer_type'],
             'user_authority'    => $conditions['user_authority'],
             'lock_status'       => $conditions['lock_status']
         );
@@ -127,6 +129,7 @@ class AuthConfig extends \Model {
                 'mail_address'      => $conditions['mail_address'],
                 'user_id'           => $conditions['user_id'],
                 'customer_code'     => $conditions['customer_code'],
+                'customer_type'     => $conditions['customer_type'],
                 'user_authority'    => $conditions['user_authority'],
                 'lock_status'       => $conditions['lock_status']
             );

@@ -317,11 +317,16 @@ class M0010 extends \Model {
                 array('m.user_authority', 'user_authority'),
                 array('m.lock_status', 'lock_status'),
                 array('m.customer_code', 'customer_code'),
+                array('c.customer_type', 'customer_type'),
                 array('m.start_date', 'start_date')
                 );
 
         // テーブル
-        $stmt->from(array('m_member', 'm'));
+        $stmt->from(array('m_member', 'm'))
+        ->join(array('m_customer', 'c'), 'LEFT')
+            ->on('c.customer_code', '=', 'm.customer_code')
+            ->on('c.del_flg', '=', \DB::expr("'NO'"))
+        ;
 
         // 社員コード
         $stmt->where('m.member_code', '=', $code);
@@ -367,11 +372,16 @@ class M0010 extends \Model {
                 array('m.user_id', 'user_id'),
                 array('m.user_authority', 'user_authority'),
                 array('m.lock_status', 'lock_status'),
-                array('m.customer_code', 'customer_code')
+                array('m.customer_code', 'customer_code'),
+                array('c.customer_type', 'customer_type')
                 );
 
         // テーブル
-        $stmt->from(array('m_member', 'm'));
+        $stmt->from(array('m_member', 'm'))
+        ->join(array('m_customer', 'c'), 'LEFT')
+            ->on('c.customer_code', '=', 'm.customer_code')
+            ->on('c.del_flg', '=', \DB::expr("'NO'"))
+        ;
 
         // 氏名
         $stmt->where('m.user_id', '=', $user_id);
@@ -430,14 +440,15 @@ class M0010 extends \Model {
         // 項目
         $stmt = \DB::select(
                     array('mc.customer_code', 'customer_code'),
-                    array(\DB::expr("
-                        CASE
-                            WHEN mc.customer_type = 'individual' THEN '個人'
-                            WHEN mc.customer_type = 'corporation' THEN '法人'
-                            WHEN mc.customer_type = 'dealer' THEN 'ディーラー'
-                            ELSE ''
-                        END
-                        "), 'customer_type'),
+                    array('mc.customer_type', 'customer_type'),
+                    // array(\DB::expr("
+                    //     CASE
+                    //         WHEN mc.customer_type = 'individual' THEN '個人'
+                    //         WHEN mc.customer_type = 'corporation' THEN '法人'
+                    //         WHEN mc.customer_type = 'dealer' THEN 'ディーラー'
+                    //         ELSE ''
+                    //     END
+                    //     "), 'customer_type'),
                     array(\DB::expr('AES_DECRYPT(UNHEX(mc.name),"'.$encrypt_key.'")'), 'customer_name'),
                     array(\DB::expr('AES_DECRYPT(UNHEX(mc.name_kana),"'.$encrypt_key.'")'), 'customer_name_kana'),
                     array(\DB::expr('AES_DECRYPT(UNHEX(mc.zip),"'.$encrypt_key.'")'), 'zip'),

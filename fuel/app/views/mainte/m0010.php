@@ -94,6 +94,7 @@
 	                    <?php // echo Form::input('customer_code', (!empty($data['customer_code'])) ? $data['customer_code'] : '', array('class' => 'input-text', 'type' => 'text', 'id' => 'customer_code', 'style' => 'width:120px;', 'minlength' => '1', 'maxlength' => '5', 'tabindex' => '11')); ?>
                         <?php echo Form::hidden('customer_code', (!empty($data['customer_code'])) ? $data['customer_code']:'');?>
                         <?php echo Form::hidden('customer_name', (!empty($data['customer_name'])) ? $data['customer_name']:'');?>
+                        <?php echo Form::hidden('customer_type', (!empty($data['customer_type'])) ? $data['customer_type']:'');?>
                         <input type="button" name="s_client" value="お客様検索" class='buttonA' tabindex="15" onclick="onCustomerSearch('<?php echo Uri::create('search/s0010'); ?>', 0)" />
                         <span style="margin-left: 20px;margin-right: 10px;font-weight: bold;"><?php echo (!empty($data['customer_code'])) ? $data['customer_code'] : ''; ?></span>
                         <span style="font-weight: bold;"><?php echo (!empty($data['customer_name'])) ? $data['customer_name'] : ''; ?></span>

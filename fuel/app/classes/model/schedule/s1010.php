@@ -102,111 +102,112 @@ class S1010 extends \Model {
         // 項目
         switch ($type) {
             case 'count':
-                $stmt = \DB::select(\DB::expr('COUNT(l.id) AS count'));
+                $stmt = \DB::select(\DB::expr('COUNT(s.id) AS count'));
                 break;
             case 'search':
             default:
                 $stmt = \DB::select(
-                        array('l.id', 'schedule_id'),
-                        array(\DB::expr("DATE_FORMAT(l.start_date,'%Y-%m-%d')"), 'start_date'),
-                        array('l.start_time', 'start_time'),
-                        array('l.car_id', 'car_id'),
-                        array('l.car_code', 'car_code'),
-                        array(\DB::expr("AES_DECRYPT(UNHEX(l.car_name),'".$encrypt_key."')"), 'car_name'),
-                        array('l.customer_code', 'customer_code'),
+                        array('s.id', 'schedule_id'),
+                        array(\DB::expr("DATE_FORMAT(s.start_date,'%Y-%m-%d')"), 'start_date'),
+                        array('s.start_time', 'start_time'),
+                        array('s.car_id', 'car_id'),
+                        array('s.car_code', 'car_code'),
+                        array(\DB::expr("AES_DECRYPT(UNHEX(s.car_name),'".$encrypt_key."')"), 'car_name'),
+                        array('s.customer_code', 'customer_code'),
                         array(\DB::expr("
                             CASE
-                                WHEN l.customer_name IS NULL THEN AES_DECRYPT(UNHEX(m.name),'".$encrypt_key."')
-                                ELSE AES_DECRYPT(UNHEX(l.customer_name),'".$encrypt_key."')
+                                WHEN s.customer_name IS NULL THEN AES_DECRYPT(UNHEX(m.name),'".$encrypt_key."')
+                                ELSE AES_DECRYPT(UNHEX(s.customer_name),'".$encrypt_key."')
                             END
                             "), 'customer_name'),
                         array(\DB::expr("
                             CASE
-                                WHEN l.consumer_name IS NULL THEN ca.consumer_name
-                                ELSE AES_DECRYPT(UNHEX(l.consumer_name),'".$encrypt_key."')
+                                WHEN s.consumer_name IS NULL THEN ca.consumer_name
+                                ELSE AES_DECRYPT(UNHEX(s.consumer_name),'".$encrypt_key."')
                             END
                             "), 'consumer_name'),
-                        array('l.schedule_type', 'schedule_type'),
-                        array('l.request_memo', 'request_memo'),
-                        array('l.memo', 'memo'),
+                        array('m.customer_type', 'customer_type'),
+                        array('s.schedule_type', 'schedule_type'),
+                        array('s.request_memo', 'request_memo'),
+                        array('s.memo', 'memo'),
                         array(\DB::expr("
                             CASE
-                                WHEN l.request_class = 'delivery' THEN '配達'
-                                WHEN l.request_class = 'pick_up' THEN '引取り'
-                                WHEN l.request_class = 'extradition' THEN '引渡し'
-                                WHEN l.request_class = 'business_trip' THEN '出張'
-                                WHEN l.request_class = 'shipping' THEN '発送'
-                                WHEN l.request_class = 'inspection' THEN '点検'
+                                WHEN s.request_class = 'delivery' THEN '配達'
+                                WHEN s.request_class = 'pick_up' THEN '引取り'
+                                WHEN s.request_class = 'extradition' THEN '引渡し'
+                                WHEN s.request_class = 'business_trip' THEN '出張'
+                                WHEN s.request_class = 'shipping' THEN '発送'
+                                WHEN s.request_class = 'inspection' THEN '点検'
                                 ELSE 'その他'
                             END
                             "), 'request_class'),
-                        array('l.cancel_flg', 'cancel_flg'),
-                        array('l.carry_flg', 'carry_flg'),
-                        array('l.update_datetime', 'update_datetime')
+                        array('s.cancel_flg', 'cancel_flg'),
+                        array('s.carry_flg', 'carry_flg'),
+                        array('s.update_datetime', 'update_datetime')
                         );
             break;
         }
 
         // テーブル
-        $stmt->from(array('t_schedule', 'l'))
+        $stmt->from(array('t_schedule', 's'))
         ->join(array('m_customer', 'm'), 'LEFT')
-            ->on('m.customer_code', '=', 'l.customer_code')
+            ->on('m.customer_code', '=', 's.customer_code')
         ->join(array('m_car', 'ca'), 'LEFT')
-            ->on('ca.id', '=', 'l.car_id')
+            ->on('ca.id', '=', 's.car_id')
             ->on('ca.del_flg', '=', \DB::expr("'NO'"))
         ;
         // 条件
-        $stmt->where('l.del_flg', '=', 'NO');
+        $stmt->where('s.del_flg', '=', 'NO');
         // 予約ID
         if (!empty($conditions['schedule_id'])) {
-            $stmt->where('l.id', '=', $conditions['schedule_id']);
+            $stmt->where('s.id', '=', $conditions['schedule_id']);
         }
         // 予約日／希望日
         if (!empty($conditions['start_date_from']) && trim($conditions['start_date_to']) != '') {
             $date_from = \Date::forge(strtotime(trim($conditions['start_date_from'])))->format('mysql_date');
             $date_to = \Date::forge(strtotime(trim($conditions['start_date_to'])))->format('mysql_date');
-            $stmt->where('l.start_date', 'between', array($date_from, $date_to));
+            $stmt->where('s.start_date', 'between', array($date_from, $date_to));
         } else {
             if (!empty($conditions['start_date_from'])) {
                 $date = \Date::forge(strtotime(trim($conditions['start_date_from'])))->format('mysql_date');
-                $stmt->where('l.start_date', '>=', $date);
+                $stmt->where('s.start_date', '>=', $date);
             }
             if (!empty($conditions['start_date_to'])) {
                 $date = \Date::forge(strtotime(trim($conditions['start_date_to'])))->format('mysql_date');
-                $stmt->where('l.start_date', '<=', $date);
+                $stmt->where('s.start_date', '<=', $date);
             }
         }
         // お客様番号
         if (!empty($conditions['customer_code'])) {
-            // $stmt->where(\DB::expr('CAST(l.customer_code AS SIGNED)'), '=', $conditions['customer_code']);
+            // $stmt->where(\DB::expr('CAST(s.customer_code AS SIGNED)'), '=', $conditions['customer_code']);
         }
         // お客様名
         if (!empty($conditions['customer_name']) && trim($conditions['customer_name']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(l.customer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['customer_name']."%'"));
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(s.customer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['customer_name']."%'"));
         }
         // 車両番号
         if (!empty($conditions['car_code']) && trim($conditions['car_code']) != '') {
-            $stmt->where('l.car_code', 'LIKE', \DB::expr("'%".$conditions['car_code']."%'"));
+            $stmt->where('s.car_code', 'LIKE', \DB::expr("'%".$conditions['car_code']."%'"));
         }
         // 車種
         if (!empty($conditions['car_name']) && trim($conditions['car_name']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(l.car_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['car_name']."%'"));
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(s.car_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['car_name']."%'"));
         }
         // 使用者
         if (!empty($conditions['consumer_name']) && trim($conditions['consumer_name']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(l.consumer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['consumer_name']."%'"));
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(s.consumer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['consumer_name']."%'"));
         }
         // 予約タイプ
         if (!empty($conditions['schedule_type']) && $conditions['schedule_type'] != 'all') {
-            $stmt->where('l.schedule_type', '=', $conditions['schedule_type']);
+            $stmt->where('s.schedule_type', '=', $conditions['schedule_type']);
         }
         // キャンセルフラグ
         if (empty($conditions['cancel_flg']) || $conditions['cancel_flg'] == 'NO') {
-            $stmt->where('l.cancel_flg', '=', 'NO');
+            $stmt->where('s.cancel_flg', '=', 'NO');
         }
         // 持込みフラグ
         if (empty($conditions['carry_flg']) || $conditions['carry_flg'] == 'NO') {
-            $stmt->where('l.carry_flg', '=', 'NO');
+            $stmt->where('s.carry_flg', '=', 'NO');
         }
 
         // 検索実行
@@ -216,13 +217,13 @@ class S1010 extends \Model {
                 return $res[0]['count'];
                 break;
             case 'export':
-                return $stmt->order_by('l.id', 'ASC')
+                return $stmt->order_by('s.id', 'ASC')
                     ->execute($db)
                     ->as_array();
                 break;
             case 'search':
             default:
-                return $stmt->order_by('l.id', 'ASC')
+                return $stmt->order_by('s.id', 'ASC')
                     ->limit($limit)
                     ->offset($offset)
                     ->execute($db)
@@ -232,7 +233,7 @@ class S1010 extends \Model {
     }
 
     /**
-     * レコード検索件数取得
+     * レコード検索件数取得(お客様用＜個人・法人＞)
      */
     public static function getCustomerSearch($type = 'search', $conditions, $offset, $limit, $mode, $db = null) {
 
@@ -245,111 +246,114 @@ class S1010 extends \Model {
         // 項目
         switch ($type) {
             case 'count':
-                $stmt = \DB::select(\DB::expr('COUNT(l.id) AS count'));
+                $stmt = \DB::select(\DB::expr('COUNT(s.id) AS count'));
                 break;
             case 'search':
             default:
                 $stmt = \DB::select(
-                        array('l.id', 'schedule_id'),
-                        array(\DB::expr("DATE_FORMAT(l.start_date,'%Y-%m-%d')"), 'start_date'),
-                        array('l.start_time', 'start_time'),
-                        array('l.car_id', 'car_id'),
-                        array('l.car_code', 'car_code'),
-                        array(\DB::expr("AES_DECRYPT(UNHEX(l.car_name),'".$encrypt_key."')"), 'car_name'),
-                        array('l.customer_code', 'customer_code'),
+                        array('s.id', 'schedule_id'),
+                        array(\DB::expr("DATE_FORMAT(s.start_date,'%Y-%m-%d')"), 'start_date'),
+                        array('s.start_time', 'start_time'),
+                        array('s.car_id', 'car_id'),
+                        array('s.car_code', 'car_code'),
+                        array(\DB::expr("AES_DECRYPT(UNHEX(s.car_name),'".$encrypt_key."')"), 'car_name'),
+                        array('s.customer_code', 'customer_code'),
                         array(\DB::expr("
                             CASE
-                                WHEN l.customer_name IS NULL THEN AES_DECRYPT(UNHEX(m.name),'".$encrypt_key."')
-                                ELSE AES_DECRYPT(UNHEX(l.customer_name),'".$encrypt_key."')
+                                WHEN s.customer_name IS NULL THEN AES_DECRYPT(UNHEX(m.name),'".$encrypt_key."')
+                                ELSE AES_DECRYPT(UNHEX(s.customer_name),'".$encrypt_key."')
                             END
                             "), 'customer_name'),
                         array(\DB::expr("
                             CASE
-                                WHEN l.consumer_name IS NULL THEN ca.consumer_name
-                                ELSE AES_DECRYPT(UNHEX(l.consumer_name),'".$encrypt_key."')
+                                WHEN s.consumer_name IS NULL THEN ca.consumer_name
+                                ELSE AES_DECRYPT(UNHEX(s.consumer_name),'".$encrypt_key."')
                             END
                             "), 'consumer_name'),
-                        array('l.schedule_type', 'schedule_type'),
-                        array('l.request_memo', 'request_memo'),
-                        array('l.memo', 'memo'),
+                        array('m.customer_type', 'customer_type'),
+                        array('s.schedule_type', 'schedule_type'),
+                        array('s.request_memo', 'request_memo'),
+                        array('s.memo', 'memo'),
                         array(\DB::expr("
                             CASE
-                                WHEN l.request_class = 'delivery' THEN '配達'
-                                WHEN l.request_class = 'pick_up' THEN '引取り'
-                                WHEN l.request_class = 'extradition' THEN '引渡し'
-                                WHEN l.request_class = 'business_trip' THEN '出張'
-                                WHEN l.request_class = 'shipping' THEN '発送'
-                                WHEN l.request_class = 'inspection' THEN '点検'
+                                WHEN s.request_class = 'delivery' THEN '配達'
+                                WHEN s.request_class = 'pick_up' THEN '引取り'
+                                WHEN s.request_class = 'extradition' THEN '引渡し'
+                                WHEN s.request_class = 'business_trip' THEN '出張'
+                                WHEN s.request_class = 'shipping' THEN '発送'
+                                WHEN s.request_class = 'inspection' THEN '点検'
                                 ELSE 'その他'
                             END
                             "), 'request_class'),
-                        array('l.cancel_flg', 'cancel_flg'),
-                        array('l.carry_flg', 'carry_flg'),
-                        array('l.update_datetime', 'update_datetime')
+                        array('s.cancel_flg', 'cancel_flg'),
+                        array('s.carry_flg', 'carry_flg'),
+                        array('s.update_datetime', 'update_datetime')
                         );
             break;
         }
 
         // テーブル
-        $stmt->from(array('t_schedule', 'l'))
+        $stmt->from(array('t_schedule', 's'))
         ->join(array('m_customer', 'm'), 'LEFT')
-            ->on('m.customer_code', '=', 'l.customer_code')
+            ->on('m.customer_code', '=', 's.customer_code')
+            ->on('m.del_flg', '=', \DB::expr("'NO'"))
+            ->on('m.customer_type', '!=', \DB::expr("'dealer'"))
         ->join(array('m_car', 'ca'), 'LEFT')
-            ->on('ca.id', '=', 'l.car_id')
+            ->on('ca.id', '=', 's.car_id')
             ->on('ca.del_flg', '=', \DB::expr("'NO'"))
         ;
         // 条件
-        $stmt->where('l.del_flg', '=', 'NO');
+        $stmt->where('s.del_flg', '=', 'NO');
         // 予約ID
         if (!empty($conditions['schedule_id'])) {
-            $stmt->where('l.id', '=', $conditions['schedule_id']);
+            $stmt->where('s.id', '=', $conditions['schedule_id']);
         }
         // 予約日／希望日
         if (!empty($conditions['start_date_from']) && trim($conditions['start_date_to']) != '') {
             $date_from = \Date::forge(strtotime(trim($conditions['start_date_from'])))->format('mysql_date');
             $date_to = \Date::forge(strtotime(trim($conditions['start_date_to'])))->format('mysql_date');
-            $stmt->where('l.start_date', 'between', array($date_from, $date_to));
+            $stmt->where('s.start_date', 'between', array($date_from, $date_to));
         } else {
             if (!empty($conditions['start_date_from'])) {
                 $date = \Date::forge(strtotime(trim($conditions['start_date_from'])))->format('mysql_date');
-                $stmt->where('l.start_date', '>=', $date);
+                $stmt->where('s.start_date', '>=', $date);
             }
             if (!empty($conditions['start_date_to'])) {
                 $date = \Date::forge(strtotime(trim($conditions['start_date_to'])))->format('mysql_date');
-                $stmt->where('l.start_date', '<=', $date);
+                $stmt->where('s.start_date', '<=', $date);
             }
         }
         // お客様番号
         if (!empty($conditions['customer_code'])) {
-            $stmt->where(\DB::expr('CAST(l.customer_code AS SIGNED)'), '=', $conditions['customer_code']);
+            $stmt->where(\DB::expr('CAST(s.customer_code AS SIGNED)'), '=', $conditions['customer_code']);
         }
         // お客様名
         if (!empty($conditions['customer_name']) && trim($conditions['customer_name']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(l.customer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['customer_name']."%'"));
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(s.customer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['customer_name']."%'"));
         }
         // 車両番号
         if (!empty($conditions['car_code']) && trim($conditions['car_code']) != '') {
-            $stmt->where('l.car_code', 'LIKE', \DB::expr("'%".$conditions['car_code']."%'"));
+            $stmt->where('s.car_code', 'LIKE', \DB::expr("'%".$conditions['car_code']."%'"));
         }
         // 車種
         if (!empty($conditions['car_name']) && trim($conditions['car_name']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(l.car_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['car_name']."%'"));
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(s.car_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['car_name']."%'"));
         }
         // 使用者
         if (!empty($conditions['consumer_name']) && trim($conditions['consumer_name']) != '') {
-            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(l.consumer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['consumer_name']."%'"));
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(s.consumer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['consumer_name']."%'"));
         }
         // 予約タイプ
         if (!empty($conditions['schedule_type']) && $conditions['schedule_type'] != 'all') {
-            $stmt->where('l.schedule_type', '=', $conditions['schedule_type']);
+            $stmt->where('s.schedule_type', '=', $conditions['schedule_type']);
         }
         // キャンセルフラグ
         if (empty($conditions['cancel_flg']) || $conditions['cancel_flg'] == 'NO') {
-            $stmt->where('l.cancel_flg', '=', 'NO');
+            $stmt->where('s.cancel_flg', '=', 'NO');
         }
         // 持込みフラグ
         if (empty($conditions['carry_flg']) || $conditions['carry_flg'] == 'NO') {
-            $stmt->where('l.carry_flg', '=', 'NO');
+            $stmt->where('s.carry_flg', '=', 'NO');
         }
 
         // 検索実行
@@ -359,13 +363,159 @@ class S1010 extends \Model {
                 return $res[0]['count'];
                 break;
             case 'export':
-                return $stmt->order_by('l.id', 'ASC')
+                return $stmt->order_by('s.id', 'ASC')
                     ->execute($db)
                     ->as_array();
                 break;
             case 'search':
             default:
-                return $stmt->order_by('l.id', 'ASC')
+                return $stmt->order_by('s.id', 'ASC')
+                    ->limit($limit)
+                    ->offset($offset)
+                    ->execute($db)
+                    ->as_array();
+                break;
+        }
+    }
+
+    /**
+     * レコード検索件数取得(お客様用＜配達＞)
+     */
+    public static function getCustomerDealerSearch($type = 'search', $conditions, $offset, $limit, $mode, $db = null) {
+
+        if (is_null($db)) {
+            $db = self::$db;
+        }
+
+        $encrypt_key = SystemConfig::getSystemConfig('encrypt_key');
+
+        // 項目
+        switch ($type) {
+            case 'count':
+                $stmt = \DB::select(\DB::expr('COUNT(s.id) AS count'));
+                break;
+            case 'search':
+            default:
+                $stmt = \DB::select(
+                        array('s.id', 'schedule_id'),
+                        array(\DB::expr("DATE_FORMAT(s.start_date,'%Y-%m-%d')"), 'start_date'),
+                        array('s.start_time', 'start_time'),
+                        array('s.car_id', 'car_id'),
+                        array('s.car_code', 'car_code'),
+                        array(\DB::expr("AES_DECRYPT(UNHEX(s.car_name),'".$encrypt_key."')"), 'car_name'),
+                        array('s.customer_code', 'customer_code'),
+                        array(\DB::expr("
+                            CASE
+                                WHEN s.customer_name IS NULL THEN AES_DECRYPT(UNHEX(m.name),'".$encrypt_key."')
+                                ELSE AES_DECRYPT(UNHEX(s.customer_name),'".$encrypt_key."')
+                            END
+                            "), 'customer_name'),
+                        array(\DB::expr("
+                            CASE
+                                WHEN s.consumer_name IS NULL THEN ca.consumer_name
+                                ELSE AES_DECRYPT(UNHEX(s.consumer_name),'".$encrypt_key."')
+                            END
+                            "), 'consumer_name'),
+                        array('m.customer_type', 'customer_type'),
+                        array('s.schedule_type', 'schedule_type'),
+                        array('s.request_memo', 'request_memo'),
+                        array('s.memo', 'memo'),
+                        array(\DB::expr("
+                            CASE
+                                WHEN s.request_class = 'delivery' THEN '配達'
+                                WHEN s.request_class = 'pick_up' THEN '引取り'
+                                WHEN s.request_class = 'extradition' THEN '引渡し'
+                                WHEN s.request_class = 'business_trip' THEN '出張'
+                                WHEN s.request_class = 'shipping' THEN '発送'
+                                WHEN s.request_class = 'inspection' THEN '点検'
+                                ELSE 'その他'
+                            END
+                            "), 'request_class'),
+                        array('s.cancel_flg', 'cancel_flg'),
+                        array('s.carry_flg', 'carry_flg'),
+                        array('s.update_datetime', 'update_datetime')
+                        );
+            break;
+        }
+
+        // テーブル
+        $stmt->from(array('t_schedule', 's'))
+        ->join(array('m_customer', 'm'), 'LEFT')
+            ->on('m.customer_code', '=', 's.customer_code')
+            ->on('m.del_flg', '=', \DB::expr("'NO'"))
+            ->on('m.customer_type', '=', \DB::expr("'dealer'"))
+        ->join(array('m_car', 'ca'), 'LEFT')
+            ->on('ca.id', '=', 's.car_id')
+            ->on('ca.del_flg', '=', \DB::expr("'NO'"))
+        ;
+        // 条件
+        $stmt->where('s.del_flg', '=', 'NO');
+        // 予約ID
+        if (!empty($conditions['schedule_id'])) {
+            $stmt->where('s.id', '=', $conditions['schedule_id']);
+        }
+        // 予約日／希望日
+        if (!empty($conditions['start_date_from']) && trim($conditions['start_date_to']) != '') {
+            $date_from = \Date::forge(strtotime(trim($conditions['start_date_from'])))->format('mysql_date');
+            $date_to = \Date::forge(strtotime(trim($conditions['start_date_to'])))->format('mysql_date');
+            $stmt->where('s.start_date', 'between', array($date_from, $date_to));
+        } else {
+            if (!empty($conditions['start_date_from'])) {
+                $date = \Date::forge(strtotime(trim($conditions['start_date_from'])))->format('mysql_date');
+                $stmt->where('s.start_date', '>=', $date);
+            }
+            if (!empty($conditions['start_date_to'])) {
+                $date = \Date::forge(strtotime(trim($conditions['start_date_to'])))->format('mysql_date');
+                $stmt->where('s.start_date', '<=', $date);
+            }
+        }
+        // お客様番号
+        if (!empty($conditions['customer_code'])) {
+            $stmt->where(\DB::expr('CAST(s.customer_code AS SIGNED)'), '=', $conditions['customer_code']);
+        }
+        // お客様名
+        if (!empty($conditions['customer_name']) && trim($conditions['customer_name']) != '') {
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(s.customer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['customer_name']."%'"));
+        }
+        // 車両番号
+        if (!empty($conditions['car_code']) && trim($conditions['car_code']) != '') {
+            $stmt->where('s.car_code', 'LIKE', \DB::expr("'%".$conditions['car_code']."%'"));
+        }
+        // 車種
+        if (!empty($conditions['car_name']) && trim($conditions['car_name']) != '') {
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(s.car_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['car_name']."%'"));
+        }
+        // 使用者
+        if (!empty($conditions['consumer_name']) && trim($conditions['consumer_name']) != '') {
+            $stmt->where(\DB::expr('AES_DECRYPT(UNHEX(s.consumer_name),"'.$encrypt_key.'")'), 'LIKE', \DB::expr("'%".$conditions['consumer_name']."%'"));
+        }
+        // 予約タイプ
+        if (!empty($conditions['schedule_type']) && $conditions['schedule_type'] != 'all') {
+            $stmt->where('s.schedule_type', '=', $conditions['schedule_type']);
+        }
+        // キャンセルフラグ
+        if (empty($conditions['cancel_flg']) || $conditions['cancel_flg'] == 'NO') {
+            $stmt->where('s.cancel_flg', '=', 'NO');
+        }
+        // 持込みフラグ
+        if (empty($conditions['carry_flg']) || $conditions['carry_flg'] == 'NO') {
+            $stmt->where('s.carry_flg', '=', 'NO');
+        }
+
+        // 検索実行
+        switch ($type) {
+            case 'count':
+                $res = $stmt->execute($db)->as_array();
+                return $res[0]['count'];
+                break;
+            case 'export':
+                return $stmt->order_by('s.id', 'ASC')
+                    ->execute($db)
+                    ->as_array();
+                break;
+            case 'search':
+            default:
+                return $stmt->order_by('s.id', 'ASC')
                     ->limit($limit)
                     ->offset($offset)
                     ->execute($db)
@@ -587,6 +737,115 @@ class S1010 extends \Model {
 
         // 検索実行
         return $stmt->execute($db)->current();
+    }
+
+    /**
+     * 予約別入出庫情報取得
+     */
+    public static function getLogisticsBySchedule($item = array(), $db = null) {
+
+        if (is_null($db)) {
+            $db = self::$db;
+        }
+
+        $encrypt_key = SystemConfig::getSystemConfig('encrypt_key');
+
+        // 項目
+        $stmt = \DB::select(
+                array('t.id', 'logistics_id'),
+                array(\DB::expr("DATE_FORMAT(t.delivery_schedule_date,'%Y-%m-%d')"), 'delivery_schedule_date'),
+                array(\DB::expr("DATE_FORMAT(t.delivery_date,'%Y-%m-%d')"), 'delivery_date'),
+                array(\DB::expr("DATE_FORMAT(t.receipt_date,'%Y-%m-%d')"), 'receipt_date'),
+                array('t.delivery_schedule_time', 'delivery_schedule_time'),
+                array('t.delivery_time', 'delivery_time'),
+                array('t.receipt_time', 'receipt_time'),
+                array('t.location_id', 'location_id'),
+                array('t.car_id', 'car_id'),
+                array('t.car_code', 'car_code'),
+                array(\DB::expr("AES_DECRYPT(UNHEX(t.car_name),'".$encrypt_key."')"), 'car_name'),
+                array('t.customer_code', 'customer_code'),
+                array(\DB::expr("
+                    CASE
+                        WHEN t.customer_name IS NULL THEN AES_DECRYPT(UNHEX(m.name),'".$encrypt_key."')
+                        ELSE AES_DECRYPT(UNHEX(t.customer_name),'".$encrypt_key."')
+                    END
+                    "), 'customer_name'),
+                array(\DB::expr("
+                    CASE
+                        WHEN t.consumer_name IS NULL THEN ca.consumer_name
+                        ELSE AES_DECRYPT(UNHEX(t.consumer_name),'".$encrypt_key."')
+                    END
+                    "), 'consumer_name'),
+                array(\DB::expr("
+                    CASE
+                        WHEN t.owner_name IS NULL THEN ca.owner_name
+                        ELSE AES_DECRYPT(UNHEX(t.owner_name),'".$encrypt_key."')
+                    END
+                    "), 'owner_name'),
+                array('t.tire_type', 'tire_type'),
+                array('t.tire_maker', 'tire_maker'),
+                array('t.tire_product_name', 'tire_product_name'),
+                array('t.tire_size', 'tire_size'),
+                array('t.tire_pattern', 'tire_pattern'),
+                array('t.tire_made_date', 'tire_made_date'),
+                array('t.tire_punk', 'tire_punk'),
+                array('t.nut_flg', 'nut_flg'),
+                array('t.tire_remaining_groove1', 'tire_remaining_groove1'),
+                array('t.tire_remaining_groove2', 'tire_remaining_groove2'),
+                array('t.tire_remaining_groove3', 'tire_remaining_groove3'),
+                array('t.tire_remaining_groove4', 'tire_remaining_groove4'),
+                array('t.delivery_schedule_flg', 'delivery_schedule_flg'),
+                array('t.receipt_flg', 'receipt_flg'),
+                array('t.delivery_flg', 'delivery_flg'),
+                array('t.complete_flg', 'complete_flg'),
+                array('t.schedule_id', 'schedule_id'),
+                array('t.update_datetime', 'update_datetime')
+                );
+
+        // テーブル
+        $stmt->from(array('t_logistics', 't'))
+        ->join(array('m_customer', 'm'), 'LEFT')
+            ->on('m.customer_code', '=', 't.customer_code')
+        ->join(array('m_car', 'ca'), 'LEFT')
+            ->on('ca.id', '=', 't.car_id')
+            ->on('ca.del_flg', '=', \DB::expr("'NO'"))
+        ;
+        // 条件
+        $stmt->where('t.del_flg', '=', 'NO');
+        // 予約ID
+        if (!empty($item['schedule_id'])) {
+            $stmt->where('t.schedule_id', '=', $item['schedule_id']);
+        }
+        // お客様番号
+        if (!empty($item['customer_code'])) {
+            $stmt->where('t.customer_code', '=', $item['customer_code']);
+        }
+        // 車両ID
+        if (!empty($item['car_id'])) {
+            $stmt->where('t.car_id', '=', $item['car_id']);
+        }
+        // 車両番号
+        if (!empty($item['car_code'])) {
+            $stmt->where('t.car_code', '=', $item['car_code']);
+        }
+        // 出庫指示日／入庫予定日
+        if (!empty($item['delivery_schedule_date'])) {
+            // $stmt->where('t.delivery_schedule_date', '=', $item['delivery_schedule_date']);
+        }
+        // 出庫指示時間／入庫予定時間
+        if (!empty($item['delivery_schedule_time'])) {
+            // $stmt->where('t.delivery_schedule_time', '=', $item['delivery_schedule_time']);
+        }
+
+        // ソート
+        $stmt->order_by('t.id', 'ASC');
+        // 検索実行
+        $res = $stmt->execute($db)->current();
+
+        if (!empty($res)) {
+            return $res;
+        }
+        return false;
     }
 
 }

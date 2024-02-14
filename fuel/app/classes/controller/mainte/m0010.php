@@ -176,6 +176,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
             if ($result = M0010::getSearchCustomer($code, M0010::$db)) {
                 $conditions['customer_code'] = $result['customer_code'];
                 $conditions['customer_name'] = $result['customer_name'];
+                $conditions['customer_type'] = $result['customer_type'];
             } else {
                 $error_msg = Config::get('m_CUS011');
             }
@@ -416,6 +417,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
             'lock_status',
             'customer_code',
             'customer_name',
+            'customer_type',
             'start_date',
             'end_date',
             'processing_division',
@@ -561,6 +563,7 @@ class Controller_Mainte_M0010 extends Controller_Hybrid {
                         $conditions['user_authority']   = $val['user_authority'];
                         $conditions['lock_status']      = $val['lock_status'];
                         $conditions['customer_code']    = $val['customer_code'];
+                        $conditions['customer_type']    = $val['customer_type'];
                     }
                     if ($result = M0010::getSearchCustomer($conditions['customer_code'], M0010::$db)) {
                         $conditions['customer_name'] = $result['customer_name'];

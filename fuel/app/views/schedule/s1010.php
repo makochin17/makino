@@ -15,7 +15,7 @@
         <table class="search-area" style="width: 800px">
             <tbody>
                 <tr>
-                    <td style="width: 200px; height: 30px;">予約日</td>
+                    <td style="width: 200px; height: 30px;">予約希望日</td>
                     <td style="width: 460px; height: 30px;">
                         <?php echo Form::input('start_date_from', (!empty($data['start_date_from'])) ? $data['start_date_from']:'', array('type' => 'date', 'id' => 'start_date_from','class' => 'input-date','tabindex' => '1')); ?>
                         <label style="margin: 0 10px;">〜</label>
@@ -60,6 +60,7 @@
                         <?php echo Form::input('consumer_name', (!empty($data['consumer_name'])) ? $data['consumer_name']:'', array('class' => 'input-text', 'id' => 'consumer_name', 'style' => 'width: 250px;', 'tabindex' => '6')); ?>
                     </td>
                 </tr>
+                <?php /* ?>
                 <tr>
                     <td style="width: 200px; height: 30px;">予約タイプ</td>
                     <td style="width: 460px; height: 30px;">
@@ -67,6 +68,7 @@
                         array('class' => 'select-item', 'id' => 'schedule_type', 'style' => 'width: 150px', 'tabindex' => '6')); ?>
                     </td>
                 </tr>
+                <?php */ ?>
                 <tr>
                     <td style="width: 200px; height: 30px;"> </td>
                     <td style="width: 460px; height: 30px;">
@@ -94,10 +96,10 @@
         <?php echo Form::hidden('schedule_id', '');?>
         <?php echo Form::hidden('mode', '');?>
         <?php echo Form::hidden('list_count', $list_count);?>
-        <?php if ($total > 0) : ?>
-        <div style="width: 1400px;">
+        <?php if ($list_count > 0) : ?>
+        <div style="width: 1600px;">
             <div class="content-row" style="float: right">
-                検索結果：<?php echo $total; ?> 件
+                検索結果：<?php echo $list_count; ?> 件
             </div>
             <div class="content-row">&nbsp;</div>
             <!-- ここからPager -->
@@ -113,13 +115,15 @@
             <?php */ ?>
             <!-- ここまでPager -->
             <div class="table-wrap" style="clear: right">
-                <table class="table-inq" style="width: 1400px;">
+                <table class="table-inq" style="width: 1600px;">
                     <tr>
-                        <th style="width: 80px;font-size: 13px;">希望日</th>
-                        <th style="width: 60px;font-size: 13px;">区分</th>
+                        <th style="width: 80px;font-size: 13px;">予約希望日</th>
+                        <th style="width: 40px;font-size: 13px;">時間</th>
+                        <th style="width: 40px;font-size: 13px;">区分</th>
+                        <th style="width: 60px;font-size: 13px;">お客様種別</th>
                         <th style="width: 100px;font-size: 13px;">車番</th>
                         <th style="width: 160px;font-size: 13px;">車種</th>
-                        <th style="width: 100px;">使用者</th>
+                        <th style="width: 80px;">使用者</th>
                         <th style="width: 160px;font-size: 13px;">お客様名</th>
                         <th style="width: 140px;font-size: 13px;">ご要望</th>
                         <th style="width: 140px;font-size: 13px;">メモ</th>
@@ -139,7 +143,9 @@
                             <td style="font-size: 13px;text-align:left;padding-left:10px;">
                                 <?php $start_date = new DateTime($val['start_date']);echo !empty($val['start_date']) ? $start_date->format('Y/m/d'):''; ?>
                             </td>
+                            <td style="font-size: 13px;text-align:left;padding-left:10px;"><?php echo ($val['start_time'] != '00:00') ? $val['start_time']:''; ?></td>
                             <td style="font-size: 13px;text-align:center;padding-left:10px;"><?php echo (isset($schedule_type_list[$val['schedule_type']])) ? $schedule_type_list[$val['schedule_type']]:''; ?></td>
+                            <td style="font-size: 13px;text-align:center;padding-left:10px;"><?php echo (isset($customer_type_list[$val['customer_type']])) ? $customer_type_list[$val['customer_type']]:''; ?></td>
                             <td style="font-size: 13px;text-align:left;padding-left:10px;"><?php echo $val['car_code']; ?></td>
                             <td style="font-size: 13px;text-align:left;padding-left:10px;"><?php echo $val['car_name']; ?></td>
                             <td style="font-size: 13px;text-align:left;padding-left:10px;"><?php echo $val['consumer_name']; ?></td>

@@ -1,6 +1,6 @@
 <?php
 /**
- * 予約状況一覧画面
+ * 配達予約状況一覧画面
  */
 use \Model\Init;
 use \Model\AccessControl;
@@ -9,7 +9,7 @@ use \Model\Common\PagingConfig;
 use \Model\Common\GenerateList;
 use \Model\Schedule\S1010;
 
-class Controller_Schedule_S1010 extends Controller_Hybrid {
+class Controller_Schedule_S1030 extends Controller_Hybrid {
 
     protected $format = 'json';
 
@@ -33,8 +33,6 @@ class Controller_Schedule_S1010 extends Controller_Hybrid {
 
     // 予約タイプリスト
     private $schedule_type_list         = array();
-    // お客様区分リスト
-    private $customer_type_list         = array();
 
     // ユーザ情報
     private $user_authority             = array();
@@ -45,10 +43,10 @@ class Controller_Schedule_S1010 extends Controller_Hybrid {
     private function initViewForge($auth_data){
         // サイト設定
         $cnf                                = \Config::load('siteinfo', true);
-        $cnf['header_title']                = '予約状況一覧';
-        $cnf['page_id']                     = '[S1010]';
+        $cnf['header_title']                = '配達予約状況一覧';
+        $cnf['page_id']                     = '[S1030]';
         $cnf['tree']['top']                 = \Uri::base(false);
-        $cnf['tree']['management_function'] = '予約状況一覧';
+        $cnf['tree']['management_function'] = '配達予約状況一覧';
         $cnf['tree']['page_url']            = \Uri::create(AccessControl::getActiveController());
         $cnf['tree']['page_title']          = '';
 
@@ -101,8 +99,6 @@ class Controller_Schedule_S1010 extends Controller_Hybrid {
 
         // 予約タイプリスト
         $this->schedule_type_list               = GenerateList::getScheduleTypeList(true);
-        // お客様区分リスト
-        $this->customer_type_list               = GenerateList::getCustomerTypeList(true);
 
         // ユーザ権限取得
         $this->user_authority                   = $auth_data['user_authority'];
@@ -198,15 +194,22 @@ class Controller_Schedule_S1010 extends Controller_Hybrid {
         /**
          * 検索項目の取得＆初期設定
          */
-        $error_msg          = null;
-        $error_msg_sub      = null;
-        $search_flag        = true;
-        $search_mode        = 1;
-        $conditions         = S1010::getForms('search');
+        // 初期設定(共通画面設定)
+        $auth_data                      = AuthConfig::getAuthConfig('all');
+        $error_msg                      = null;
+        $error_msg_sub                  = null;
+        $search_flag                    = true;
+        $search_mode                    = 1;
+        $conditions                     = S1010::getForms('search');
+        $conditions['customer_code']    = $auth_data['customer_code'];
+
+        if (!empty(Input::param('init'))) {
+            Session::delete('s1020_list');
+        }
 
         if (!empty(Input::param('input_clear')) && Input::method() == 'POST' && Security::check_token()) {
             // 入力項目クリアボタンが押下された場合の処理
-            Session::delete('s1010_list');
+            Session::delete('s1020_list');
             $search_flag    = false;
         } elseif ((!empty(Input::param('search')) || !empty(Input::param('search_today'))) && Security::check_token()) {
             // 検索ボタンが押下された場合の処理
@@ -227,11 +230,11 @@ class Controller_Schedule_S1010 extends Controller_Hybrid {
             /**
              * セッションに検索条件を設定
              */
-            Session::delete('s1010_list');
-            Session::set('s1010_list', $conditions);
+            Session::delete('s1020_list');
+            Session::set('s1020_list', $conditions);
 
         } else {
-            if ($cond = Session::get('s1010_list', array())) {
+            if ($cond = Session::get('s1020_list', array())) {
 
                 foreach ($cond as $key => $val) {
                     $conditions[$key] = $val;
@@ -252,7 +255,7 @@ class Controller_Schedule_S1010 extends Controller_Hybrid {
             }
 
             //初期表示もエクスポートに備えて条件保存する
-            Session::set('s1010_list', $conditions);
+            Session::set('s1020_list', $conditions);
 
         }
 
@@ -260,7 +263,7 @@ class Controller_Schedule_S1010 extends Controller_Hybrid {
          * ページング設定&検索実行
          */
         if ($search_flag) {
-            $total = S1010::getSearch('count', $conditions, null, null, $search_mode, S1010::$db);
+            $total = S1010::getCustomerDealerSearch('count', $conditions, null, null, $search_mode, S1010::$db);
 
             // 検索上限チェック
             if (Config::get('s1010_limit') < $total) {
@@ -274,25 +277,25 @@ class Controller_Schedule_S1010 extends Controller_Hybrid {
         }
 
         //初期表示かつ前回表示時のページ数を保持していれば、ページネーションのカレントページを設定
-        $page = Session::get('s1010_page');
+        $page = Session::get('s1020_page');
         if (empty(Input::get('p')) && !empty($page)) {
             $this->pagenation_config += array('current_page' => $page);
 
             //ページネーションのページ数をセッションに保存
-            Session::set('s1010_page', $page);
+            Session::set('s1020_page', $page);
         } else {
             //ページネーションのページ数をセッションに保存
-            Session::set('s1010_page', Input::get('p'));
+            Session::set('s1020_page', Input::get('p'));
         }
 
-        $this->pagenation_config        += array('uri' => \Uri::create(AccessControl::getActiveController()), 'total_items' => $total);
-        $pagination                     = Pagination::forge('mypagination', $this->pagenation_config);
-        $limit                          = $pagination->per_page;
-        $offset                         = $pagination->offset;
+        $this->pagenation_config    += array('uri' => \Uri::create(AccessControl::getActiveController()), 'total_items' => $total);
+        $pagination                 = Pagination::forge('mypagination', $this->pagenation_config);
+        $limit                      = $pagination->per_page;
+        $offset                     = $pagination->offset;
 
-        $list_data                      = array();
+        $list_data                  = array();
         if ($total > 0) {
-            if ($list                   = S1010::getSearch('search', $conditions, $offset, $limit, $search_mode, S1010::$db)) {
+            if ($list                   = S1010::getCustomerDealerSearch('search', $conditions, $offset, $limit, $search_mode, S1010::$db)) {
                 foreach ($list as $key => $val) {
                     $search_list        = array(
                         'schedule_id'   => $val['schedule_id'],
@@ -331,8 +334,6 @@ class Controller_Schedule_S1010 extends Controller_Hybrid {
                 'userinfo'                      => AuthConfig::getAuthConfig('all'),
                 // 予約タイプリスト
                 'schedule_type_list'            => $this->schedule_type_list,
-                // お客様区分リスト
-                'customer_type_list'            => $this->customer_type_list,
 
                 'list_data'                     => $list_data,
                 'list_count'                    => $list_count,

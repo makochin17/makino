@@ -1,6 +1,7 @@
 <?php $auth_data        = Session::get('auth_data'); ?>
 <?php $user_authority   = !empty($auth_data['user_authority']) ? $auth_data['user_authority'] : 0; ?>
 <?php $customer_code    = !empty($auth_data['customer_code']) ? $auth_data['customer_code'] : 0; ?>
+<?php $customer_type    = !empty($auth_data['customer_type']) ? $auth_data['customer_type'] : 0; ?>
 
 <div id="sidebar">
   <div class="inner">
@@ -21,6 +22,9 @@
           <ul>
             <?php if (!empty($customer_code)) : ?>
               <li><?php echo Html::anchor(\Uri::create('schedule/s1020?init=1'), '予約状況一覧'); ?></li>
+            <?php endif; ?>
+            <?php if (!empty($customer_code) && !empty($customer_type) && $customer_type == 'dealer') : ?>
+              <li><?php echo Html::anchor(\Uri::create('schedule/s1030?init=1'), '配達予約状況一覧'); ?></li>
             <?php endif; ?>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0012'), '予約スケジュール'); ?></li>
             <li><?php echo Html::anchor(\Uri::create('schedule/s0013'), '配達予約スケジュール'); ?></li>

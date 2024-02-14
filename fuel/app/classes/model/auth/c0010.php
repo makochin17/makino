@@ -29,12 +29,16 @@ class C0010 extends \Model {
                 array(\DB::expr('AES_DECRYPT(UNHEX(m.mail_address),"'.$encrypt_key.'")'), 'mail_address'),
                 array('m.user_id', 'user_id'),
                 array('m.customer_code', 'customer_code'),
+                array('c.customer_type', 'customer_type'),
                 array('m.user_authority', 'user_authority'),
                 array('m.lock_status', 'lock_status')
                 )
 
         // テーブル
         ->from(array('m_member', 'm'))
+        ->join(array('m_customer', 'c'), 'LEFT')
+            ->on('c.customer_code', '=', 'm.customer_code')
+            ->on('c.del_flg', '=', \DB::expr("'NO'"))
         // ログインユーザーID
         ->where('m.user_id', $user_id)
         // 適用開始日
