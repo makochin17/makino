@@ -233,7 +233,7 @@ class Controller_Logistics_L0013 extends Controller_Hybrid {
             // トランザクションクエリをロールバックする
             DB::rollback_transaction(L0013::$db);
             Log::error($e->getMessage());
-            var_dump($e->getMessage());
+            // var_dump($e->getMessage());
             return Config::get('m_CE0001');
         }
 

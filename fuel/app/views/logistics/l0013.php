@@ -111,6 +111,14 @@
         <?php echo Form::hidden('logistics_id', '');?>
         <?php echo Form::hidden('mode', '');?>
         <?php echo Form::hidden('list_count', $list_count);?>
+        <?php echo Form::hidden('delivery_schedule_date_from', (!empty($data['delivery_schedule_date_from'])) ? $data['delivery_schedule_date_from']:'');?>
+        <?php echo Form::hidden('delivery_schedule_date_to', (!empty($data['delivery_schedule_date_to'])) ? $data['delivery_schedule_date_to']:'');?>
+        <?php echo Form::hidden('customer_name', (!empty($data['customer_name'])) ? $data['customer_name']:'');?>
+        <?php echo Form::hidden('customer_code', (!empty($data['customer_code'])) ? $data['customer_code']:'');?>
+        <?php echo Form::hidden('car_code', (!empty($data['car_code'])) ? $data['car_code']:'');?>
+        <?php echo Form::hidden('car_name', (!empty($data['car_name'])) ? $data['car_name']:'');?>
+        <?php echo Form::hidden('delivery_flg', (!empty($data['delivery_flg'])) ? $data['delivery_flg']:'');?>
+        <?php echo Form::hidden('delivery_schedule_flg', (!empty($data['delivery_schedule_flg'])) ? $data['delivery_schedule_flg']:'');?>
         <?php if ($total > 0) : ?>
         <div style="width: 1400px;">
             <div class="content-row" style="float: right">

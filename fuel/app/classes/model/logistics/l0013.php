@@ -614,9 +614,9 @@ class L0013 extends \Model {
         // レコードID
         $stmt->where('t.id', '=', $logistics_id);
         // 入庫フラグ
-        $stmt->where('l.receipt_flg', 'YES');
+        $stmt->where('t.receipt_flg', 'YES');
         // 出庫フラグ
-        $stmt->where('l.delivery_flg', 'NO');
+        $stmt->where('t.delivery_flg', 'NO');
 
         // 検索実行
         return $stmt->execute($db)->current();
