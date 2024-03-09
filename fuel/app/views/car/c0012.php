@@ -90,7 +90,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤメーカー
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -99,7 +99,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤ商品名
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -108,7 +108,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤサイズ
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -117,7 +117,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤサイズ２
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -126,16 +126,16 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤタイヤパターン
 					</td>
-					<td style="width: 600px; height: 30px;">
+					<td style="width: 600px; height: 30px; color: #FF0000;">
                     <?php echo Form::input('summer_tire_pattern', (!empty($data['summer_tire_pattern'])) ? $data['summer_tire_pattern'] : '', 
                     array('class' => 'input-text', 'type' => 'text', 'id' => 'summer_tire_pattern', 'style' => 'width:300px;', 'minlength' => '1', 'maxlength' => '100', 'tabindex' => '12')); ?>
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤホイール商品名
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -144,7 +144,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤホイールサイズ
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -153,7 +153,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤホイールサイズ２
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -162,7 +162,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤ製造年
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -171,7 +171,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤ残溝数１
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -180,7 +180,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤ残溝数２
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -189,7 +189,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤ残溝数３
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -198,7 +198,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤ残溝数４
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -207,7 +207,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤパンク、傷
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -216,7 +216,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #FF0000;">
 						夏タイヤナット有無
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -234,7 +234,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤメーカー
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -243,7 +243,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤ商品名
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -252,7 +252,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤサイズ
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -261,7 +261,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤサイズ２
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -270,7 +270,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤタイヤパターン
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -279,7 +279,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤホイール商品名
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -288,7 +288,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤホイールサイズ
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -297,7 +297,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤホイールサイズ２
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -306,7 +306,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤ製造年
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -315,7 +315,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤ残溝数１
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -324,7 +324,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤ残溝数２
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -333,7 +333,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤ残溝数３
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -342,7 +342,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤ残溝数４
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -351,7 +351,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤパンク、傷
 					</td>
 					<td style="width: 600px; height: 30px;">
@@ -360,7 +360,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; height: 30px;">
+					<td style="width: 200px; height: 30px; color: #0000FF;">
 						冬タイヤナット有無
 					</td>
 					<td style="width: 600px; height: 30px;">
