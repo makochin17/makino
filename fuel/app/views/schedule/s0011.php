@@ -192,7 +192,8 @@
 								<?php $title 	= '予約あり'; ?>
 								<?php if ($val["customer_code"] == $userinfo['customer_code'] || in_array($userinfo['user_authority'], $schedule_authority)) : ?>
 									<?php $editable = true; ?>
-									<?php $title 	= $commit.$customer_code.$val['customer_name']."[".$val["car_code"]."] "."[".$val["car_name"]."] ".$memo; ?>
+									// <?php $title 	= $commit.$customer_code.$val['customer_name']."[".$val["car_code"]."] "."[".$val["car_name"]."] ".$memo; ?>
+									<?php $title 	= $commit.$val['customer_name']."[".$val["car_code"]."] "."[".$val["car_name"]."] ".$memo; ?>
 								<?php endif; ?>
 
 								// 予約イベントを設定
@@ -844,11 +845,11 @@
 				}
 
 				var title = "";
-				if (customer_code == "") {
-					title = title + "[新]";
-				} else {
-					title = title + "[" + customer_code + "]";
-				}
+				// if (customer_code == "") {
+				// 	title = title + "[新]";
+				// } else {
+				// 	title = title + "[" + customer_code + "]";
+				// }
 
 				title = title + customer_name;
 
@@ -932,11 +933,11 @@
 								if (commit == "1") {
 									title = title + "〇";
 								}
-								if (customer_code == "") {
-									title = title + "[新]";
-								} else {
-									title = title + "[" + customer_code + "]";
-								}
+								// if (customer_code == "") {
+								// 	title = title + "[新]";
+								// } else {
+								// 	title = title + "[" + customer_code + "]";
+								// }
 
 								title = title + customer_name;
 

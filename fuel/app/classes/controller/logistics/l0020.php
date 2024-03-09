@@ -19,6 +19,7 @@ class Controller_Logistics_L0020 extends Controller_Rest {
         $status             = false;
         $data               = array();
         $logistics_ids      = array();
+        $mode               = Input::param('mode', '');
         $print_status_id    = Input::param('print_status_id', '');
 
         // IDを配列化
@@ -26,12 +27,20 @@ class Controller_Logistics_L0020 extends Controller_Rest {
         if (!is_array($logistics_ids)) {
             $logistics_ids[] = $logistics_ids;
         }
-
-        // 対象の入庫データを取得
-        if ($list = L0020::getLogisticsById($logistics_ids, L0020::$db)) {
-            // データをテンプレートエクセルに記載
-            L0020::setExcelData($list, L0020::$db);
-            $status = true;
+        if ($mode == 'deliveryschedule') {
+            // 出庫指示画面から遷移
+            if ($list = L0020::getLogisticsById($logistics_ids, L0020::$db)) {
+                // データをテンプレートエクセルに記載
+                L0020::setExcelData($list, L0020::$db);
+                $status = true;
+            }
+        } else {
+            // 対象の入庫データを取得
+            if ($list = L0020::getLogisticsById($logistics_ids, L0020::$db)) {
+                // データをテンプレートエクセルに記載
+                L0020::setExcelData($list, L0020::$db);
+                $status = true;
+            }
         }
         return $this->response($status);
 

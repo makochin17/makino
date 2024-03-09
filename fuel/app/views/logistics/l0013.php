@@ -11,6 +11,7 @@
             var processing_msg2 = '<?php echo Config::get('m_DS0009'); ?>';
             var processing_msg3 = '<?php echo Config::get('m_DS0016'); ?>';
             var processing_msg4 = '<?php echo Config::get('m_DS0017'); ?>';
+            var processing_msg5 = '<?php echo Config::get('m_DS0018'); ?>';
         </script>
         <p class="error-message-head"><?php echo $error_message; ?></p>
         <label>■検索条件</label>
@@ -134,6 +135,7 @@
                 <button type="button" onclick="allUncheck()" class="buttonA">全て解除</button>
                 <button type="button" onclick="onDeliverySchedule()" class="buttonA" style="width:180px;margin-left: 30px;">　出庫指示確定　</button>
                 <button type="button" onclick="onDeliverySchedulePrint('<?php echo Uri::create('logistics/l0030'); ?>')" class="buttonA" style="width:180px;margin-left: 30px;">　出庫指示書印刷　</button>
+                <button type="button" onclick="onReceiptPrint('<?php echo Uri::create('logistics/l0020'); ?>')" class="buttonA" style="margin-left: 30px;">　入庫シール印刷　</button>
             </div>
         </div>
             <!-- ここまでPager -->

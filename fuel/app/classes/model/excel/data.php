@@ -454,7 +454,7 @@ class Data extends \Model {
                             $sheet->setCellValueExplicitByColumnAndRow(
                                 $col,
                                 ($row + $countup_no),
-                                '出荷指示書',
+                                '出庫指示書',
                                 DataType::TYPE_STRING
                             )
                                 ->getStyle($sheet->getCellByColumnAndRow($col, ($row + $countup_no))->getCoordinate())
@@ -635,7 +635,7 @@ class Data extends \Model {
                                 $sheet->setCellValueExplicitByColumnAndRow(
                                     $col,
                                     ($row + $countup_no),
-                                    $data[$dcnt]['delivery_schedule_date'].' '.$data[$dcnt]['delivery_schedule_time'],
+                                    (!empty($data[$dcnt]['delivery_schedule_date'])) ? $data[$dcnt]['delivery_schedule_date'].' '.$data[$dcnt]['delivery_schedule_time']:'',
                                     DataType::TYPE_STRING
                                 )
                                     ->getStyle($sheet->getCellByColumnAndRow($col, ($row + $countup_no))->getCoordinate())
@@ -715,6 +715,32 @@ class Data extends \Model {
                                     ->getFont()
                                     ->setName('Meiryo UI')
                                     ->setSize(18)
+                                    ->setBold(false)
+                                ;
+                                $dcnt++;
+                            }
+                        }
+                    } elseif ($row ==  16) {
+                        // メモ
+                        if ($col == 2 || $col == 5 || $col == 8 || $col == 11 || $col == 14) {
+                            if (isset($data[$dcnt])) {
+                                $sheet->setCellValueExplicitByColumnAndRow(
+                                    $col,
+                                    ($row + $countup_no),
+                                    // (!empty($data[$dcnt]['request_memo'])) ? $data[$dcnt]['request_memo']:'',
+                                    // (!empty($data[$dcnt]['memo'])) ? $data[$dcnt]['memo']:'',
+                                    (!empty($data[$dcnt]['set_memo'])) ? $data[$dcnt]['set_memo']:'',
+                                    DataType::TYPE_STRING
+                                )
+                                    ->getStyle($sheet->getCellByColumnAndRow($col, ($row + $countup_no))->getCoordinate())
+                                    ->getAlignment()
+                                    ->setWrapText(true)
+                                    // ->setShrinkToFit(true)
+                                    ;
+                                $sheet->getStyle($sheet->getCellByColumnAndRow($col, ($row + $countup_no))->getCoordinate())
+                                    ->getFont()
+                                    ->setName('Meiryo UI')
+                                    ->setSize(8)
                                     ->setBold(false)
                                 ;
                                 $dcnt++;

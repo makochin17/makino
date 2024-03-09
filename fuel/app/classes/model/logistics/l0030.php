@@ -127,6 +127,9 @@ class L0030 extends \Model {
                 array('t.delivery_flg', 'delivery_flg'),
                 array('t.complete_flg', 'complete_flg'),
                 array('t.schedule_id', 'schedule_id'),
+                array('s.request_memo', 'request_memo'),
+                array('s.memo', 'memo'),
+                array(\DB::expr("CONCAT(s.request_memo, '\n', s.memo)"), 'set_memo'),
                 array('t.update_datetime', 'update_datetime')
                 );
 
@@ -137,6 +140,9 @@ class L0030 extends \Model {
         ->join(array('m_car', 'ca'), 'LEFT')
             ->on('ca.id', '=', 't.car_id')
             ->on('ca.del_flg', '=', \DB::expr("'NO'"))
+        ->join(array('t_schedule', 's'), 'LEFT')
+            ->on('s.id', '=', 't.schedule_id')
+            ->on('s.del_flg', '=', \DB::expr("'NO'"))
         ;
         // 条件
         $stmt->where('t.del_flg', '=', 'NO');

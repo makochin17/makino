@@ -6,6 +6,22 @@ function enter(){
     }
 }
 
+// 動的にhidden追加
+function make_hidden(name, value, formname) {
+    var q = document.createElement('input');
+    q.type = 'hidden';
+    q.name = name;
+    q.value = value;
+    if (formname) {
+        if ( document.forms[formname] == undefined ){
+            console.error( "ERROR: form " + formname + " is not exists." );
+        }
+        document.forms[formname].appendChild(q);
+    } else {
+        document.forms[0].appendChild(q);
+    }
+}
+
 // 検索窓のチェックボックス
 function check(element_id){
     var f = document.forms["searchForm"];
@@ -93,6 +109,22 @@ function onDeliverySchedulePrint(url_str) {
     var f = document.forms["selectForm"];
     f.method = "POST";
     f.action = url_str;
+    f.submit();
+
+    return true;
+}
+
+// 出庫指示画面入庫シール印刷ボタン押下時処理
+function onReceiptPrint(url_str) {
+    //入庫シールの印刷確認
+    var flag = window.confirm(processing_msg5);
+    if (!flag)return false;
+
+    var f                   = document.forms["selectForm"];
+    f.method                = "POST";
+    f.action                = url_str;
+    f.mode.value            = 'deliveryschedule';
+    make_hidden('print_status_id', f.select_id.value, 'selectForm');
     f.submit();
 
     return true;
