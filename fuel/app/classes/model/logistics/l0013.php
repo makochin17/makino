@@ -223,6 +223,7 @@ class L0013 extends \Model {
                         array('l.delivery_flg', 'delivery_flg'),
                         array('l.complete_flg', 'complete_flg'),
                         array('l.schedule_id', 'schedule_id'),
+                        array('s.unit_id', 'unit_id'),
                         array('l.update_datetime', 'update_datetime')
                         );
             break;
@@ -235,6 +236,10 @@ class L0013 extends \Model {
         ->join(array('m_car', 'ca'), 'LEFT')
             ->on('ca.id', '=', 'l.car_id')
             ->on('ca.del_flg', '=', \DB::expr("'NO'"))
+        ->join(array('t_schedule', 's'), 'LEFT')
+            ->on('s.id', '=', 'l.schedule_id')
+            ->on('s.del_flg', '=', \DB::expr("'NO'"))
+            ->on('s.cancel_flg', '=', \DB::expr("'NO'"))
         ;
         // 条件
         $stmt->where('l.del_flg', '=', 'NO');

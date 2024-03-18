@@ -39,14 +39,15 @@ class Controller_Schedule_Fullcalendar_GetCar extends Controller_Rest {
         $car_code           = Input::param('car_code', '');
         $data               = array();
         $data['item']       = array(
-            'car_cnt'           => 0,
-            'car_id'            => '',
-            'car_code'          => '',
-            'car_name'          => '',
-            'customer_code'     => '',
-            'customer_name'     => '',
-            'consumer_name'     => '',
-            'return'            => '',
+            'car_cnt'               => 0,
+            'car_id'                => '',
+            'car_code'              => '',
+            'car_name'              => '',
+            'customer_code'         => '',
+            'customer_name'         => '',
+            'consumer_name'         => '',
+            'work_required_time'    => '',
+            'return'                => '',
         );
 
         try {
@@ -54,62 +55,68 @@ class Controller_Schedule_Fullcalendar_GetCar extends Controller_Rest {
             if ($res = S0010::getCar($car_code, null, S0010::$db)) {
                 foreach ($res as $key => $val) {
                     if ($key == 0) {
-                        $car_id         = $val["car_id"];
-                        $car_code       = $val["car_code"];
-                        $car_name       = $val["car_name"];
-                        $customer_code  = $val["customer_code"];
-                        $customer_name  = $val["customer_name"];
-                        $consumer_name  = $val["consumer_name"];
+                        $car_id                 = $val["car_id"];
+                        $car_code               = $val["car_code"];
+                        $car_name               = $val["car_name"];
+                        $customer_code          = $val["customer_code"];
+                        $customer_name          = $val["customer_name"];
+                        $consumer_name          = $val["consumer_name"];
+                        $work_required_time     = $val["work_required_time"];
                     } else {
-                        $car_id         = $car_id.",".$val["car_id"];
-                        $car_code       = $car_code.",".$val["car_code"];
-                        $car_name       = $car_name.",".$val["car_name"];
-                        $customer_code  = $customer_code.",".$val["customer_code"];
-                        $customer_name  = $customer_name.",".$val["customer_name"];
-                        $consumer_name  = $consumer_name.",".$val["consumer_name"];
+                        $car_id                 = $car_id.",".$val["car_id"];
+                        $car_code               = $car_code.",".$val["car_code"];
+                        $car_name               = $car_name.",".$val["car_name"];
+                        $customer_code          = $customer_code.",".$val["customer_code"];
+                        $customer_name          = $customer_name.",".$val["customer_name"];
+                        $consumer_name          = $consumer_name.",".$val["consumer_name"];
+                        $work_required_time     = $work_required_time.",".$val["work_required_time"];
                     }
                 }
 
                 $data['item'] = array(
-                    'car_cnt'           => count($res),
-                    'car_id'            => $car_id,
-                    'car_code'          => $car_code,
-                    'car_name'          => $car_name,
-                    'customer_code'     => $customer_code,
-                    'customer_name'     => $customer_name,
-                    'consumer_name'     => $consumer_name,
-                    'return'            => '',
+                    'car_cnt'               => count($res),
+                    'car_id'                => $car_id,
+                    'car_code'              => $car_code,
+                    'car_name'              => $car_name,
+                    'customer_code'         => $customer_code,
+                    'customer_name'         => $customer_name,
+                    'consumer_name'         => $consumer_name,
+                    'work_required_time'    => $work_required_time,
+                    'return'                => '',
                 );
             } else {
                 // 車種名で曖昧検索
                 if ($res = S0010::getCar(null, $car_code, S0010::$db)) {
                     foreach ($res as $key => $val) {
                         if ($key == 0) {
-                            $car_id         = $val["car_id"];
-                            $car_code       = $val["car_code"];
-                            $car_name       = $val["car_name"];
-                            $customer_code  = $val["customer_code"];
-                            $customer_name  = $val["customer_name"];
-                            $consumer_name  = $val["consumer_name"];
+                            $car_id                 = $val["car_id"];
+                            $car_code               = $val["car_code"];
+                            $car_name               = $val["car_name"];
+                            $customer_code          = $val["customer_code"];
+                            $customer_name          = $val["customer_name"];
+                            $consumer_name          = $val["consumer_name"];
+                            $work_required_time     = $val["work_required_time"];
                         } else {
-                            $car_id         = $car_id.",".$val["car_id"];
-                            $car_code       = $car_code.",".$val["car_code"];
-                            $car_name       = $car_name.",".$val["car_name"];
-                            $customer_code  = $customer_code.",".$val["customer_code"];
-                            $customer_name  = $customer_name.",".$val["customer_name"];
-                            $consumer_name  = $consumer_name.",".$val["consumer_name"];
+                            $car_id                 = $car_id.",".$val["car_id"];
+                            $car_code               = $car_code.",".$val["car_code"];
+                            $car_name               = $car_name.",".$val["car_name"];
+                            $customer_code          = $customer_code.",".$val["customer_code"];
+                            $customer_name          = $customer_name.",".$val["customer_name"];
+                            $consumer_name          = $consumer_name.",".$val["consumer_name"];
+                            $work_required_time     = $work_required_time.",".$val["work_required_time"];
                         }
                     }
 
                     $data['item'] = array(
-                        'car_cnt'           => count($res),
-                        'car_id'            => $car_id,
-                        'car_code'          => $car_code,
-                        'car_name'          => $car_name,
-                        'customer_code'     => $customer_code,
-                        'customer_name'     => $customer_name,
-                        'consumer_name'     => $consumer_name,
-                        'return'            => '',
+                        'car_cnt'               => count($res),
+                        'car_id'                => $car_id,
+                        'car_code'              => $car_code,
+                        'car_name'              => $car_name,
+                        'customer_code'         => $customer_code,
+                        'customer_name'         => $customer_name,
+                        'consumer_name'         => $consumer_name,
+                        'work_required_time'    => $work_required_time,
+                        'return'                => '',
                     );
                 } else {
                     $data['item']['return'] = '該当する車両は見つかりませんでした('.$car_code.')';

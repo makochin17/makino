@@ -9,6 +9,7 @@ use \Model\Common\PagingConfig;
 use \Model\Common\GenerateList;
 use \Model\Common\OpeLog;
 use \Model\Mainte\M0020\M0020;
+use \Model\Mainte\M0020\M0025;
 
 class Controller_Mainte_M0020 extends Controller_Hybrid {
 
@@ -162,6 +163,36 @@ class Controller_Mainte_M0020 extends Controller_Hybrid {
         return null;
     }
 
+    /**
+    * 顧客表示フラグ更新
+    **/
+    public function edit_disp_flg($unit_code, $disp_flg) {
+
+        try {
+            DB::start_transaction(M0020::$db);
+
+            // レコード存在チェック
+            if (!$result = M0020::getUnit($unit_code, M0020::$db)) {
+                return Config::get('m_MW0003');
+            }
+
+            // レコード削除（論理）
+            if (empty(M0025::updUnitDispFlg($unit_code, $disp_flg, M0020::$db))) {
+                DB::rollback_transaction(M0020::$db);
+                return 'フラグの更新に失敗しました';
+            }
+
+            DB::commit_transaction(M0020::$db);
+        } catch (Exception $e) {
+            // トランザクションクエリをロールバックする
+            DB::rollback_transaction(M0020::$db);
+            Log::error($e->getMessage());
+            return Config::get('m_CE0001');
+        }
+
+        return null;
+    }
+
     public function action_index() {
 
         Config::load('message');
@@ -174,6 +205,7 @@ class Controller_Mainte_M0020 extends Controller_Hybrid {
         $init_flag      = false;
         $conditions 	= array_fill_keys(array(
             'schedule_type',
+            'disp_flg',
         	'unit_name',
         ), '');
 
@@ -206,6 +238,16 @@ class Controller_Mainte_M0020 extends Controller_Hybrid {
             $error_msg = $this->delete_record();
 
         }
+
+        if (Input::post('processing_division', '') == '4' && Security::check_token()) {
+            // 表示フラグボタンが押下された場合の処理
+            $unit_code  = Input::post('unit_code', '');
+            $disp_flg   = Input::post('disp_flg', '');
+            //ユニットデータ削除
+            $error_msg = $this->edit_disp_flg($unit_code, $disp_flg);
+
+        }
+
         if (!empty(Input::param('search')) && Security::check_token()) {
             // 検索ボタンが押下された場合の処理
 

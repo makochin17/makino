@@ -56,7 +56,7 @@ class Controller_Schedule_S0012 extends Controller_Hybrid {
          */
         switch (Request::main()->action) {
             case 'detail':
-            case 'carrying':
+            case 'chhourtime':
                 return true;
                 break;
             default:
@@ -139,7 +139,7 @@ class Controller_Schedule_S0012 extends Controller_Hybrid {
         // 作業選択時間リスト
         $this->select_work_time_list    = GenerateList::getSelectWorkTimeList(false);
         // ユニットリスト
-        $this->unit_list                = GenerateList::getUnitList('all', S0010::$schedule_type, S0010::$db);
+        $this->unit_list                = GenerateList::getUnitList('all', S0010::$schedule_type, false, S0010::$db);
         // 依頼区分リスト
         $this->request_class_list       = GenerateList::getRequestClassList(false);
         // 予約権限設定
@@ -252,17 +252,29 @@ class Controller_Schedule_S0012 extends Controller_Hybrid {
             $end_time   = $s[1];
             $start_h    = (int)$start_hour;
             $end_h      = (int)$end_hour;
+
         }
         // 指定日付設定
-        $conditions['default_day'] = date("Y-m-d");
+        // $conditions['default_day'] = date("Y-m-d");
+        $d              = new \DateTime();
+        // $default_day    = $d->modify('+3 day')->format("Y-m-d");
+        $default_day    = $d->format("Y-m-d");
+        $conditions['default_day'] = $default_day;
         if (!empty($w_month)) {
-            $w_month  = str_pad(strval($w_month), 2, '0', STR_PAD_LEFT);
+            $w_month    = str_pad(strval($w_month), 2, '0', STR_PAD_LEFT);
         }
         if (!empty($w_day) && $w_day != '01') {
-            $w_day  = str_pad(strval($w_day), 2, '0', STR_PAD_LEFT);
+            $w_day      = str_pad(strval($w_day), 2, '0', STR_PAD_LEFT);
         }
         if (!empty($w_year) && !empty($w_month) && !empty($w_day)) {
             $conditions['default_day'] = $w_year."-".$w_month."-".$w_day;
+        }
+        // デフォルト日よりも過去日の場合は予約スケジュールの編集ができないようにする
+        $today          = $default_day;
+        $target_day     = $conditions['default_day'];
+        $editable       = true;
+        if(strtotime($today) > strtotime($target_day)){
+            $editable   = false;
         }
 
         if (!empty(Input::param('select_record'))) {
@@ -316,6 +328,7 @@ class Controller_Schedule_S0012 extends Controller_Hybrid {
                 'changedateschedule_url'    => \Uri::create(\Uri::create('schedule/fullcalendar/changedateschedule')),
                 'cancelschedule_url'        => \Uri::create(\Uri::create('schedule/fullcalendar/cancelschedule')),
                 'commitschedule_url'        => \Uri::create(\Uri::create('schedule/fullcalendar/commitschedule')),
+                'chhourtime_url'            => \Uri::create(\Uri::create('schedule/fullcalendar/changehourtime')),
                 'current_url'               => \Uri::create(AccessControl::getActiveController().'/detail'),
                 'master_url'                => \Uri::create(AccessControl::getActiveController().'/master'),
 
@@ -332,6 +345,10 @@ class Controller_Schedule_S0012 extends Controller_Hybrid {
                 'end_time'                  => $end_time,
                 'start_h'                   => $start_h,
                 'end_h'                     => $end_h,
+                // 画面編集フラグ
+                'editable'                  => $editable,
+                // 初期設定日
+                'default_day'               => $default_day,
 
                 'company_list'              => $this->company_select_list,
                 'work_time_list'            => $this->work_time_list,
@@ -344,7 +361,7 @@ class Controller_Schedule_S0012 extends Controller_Hybrid {
                 // 社員情報
                 'userinfo'                  => AuthConfig::getAuthConfig('all'),
                 // ユニットリストデータ
-                'unit'                      => S0010::setList('unit', S0010::getUnit(null, S0010::$schedule_type, S0010::$db)),
+                'unit'                      => S0010::setList('unit', S0010::getUnit(null, S0010::$schedule_type, false, S0010::$db)),
 
                 'error_message'             => $error_msg,
             )

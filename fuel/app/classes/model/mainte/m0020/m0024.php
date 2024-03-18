@@ -19,6 +19,7 @@ class M0024 extends \Model {
 
         $data = array(
             'schedule_type' => $conditions['schedule_type'],
+            'disp_flg'      => $conditions['disp_flg'],
             'unit_name'     => $conditions['unit_name'],
             );
 
@@ -40,6 +41,7 @@ class M0024 extends \Model {
         // 項目セット
         $set = array(
             'schedule_type' => $items['schedule_type'],
+            'disp_flg'      => $items['disp_flg'],
             'name'          => $items['unit_name'],
             'start_date'    => Date::forge()->format('mysql_date'),
             'end_date'      => Date::create_from_string("9999-12-31" , "mysql_date")->format('mysql_date')

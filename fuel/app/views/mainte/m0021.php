@@ -26,8 +26,16 @@
                         ユニット名
                     </td>
                     <td style="width: 380px; height: 30px;">
-                        <?php echo Form::input('unit_name', (!empty($data['unit_name'])) ? $data['unit_name'] : '', 
-                        array('class' => 'input-text', 'type' => 'text', 'id' => 'unit_name', 'style' => 'width:180px;', 'maxlength' => '8', 'tabindex' => '2')); ?>
+                        <?php echo Form::input('unit_name', (!empty($data['unit_name'])) ? $data['unit_name'] : '', array('class' => 'input-text', 'type' => 'text', 'id' => 'unit_name', 'style' => 'width:180px;', 'maxlength' => '8', 'tabindex' => '2')); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 150px; height: 30px;">
+                        顧客表示フラグ
+                    </td>
+                    <td style="width: 380px; height: 30px;">
+                        <?php echo Form::select('disp_flg', $data['disp_flg'], $disp_flg_list,
+                            array('class' => 'select-item', 'id' => 'disp_flg', 'style' => 'width: 100px', 'onchange' => 'change()', 'tabindex' => '1')); ?>
                     </td>
                 </tr>
             </tbody>

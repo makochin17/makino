@@ -768,49 +768,49 @@ class Data extends \Model {
                                 // バーコード生成
                                 if (isset($location_list[$data[$dcnt]['location_id']])) {
                                     // 文字変換
-                                    $barcode_name       = self::getBarcodeData($data[$dcnt]['location_id'], self::$db);
-                                    $column_name        = Coordinate::stringFromColumnIndex($col);
-                                    $create_dir_data    = array($data[$dcnt]['location_id']);
-                                    $create_dir         = self::create_dir($create_dir_data, DOCROOT.'template/barcode/');
-                                    // QRコード生成
-                                    // $qrCode             = Builder::create()
-                                    //                       ->writer(new PngWriter())
-                                    //                       ->writerOptions([])
-                                    //                       ->data($location_list[$data[$dcnt]['location_id']])
-                                    //                       ->encoding(new Encoding('UTF-8'))
-                                    //                       ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
-                                    //                       ->size(200)
-                                    //                       ->margin(10)
-                                    //                       ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
-                                    //                       ->build();
-                                    // $qrCode->saveToFile(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png');
-                                    //画像の貼り付け
-                                    // $drawing            = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-                                    // $drawing->setName($location_list[$data[$dcnt]['location_id']]);
-                                    // $drawing->setDescription($location_list[$data[$dcnt]['location_id']]);
-                                    // $drawing->setPath(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png');
-                                    // $drawing->setHeight(70);
-                                    // // $drawing->setWidth(500);
-                                    // $drawing->setOffsetX(35);
-                                    // $drawing->setOffsetY(5);
-                                    // $drawing->setCoordinates($column_name.($row + 1 + $countup_no));
-                                    // $drawing->setWorksheet($sheet);
+                                    if ($barcode_name       = self::getBarcodeData($data[$dcnt]['location_id'], self::$db)) {
+                                        $column_name        = Coordinate::stringFromColumnIndex($col);
+                                        $create_dir_data    = array($data[$dcnt]['location_id']);
+                                        $create_dir         = self::create_dir($create_dir_data, DOCROOT.'template/barcode/');
+                                        // QRコード生成
+                                        // $qrCode             = Builder::create()
+                                        //                       ->writer(new PngWriter())
+                                        //                       ->writerOptions([])
+                                        //                       ->data($location_list[$data[$dcnt]['location_id']])
+                                        //                       ->encoding(new Encoding('UTF-8'))
+                                        //                       ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+                                        //                       ->size(200)
+                                        //                       ->margin(10)
+                                        //                       ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
+                                        //                       ->build();
+                                        // $qrCode->saveToFile(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png');
+                                        //画像の貼り付け
+                                        // $drawing            = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+                                        // $drawing->setName($location_list[$data[$dcnt]['location_id']]);
+                                        // $drawing->setDescription($location_list[$data[$dcnt]['location_id']]);
+                                        // $drawing->setPath(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png');
+                                        // $drawing->setHeight(70);
+                                        // // $drawing->setWidth(500);
+                                        // $drawing->setOffsetX(35);
+                                        // $drawing->setOffsetY(5);
+                                        // $drawing->setCoordinates($column_name.($row + 1 + $countup_no));
+                                        // $drawing->setWorksheet($sheet);
 
-                                    // バーコード生成
-                                    $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-                                    file_put_contents(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png', $generator->getBarcode($barcode_name, $generator::TYPE_ITF_8, 8, 200));
-                                    //画像の貼り付け
-                                    $drawing            = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-                                    $drawing->setName($location_list[$data[$dcnt]['location_id']]);
-                                    $drawing->setDescription($location_list[$data[$dcnt]['location_id']]);
-                                    $drawing->setPath(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png');
-                                    $drawing->setHeight(40);
-                                    $drawing->setWidth(130);
-                                    $drawing->setOffsetX(10);
-                                    $drawing->setOffsetY(18);
-                                    $drawing->setCoordinates($column_name.($row + 1 + $countup_no));
-                                    $drawing->setWorksheet($sheet);
-
+                                        // バーコード生成
+                                        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+                                        file_put_contents(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png', $generator->getBarcode($barcode_name, $generator::TYPE_ITF_8, 8, 200));
+                                        //画像の貼り付け
+                                        $drawing            = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+                                        $drawing->setName($location_list[$data[$dcnt]['location_id']]);
+                                        $drawing->setDescription($location_list[$data[$dcnt]['location_id']]);
+                                        $drawing->setPath(DOCROOT.'template/barcode/'.$data[$dcnt]['location_id'].'/'.date('Ymd').'_barcode.png');
+                                        $drawing->setHeight(40);
+                                        $drawing->setWidth(130);
+                                        $drawing->setOffsetX(10);
+                                        $drawing->setOffsetY(18);
+                                        $drawing->setCoordinates($column_name.($row + 1 + $countup_no));
+                                        $drawing->setWorksheet($sheet);
+                                    }
                                 }
                                 $dcnt++;
                             }
@@ -854,9 +854,23 @@ class Data extends \Model {
         $result = $stmt->execute($db)->current();
 
         if (!empty($result)) {
-            $storage_column = sprintf('%02d', preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($result['storage_column'], 'as', 'UTF-8'))));
-            $storage_depth  = sprintf('%03d', preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($result['storage_depth'], 'as', 'UTF-8'))));
-            $storage_height = sprintf('%03d', preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($result['storage_height'], 'as', 'UTF-8'))));
+            // $storage_column = sprintf('%02d', preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($result['storage_column'], 'as', 'UTF-8'))));
+            // $storage_depth  = sprintf('%03d', preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($result['storage_depth'], 'as', 'UTF-8'))));
+            // $storage_height = sprintf('%03d', preg_replace('/[^0-9a-zA-Z]/', '', trim(mb_convert_kana($result['storage_height'], 'as', 'UTF-8'))));
+
+            $column         = preg_replace('/[^0-9]/', '', trim(mb_convert_kana($result['storage_column'], 'as', 'UTF-8')));
+            $depth          = preg_replace('/[^0-9]/', '', trim(mb_convert_kana($result['storage_depth'], 'as', 'UTF-8')));
+            $height         = preg_replace('/[^0-9]/', '', trim(mb_convert_kana($result['storage_height'], 'as', 'UTF-8')));
+            if (empty($column) || empty($depth) || empty($height)) {
+                return false;
+            } else {
+                $height = substr($height, 0, -1);
+            }
+
+            $storage_column = sprintf('%02d', $column);
+            $storage_depth  = sprintf('%03d', $depth);
+            $storage_height = sprintf('%03d', $height);
+
             return $storage_column.$storage_depth.$storage_height;
         }
 

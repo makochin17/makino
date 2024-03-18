@@ -143,6 +143,7 @@
                 <table class="table-inq" style="width: 1400px;">
                     <tr>
                         <th rowspan="2" style="width: 60px;">選択</th>
+                        <th rowspan="2" style="width: 60px;font-size: 13px;">ユニット</th>
                         <th rowspan="2" style="width: 60px;font-size: 13px;">出庫指示状況</th>
                         <th rowspan="2" style="width: 60px;font-size: 13px;">出庫状況</th>
                         <th style="width: 100px;font-size: 13px;">入庫日</th>
@@ -168,6 +169,7 @@
                                 <?php echo Form::checkbox('select_'.$i, $val['logistics_id'], ($val['delivery_schedule_flg'] == 'YES') ? true:false, array('id' => 'form_select_'.$i, 'class' => 'text', 'style' => 'display:inline;')); ?>
                                 <?php echo Form::label('', 'select_'.$i, array('style' => 'display:inline;padding-left: 1.0em;')); ?>
                             </td>
+                            <td rowspan="2" style="font-size: 11px;text-align: center;"><?php echo (isset($unit_list[$val['unit_id']])) ? $unit_list[$val['unit_id']]:''; ?></td>
                             <td rowspan="2" style="font-size: 13px;text-align: center;">
                                 <?php if ($val['delivery_schedule_flg'] == 'NO') : ?>
                                     <!-- 未出庫指示の場合 -->

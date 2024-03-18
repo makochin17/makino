@@ -56,6 +56,11 @@ class S0010 extends \Model {
                     $res[$val['unit_id']] = $val['unit_name'];
                 }
                 break;
+            case 'unitall':
+                foreach ($item as $key => $val) {
+                    $res[$val['unit_id']] = $val;
+                }
+                break;
             default:
                 break;
         }
@@ -836,7 +841,7 @@ class S0010 extends \Model {
     /**
      * ユニットマスタ取得
      */
-    public static function getUnit($code = null, $schedule_type = null, $db = null) {
+    public static function getUnit($code = null, $schedule_type = null, $disp = true, $db = null) {
 
         if (is_null($db)) {
             $db = self::$db;
@@ -846,12 +851,17 @@ class S0010 extends \Model {
         $stmt = \DB::select(
                 array('m.id', 'unit_id'),
                 array('m.schedule_type', 'schedule_type'),
+                array('m.disp_flg', 'disp_flg'),
                 array('m.name', 'unit_name')
                 );
 
         // テーブル
         $stmt->from(array('m_unit', 'm'));
 
+        // 顧客表示設定フラグ
+        if ($disp === false) {
+            $stmt->where('m.disp_flg', '=', 'NO');
+        }
         // 予約タイプ
         if (!empty($schedule_type)) {
             $stmt->where('m.schedule_type', '=', $schedule_type);
@@ -1312,7 +1322,8 @@ class S0010 extends \Model {
 
         // 車両番号
         if (!empty($code)) {
-            $stmt->where('m.car_code', '=', $code);
+            // $stmt->where('m.car_code', '=', $code);
+            $stmt->where('m.car_code', 'LIKE', '%'.$code.'%');
         }
         // 車種
         if (!empty($name)) {
@@ -1327,6 +1338,49 @@ class S0010 extends \Model {
 
         // 検索実行
         return $stmt->execute($db)->as_array();
+    }
+
+    /**
+     * 車両情報取得(完全一致車両コード)
+     */
+    public static function getCarByCode($code = null, $db = null) {
+
+        if (is_null($db)) {
+            $db = self::$db;
+        }
+
+        $encrypt_key = SystemConfig::getSystemConfig('encrypt_key',$db);
+
+        // 項目
+        $stmt = \DB::select(
+                array('m.id', 'car_id'),
+                array('m.old_car_id', 'old_car_id'),
+                array('m.car_code', 'car_code'),
+                array('m.customer_code', 'customer_code'),
+                array(\DB::expr('(SELECT AES_DECRYPT(UNHEX(name), "'.$encrypt_key.'") FROM m_customer WHERE customer_code = m.customer_code)'), 'customer_name'),
+                array('m.owner_name', 'owner_name'),
+                array('m.consumer_name', 'consumer_name'),
+                array('m.car_name', 'car_name'),
+                array('m.work_required_time', 'work_required_time'),
+                array('m.note', 'note'),
+                array('m.message', 'message')
+                );
+
+        // テーブル
+        $stmt->from(array('m_car', 'm'));
+        ;
+
+        // 車両番号
+        $stmt->where('m.car_code', '=', $code);
+        // 削除フラグ
+        $stmt->where('m.del_flg', '=', 'NO');
+        // 適用開始日
+        $stmt->where('m.start_date', '<=', date("Y-m-d"));
+        // 適用終了日
+        $stmt->where('m.end_date', '>', date("Y-m-d"));
+
+        // 検索実行
+        return $stmt->execute($db)->current();
     }
 
     //=========================================================================//

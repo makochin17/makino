@@ -33,6 +33,8 @@
         <?php echo Form::hidden('unit_code', '');?>
         <?php echo Form::hidden('select_record', '');?>
         <?php echo Form::hidden(\Config::get('security.csrf_token_key'), \Security::fetch_token());?>
+        <?php echo Form::hidden('disp_flg', '');?>
+        <?php echo Form::close(); ?>
         <?php if ($total > 0) : ?>
             <div class="content-row">
                 検索結果：<?php echo $total; ?> 件
@@ -43,21 +45,29 @@
             </div>
             <!-- ここまでPager -->
             <div class="table-wrap">
-                <table class="table-inq" style="width: 720px">
+                <table class="table-inq" style="width: 800px">
                     <tr>
-                        <th style="width: 100px">操作</th>
+                        <th style="width: 120px">操作</th>
                         <th style="width: 80px">タイプ</th>
                         <th style="width: 160px">ユニット名</th>
+                        <th style="width: 80px">顧客画面フラグ</th>
                     </tr>
                     <?php if (!empty($list_data)) : ?>
                       <?php foreach ($list_data as $key => $val) : ?>
                         <tr>
-                            <td style="width: 60px; text-align: center;">
+                            <td style="width: 140px; text-align: center;">
                                 <button type="button" onclick="onEdit('<?php echo Uri::create('mainte/m0025'); ?>', '<?php echo $val['unit_code']; ?>')" class="buttonA"><i class='fa fa-edit' style="font-size:14px;"></i> 編集</button>
                                 <button type="button" onclick="onDelete(<?php echo $val['unit_code']; ?>, '<?php echo $val['unit_name']; ?>')" class="buttonA"><i class='fa fa-trash' style="font-size:15px;"></i> 削除</button>
                             </td>
-                            <td style="width: 160px"><?php echo (isset($schedule_type_list[$val['schedule_type']])) ? $schedule_type_list[$val['schedule_type']]:'不明'; ?></td>
-                            <td style="width: 160px"><?php echo $val['unit_name']; ?></td>
+                            <td style="width: 160px; text-align: center;"><?php echo (isset($schedule_type_list[$val['schedule_type']])) ? $schedule_type_list[$val['schedule_type']]:'不明'; ?></td>
+                            <td style="width: 160px;"><?php echo $val['unit_name']; ?></td>
+                            <td style="width: 60px; text-align: center; vertical-align: middle;">
+                                <?php if ($val['disp_flg'] == 'YES') : ?>
+                                    <button type="button" onclick="onChangeDisp('<?php echo $val['unit_code']; ?>', 'NO')" class="buttonA">表示</button>
+                                <?php else : ?>
+                                    <button type="button" onclick="onChangeDisp('<?php echo $val['unit_code']; ?>', 'YES')" class="buttonA">非表示</button>
+                                <?php endif ; ?>
+                            </td>
                         </tr>
                       <?php endforeach; ?>
                     <?php endif ; ?>

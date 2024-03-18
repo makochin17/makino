@@ -22,6 +22,7 @@ class M0025 extends \Model {
         $stmt = \DB::select(
                 array('m.id', 'unit_code'),
                 array('m.schedule_type', 'schedule_type'),
+                array('m.disp_flg', 'disp_flg'),
                 array('m.name', 'unit_name'),
                 array('m.start_date', 'start_date'),
                 array('m.end_date', 'end_date'),
@@ -103,6 +104,7 @@ class M0025 extends \Model {
 
             $data = array(
                 'schedule_type' => $conditions['schedule_type'],
+                'disp_flg'      => $conditions['disp_flg'],
                 'unit_name'     => $conditions['unit_name'],
                 );
 
@@ -142,6 +144,7 @@ class M0025 extends \Model {
         // 項目セット
         $set = array(
             'schedule_type' => $items['schedule_type'],
+            'disp_flg'      => $items['disp_flg'],
             'name'          => $items['unit_name'],
             'start_date'    => Date::forge()->format('mysql_date'),
             'end_date'      => Date::create_from_string("9999-12-31" , "mysql_date")->format('mysql_date')
@@ -191,6 +194,36 @@ class M0025 extends \Model {
         }
         return false;
     }
+
+    /**
+     * ユニットマスタ更新
+     */
+    public static function updUnitDispFlg($unit_code, $disp_flg, $db) {
+
+        // テーブル
+        $stmt = \DB::update('m_unit');
+
+        // 項目セット
+        $set = array(
+            'disp_flg'      => $disp_flg,
+            );
+        $stmt->set(array_merge($set, self::getEtcData(false)));
+
+        // コード
+        $stmt->where('id', '=', $unit_code);
+        // 適用開始日
+        $stmt->where('start_date', '<=', Date::forge()->format('mysql_date'));
+        // 適用終了日
+        $stmt->where('end_date', '>', Date::forge()->format('mysql_date'));
+        // 更新実行
+        $result = $stmt->execute($db);
+
+        if($result > 0) {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * 付加データ

@@ -43,6 +43,8 @@ class Controller_Logistics_L0013 extends Controller_Hybrid {
     private $complete_flg_list          = array();
     // 保管場所リスト
     private $location_list              = array();
+    // ユニットリスト
+    private $unit_list                  = array();
 
     // ユーザ情報
     private $user_authority             = array();
@@ -119,6 +121,8 @@ class Controller_Logistics_L0013 extends Controller_Hybrid {
         $this->complete_flg_list            = GenerateList::getCompleteFlgList(true);
         // 保管場所リスト
         $this->location_list                = GenerateList::getLocationList(true, L0013::$db);
+        // ユニットリスト
+        $this->unit_list                    = GenerateList::getUnitList(false, null, true, L0013::$db);
 
         // ユーザ権限取得
         $this->user_authority               = $auth_data['user_authority'];
@@ -428,6 +432,8 @@ class Controller_Logistics_L0013 extends Controller_Hybrid {
                 'location_list'                 => $this->location_list,
                 // 保管場所リスト(プルダウン用)
                 'location_combo_list'           => array('' => '-') + L0013::getLocationList('logistics', $this->location_list, L0013::$db),
+                // ユニットリスト
+                'unit_list'                     => $this->unit_list,
 
                 'list_data'                     => $list_data,
                 'list_count'                    => $list_count,

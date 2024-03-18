@@ -170,6 +170,7 @@
                     <tr>
                         <th rowspan="2" style="width: 60px;">選択</th>
                         <th rowspan="2" style="width: 60px;font-size: 13px;">印刷対象</th>
+                        <th rowspan="2" style="width: 60px;font-size: 13px;">ユニット</th>
                         <th rowspan="2" style="width: 60px;font-size: 13px;">入庫状況</th>
                         <th rowspan="2" style="width: 60px;font-size: 13px;">出庫指示状況</th>
                         <th rowspan="2" style="width: 60px;font-size: 13px;">出庫状況</th>
@@ -179,7 +180,7 @@
                         <th style="width: 140px;">お客様名</th>
                         <th style="width: 160px;">車種</th>
                         <th style="width: 140px;font-size: 13px;">タイヤ種別</th>
-                        <th style="width: 60px;font-size: 13px;">残溝</th>
+                        <!-- <th style="width: 60px;font-size: 13px;">残溝</th> -->
                     </tr>
                     <tr>
                         <th style="font-size: 13px;">入庫時間</th>
@@ -188,7 +189,7 @@
                         <th>使用者</th>
                         <th>車番</th>
                         <th style="font-size: 13px;">保管場所</th>
-                        <th style="font-size: 13px;">予約状況</th>
+                        <!-- <th style="font-size: 13px;">予約状況</th> -->
                     </tr>
                     <?php if (!empty($list_data)) : ?>
                     <?php $i = 0; ?>
@@ -204,6 +205,7 @@
                                 <?php echo Form::checkbox('print_status_'.$i, $val['logistics_id'], false, array('id' => 'form_print_status_'.$i, 'class' => 'text', 'style' => 'display:inline;')); ?>
                                 <?php echo Form::label('', 'print_status_'.$i, array('style' => 'display:inline;padding-left: 1.0em;')); ?>
                             </td>
+                            <td rowspan="2" style="font-size: 11px;text-align: center;"><?php echo (isset($unit_list[$val['unit_id']])) ? $unit_list[$val['unit_id']]:''; ?></td>
                             <td rowspan="2" style="font-size: 13px;text-align: center;">
                                 <?php if ($val['receipt_flg'] == 'NO') : ?>
                                     <!-- 未入庫の場合 -->
@@ -255,7 +257,7 @@
                             </td>
                             <td style="font-size: 13px;padding-left:10px;"><?php echo $val['car_name']; ?></td>
                             <td style="font-size: 13px;padding-left:10px;"><?php echo (isset($tire_kubun_list[$val['tire_type']])) ? $tire_kubun_list[$val['tire_type']]:''; ?></td>
-                            <td style="font-size: 13px;padding-left:10px;"><?php echo $val['tire_remaining_groove1']; ?>mm</td>
+                            <!-- <td style="font-size: 13px;padding-left:10px;"><?php echo $val['tire_remaining_groove1']; ?>mm</td> -->
                         </tr>
                         <tr>
                             <td style="font-size: 13px;padding-left:10px;"><?php echo ($val['receipt_time'] != '00:00') ? $val['receipt_time']:''; ?></td>
@@ -264,7 +266,7 @@
                             <td style="font-size: 13px;padding-left:10px;"><?php echo $val['consumer_name']; ?></td>
                             <td style="font-size: 13px;padding-left:10px;"><?php echo $val['car_code']; ?></td>
                             <td style="font-size: 13px;padding-left:10px;"><?php echo (isset($location_list[$val['location_id']])) ? $location_list[$val['location_id']]:'不明'; ?></td>
-                            <td style="font-size: 13px;padding-left:10px;"><?php echo (!empty($val['schedule_id'])) ? '予約有':'予約無'; ?></td>
+                            <!-- <td style="font-size: 13px;padding-left:10px;"><?php echo (!empty($val['schedule_id'])) ? '予約有':'予約無'; ?></td> -->
                         </tr>
                       <?php endforeach; ?>
                     <?php endif ; ?>

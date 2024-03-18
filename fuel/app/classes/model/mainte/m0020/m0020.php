@@ -23,6 +23,7 @@ class M0020 extends \Model {
                 array('m.id', 'unit_code'),
                 array('m.name', 'unit_name'),
                 array('m.schedule_type', 'schedule_type'),
+                array('m.disp_flg', 'disp_flg'),
                 );
 
         // テーブル
@@ -48,6 +49,7 @@ class M0020 extends \Model {
                 array('m.id', 'unit_code'),
                 array('m.name', 'unit_name'),
                 array('m.schedule_type', 'schedule_type'),
+                array('m.disp_flg', 'disp_flg'),
                 );
 
         // テーブル
@@ -85,6 +87,7 @@ class M0020 extends \Model {
                             array('m.id', 'unit_code'),
                             array('m.name', 'unit_name'),
                             array('m.schedule_type', 'schedule_type'),
+                            array('m.disp_flg', 'disp_flg'),
                             array('m.start_date', 'start_date'),
                             array('m.end_date', 'end_date')
                         );
@@ -101,7 +104,7 @@ class M0020 extends \Model {
         }
         // ユニット名称
         if (!empty($conditions['unit_name'])) {
-            $stmt->where('m.name', '=', $conditions['unit_name']);
+            $stmt->where('m.name', 'LIKE', \DB::expr("'%".$conditions['unit_name']."%'"));
         }
 
         $stmt->where('m.del_flg', '=', 'NO');

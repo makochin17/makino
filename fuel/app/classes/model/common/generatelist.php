@@ -379,7 +379,7 @@ class GenerateList extends \Model {
      * ユニットリスト取得
      * $all_flag リストに"全て"を含めるフラグ（trueで含める）
      */
-    public static function getUnitList($all_flag, $schedule_type, $db) {
+    public static function getUnitList($all_flag, $schedule_type, $flg, $db) {
 
         // データ取得
         // 項目
@@ -393,6 +393,9 @@ class GenerateList extends \Model {
 
         if (!empty($schedule_type)) {
             $stmt->where('schedule_type', $schedule_type);
+        }
+        if ($flg === false) {
+            $stmt->where('disp_flg', 'NO');
         }
         // ソート
         $stmt->order_by('m.id', 'ASC');
@@ -578,6 +581,23 @@ class GenerateList extends \Model {
 
         return $user_authority_list;
     }
+
+    /**
+     * YES/NOフラグリスト取得
+     * $all_flag リストに"全て"を含めるフラグ（trueで含める）
+     */
+    public static function getDispFlgList($all_flag) {
+
+        $result = array('NO'=>"表示", 'YES'=>"非表示");
+
+        if ($all_flag) {
+            // リストの先頭に"全て"を追加
+            $result = array_merge(array(''=>"-"), $result);
+        }
+
+        return $result;
+    }
+
 
     /**
      * 処理区分リスト取得

@@ -24,6 +24,8 @@ class Controller_Mainte_M0021 extends Controller_Hybrid {
 
     // 予約タイプリスト
     private $schedule_type_list = array();
+    // 顧客表示フラグリスト
+    private $disp_flg_list      = array();
 
     /**
     * 画面共通初期設定
@@ -71,7 +73,9 @@ class Controller_Mainte_M0021 extends Controller_Hybrid {
         $this->template->tree       = $tree;
 
         // 予約タイプリスト
-        $this->schedule_type_list = GenerateList::getScheduleTypeList(false);
+        $this->schedule_type_list   = GenerateList::getScheduleTypeList(false);
+        // 顧客表示フラグリスト
+        $this->disp_flg_list        = GenerateList::getDispFlgList(false);
 
 	}
 
@@ -164,6 +168,7 @@ class Controller_Mainte_M0021 extends Controller_Hybrid {
         $error_msg      = null;
         $conditions 	= array_fill_keys(array(
             'schedule_type',
+            'disp_flg',
             'unit_name',
         ), '');
 
@@ -244,6 +249,7 @@ class Controller_Mainte_M0021 extends Controller_Hybrid {
             array(
                 'data'                          => $conditions,
                 'schedule_type_list'            => $this->schedule_type_list,
+                'disp_flg_list'                 => $this->disp_flg_list,
                 'error_message'                 => $error_msg
             )
         );

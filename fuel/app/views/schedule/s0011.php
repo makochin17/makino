@@ -599,13 +599,16 @@
 									$("[id=customer_name]").val($(this).find("customer_name").text());
 									$("[id=car_name]").val($(this).find("car_name").text());
 									$("[id=consumer_name]").val($(this).find("consumer_name").text());
-
 									$("[id=disp_customer_name]").text($(this).find("customer_name").text());
 									$("[id=disp_car_name]").text($(this).find("car_name").text());
 									$("[id=disp_consumer_name]").text($(this).find("consumer_name").text());
+
 									$("[id=id_error]").empty();
 									$('[id=y_data_area]').css('display', 'none');
 									$('[id=car_data_area]').css('display', 'block');
+									// 選択された車両の作業時間を反映
+									change_hourtime($(this).find("car_code").text());
+
 								} else {
 
 									$('[id=car_data_area]').css('display', 'none');
@@ -640,7 +643,7 @@
 									$("[id=tbl1 tr]").remove();
 
 									for (var i = 0; i < item_cnt; i++){
-										$('[id=tbl1]').append("<tr><td style=\"text-align:center;\"><a href=\"#\" style=\"border:none;\" onclick=\"set_patient('"+car_id_list[i]+"','"+code_list[i]+"','"+customer_code_list[i]+"','"+customer_name_list[i]+"','"+car_name_list[i]+"','"+consumer_name_list[i]+"');\" ><i class='fa fa-check' style='font-size:24px;'></i></a></td><td>"+code_list[i]+"</td><td>"+customer_name_list[i]+"</td><td>"+car_name_list[i]+"</td><td>"+consumer_name_list[i]+"</td></tr>");
+										$('[id=tbl1]').append("<tr><td style=\"text-align:center;\"><a href=\"#\" id=\"chcar\" style=\"border:none;\" onclick=\"set_patient('"+car_id_list[i]+"','"+code_list[i]+"','"+customer_code_list[i]+"','"+customer_name_list[i]+"','"+car_name_list[i]+"','"+consumer_name_list[i]+"');\" ><i class='fa fa-check' style='font-size:24px;'></i></a></td><td>"+code_list[i]+"</td><td>"+customer_name_list[i]+"</td><td>"+car_name_list[i]+"</td><td>"+consumer_name_list[i]+"</td></tr>");
 									}
 								}
 							}
@@ -671,6 +674,44 @@
 				$("[id=id_error]").empty();
 				$('[id=y_data_area]').css('display', 'none');
 				$('[id=car_data_area]').css('display', 'block');
+
+				// 選択された車両の作業時間を反映
+				change_hourtime(code);
+			}
+
+			// 車両選択時の作業時間更新
+			function change_hourtime(car_code) {
+		        var date    	= $("[id=reserve_day]").val();
+		        var hour    	= $("[id=start_hour]").val();
+		        var time    	= $("[id=start_time]").val();
+		        // データ
+				var post_data 	= {
+		            // 'code': $("[id=car_code]").val(),
+		            'code': car_code,
+		            'date': date,
+		            'hour': hour,
+		            'time': time
+				};
+				$.post(
+				     '<?php echo $chhourtime_url; ?>',
+				     post_data,
+				     function(xml){
+						// console.log(xml);
+						$(xml).find("item").each(function(){
+
+							var message    		= $(this).find("return").text();
+							var end_hour    	= $(this).find("end_hour").text();
+							var end_time    	= $(this).find("end_time").text();
+
+							if (message == "") {
+								$("[id=end_hour]").val(end_hour);
+								$("[id=end_time]").val(end_time);
+							}
+						});
+				     }
+				);
+
+				return true;
 			}
 
 			function add_new(){
@@ -1289,6 +1330,8 @@
 		<!--[if lte IE 8]><script src="../js/ie/html5shiv.js"></script><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="../css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="../css/ie8.css" /><![endif]-->
+
+    <?php echo Form::hidden('chhourtime_url', $chhourtime_url, array('id' => 'chhourtime_url'));?>
 
 	<section id="banner_section" style="padding-top:10px;">
 		<div id="wrapper">

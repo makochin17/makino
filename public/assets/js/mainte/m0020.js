@@ -45,3 +45,17 @@ function onDelete(unit_code, unit_name) {
 
     return true;
 }
+
+
+// 表示切り替えボタン押下時処理
+function onChangeDisp(unit_code, disp_flg) {
+    var f = document.forms["selectForm"];
+    f.processing_division.value = '4';
+    f.unit_code.value = unit_code;
+    f.disp_flg.value = disp_flg;
+alert(disp_flg);
+    f.method = "POST";
+    f.submit();
+
+    return true;
+}

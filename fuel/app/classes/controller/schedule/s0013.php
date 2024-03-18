@@ -56,7 +56,7 @@ class Controller_Schedule_S0013 extends Controller_Hybrid {
          */
         switch (Request::main()->action) {
             case 'detail':
-            case 'carrying':
+            case 'chhourtime':
                 return true;
                 break;
             default:
@@ -139,7 +139,7 @@ class Controller_Schedule_S0013 extends Controller_Hybrid {
         // 作業選択時間リスト
         $this->select_work_time_list    = GenerateList::getSelectWorkTimeList(false);
         // ユニットリスト
-        $this->unit_list                = GenerateList::getUnitList('all', S0010::$schedule_type, S0010::$db);
+        $this->unit_list                = GenerateList::getUnitList('all', S0010::$schedule_type, false, S0010::$db);
         // 依頼区分リスト
         $this->request_class_list       = GenerateList::getRequestClassList(false);
         // 予約権限設定
@@ -317,6 +317,7 @@ class Controller_Schedule_S0013 extends Controller_Hybrid {
                 'changedateschedule_url'    => \Uri::create(\Uri::create('schedule/fullcalendar/changedateschedule')),
                 'cancelschedule_url'        => \Uri::create(\Uri::create('schedule/fullcalendar/cancelschedule')),
                 'commitschedule_url'        => \Uri::create(\Uri::create('schedule/fullcalendar/commitschedule')),
+                'chhourtime_url'            => \Uri::create(\Uri::create('schedule/fullcalendar/changehourtime')),
                 'current_url'               => \Uri::create(AccessControl::getActiveController().'/detail'),
                 'master_url'                => \Uri::create(AccessControl::getActiveController().'/master'),
 
@@ -345,7 +346,7 @@ class Controller_Schedule_S0013 extends Controller_Hybrid {
                 // 社員情報
                 'userinfo'                  => AuthConfig::getAuthConfig('all'),
                 // ユニットリストデータ
-                'unit'                      => S0010::setList('unit', S0010::getUnit(null, S0010::$schedule_type, S0010::$db)),
+                'unit'                      => S0010::setList('unit', S0010::getUnit(null, S0010::$schedule_type, false, S0010::$db)),
 
                 'error_message'             => $error_msg,
             )
