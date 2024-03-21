@@ -38,6 +38,11 @@
 						today:    '今日'
 					},
 					timeFormat : 'HH:mm',
+					// firstDay: (new Date()).getDay(),
+					firstDay: (new Date(<?php echo $default_y; ?>, <?php echo ($default_m - 1); ?>, <?php echo $default_d; ?>)).getDay(),
+					validRange: {
+						start: new Date(<?php echo $default_y; ?>, <?php echo ($default_m - 1); ?>, <?php echo $default_d; ?>)
+					},
 					header: {
 						left: 'prev,next today',
 						center: 'title',
@@ -196,8 +201,7 @@
 									// <?php $title 	= $commit.$customer_code.$val['customer_name']."[".$val["car_code"]."] "."[".$val["car_name"]."] ".$memo; ?>
 									<?php $title 	= $commit.$val['customer_name']."[".$val["car_code"]."] "."[".$val["car_name"]."] ".$memo; ?>
 								<?php endif; ?>
-								// 過去日イベントは編集不可
-						        <?php // (strtotime($default_day) > strtotime($data['default_day'])) ? $editable = false:$editable = true; ?>
+
 								// 予約イベントを設定
 								{
 									id: 				'<?php echo $val['id']; ?>',
@@ -1198,6 +1202,14 @@
 			    background-color: #f0f0ff;
 			}
 
+			/* 背景色 */
+			.fc-day {
+				/* background-color: #fcf8e3; */
+			}
+			.fc-day[data-date="<?php echo $default_day; ?>"] {
+				background-color: #fcf8e3; !important
+			}
+
 			#cboxClose {
 				color: #025948 !important;
 			}
@@ -1342,7 +1354,7 @@
 						<div style="display:inline;float:right;" class="s_form" >
 				        <?php */ ?>
 
-						<div style="display:inline;" class="s_form" >
+						<div style="display:inline;" class="s_form">
 							お客様：
                     		<?php echo Form::input('txtCustomer', (!empty($data['customer_name'])) ? $data['customer_name']:'', array('class' => 'input-text', 'type' => 'text', 'id' => 'txtCustomer', 'style' => 'width:200px;', 'maxlength' => '50')); ?>
 	                        <input type="button" name="search_button1" value="検索" class='buttonB' id="search_button1" style="cursor:pointer;display:inline;color:red;width:80px;height:40px;" onclick="onCustomerSearch('<?php echo Uri::create('search/s0010'); ?>', 0)" />
@@ -1509,3 +1521,4 @@
 			</div>
 		</div>
 	</section>
+

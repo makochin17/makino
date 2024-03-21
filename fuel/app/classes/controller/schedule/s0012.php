@@ -257,8 +257,8 @@ class Controller_Schedule_S0012 extends Controller_Hybrid {
         // 指定日付設定
         // $conditions['default_day'] = date("Y-m-d");
         $d              = new \DateTime();
-        // $default_day    = $d->modify('+3 day')->format("Y-m-d");
-        $default_day    = $d->format("Y-m-d");
+        $default_day    = $d->modify('+3 day')->format("Y-m-d");
+        // $default_day    = $d->format("Y-m-d");
         $conditions['default_day'] = $default_day;
         if (!empty($w_month)) {
             $w_month    = str_pad(strval($w_month), 2, '0', STR_PAD_LEFT);
@@ -349,6 +349,9 @@ class Controller_Schedule_S0012 extends Controller_Hybrid {
                 'editable'                  => $editable,
                 // 初期設定日
                 'default_day'               => $default_day,
+                'default_y'                 => date('Y', strtotime($default_day)),
+                'default_m'                 => date('m', strtotime($default_day)),
+                'default_d'                 => date('d', strtotime($default_day)),
 
                 'company_list'              => $this->company_select_list,
                 'work_time_list'            => $this->work_time_list,

@@ -38,6 +38,11 @@
 						today:    '今日'
 					},
 					timeFormat : 'HH:mm',
+					// firstDay: (new Date()).getDay(),
+					firstDay: (new Date(<?php echo $default_y; ?>, <?php echo ($default_m - 1); ?>, <?php echo $default_d; ?>)).getDay(),
+					validRange: {
+						start: new Date(<?php echo $default_y; ?>, <?php echo ($default_m - 1); ?>, <?php echo $default_d; ?>)
+					},
 					header: {
 						left: 'prev,next today',
 						center: 'title',
@@ -1209,6 +1214,14 @@
 			.fc-sat {
 			    color: blue;
 			    background-color: #f0f0ff;
+			}
+
+			/* 背景色 */
+			.fc-day {
+				/* background-color: #fcf8e3; */
+			}
+			.fc-day[data-date="<?php echo $default_day; ?>"] {
+				background-color: #fcf8e3; !important
 			}
 
 			#cboxClose {

@@ -255,15 +255,26 @@ class Controller_Schedule_S0013 extends Controller_Hybrid {
 
         }
         // 指定日付設定
-        $conditions['default_day'] = date("Y-m-d");
+        // $conditions['default_day'] = date("Y-m-d");
+        $d              = new \DateTime();
+        $default_day    = $d->modify('+3 day')->format("Y-m-d");
+        // $default_day    = $d->format("Y-m-d");
+        $conditions['default_day'] = $default_day;
         if (!empty($w_month)) {
-            $w_month  = str_pad(strval($w_month), 2, '0', STR_PAD_LEFT);
+            $w_month    = str_pad(strval($w_month), 2, '0', STR_PAD_LEFT);
         }
         if (!empty($w_day) && $w_day != '01') {
-            $w_day  = str_pad(strval($w_day), 2, '0', STR_PAD_LEFT);
+            $w_day      = str_pad(strval($w_day), 2, '0', STR_PAD_LEFT);
         }
         if (!empty($w_year) && !empty($w_month) && !empty($w_day)) {
             $conditions['default_day'] = $w_year."-".$w_month."-".$w_day;
+        }
+        // デフォルト日よりも過去日の場合は予約スケジュールの編集ができないようにする
+        $today          = $default_day;
+        $target_day     = $conditions['default_day'];
+        $editable       = true;
+        if(strtotime($today) > strtotime($target_day)){
+            $editable   = false;
         }
 
         if (!empty(Input::param('select_record'))) {
@@ -334,6 +345,13 @@ class Controller_Schedule_S0013 extends Controller_Hybrid {
                 'end_time'                  => $end_time,
                 'start_h'                   => $start_h,
                 'end_h'                     => $end_h,
+                // 画面編集フラグ
+                'editable'                  => $editable,
+                // 初期設定日
+                'default_day'               => $default_day,
+                'default_y'                 => date('Y', strtotime($default_day)),
+                'default_m'                 => date('m', strtotime($default_day)),
+                'default_d'                 => date('d', strtotime($default_day)),
 
                 'company_list'              => $this->company_select_list,
                 'work_time_list'            => $this->work_time_list,
